@@ -1,0 +1,1190 @@
+ ./gradlew test --info --tests "org.blackerp.infrastructure.persistence.SimpleTest"
+Initialized native services in: /home/red1/.gradle/native
+Initialized jansi services in: /home/red1/.gradle/native
+Received JVM installation metadata from '/usr/lib/jvm/java-17-openjdk-amd64': {JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64, JAVA_VERSION=17.0.13, JAVA_VENDOR=Ubuntu, RUNTIME_NAME=OpenJDK Runtime Environment, RUNTIME_VERSION=17.0.13+11-Ubuntu-2ubuntu124.04, VM_NAME=OpenJDK 64-Bit Server VM, VM_VERSION=17.0.13+11-Ubuntu-2ubuntu124.04, VM_VENDOR=Ubuntu, OS_ARCH=amd64}
+Found daemon DaemonInfo{pid=1290631, address=[2e794555-33df-49b0-9aa9-11c142bd306b port:39061, addresses:[/127.0.0.1]], state=Idle, lastBusy=1732316904256, context=DefaultDaemonContext[uid=20626957-4127-42b3-82d6-3cb786152720,javaHome=/home/red1/.vscode/extensions/redhat.java-1.36.0-linux-x64/jre/17.0.13-linux-x86_64,javaVersion=17,javaVendor=Eclipse Adoptium,daemonRegistryDir=/home/red1/.gradle/daemon,pid=1290631,idleTimeout=10800000,priority=NORMAL,applyInstrumentationAgent=true,nativeServicesMode=ENABLED,daemonOpts=--add-opens=java.base/java.util=ALL-UNNAMED,--add-opens=java.base/java.lang=ALL-UNNAMED,--add-opens=java.base/java.lang.invoke=ALL-UNNAMED,--add-opens=java.prefs/java.util.prefs=ALL-UNNAMED,--add-exports=jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED,--add-exports=jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED,--add-opens=java.base/java.nio.charset=ALL-UNNAMED,--add-opens=java.base/java.net=ALL-UNNAMED,--add-opens=java.base/java.util.concurrent.atomic=ALL-UNNAMED,-XX:MaxMetaspaceSize=384m,-XX:+HeapDumpOnOutOfMemoryError,-Xms256m,-Xmx512m,-Dfile.encoding=UTF-8,-Duser.country=US,-Duser.language=en,-Duser.variant]} however its context does not match the desired criteria.
+JVM is incompatible.
+Wanted: DaemonRequestContext{jvmCriteria=/usr/lib/jvm/java-17-openjdk-amd64 (no JDK specified, using current Java home), daemonOpts=[--add-opens=java.base/java.util=ALL-UNNAMED, --add-opens=java.base/java.lang=ALL-UNNAMED, --add-opens=java.base/java.lang.invoke=ALL-UNNAMED, --add-opens=java.prefs/java.util.prefs=ALL-UNNAMED, --add-exports=jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED, --add-exports=jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED, --add-opens=java.base/java.nio.charset=ALL-UNNAMED, --add-opens=java.base/java.net=ALL-UNNAMED, --add-opens=java.base/java.util.concurrent.atomic=ALL-UNNAMED, -XX:MaxMetaspaceSize=384m, -XX:+HeapDumpOnOutOfMemoryError, -Xms256m, -Xmx512m, -Dfile.encoding=UTF-8, -Duser.country=US, -Duser.language=en, -Duser.variant], applyInstrumentationAgent=true, nativeServicesMode=ENABLED, priority=NORMAL}
+Actual: DefaultDaemonContext[uid=20626957-4127-42b3-82d6-3cb786152720,javaHome=/home/red1/.vscode/extensions/redhat.java-1.36.0-linux-x64/jre/17.0.13-linux-x86_64,javaVersion=17,javaVendor=Eclipse Adoptium,daemonRegistryDir=/home/red1/.gradle/daemon,pid=1290631,idleTimeout=10800000,priority=NORMAL,applyInstrumentationAgent=true,nativeServicesMode=ENABLED,daemonOpts=--add-opens=java.base/java.util=ALL-UNNAMED,--add-opens=java.base/java.lang=ALL-UNNAMED,--add-opens=java.base/java.lang.invoke=ALL-UNNAMED,--add-opens=java.prefs/java.util.prefs=ALL-UNNAMED,--add-exports=jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED,--add-exports=jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED,--add-opens=java.base/java.nio.charset=ALL-UNNAMED,--add-opens=java.base/java.net=ALL-UNNAMED,--add-opens=java.base/java.util.concurrent.atomic=ALL-UNNAMED,-XX:MaxMetaspaceSize=384m,-XX:+HeapDumpOnOutOfMemoryError,-Xms256m,-Xmx512m,-Dfile.encoding=UTF-8,-Duser.country=US,-Duser.language=en,-Duser.variant]
+
+  Looking for a different daemon...
+The client will now receive all logging from the daemon (pid: 1187004). The daemon log file: /home/red1/.gradle/daemon/8.10.2/daemon-1187004.out.log
+Starting 17th build in daemon [uptime: 3 hrs 52 mins 59.699 secs, performance: 100%, GC rate: 0.00/s, heap usage: 7% of 512 MiB, non-heap usage: 22% of 384 MiB]
+Using 8 worker leases.
+Now considering [/home/red1/Projects/blackerp] as hierarchies to watch
+Watching the file system is configured to be enabled if available
+File system watching is active
+Starting Build
+Settings evaluated using settings file '/home/red1/Projects/blackerp/settings.gradle.kts'.
+Projects loaded. Root project using build file '/home/red1/Projects/blackerp/build.gradle.kts'.
+Included projects: [root project 'blackerp']
+Path for java installation '/usr/lib/jvm/openjdk-17' (Common Linux Locations) auto-detected does not contain a java executable
+Path for java installation '/usr/lib/jvm/openjdk-21' (Common Linux Locations) auto-detected does not contain a java executable
+Path for java installation '/usr/lib/jvm/openjdk-11' (Common Linux Locations) auto-detected does not contain a java executable
+
+> Configure project :
+Evaluating root project 'blackerp' using build file '/home/red1/Projects/blackerp/build.gradle.kts'.
+Transforming kotlin-allopen-1.9.20-gradle81.jar (org.jetbrains.kotlin:kotlin-allopen:1.9.20) with InstrumentationAnalysisTransform
+Transforming kotlin-gradle-plugin-model-1.9.20.jar (org.jetbrains.kotlin:kotlin-gradle-plugin-model:1.9.20) with InstrumentationAnalysisTransform
+Transforming kotlin-gradle-plugin-api-1.9.20.jar (org.jetbrains.kotlin:kotlin-gradle-plugin-api:1.9.20) with InstrumentationAnalysisTransform
+Transforming kotlin-gradle-plugin-api-1.9.20-gradle81.jar (org.jetbrains.kotlin:kotlin-gradle-plugin-api:1.9.20) with InstrumentationAnalysisTransform
+Transforming kotlin-gradle-plugin-1.9.20-gradle81.jar (org.jetbrains.kotlin:kotlin-gradle-plugin:1.9.20) with InstrumentationAnalysisTransform
+Transforming spring-boot-gradle-plugin-3.2.0.jar (org.springframework.boot:spring-boot-gradle-plugin:3.2.0) with InstrumentationAnalysisTransform
+Transforming dependency-management-plugin-1.1.4.jar (io.spring.gradle:dependency-management-plugin:1.1.4) with InstrumentationAnalysisTransform
+Transforming kotlin-gradle-plugin-idea-proto-1.9.20.jar (org.jetbrains.kotlin:kotlin-gradle-plugin-idea-proto:1.9.20) with InstrumentationAnalysisTransform
+Transforming kotlin-gradle-plugin-idea-1.9.20.jar (org.jetbrains.kotlin:kotlin-gradle-plugin-idea:1.9.20) with InstrumentationAnalysisTransform
+Transforming kotlin-klib-commonizer-api-1.9.20.jar (org.jetbrains.kotlin:kotlin-klib-commonizer-api:1.9.20) with InstrumentationAnalysisTransform
+Transforming kotlin-native-utils-1.9.20.jar (org.jetbrains.kotlin:kotlin-native-utils:1.9.20) with InstrumentationAnalysisTransform
+Transforming kotlin-util-klib-1.9.20.jar (org.jetbrains.kotlin:kotlin-util-klib:1.9.20) with InstrumentationAnalysisTransform
+Transforming kotlin-build-tools-api-1.9.20.jar (org.jetbrains.kotlin:kotlin-build-tools-api:1.9.20) with InstrumentationAnalysisTransform
+Transforming kotlin-android-extensions-1.9.20.jar (org.jetbrains.kotlin:kotlin-android-extensions:1.9.20) with InstrumentationAnalysisTransform
+Transforming kotlin-compiler-runner-1.9.20.jar (org.jetbrains.kotlin:kotlin-compiler-runner:1.9.20) with InstrumentationAnalysisTransform
+Transforming kotlin-compiler-embeddable-1.9.20.jar (org.jetbrains.kotlin:kotlin-compiler-embeddable:1.9.20) with InstrumentationAnalysisTransform
+Transforming kotlin-scripting-compiler-embeddable-1.9.20.jar (org.jetbrains.kotlin:kotlin-scripting-compiler-embeddable:1.9.20) with InstrumentationAnalysisTransform
+Transforming kotlin-scripting-compiler-impl-embeddable-1.9.20.jar (org.jetbrains.kotlin:kotlin-scripting-compiler-impl-embeddable:1.9.20) with InstrumentationAnalysisTransform
+Transforming spring-boot-buildpack-platform-3.2.0.jar (org.springframework.boot:spring-boot-buildpack-platform:3.2.0) with InstrumentationAnalysisTransform
+Transforming spring-boot-loader-tools-3.2.0.jar (org.springframework.boot:spring-boot-loader-tools:3.2.0) with InstrumentationAnalysisTransform
+Transforming commons-compress-1.23.0.jar (org.apache.commons:commons-compress:1.23.0) with InstrumentationAnalysisTransform
+Transforming spring-core-6.0.10.jar (org.springframework:spring-core:6.0.10) with InstrumentationAnalysisTransform
+Transforming kotlin-gradle-plugin-annotations-1.9.20.jar (org.jetbrains.kotlin:kotlin-gradle-plugin-annotations:1.9.20) with InstrumentationAnalysisTransform
+Transforming kotlin-project-model-1.9.20.jar (org.jetbrains.kotlin:kotlin-project-model:1.9.20) with InstrumentationAnalysisTransform
+Transforming kotlin-tooling-core-1.9.20.jar (org.jetbrains.kotlin:kotlin-tooling-core:1.9.20) with InstrumentationAnalysisTransform
+Transforming kotlin-util-io-1.9.20.jar (org.jetbrains.kotlin:kotlin-util-io:1.9.20) with InstrumentationAnalysisTransform
+Transforming kotlin-daemon-embeddable-1.9.20.jar (org.jetbrains.kotlin:kotlin-daemon-embeddable:1.9.20) with InstrumentationAnalysisTransform
+Transforming trove4j-1.0.20200330.jar (org.jetbrains.intellij.deps:trove4j:1.0.20200330) with InstrumentationAnalysisTransform
+Transforming kotlin-daemon-client-1.9.20.jar (org.jetbrains.kotlin:kotlin-daemon-client:1.9.20) with InstrumentationAnalysisTransform
+Transforming kotlinx-coroutines-core-jvm-1.5.0.jar (org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm:1.5.0) with InstrumentationAnalysisTransform
+Transforming kotlin-scripting-jvm-1.9.20.jar (org.jetbrains.kotlin:kotlin-scripting-jvm:1.9.20) with InstrumentationAnalysisTransform
+Transforming kotlin-scripting-common-1.9.20.jar (org.jetbrains.kotlin:kotlin-scripting-common:1.9.20) with InstrumentationAnalysisTransform
+Transforming jackson-annotations-2.14.2.jar (com.fasterxml.jackson.core:jackson-annotations:2.14.2) with InstrumentationAnalysisTransform
+Transforming jackson-core-2.14.2.jar (com.fasterxml.jackson.core:jackson-core:2.14.2) with InstrumentationAnalysisTransform
+Transforming jackson-module-parameter-names-2.14.2.jar (com.fasterxml.jackson.module:jackson-module-parameter-names:2.14.2) with InstrumentationAnalysisTransform
+Transforming jackson-databind-2.14.2.jar (com.fasterxml.jackson.core:jackson-databind:2.14.2) with InstrumentationAnalysisTransform
+Transforming jna-platform-5.13.0.jar (net.java.dev.jna:jna-platform:5.13.0) with InstrumentationAnalysisTransform
+Transforming httpclient5-5.2.1.jar (org.apache.httpcomponents.client5:httpclient5:5.2.1) with InstrumentationAnalysisTransform
+Transforming tomlj-1.0.0.jar (org.tomlj:tomlj:1.0.0) with InstrumentationAnalysisTransform
+Transforming spring-jcl-6.0.10.jar (org.springframework:spring-jcl:6.0.10) with InstrumentationAnalysisTransform
+Transforming jna-5.13.0.jar (net.java.dev.jna:jna:5.13.0) with InstrumentationAnalysisTransform
+Transforming httpcore5-h2-5.2.jar (org.apache.httpcomponents.core5:httpcore5-h2:5.2) with InstrumentationAnalysisTransform
+Transforming httpcore5-5.2.jar (org.apache.httpcomponents.core5:httpcore5:5.2) with InstrumentationAnalysisTransform
+Transforming slf4j-api-1.7.36.jar (org.slf4j:slf4j-api:1.7.36) with InstrumentationAnalysisTransform
+Transforming antlr4-runtime-4.7.2.jar (org.antlr:antlr4-runtime:4.7.2) with InstrumentationAnalysisTransform
+Transforming jsr305-3.0.2.jar (com.google.code.findbugs:jsr305:3.0.2) with InstrumentationAnalysisTransform
+Transforming kotlin-allopen-1.9.20-gradle81.jar (org.jetbrains.kotlin:kotlin-allopen:1.9.20) with InstrumentationAnalysisTransform
+Transforming kotlin-allopen-1.9.20-gradle81.jar (org.jetbrains.kotlin:kotlin-allopen:1.9.20) with MergeInstrumentationAnalysisTransform
+Transforming kotlin-gradle-plugin-model-1.9.20.jar (org.jetbrains.kotlin:kotlin-gradle-plugin-model:1.9.20) with InstrumentationAnalysisTransform
+Transforming kotlin-gradle-plugin-model-1.9.20.jar (org.jetbrains.kotlin:kotlin-gradle-plugin-model:1.9.20) with MergeInstrumentationAnalysisTransform
+Transforming kotlin-gradle-plugin-api-1.9.20.jar (org.jetbrains.kotlin:kotlin-gradle-plugin-api:1.9.20) with InstrumentationAnalysisTransform
+Transforming kotlin-gradle-plugin-api-1.9.20.jar (org.jetbrains.kotlin:kotlin-gradle-plugin-api:1.9.20) with MergeInstrumentationAnalysisTransform
+Transforming kotlin-gradle-plugin-api-1.9.20-gradle81.jar (org.jetbrains.kotlin:kotlin-gradle-plugin-api:1.9.20) with InstrumentationAnalysisTransform
+Transforming kotlin-allopen-1.9.20-gradle81.jar (org.jetbrains.kotlin:kotlin-allopen:1.9.20) with ExternalDependencyInstrumentingArtifactTransform
+Transforming kotlin-gradle-plugin-model-1.9.20.jar (org.jetbrains.kotlin:kotlin-gradle-plugin-model:1.9.20) with ExternalDependencyInstrumentingArtifactTransform
+Transforming kotlin-gradle-plugin-api-1.9.20-gradle81.jar (org.jetbrains.kotlin:kotlin-gradle-plugin-api:1.9.20) with MergeInstrumentationAnalysisTransform
+Transforming kotlin-gradle-plugin-api-1.9.20.jar (org.jetbrains.kotlin:kotlin-gradle-plugin-api:1.9.20) with ExternalDependencyInstrumentingArtifactTransform
+Transforming kotlin-gradle-plugin-1.9.20-gradle81.jar (org.jetbrains.kotlin:kotlin-gradle-plugin:1.9.20) with InstrumentationAnalysisTransform
+Transforming kotlin-gradle-plugin-1.9.20-gradle81.jar (org.jetbrains.kotlin:kotlin-gradle-plugin:1.9.20) with MergeInstrumentationAnalysisTransform
+Transforming kotlin-gradle-plugin-api-1.9.20-gradle81.jar (org.jetbrains.kotlin:kotlin-gradle-plugin-api:1.9.20) with ExternalDependencyInstrumentingArtifactTransform
+Transforming spring-boot-gradle-plugin-3.2.0.jar (org.springframework.boot:spring-boot-gradle-plugin:3.2.0) with InstrumentationAnalysisTransform
+Transforming spring-boot-gradle-plugin-3.2.0.jar (org.springframework.boot:spring-boot-gradle-plugin:3.2.0) with MergeInstrumentationAnalysisTransform
+Transforming kotlin-gradle-plugin-1.9.20-gradle81.jar (org.jetbrains.kotlin:kotlin-gradle-plugin:1.9.20) with ExternalDependencyInstrumentingArtifactTransform
+Transforming dependency-management-plugin-1.1.4.jar (io.spring.gradle:dependency-management-plugin:1.1.4) with InstrumentationAnalysisTransform
+Transforming dependency-management-plugin-1.1.4.jar (io.spring.gradle:dependency-management-plugin:1.1.4) with MergeInstrumentationAnalysisTransform
+Transforming spring-boot-gradle-plugin-3.2.0.jar (org.springframework.boot:spring-boot-gradle-plugin:3.2.0) with ExternalDependencyInstrumentingArtifactTransform
+Transforming kotlin-gradle-plugin-idea-proto-1.9.20.jar (org.jetbrains.kotlin:kotlin-gradle-plugin-idea-proto:1.9.20) with InstrumentationAnalysisTransform
+Transforming kotlin-gradle-plugin-idea-proto-1.9.20.jar (org.jetbrains.kotlin:kotlin-gradle-plugin-idea-proto:1.9.20) with MergeInstrumentationAnalysisTransform
+Transforming kotlin-gradle-plugin-idea-1.9.20.jar (org.jetbrains.kotlin:kotlin-gradle-plugin-idea:1.9.20) with InstrumentationAnalysisTransform
+Transforming kotlin-gradle-plugin-idea-1.9.20.jar (org.jetbrains.kotlin:kotlin-gradle-plugin-idea:1.9.20) with MergeInstrumentationAnalysisTransform
+Transforming kotlin-klib-commonizer-api-1.9.20.jar (org.jetbrains.kotlin:kotlin-klib-commonizer-api:1.9.20) with InstrumentationAnalysisTransform
+Transforming dependency-management-plugin-1.1.4.jar (io.spring.gradle:dependency-management-plugin:1.1.4) with ExternalDependencyInstrumentingArtifactTransform
+Transforming kotlin-klib-commonizer-api-1.9.20.jar (org.jetbrains.kotlin:kotlin-klib-commonizer-api:1.9.20) with MergeInstrumentationAnalysisTransform
+Transforming kotlin-gradle-plugin-idea-proto-1.9.20.jar (org.jetbrains.kotlin:kotlin-gradle-plugin-idea-proto:1.9.20) with ExternalDependencyInstrumentingArtifactTransform
+Transforming kotlin-native-utils-1.9.20.jar (org.jetbrains.kotlin:kotlin-native-utils:1.9.20) with InstrumentationAnalysisTransform
+Transforming kotlin-native-utils-1.9.20.jar (org.jetbrains.kotlin:kotlin-native-utils:1.9.20) with MergeInstrumentationAnalysisTransform
+Transforming kotlin-gradle-plugin-idea-1.9.20.jar (org.jetbrains.kotlin:kotlin-gradle-plugin-idea:1.9.20) with ExternalDependencyInstrumentingArtifactTransform
+Transforming kotlin-util-klib-1.9.20.jar (org.jetbrains.kotlin:kotlin-util-klib:1.9.20) with InstrumentationAnalysisTransform
+Transforming kotlin-native-utils-1.9.20.jar (org.jetbrains.kotlin:kotlin-native-utils:1.9.20) with ExternalDependencyInstrumentingArtifactTransform
+Transforming kotlin-util-klib-1.9.20.jar (org.jetbrains.kotlin:kotlin-util-klib:1.9.20) with MergeInstrumentationAnalysisTransform
+Transforming kotlin-klib-commonizer-api-1.9.20.jar (org.jetbrains.kotlin:kotlin-klib-commonizer-api:1.9.20) with ExternalDependencyInstrumentingArtifactTransform
+Transforming kotlin-build-tools-api-1.9.20.jar (org.jetbrains.kotlin:kotlin-build-tools-api:1.9.20) with InstrumentationAnalysisTransform
+Transforming kotlin-build-tools-api-1.9.20.jar (org.jetbrains.kotlin:kotlin-build-tools-api:1.9.20) with MergeInstrumentationAnalysisTransform
+Transforming kotlin-util-klib-1.9.20.jar (org.jetbrains.kotlin:kotlin-util-klib:1.9.20) with ExternalDependencyInstrumentingArtifactTransform
+Transforming kotlin-android-extensions-1.9.20.jar (org.jetbrains.kotlin:kotlin-android-extensions:1.9.20) with InstrumentationAnalysisTransform
+Transforming kotlin-android-extensions-1.9.20.jar (org.jetbrains.kotlin:kotlin-android-extensions:1.9.20) with MergeInstrumentationAnalysisTransform
+Transforming kotlin-compiler-runner-1.9.20.jar (org.jetbrains.kotlin:kotlin-compiler-runner:1.9.20) with InstrumentationAnalysisTransform
+Transforming kotlin-build-tools-api-1.9.20.jar (org.jetbrains.kotlin:kotlin-build-tools-api:1.9.20) with ExternalDependencyInstrumentingArtifactTransform
+Transforming kotlin-compiler-runner-1.9.20.jar (org.jetbrains.kotlin:kotlin-compiler-runner:1.9.20) with MergeInstrumentationAnalysisTransform
+Transforming kotlin-compiler-embeddable-1.9.20.jar (org.jetbrains.kotlin:kotlin-compiler-embeddable:1.9.20) with InstrumentationAnalysisTransform
+Transforming kotlin-compiler-embeddable-1.9.20.jar (org.jetbrains.kotlin:kotlin-compiler-embeddable:1.9.20) with MergeInstrumentationAnalysisTransform
+Transforming kotlin-scripting-compiler-embeddable-1.9.20.jar (org.jetbrains.kotlin:kotlin-scripting-compiler-embeddable:1.9.20) with InstrumentationAnalysisTransform
+Transforming kotlin-compiler-runner-1.9.20.jar (org.jetbrains.kotlin:kotlin-compiler-runner:1.9.20) with ExternalDependencyInstrumentingArtifactTransform
+Transforming kotlin-scripting-compiler-embeddable-1.9.20.jar (org.jetbrains.kotlin:kotlin-scripting-compiler-embeddable:1.9.20) with MergeInstrumentationAnalysisTransform
+Transforming kotlin-android-extensions-1.9.20.jar (org.jetbrains.kotlin:kotlin-android-extensions:1.9.20) with ExternalDependencyInstrumentingArtifactTransform
+Transforming kotlin-scripting-compiler-impl-embeddable-1.9.20.jar (org.jetbrains.kotlin:kotlin-scripting-compiler-impl-embeddable:1.9.20) with InstrumentationAnalysisTransform
+Transforming kotlin-compiler-embeddable-1.9.20.jar (org.jetbrains.kotlin:kotlin-compiler-embeddable:1.9.20) with ExternalDependencyInstrumentingArtifactTransform
+Transforming kotlin-scripting-compiler-embeddable-1.9.20.jar (org.jetbrains.kotlin:kotlin-scripting-compiler-embeddable:1.9.20) with ExternalDependencyInstrumentingArtifactTransform
+Transforming kotlin-scripting-compiler-impl-embeddable-1.9.20.jar (org.jetbrains.kotlin:kotlin-scripting-compiler-impl-embeddable:1.9.20) with MergeInstrumentationAnalysisTransform
+Transforming spring-boot-buildpack-platform-3.2.0.jar (org.springframework.boot:spring-boot-buildpack-platform:3.2.0) with InstrumentationAnalysisTransform
+Transforming spring-boot-buildpack-platform-3.2.0.jar (org.springframework.boot:spring-boot-buildpack-platform:3.2.0) with MergeInstrumentationAnalysisTransform
+Transforming spring-boot-loader-tools-3.2.0.jar (org.springframework.boot:spring-boot-loader-tools:3.2.0) with InstrumentationAnalysisTransform
+Transforming kotlin-scripting-compiler-impl-embeddable-1.9.20.jar (org.jetbrains.kotlin:kotlin-scripting-compiler-impl-embeddable:1.9.20) with ExternalDependencyInstrumentingArtifactTransform
+Transforming spring-boot-loader-tools-3.2.0.jar (org.springframework.boot:spring-boot-loader-tools:3.2.0) with MergeInstrumentationAnalysisTransform
+Transforming spring-boot-buildpack-platform-3.2.0.jar (org.springframework.boot:spring-boot-buildpack-platform:3.2.0) with ExternalDependencyInstrumentingArtifactTransform
+Transforming commons-compress-1.23.0.jar (org.apache.commons:commons-compress:1.23.0) with InstrumentationAnalysisTransform
+Transforming commons-compress-1.23.0.jar (org.apache.commons:commons-compress:1.23.0) with MergeInstrumentationAnalysisTransform
+Transforming spring-core-6.0.10.jar (org.springframework:spring-core:6.0.10) with InstrumentationAnalysisTransform
+Transforming spring-core-6.0.10.jar (org.springframework:spring-core:6.0.10) with MergeInstrumentationAnalysisTransform
+Transforming kotlin-gradle-plugin-annotations-1.9.20.jar (org.jetbrains.kotlin:kotlin-gradle-plugin-annotations:1.9.20) with InstrumentationAnalysisTransform
+Transforming spring-boot-loader-tools-3.2.0.jar (org.springframework.boot:spring-boot-loader-tools:3.2.0) with ExternalDependencyInstrumentingArtifactTransform
+Transforming kotlin-gradle-plugin-annotations-1.9.20.jar (org.jetbrains.kotlin:kotlin-gradle-plugin-annotations:1.9.20) with MergeInstrumentationAnalysisTransform
+Transforming commons-compress-1.23.0.jar (org.apache.commons:commons-compress:1.23.0) with ExternalDependencyInstrumentingArtifactTransform
+Transforming kotlin-project-model-1.9.20.jar (org.jetbrains.kotlin:kotlin-project-model:1.9.20) with InstrumentationAnalysisTransform
+Transforming kotlin-project-model-1.9.20.jar (org.jetbrains.kotlin:kotlin-project-model:1.9.20) with MergeInstrumentationAnalysisTransform
+Transforming spring-core-6.0.10.jar (org.springframework:spring-core:6.0.10) with ExternalDependencyInstrumentingArtifactTransform
+Transforming kotlin-gradle-plugin-annotations-1.9.20.jar (org.jetbrains.kotlin:kotlin-gradle-plugin-annotations:1.9.20) with ExternalDependencyInstrumentingArtifactTransform
+Transforming kotlin-tooling-core-1.9.20.jar (org.jetbrains.kotlin:kotlin-tooling-core:1.9.20) with InstrumentationAnalysisTransform
+Transforming kotlin-project-model-1.9.20.jar (org.jetbrains.kotlin:kotlin-project-model:1.9.20) with ExternalDependencyInstrumentingArtifactTransform
+Transforming kotlin-tooling-core-1.9.20.jar (org.jetbrains.kotlin:kotlin-tooling-core:1.9.20) with MergeInstrumentationAnalysisTransform
+Transforming kotlin-util-io-1.9.20.jar (org.jetbrains.kotlin:kotlin-util-io:1.9.20) with InstrumentationAnalysisTransform
+Transforming kotlin-util-io-1.9.20.jar (org.jetbrains.kotlin:kotlin-util-io:1.9.20) with MergeInstrumentationAnalysisTransform
+Transforming kotlin-daemon-embeddable-1.9.20.jar (org.jetbrains.kotlin:kotlin-daemon-embeddable:1.9.20) with InstrumentationAnalysisTransform
+Transforming kotlin-tooling-core-1.9.20.jar (org.jetbrains.kotlin:kotlin-tooling-core:1.9.20) with ExternalDependencyInstrumentingArtifactTransform
+Transforming kotlin-daemon-embeddable-1.9.20.jar (org.jetbrains.kotlin:kotlin-daemon-embeddable:1.9.20) with MergeInstrumentationAnalysisTransform
+Transforming trove4j-1.0.20200330.jar (org.jetbrains.intellij.deps:trove4j:1.0.20200330) with InstrumentationAnalysisTransform
+Transforming trove4j-1.0.20200330.jar (org.jetbrains.intellij.deps:trove4j:1.0.20200330) with MergeInstrumentationAnalysisTransform
+Transforming kotlin-daemon-embeddable-1.9.20.jar (org.jetbrains.kotlin:kotlin-daemon-embeddable:1.9.20) with ExternalDependencyInstrumentingArtifactTransform
+Transforming trove4j-1.0.20200330.jar (org.jetbrains.intellij.deps:trove4j:1.0.20200330) with ExternalDependencyInstrumentingArtifactTransform
+Transforming kotlin-util-io-1.9.20.jar (org.jetbrains.kotlin:kotlin-util-io:1.9.20) with ExternalDependencyInstrumentingArtifactTransform
+Transforming kotlin-daemon-client-1.9.20.jar (org.jetbrains.kotlin:kotlin-daemon-client:1.9.20) with InstrumentationAnalysisTransform
+Transforming kotlin-daemon-client-1.9.20.jar (org.jetbrains.kotlin:kotlin-daemon-client:1.9.20) with MergeInstrumentationAnalysisTransform
+Transforming kotlinx-coroutines-core-jvm-1.5.0.jar (org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm:1.5.0) with InstrumentationAnalysisTransform
+Transforming kotlinx-coroutines-core-jvm-1.5.0.jar (org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm:1.5.0) with MergeInstrumentationAnalysisTransform
+Transforming kotlin-scripting-jvm-1.9.20.jar (org.jetbrains.kotlin:kotlin-scripting-jvm:1.9.20) with InstrumentationAnalysisTransform
+Transforming kotlin-scripting-jvm-1.9.20.jar (org.jetbrains.kotlin:kotlin-scripting-jvm:1.9.20) with MergeInstrumentationAnalysisTransform
+Transforming kotlin-daemon-client-1.9.20.jar (org.jetbrains.kotlin:kotlin-daemon-client:1.9.20) with ExternalDependencyInstrumentingArtifactTransform
+Transforming kotlin-scripting-common-1.9.20.jar (org.jetbrains.kotlin:kotlin-scripting-common:1.9.20) with InstrumentationAnalysisTransform
+Transforming kotlinx-coroutines-core-jvm-1.5.0.jar (org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm:1.5.0) with ExternalDependencyInstrumentingArtifactTransform
+Transforming kotlin-scripting-common-1.9.20.jar (org.jetbrains.kotlin:kotlin-scripting-common:1.9.20) with MergeInstrumentationAnalysisTransform
+Transforming kotlin-scripting-jvm-1.9.20.jar (org.jetbrains.kotlin:kotlin-scripting-jvm:1.9.20) with ExternalDependencyInstrumentingArtifactTransform
+Transforming jackson-annotations-2.14.2.jar (com.fasterxml.jackson.core:jackson-annotations:2.14.2) with InstrumentationAnalysisTransform
+Transforming jackson-annotations-2.14.2.jar (com.fasterxml.jackson.core:jackson-annotations:2.14.2) with MergeInstrumentationAnalysisTransform
+Transforming jackson-core-2.14.2.jar (com.fasterxml.jackson.core:jackson-core:2.14.2) with InstrumentationAnalysisTransform
+Transforming kotlin-scripting-common-1.9.20.jar (org.jetbrains.kotlin:kotlin-scripting-common:1.9.20) with ExternalDependencyInstrumentingArtifactTransform
+Transforming jackson-core-2.14.2.jar (com.fasterxml.jackson.core:jackson-core:2.14.2) with MergeInstrumentationAnalysisTransform
+Transforming jackson-module-parameter-names-2.14.2.jar (com.fasterxml.jackson.module:jackson-module-parameter-names:2.14.2) with InstrumentationAnalysisTransform
+Transforming jackson-annotations-2.14.2.jar (com.fasterxml.jackson.core:jackson-annotations:2.14.2) with ExternalDependencyInstrumentingArtifactTransform
+Transforming jackson-module-parameter-names-2.14.2.jar (com.fasterxml.jackson.module:jackson-module-parameter-names:2.14.2) with MergeInstrumentationAnalysisTransform
+Transforming jackson-databind-2.14.2.jar (com.fasterxml.jackson.core:jackson-databind:2.14.2) with InstrumentationAnalysisTransform
+Transforming jackson-databind-2.14.2.jar (com.fasterxml.jackson.core:jackson-databind:2.14.2) with MergeInstrumentationAnalysisTransform
+Transforming jackson-core-2.14.2.jar (com.fasterxml.jackson.core:jackson-core:2.14.2) with ExternalDependencyInstrumentingArtifactTransform
+Transforming jna-platform-5.13.0.jar (net.java.dev.jna:jna-platform:5.13.0) with InstrumentationAnalysisTransform
+Transforming jackson-module-parameter-names-2.14.2.jar (com.fasterxml.jackson.module:jackson-module-parameter-names:2.14.2) with ExternalDependencyInstrumentingArtifactTransform
+Transforming jackson-databind-2.14.2.jar (com.fasterxml.jackson.core:jackson-databind:2.14.2) with ExternalDependencyInstrumentingArtifactTransform
+Transforming jna-platform-5.13.0.jar (net.java.dev.jna:jna-platform:5.13.0) with MergeInstrumentationAnalysisTransform
+Transforming httpclient5-5.2.1.jar (org.apache.httpcomponents.client5:httpclient5:5.2.1) with InstrumentationAnalysisTransform
+Transforming httpclient5-5.2.1.jar (org.apache.httpcomponents.client5:httpclient5:5.2.1) with MergeInstrumentationAnalysisTransform
+Transforming tomlj-1.0.0.jar (org.tomlj:tomlj:1.0.0) with InstrumentationAnalysisTransform
+Transforming jna-platform-5.13.0.jar (net.java.dev.jna:jna-platform:5.13.0) with ExternalDependencyInstrumentingArtifactTransform
+Transforming tomlj-1.0.0.jar (org.tomlj:tomlj:1.0.0) with MergeInstrumentationAnalysisTransform
+Transforming spring-jcl-6.0.10.jar (org.springframework:spring-jcl:6.0.10) with InstrumentationAnalysisTransform
+Transforming httpclient5-5.2.1.jar (org.apache.httpcomponents.client5:httpclient5:5.2.1) with ExternalDependencyInstrumentingArtifactTransform
+Transforming spring-jcl-6.0.10.jar (org.springframework:spring-jcl:6.0.10) with MergeInstrumentationAnalysisTransform
+Transforming jna-5.13.0.jar (net.java.dev.jna:jna:5.13.0) with InstrumentationAnalysisTransform
+Transforming jna-5.13.0.jar (net.java.dev.jna:jna:5.13.0) with MergeInstrumentationAnalysisTransform
+Transforming httpcore5-h2-5.2.jar (org.apache.httpcomponents.core5:httpcore5-h2:5.2) with InstrumentationAnalysisTransform
+Transforming httpcore5-h2-5.2.jar (org.apache.httpcomponents.core5:httpcore5-h2:5.2) with MergeInstrumentationAnalysisTransform
+Transforming spring-jcl-6.0.10.jar (org.springframework:spring-jcl:6.0.10) with ExternalDependencyInstrumentingArtifactTransform
+Transforming tomlj-1.0.0.jar (org.tomlj:tomlj:1.0.0) with ExternalDependencyInstrumentingArtifactTransform
+Transforming httpcore5-5.2.jar (org.apache.httpcomponents.core5:httpcore5:5.2) with InstrumentationAnalysisTransform
+Transforming jna-5.13.0.jar (net.java.dev.jna:jna:5.13.0) with ExternalDependencyInstrumentingArtifactTransform
+Transforming httpcore5-h2-5.2.jar (org.apache.httpcomponents.core5:httpcore5-h2:5.2) with ExternalDependencyInstrumentingArtifactTransform
+Transforming httpcore5-5.2.jar (org.apache.httpcomponents.core5:httpcore5:5.2) with MergeInstrumentationAnalysisTransform
+Transforming slf4j-api-1.7.36.jar (org.slf4j:slf4j-api:1.7.36) with InstrumentationAnalysisTransform
+Transforming slf4j-api-1.7.36.jar (org.slf4j:slf4j-api:1.7.36) with MergeInstrumentationAnalysisTransform
+Transforming antlr4-runtime-4.7.2.jar (org.antlr:antlr4-runtime:4.7.2) with InstrumentationAnalysisTransform
+Transforming antlr4-runtime-4.7.2.jar (org.antlr:antlr4-runtime:4.7.2) with MergeInstrumentationAnalysisTransform
+Transforming jsr305-3.0.2.jar (com.google.code.findbugs:jsr305:3.0.2) with InstrumentationAnalysisTransform
+Transforming httpcore5-5.2.jar (org.apache.httpcomponents.core5:httpcore5:5.2) with ExternalDependencyInstrumentingArtifactTransform
+Transforming jsr305-3.0.2.jar (com.google.code.findbugs:jsr305:3.0.2) with MergeInstrumentationAnalysisTransform
+Transforming antlr4-runtime-4.7.2.jar (org.antlr:antlr4-runtime:4.7.2) with ExternalDependencyInstrumentingArtifactTransform
+Transforming jsr305-3.0.2.jar (com.google.code.findbugs:jsr305:3.0.2) with ExternalDependencyInstrumentingArtifactTransform
+Transforming slf4j-api-1.7.36.jar (org.slf4j:slf4j-api:1.7.36) with ExternalDependencyInstrumentingArtifactTransform
+Using Kotlin Gradle Plugin gradle81 variant
+kotlin scripting plugin: created the scripting discovery configuration: kotlinScriptDef
+kotlin scripting plugin: created the scripting discovery configuration: testKotlinScriptDef
+Applying dependency management to configuration 'annotationProcessor' in project 'blackerp'
+Applying dependency management to configuration 'api' in project 'blackerp'
+Applying dependency management to configuration 'apiDependenciesMetadata' in project 'blackerp'
+Applying dependency management to configuration 'apiElements' in project 'blackerp'
+Applying dependency management to configuration 'archives' in project 'blackerp'
+Applying dependency management to configuration 'bootArchives' in project 'blackerp'
+Applying dependency management to configuration 'compileClasspath' in project 'blackerp'
+Applying dependency management to configuration 'compileOnly' in project 'blackerp'
+Applying dependency management to configuration 'compileOnlyDependenciesMetadata' in project 'blackerp'
+Applying dependency management to configuration 'default' in project 'blackerp'
+Applying dependency management to configuration 'developmentOnly' in project 'blackerp'
+Applying dependency management to configuration 'implementation' in project 'blackerp'
+Applying dependency management to configuration 'implementationDependenciesMetadata' in project 'blackerp'
+Applying dependency management to configuration 'intransitiveDependenciesMetadata' in project 'blackerp'
+Applying dependency management to configuration 'kotlinBuildToolsApiClasspath' in project 'blackerp'
+Applying dependency management to configuration 'kotlinCompilerClasspath' in project 'blackerp'
+Applying dependency management to configuration 'kotlinCompilerPluginClasspath' in project 'blackerp'
+Applying dependency management to configuration 'kotlinCompilerPluginClasspathMain' in project 'blackerp'
+Applying dependency management to configuration 'kotlinCompilerPluginClasspathTest' in project 'blackerp'
+Applying dependency management to configuration 'kotlinKlibCommonizerClasspath' in project 'blackerp'
+Applying dependency management to configuration 'kotlinNativeCompilerPluginClasspath' in project 'blackerp'
+Applying dependency management to configuration 'kotlinScriptDef' in project 'blackerp'
+Applying dependency management to configuration 'kotlinScriptDefExtensions' in project 'blackerp'
+Applying dependency management to configuration 'mainSourceElements' in project 'blackerp'
+Applying dependency management to configuration 'productionRuntimeClasspath' in project 'blackerp'
+Applying dependency management to configuration 'runtimeClasspath' in project 'blackerp'
+Applying dependency management to configuration 'runtimeElements' in project 'blackerp'
+Applying dependency management to configuration 'runtimeOnly' in project 'blackerp'
+Applying dependency management to configuration 'testAndDevelopmentOnly' in project 'blackerp'
+Applying dependency management to configuration 'testAnnotationProcessor' in project 'blackerp'
+Applying dependency management to configuration 'testApi' in project 'blackerp'
+Applying dependency management to configuration 'testApiDependenciesMetadata' in project 'blackerp'
+Applying dependency management to configuration 'testCompileClasspath' in project 'blackerp'
+Applying dependency management to configuration 'testCompileOnly' in project 'blackerp'
+Applying dependency management to configuration 'testCompileOnlyDependenciesMetadata' in project 'blackerp'
+Applying dependency management to configuration 'testImplementation' in project 'blackerp'
+Applying dependency management to configuration 'testImplementationDependenciesMetadata' in project 'blackerp'
+Applying dependency management to configuration 'testIntransitiveDependenciesMetadata' in project 'blackerp'
+Applying dependency management to configuration 'testKotlinScriptDef' in project 'blackerp'
+Applying dependency management to configuration 'testKotlinScriptDefExtensions' in project 'blackerp'
+Applying dependency management to configuration 'testResultsElementsForTest' in project 'blackerp'
+Applying dependency management to configuration 'testRuntimeClasspath' in project 'blackerp'
+Applying dependency management to configuration 'testRuntimeOnly' in project 'blackerp'
+Applying dependency management to configuration 'apiElements-published' in project 'blackerp'
+Applying dependency management to configuration 'runtimeElements-published' in project 'blackerp'
+All projects evaluated.
+Task name matched 'test'
+Selected primary task 'test' from project :
+Tasks to be executed: [task ':checkKotlinGradlePluginConfigurationErrors', task ':compileKotlin', task ':compileJava', task ':processResources', task ':classes', task ':compileTestKotlin', task ':compileTestJava', task ':processTestResources', task ':testClasses', task ':test']
+Tasks that were excluded: []
+Resolve mutations for :checkKotlinGradlePluginConfigurationErrors (Thread[Execution worker,5,main]) started.
+:checkKotlinGradlePluginConfigurationErrors (Thread[Execution worker,5,main]) started.
+
+> Task :checkKotlinGradlePluginConfigurationErrors
+Caching disabled for task ':checkKotlinGradlePluginConfigurationErrors' because:
+  Build cache is disabled
+Task ':checkKotlinGradlePluginConfigurationErrors' is not up-to-date because:
+  Task has not declared any outputs despite executing actions.
+Resolve mutations for :compileKotlin (Thread[Execution worker,5,main]) started.
+:compileKotlin (Thread[Execution worker,5,main]) started.
+
+> Task :compileKotlin UP-TO-DATE
+Resolving global dependency management for project 'blackerp'
+Excluding []
+Excluding []
+Transforming kotlin-reflect-1.9.20.jar with ClasspathEntrySnapshotTransform
+Transforming arrow-fx-coroutines-jvm-1.2.0.jar with ClasspathEntrySnapshotTransform
+Transforming kotlinx-coroutines-reactive-1.7.3.jar with ClasspathEntrySnapshotTransform
+Transforming kotlinx-coroutines-core-jvm-1.7.3.jar with ClasspathEntrySnapshotTransform
+Transforming kotlinx-coroutines-reactor-1.7.3.jar with ClasspathEntrySnapshotTransform
+Transforming kotlin-stdlib-jdk8-1.9.20.jar with ClasspathEntrySnapshotTransform
+Transforming arrow-core-jvm-1.2.0.jar with ClasspathEntrySnapshotTransform
+Transforming arrow-atomic-jvm-1.2.0.jar with ClasspathEntrySnapshotTransform
+Transforming kotlin-stdlib-jdk7-1.9.20.jar with ClasspathEntrySnapshotTransform
+Transforming kotlin-stdlib-1.9.20.jar with ClasspathEntrySnapshotTransform
+Transforming spring-boot-starter-web-3.2.0.jar with ClasspathEntrySnapshotTransform
+Transforming spring-boot-starter-data-jpa-3.2.0.jar with ClasspathEntrySnapshotTransform
+Transforming spring-boot-starter-validation-3.2.0.jar with ClasspathEntrySnapshotTransform
+Transforming java-uuid-generator-4.2.0.jar with ClasspathEntrySnapshotTransform
+Transforming annotations-23.0.0.jar with ClasspathEntrySnapshotTransform
+Transforming spring-boot-starter-json-3.2.0.jar with ClasspathEntrySnapshotTransform
+Transforming spring-boot-starter-aop-3.2.0.jar with ClasspathEntrySnapshotTransform
+Transforming spring-boot-starter-jdbc-3.2.0.jar with ClasspathEntrySnapshotTransform
+Transforming spring-boot-starter-3.2.0.jar with ClasspathEntrySnapshotTransform
+Transforming spring-boot-starter-tomcat-3.2.0.jar with ClasspathEntrySnapshotTransform
+Transforming spring-webmvc-6.1.1.jar with ClasspathEntrySnapshotTransform
+Transforming spring-web-6.1.1.jar with ClasspathEntrySnapshotTransform
+Transforming hibernate-core-6.3.1.Final.jar with ClasspathEntrySnapshotTransform
+Transforming spring-data-jpa-3.2.0.jar with ClasspathEntrySnapshotTransform
+Transforming spring-aspects-6.1.1.jar with ClasspathEntrySnapshotTransform
+Transforming tomcat-embed-el-10.1.16.jar with ClasspathEntrySnapshotTransform
+Transforming hibernate-validator-8.0.1.Final.jar with ClasspathEntrySnapshotTransform
+Transforming HikariCP-5.0.1.jar with ClasspathEntrySnapshotTransform
+Transforming spring-data-commons-3.2.0.jar with ClasspathEntrySnapshotTransform
+Transforming spring-boot-starter-logging-3.2.0.jar with ClasspathEntrySnapshotTransform
+Transforming logback-classic-1.4.11.jar with ClasspathEntrySnapshotTransform
+Transforming log4j-to-slf4j-2.21.1.jar with ClasspathEntrySnapshotTransform
+Transforming jul-to-slf4j-2.0.9.jar with ClasspathEntrySnapshotTransform
+Transforming slf4j-api-2.0.9.jar with ClasspathEntrySnapshotTransform
+Transforming reactor-core-3.6.0.jar with ClasspathEntrySnapshotTransform
+Transforming spring-boot-autoconfigure-3.2.0.jar with ClasspathEntrySnapshotTransform
+Transforming spring-boot-3.2.0.jar with ClasspathEntrySnapshotTransform
+Transforming jakarta.annotation-api-2.1.1.jar with ClasspathEntrySnapshotTransform
+Transforming spring-context-6.1.1.jar with ClasspathEntrySnapshotTransform
+Transforming spring-aop-6.1.1.jar with ClasspathEntrySnapshotTransform
+Transforming spring-orm-6.1.1.jar with ClasspathEntrySnapshotTransform
+Transforming spring-jdbc-6.1.1.jar with ClasspathEntrySnapshotTransform
+Transforming spring-tx-6.1.1.jar with ClasspathEntrySnapshotTransform
+Transforming spring-beans-6.1.1.jar with ClasspathEntrySnapshotTransform
+Transforming spring-expression-6.1.1.jar with ClasspathEntrySnapshotTransform
+Transforming spring-core-6.1.1.jar with ClasspathEntrySnapshotTransform
+Transforming snakeyaml-2.2.jar with ClasspathEntrySnapshotTransform
+Transforming jackson-datatype-jsr310-2.15.3.jar with ClasspathEntrySnapshotTransform
+Transforming jackson-module-parameter-names-2.15.3.jar with ClasspathEntrySnapshotTransform
+Transforming jackson-annotations-2.15.3.jar with ClasspathEntrySnapshotTransform
+Transforming jackson-core-2.15.3.jar with ClasspathEntrySnapshotTransform
+Transforming jackson-datatype-jdk8-2.15.3.jar with ClasspathEntrySnapshotTransform
+Transforming jackson-databind-2.15.3.jar with ClasspathEntrySnapshotTransform
+Transforming tomcat-embed-websocket-10.1.16.jar with ClasspathEntrySnapshotTransform
+Transforming tomcat-embed-core-10.1.16.jar with ClasspathEntrySnapshotTransform
+Transforming micrometer-observation-1.12.0.jar with ClasspathEntrySnapshotTransform
+Transforming aspectjweaver-1.9.20.1.jar with ClasspathEntrySnapshotTransform
+Transforming jakarta.persistence-api-3.1.0.jar with ClasspathEntrySnapshotTransform
+Transforming jakarta.transaction-api-2.0.1.jar with ClasspathEntrySnapshotTransform
+Transforming antlr4-runtime-4.10.1.jar with ClasspathEntrySnapshotTransform
+Transforming jakarta.validation-api-3.0.2.jar with ClasspathEntrySnapshotTransform
+Transforming jboss-logging-3.5.3.Final.jar with ClasspathEntrySnapshotTransform
+Transforming classmate-1.6.0.jar with ClasspathEntrySnapshotTransform
+Transforming reactive-streams-1.0.4.jar with ClasspathEntrySnapshotTransform
+Transforming arrow-continuations-jvm-1.2.0.jar with ClasspathEntrySnapshotTransform
+Transforming arrow-annotations-jvm-1.2.0.jar with ClasspathEntrySnapshotTransform
+Transforming spring-jcl-6.1.1.jar with ClasspathEntrySnapshotTransform
+Transforming micrometer-commons-1.12.0.jar with ClasspathEntrySnapshotTransform
+Transforming logback-core-1.4.11.jar with ClasspathEntrySnapshotTransform
+Transforming log4j-api-2.21.1.jar with ClasspathEntrySnapshotTransform
+Excluding []
+Excluding []
+Caching disabled for task ':compileKotlin' because:
+  Build cache is disabled
+Skipping task ':compileKotlin' as it is up-to-date.
+Resolve mutations for :compileJava (Thread[Execution worker,5,main]) started.
+:compileJava (Thread[Execution worker,5,main]) started.
+
+> Task :compileJava NO-SOURCE
+Skipping task ':compileJava' as it has no source files and no previous output files.
+Resolve mutations for :processResources (Thread[Execution worker,5,main]) started.
+:processResources (Thread[Execution worker,5,main]) started.
+
+> Task :processResources UP-TO-DATE
+Caching disabled for task ':processResources' because:
+  Build cache is disabled
+  Not worth caching
+Skipping task ':processResources' as it is up-to-date.
+Resolve mutations for :classes (Thread[Execution worker,5,main]) started.
+:classes (Thread[Execution worker,5,main]) started.
+
+> Task :classes UP-TO-DATE
+Skipping task ':classes' as it has no actions.
+Resolve mutations for :compileTestKotlin (Thread[Execution worker,5,main]) started.
+:compileTestKotlin (Thread[Execution worker,5,main]) started.
+
+> Task :compileTestKotlin UP-TO-DATE
+Excluding []
+Excluding []
+Transforming main with ClasspathEntrySnapshotTransform
+Transforming main with ClasspathEntrySnapshotTransform
+Transforming kotlin-reflect-1.9.20.jar with ClasspathEntrySnapshotTransform
+Transforming kotest-extensions-spring-1.1.3.jar with ClasspathEntrySnapshotTransform
+Transforming kotlinx-coroutines-reactive-1.7.3.jar with ClasspathEntrySnapshotTransform
+Transforming kotest-runner-junit5-jvm-5.8.0.jar with ClasspathEntrySnapshotTransform
+Transforming kotest-framework-engine-jvm-5.8.0.jar with ClasspathEntrySnapshotTransform
+Transforming kotest-framework-api-jvm-5.8.0.jar with ClasspathEntrySnapshotTransform
+Transforming kotlinx-coroutines-test-jvm-1.7.3.jar with ClasspathEntrySnapshotTransform
+Transforming kotlinx-coroutines-reactor-1.7.3.jar with ClasspathEntrySnapshotTransform
+Transforming arrow-fx-coroutines-jvm-1.2.0.jar with ClasspathEntrySnapshotTransform
+Transforming kotlinx-coroutines-core-jvm-1.7.3.jar with ClasspathEntrySnapshotTransform
+Transforming kotest-assertions-core-jvm-5.8.0.jar with ClasspathEntrySnapshotTransform
+Transforming kotest-assertions-arrow-jvm-1.3.3.jar with ClasspathEntrySnapshotTransform
+Transforming kotest-property-jvm-5.8.0.jar with ClasspathEntrySnapshotTransform
+Transforming kotest-framework-datatest-jvm-5.8.0.jar with ClasspathEntrySnapshotTransform
+Transforming mockk-jvm-1.13.8.jar with ClasspathEntrySnapshotTransform
+Transforming kotest-framework-discovery-jvm-5.8.0.jar with ClasspathEntrySnapshotTransform
+Transforming kotest-common-jvm-5.8.0.jar with ClasspathEntrySnapshotTransform
+Transforming kotest-extensions-jvm-5.8.0.jar with ClasspathEntrySnapshotTransform
+Transforming kotest-framework-concurrency-jvm-5.8.0.jar with ClasspathEntrySnapshotTransform
+Transforming kotest-assertions-shared-jvm-5.8.0.jar with ClasspathEntrySnapshotTransform
+Transforming mockk-dsl-jvm-1.13.8.jar with ClasspathEntrySnapshotTransform
+Transforming mockk-agent-jvm-1.13.8.jar with ClasspathEntrySnapshotTransform
+Transforming mockk-agent-api-jvm-1.13.8.jar with ClasspathEntrySnapshotTransform
+Transforming mockk-core-jvm-1.13.8.jar with ClasspathEntrySnapshotTransform
+Transforming kotest-assertions-api-jvm-5.8.0.jar with ClasspathEntrySnapshotTransform
+Transforming kotlin-stdlib-jdk8-1.9.20.jar with ClasspathEntrySnapshotTransform
+Transforming arrow-core-jvm-1.2.0.jar with ClasspathEntrySnapshotTransform
+Transforming arrow-atomic-jvm-1.2.0.jar with ClasspathEntrySnapshotTransform
+Transforming kotlin-stdlib-jdk7-1.9.20.jar with ClasspathEntrySnapshotTransform
+Transforming mordant-1.2.1.jar with ClasspathEntrySnapshotTransform
+Transforming colormath-1.2.0.jar with ClasspathEntrySnapshotTransform
+Transforming kotlin-stdlib-1.9.20.jar with ClasspathEntrySnapshotTransform
+Transforming spring-boot-starter-web-3.2.0.jar with ClasspathEntrySnapshotTransform
+Transforming spring-boot-starter-data-jpa-3.2.0.jar with ClasspathEntrySnapshotTransform
+Transforming spring-boot-starter-validation-3.2.0.jar with ClasspathEntrySnapshotTransform
+Transforming java-uuid-generator-4.2.0.jar with ClasspathEntrySnapshotTransform
+Transforming spring-boot-starter-test-3.2.0.jar with ClasspathEntrySnapshotTransform
+Transforming annotations-23.0.0.jar with ClasspathEntrySnapshotTransform
+Transforming spring-boot-starter-json-3.2.0.jar with ClasspathEntrySnapshotTransform
+Transforming spring-boot-starter-aop-3.2.0.jar with ClasspathEntrySnapshotTransform
+Transforming spring-boot-starter-jdbc-3.2.0.jar with ClasspathEntrySnapshotTransform
+Transforming spring-boot-starter-3.2.0.jar with ClasspathEntrySnapshotTransform
+Transforming spring-boot-starter-tomcat-3.2.0.jar with ClasspathEntrySnapshotTransform
+Transforming spring-webmvc-6.1.1.jar with ClasspathEntrySnapshotTransform
+Transforming spring-web-6.1.1.jar with ClasspathEntrySnapshotTransform
+Transforming hibernate-core-6.3.1.Final.jar with ClasspathEntrySnapshotTransform
+Transforming spring-data-jpa-3.2.0.jar with ClasspathEntrySnapshotTransform
+Transforming spring-aspects-6.1.1.jar with ClasspathEntrySnapshotTransform
+Transforming tomcat-embed-el-10.1.16.jar with ClasspathEntrySnapshotTransform
+Transforming hibernate-validator-8.0.1.Final.jar with ClasspathEntrySnapshotTransform
+Transforming HikariCP-5.0.1.jar with ClasspathEntrySnapshotTransform
+Transforming spring-data-commons-3.2.0.jar with ClasspathEntrySnapshotTransform
+Transforming spring-boot-starter-logging-3.2.0.jar with ClasspathEntrySnapshotTransform
+Transforming logback-classic-1.4.11.jar with ClasspathEntrySnapshotTransform
+Transforming log4j-to-slf4j-2.21.1.jar with ClasspathEntrySnapshotTransform
+Transforming jul-to-slf4j-2.0.9.jar with ClasspathEntrySnapshotTransform
+Transforming slf4j-api-2.0.9.jar with ClasspathEntrySnapshotTransform
+Transforming reactor-core-3.6.0.jar with ClasspathEntrySnapshotTransform
+Transforming spring-boot-test-autoconfigure-3.2.0.jar with ClasspathEntrySnapshotTransform
+Transforming spring-boot-test-3.2.0.jar with ClasspathEntrySnapshotTransform
+Transforming json-path-2.8.0.jar with ClasspathEntrySnapshotTransform
+Transforming jakarta.xml.bind-api-4.0.1.jar with ClasspathEntrySnapshotTransform
+Transforming json-smart-2.5.0.jar with ClasspathEntrySnapshotTransform
+Transforming assertj-core-3.24.2.jar with ClasspathEntrySnapshotTransform
+Transforming awaitility-4.2.0.jar with ClasspathEntrySnapshotTransform
+Transforming hamcrest-2.2.jar with ClasspathEntrySnapshotTransform
+Transforming junit-jupiter-params-5.10.1.jar with ClasspathEntrySnapshotTransform
+Transforming junit-jupiter-api-5.10.1.jar with ClasspathEntrySnapshotTransform
+Transforming junit-platform-launcher-1.10.1.jar with ClasspathEntrySnapshotTransform
+Transforming junit-platform-engine-1.10.1.jar with ClasspathEntrySnapshotTransform
+Transforming junit-platform-suite-api-1.10.1.jar with ClasspathEntrySnapshotTransform
+Transforming junit-platform-commons-1.10.1.jar with ClasspathEntrySnapshotTransform
+Transforming junit-jupiter-5.10.1.jar with ClasspathEntrySnapshotTransform
+Transforming mockito-junit-jupiter-5.7.0.jar with ClasspathEntrySnapshotTransform
+Transforming jsonassert-1.5.1.jar with ClasspathEntrySnapshotTransform
+Transforming spring-test-6.1.1.jar with ClasspathEntrySnapshotTransform
+Transforming spring-boot-autoconfigure-3.2.0.jar with ClasspathEntrySnapshotTransform
+Transforming spring-boot-3.2.0.jar with ClasspathEntrySnapshotTransform
+Transforming spring-context-6.1.1.jar with ClasspathEntrySnapshotTransform
+Transforming spring-aop-6.1.1.jar with ClasspathEntrySnapshotTransform
+Transforming spring-orm-6.1.1.jar with ClasspathEntrySnapshotTransform
+Transforming spring-jdbc-6.1.1.jar with ClasspathEntrySnapshotTransform
+Transforming spring-tx-6.1.1.jar with ClasspathEntrySnapshotTransform
+Transforming spring-beans-6.1.1.jar with ClasspathEntrySnapshotTransform
+Transforming spring-expression-6.1.1.jar with ClasspathEntrySnapshotTransform
+Transforming spring-core-6.1.1.jar with ClasspathEntrySnapshotTransform
+Transforming xmlunit-core-2.9.1.jar with ClasspathEntrySnapshotTransform
+Transforming jakarta.annotation-api-2.1.1.jar with ClasspathEntrySnapshotTransform
+Transforming snakeyaml-2.2.jar with ClasspathEntrySnapshotTransform
+Transforming jackson-datatype-jsr310-2.15.3.jar with ClasspathEntrySnapshotTransform
+Transforming jackson-module-parameter-names-2.15.3.jar with ClasspathEntrySnapshotTransform
+Transforming jackson-annotations-2.15.3.jar with ClasspathEntrySnapshotTransform
+Transforming jackson-core-2.15.3.jar with ClasspathEntrySnapshotTransform
+Transforming jackson-datatype-jdk8-2.15.3.jar with ClasspathEntrySnapshotTransform
+Transforming jackson-databind-2.15.3.jar with ClasspathEntrySnapshotTransform
+Transforming tomcat-embed-websocket-10.1.16.jar with ClasspathEntrySnapshotTransform
+Transforming tomcat-embed-core-10.1.16.jar with ClasspathEntrySnapshotTransform
+Transforming micrometer-observation-1.12.0.jar with ClasspathEntrySnapshotTransform
+Transforming aspectjweaver-1.9.20.1.jar with ClasspathEntrySnapshotTransform
+Transforming jakarta.persistence-api-3.1.0.jar with ClasspathEntrySnapshotTransform
+Transforming jakarta.transaction-api-2.0.1.jar with ClasspathEntrySnapshotTransform
+Transforming antlr4-runtime-4.10.1.jar with ClasspathEntrySnapshotTransform
+Transforming jakarta.validation-api-3.0.2.jar with ClasspathEntrySnapshotTransform
+Transforming jboss-logging-3.5.3.Final.jar with ClasspathEntrySnapshotTransform
+Transforming classmate-1.6.0.jar with ClasspathEntrySnapshotTransform
+Transforming reactive-streams-1.0.4.jar with ClasspathEntrySnapshotTransform
+Transforming jakarta.activation-api-2.1.2.jar with ClasspathEntrySnapshotTransform
+Transforming accessors-smart-2.5.0.jar with ClasspathEntrySnapshotTransform
+Transforming byte-buddy-1.14.10.jar with ClasspathEntrySnapshotTransform
+Transforming android-json-0.0.20131108.vaadin1.jar with ClasspathEntrySnapshotTransform
+Transforming spring-jcl-6.1.1.jar with ClasspathEntrySnapshotTransform
+Transforming rgxgen-1.4.jar with ClasspathEntrySnapshotTransform
+Transforming arrow-continuations-jvm-1.2.0.jar with ClasspathEntrySnapshotTransform
+Transforming arrow-annotations-jvm-1.2.0.jar with ClasspathEntrySnapshotTransform
+Transforming micrometer-commons-1.12.0.jar with ClasspathEntrySnapshotTransform
+Transforming asm-9.3.jar with ClasspathEntrySnapshotTransform
+Transforming opentest4j-1.3.0.jar with ClasspathEntrySnapshotTransform
+Transforming apiguardian-api-1.1.2.jar with ClasspathEntrySnapshotTransform
+Transforming logback-core-1.4.11.jar with ClasspathEntrySnapshotTransform
+Transforming log4j-api-2.21.1.jar with ClasspathEntrySnapshotTransform
+Transforming classgraph-4.8.162.jar with ClasspathEntrySnapshotTransform
+Transforming objenesis-3.3.jar with ClasspathEntrySnapshotTransform
+Transforming byte-buddy-agent-1.14.10.jar with ClasspathEntrySnapshotTransform
+Excluding []
+Caching disabled for task ':compileTestKotlin' because:
+  Build cache is disabled
+Skipping task ':compileTestKotlin' as it is up-to-date.
+Resolve mutations for :compileTestJava (Thread[Execution worker,5,main]) started.
+:compileTestJava (Thread[Execution worker,5,main]) started.
+
+> Task :compileTestJava NO-SOURCE
+Skipping task ':compileTestJava' as it has no source files and no previous output files.
+Resolve mutations for :processTestResources (Thread[Execution worker,5,main]) started.
+:processTestResources (Thread[Execution worker,5,main]) started.
+
+> Task :processTestResources UP-TO-DATE
+Caching disabled for task ':processTestResources' because:
+  Build cache is disabled
+  Not worth caching
+Skipping task ':processTestResources' as it is up-to-date.
+Resolve mutations for :testClasses (Thread[Execution worker,5,main]) started.
+:testClasses (Thread[Execution worker,5,main]) started.
+
+> Task :testClasses UP-TO-DATE
+Skipping task ':testClasses' as it has no actions.
+Resolve mutations for :test (Thread[Execution worker,5,main]) started.
+:test (Thread[Execution worker,5,main]) started.
+Gradle Test Executor 11 started executing tests.
+
+> Task :test
+Excluding []
+Caching disabled for task ':test' because:
+  Build cache is disabled
+Task ':test' is not up-to-date because:
+  Task has failed previously.
+file or directory '/home/red1/Projects/blackerp/build/classes/java/test', not found
+Starting process 'Gradle Test Executor 11'. Working directory: /home/red1/Projects/blackerp Command: /usr/lib/jvm/java-17-openjdk-amd64/bin/java -Dorg.gradle.internal.worker.tmpdir=/home/red1/Projects/blackerp/build/tmp/test/work @/home/red1/.gradle/.tmp/gradle-worker-classpath13039711685419804459txt -Xmx512m -Dfile.encoding=UTF-8 -Duser.country=US -Duser.language=en -Duser.variant -ea worker.org.gradle.process.internal.worker.GradleWorkerMain 'Gradle Test Executor 11'
+Successfully started process 'Gradle Test Executor 11'
+
+org.blackerp.infrastructure.persistence.SimpleTest STANDARD_ERROR
+    ch.qos.logback.core.joran.spi.JoranException: Problem parsing XML document. See previously reported errors.
+        at ch.qos.logback.core.joran.event.SaxEventRecorder.recordEvents(SaxEventRecorder.java:70)
+        at ch.qos.logback.core.joran.GenericXMLConfigurator.populateSaxEventRecorder(GenericXMLConfigurator.java:184)
+        at ch.qos.logback.core.joran.GenericXMLConfigurator.doConfigure(GenericXMLConfigurator.java:158)
+        at ch.qos.logback.core.joran.GenericXMLConfigurator.doConfigure(GenericXMLConfigurator.java:122)
+        at ch.qos.logback.core.joran.GenericXMLConfigurator.doConfigure(GenericXMLConfigurator.java:65)
+        at ch.qos.logback.classic.util.DefaultJoranConfigurator.configureByResource(DefaultJoranConfigurator.java:68)
+        at ch.qos.logback.classic.util.DefaultJoranConfigurator.configure(DefaultJoranConfigurator.java:35)
+        at ch.qos.logback.classic.util.ContextInitializer.invokeConfigure(ContextInitializer.java:122)
+        at ch.qos.logback.classic.util.ContextInitializer.autoConfig(ContextInitializer.java:97)
+        at ch.qos.logback.classic.util.ContextInitializer.autoConfig(ContextInitializer.java:65)
+        at ch.qos.logback.classic.spi.LogbackServiceProvider.initializeLoggerContext(LogbackServiceProvider.java:52)
+        at ch.qos.logback.classic.spi.LogbackServiceProvider.initialize(LogbackServiceProvider.java:41)
+        at org.slf4j.LoggerFactory.bind(LoggerFactory.java:195)
+        at org.slf4j.LoggerFactory.performInitialization(LoggerFactory.java:182)
+        at org.slf4j.LoggerFactory.getProvider(LoggerFactory.java:490)
+        at org.slf4j.LoggerFactory.getILoggerFactory(LoggerFactory.java:476)
+        at org.slf4j.LoggerFactory.getLogger(LoggerFactory.java:425)
+        at org.apache.commons.logging.LogAdapter$Slf4jAdapter.createLocationAwareLog(LogAdapter.java:121)
+        at org.apache.commons.logging.LogAdapter.createLog(LogAdapter.java:95)
+        at org.apache.commons.logging.LogFactory.getLog(LogFactory.java:67)
+        at org.apache.commons.logging.LogFactory.getLog(LogFactory.java:59)
+        at org.springframework.test.context.TestContextManager.<clinit>(TestContextManager.java:91)
+        at io.kotest.extensions.spring.SpringAutowireConstructorExtension.instantiate(SpringAutowireConstructorExtension.kt:26)
+        at io.kotest.engine.spec.InstantiateSpecKt.createAndInitializeSpec(instantiateSpec.kt:30)
+        at io.kotest.engine.spec.InstantiateSpecKt.instantiate(instantiateSpec.kt:11)
+        at io.kotest.engine.spec.SpecRefKt.instance(SpecRef.kt:14)
+        at io.kotest.engine.spec.SpecExecutor.createInstance-gIAlu-s(SpecExecutor.kt:63)
+        at io.kotest.engine.spec.SpecExecutor.access$createInstance-gIAlu-s(SpecExecutor.kt:24)
+        at io.kotest.engine.spec.SpecExecutor$execute$innerExecute$1.invokeSuspend(SpecExecutor.kt:40)
+        at io.kotest.engine.spec.SpecExecutor$execute$innerExecute$1.invoke(SpecExecutor.kt)
+        at io.kotest.engine.spec.SpecExecutor$execute$innerExecute$1.invoke(SpecExecutor.kt)
+        at io.kotest.engine.spec.interceptor.ref.FinalizeSpecInterceptor.intercept-0E7RQCE(FinalizeSpecInterceptor.kt:24)
+        at io.kotest.engine.spec.interceptor.SpecRefInterceptorPipeline$execute$3$1.invokeSuspend(SpecRefInterceptorPipeline.kt:49)
+        at io.kotest.engine.spec.interceptor.SpecRefInterceptorPipeline$execute$3$1.invoke(SpecRefInterceptorPipeline.kt)
+        at io.kotest.engine.spec.interceptor.SpecRefInterceptorPipeline$execute$3$1.invoke(SpecRefInterceptorPipeline.kt)
+        at io.kotest.engine.spec.interceptor.ref.BeforeSpecStateInterceptor.intercept-0E7RQCE(BeforeSpecStateInterceptor.kt:25)
+        at io.kotest.engine.spec.interceptor.SpecRefInterceptorPipeline$execute$3$1.invokeSuspend(SpecRefInterceptorPipeline.kt:49)
+        at io.kotest.engine.spec.interceptor.SpecRefInterceptorPipeline$execute$3$1.invoke(SpecRefInterceptorPipeline.kt)
+        at io.kotest.engine.spec.interceptor.SpecRefInterceptorPipeline$execute$3$1.invoke(SpecRefInterceptorPipeline.kt)
+        at io.kotest.engine.spec.interceptor.ref.PrepareSpecInterceptor.intercept-0E7RQCE(PrepareSpecInterceptor.kt:25)
+        at io.kotest.engine.spec.interceptor.SpecRefInterceptorPipeline$execute$3$1.invokeSuspend(SpecRefInterceptorPipeline.kt:49)
+        at io.kotest.engine.spec.interceptor.SpecRefInterceptorPipeline$execute$3$1.invoke(SpecRefInterceptorPipeline.kt)
+        at io.kotest.engine.spec.interceptor.SpecRefInterceptorPipeline$execute$3$1.invoke(SpecRefInterceptorPipeline.kt)
+        at io.kotest.engine.spec.interceptor.ref.ApplyExtensionsInterceptor.intercept-0E7RQCE(ApplyExtensionsInterceptor.kt:36)
+        at io.kotest.engine.spec.interceptor.SpecRefInterceptorPipeline$execute$3$1.invokeSuspend(SpecRefInterceptorPipeline.kt:49)
+        at io.kotest.engine.spec.interceptor.SpecRefInterceptorPipeline$execute$3$1.invoke(SpecRefInterceptorPipeline.kt)
+        at io.kotest.engine.spec.interceptor.SpecRefInterceptorPipeline$execute$3$1.invoke(SpecRefInterceptorPipeline.kt)
+        at io.kotest.engine.spec.interceptor.ref.SpecFinishedInterceptor.intercept-0E7RQCE(SpecFinishedInterceptor.kt:22)
+        at io.kotest.engine.spec.interceptor.SpecRefInterceptorPipeline$execute$3$1.invokeSuspend(SpecRefInterceptorPipeline.kt:49)
+        at io.kotest.engine.spec.interceptor.SpecRefInterceptorPipeline$execute$3$1.invoke(SpecRefInterceptorPipeline.kt)
+        at io.kotest.engine.spec.interceptor.SpecRefInterceptorPipeline$execute$3$1.invoke(SpecRefInterceptorPipeline.kt)
+        at io.kotest.engine.spec.interceptor.ref.SpecStartedInterceptor.intercept-0E7RQCE(SpecStartedInterceptor.kt:20)
+        at io.kotest.engine.spec.interceptor.SpecRefInterceptorPipeline$execute$3$1.invokeSuspend(SpecRefInterceptorPipeline.kt:49)
+        at io.kotest.engine.spec.interceptor.SpecRefInterceptorPipeline$execute$3$1.invoke(SpecRefInterceptorPipeline.kt)
+        at io.kotest.engine.spec.interceptor.SpecRefInterceptorPipeline$execute$3$1.invoke(SpecRefInterceptorPipeline.kt)
+        at io.kotest.engine.spec.interceptor.ref.SpecRefExtensionInterceptor$intercept$inner$1.invokeSuspend(SpecRefExtensionInterceptor.kt:28)
+        at io.kotest.engine.spec.interceptor.ref.SpecRefExtensionInterceptor$intercept$inner$1.invoke(SpecRefExtensionInterceptor.kt)
+        at io.kotest.engine.spec.interceptor.ref.SpecRefExtensionInterceptor$intercept$inner$1.invoke(SpecRefExtensionInterceptor.kt)
+        at io.kotest.engine.spec.interceptor.ref.SpecRefExtensionInterceptor.intercept-0E7RQCE(SpecRefExtensionInterceptor.kt:31)
+        at io.kotest.engine.spec.interceptor.SpecRefInterceptorPipeline$execute$3$1.invokeSuspend(SpecRefInterceptorPipeline.kt:49)
+        at io.kotest.engine.spec.interceptor.SpecRefInterceptorPipeline$execute$3$1.invoke(SpecRefInterceptorPipeline.kt)
+        at io.kotest.engine.spec.interceptor.SpecRefInterceptorPipeline$execute$3$1.invoke(SpecRefInterceptorPipeline.kt)
+        at io.kotest.engine.spec.interceptor.ref.RequiresTagInterceptor.intercept-0E7RQCE(RequiresTagInterceptor.kt:35)
+        at io.kotest.engine.spec.interceptor.SpecRefInterceptorPipeline$execute$3$1.invokeSuspend(SpecRefInterceptorPipeline.kt:49)
+        at io.kotest.engine.spec.interceptor.SpecRefInterceptorPipeline$execute$3$1.invoke(SpecRefInterceptorPipeline.kt)
+        at io.kotest.engine.spec.interceptor.SpecRefInterceptorPipeline$execute$3$1.invoke(SpecRefInterceptorPipeline.kt)
+        at io.kotest.engine.spec.interceptor.ref.TagsInterceptor.intercept-0E7RQCE(TagsInterceptor.kt:38)
+        at io.kotest.engine.spec.interceptor.SpecRefInterceptorPipeline$execute$3$1.invokeSuspend(SpecRefInterceptorPipeline.kt:49)
+        at io.kotest.engine.spec.interceptor.SpecRefInterceptorPipeline$execute$3$1.invoke(SpecRefInterceptorPipeline.kt)
+        at io.kotest.engine.spec.interceptor.SpecRefInterceptorPipeline$execute$3$1.invoke(SpecRefInterceptorPipeline.kt)
+        at io.kotest.engine.spec.interceptor.ref.SystemPropertySpecFilterInterceptor.intercept-0E7RQCE(SystemPropertySpecFilterInterceptor.kt:48)
+        at io.kotest.engine.spec.interceptor.SpecRefInterceptorPipeline$execute$3$1.invokeSuspend(SpecRefInterceptorPipeline.kt:49)
+        at io.kotest.engine.spec.interceptor.SpecRefInterceptorPipeline$execute$3$1.invoke(SpecRefInterceptorPipeline.kt)
+        at io.kotest.engine.spec.interceptor.SpecRefInterceptorPipeline$execute$3$1.invoke(SpecRefInterceptorPipeline.kt)
+        at io.kotest.engine.spec.interceptor.ref.SpecFilterInterceptor.intercept-0E7RQCE(SpecFilterInterceptor.kt:38)
+        at io.kotest.engine.spec.interceptor.SpecRefInterceptorPipeline$execute$3$1.invokeSuspend(SpecRefInterceptorPipeline.kt:49)
+        at io.kotest.engine.spec.interceptor.SpecRefInterceptorPipeline$execute$3$1.invoke(SpecRefInterceptorPipeline.kt)
+        at io.kotest.engine.spec.interceptor.SpecRefInterceptorPipeline$execute$3$1.invoke(SpecRefInterceptorPipeline.kt)
+        at io.kotest.engine.spec.interceptor.ref.IgnoredSpecInterceptor.intercept-0E7RQCE(IgnoredSpecInterceptor.kt:51)
+        at io.kotest.engine.spec.interceptor.SpecRefInterceptorPipeline$execute$3$1.invokeSuspend(SpecRefInterceptorPipeline.kt:49)
+        at io.kotest.engine.spec.interceptor.SpecRefInterceptorPipeline$execute$3$1.invoke(SpecRefInterceptorPipeline.kt)
+        at io.kotest.engine.spec.interceptor.SpecRefInterceptorPipeline$execute$3$1.invoke(SpecRefInterceptorPipeline.kt)
+        at io.kotest.engine.spec.interceptor.ref.EnabledIfInterceptor.intercept-0E7RQCE(EnabledIfInterceptor.kt:41)
+        at io.kotest.engine.spec.interceptor.SpecRefInterceptorPipeline$execute$3$1.invokeSuspend(SpecRefInterceptorPipeline.kt:49)
+        at io.kotest.engine.spec.interceptor.SpecRefInterceptorPipeline$execute$3$1.invoke(SpecRefInterceptorPipeline.kt)
+        at io.kotest.engine.spec.interceptor.SpecRefInterceptorPipeline$execute$3$1.invoke(SpecRefInterceptorPipeline.kt)
+        at io.kotest.engine.spec.interceptor.ref.RequiresPlatformInterceptor.intercept-0E7RQCE(RequiresPlatformInterceptor.kt:32)
+        at io.kotest.engine.spec.interceptor.SpecRefInterceptorPipeline$execute$3$1.invokeSuspend(SpecRefInterceptorPipeline.kt:49)
+        at io.kotest.engine.spec.interceptor.SpecRefInterceptorPipeline$execute$3$1.invoke(SpecRefInterceptorPipeline.kt)
+        at io.kotest.engine.spec.interceptor.SpecRefInterceptorPipeline$execute$3$1.invoke(SpecRefInterceptorPipeline.kt)
+        at io.kotest.engine.spec.interceptor.SpecRefInterceptorPipeline.execute-0E7RQCE(SpecRefInterceptorPipeline.kt:50)
+        at io.kotest.engine.spec.SpecExecutor.execute(SpecExecutor.kt:42)
+        at io.kotest.engine.ConcurrentTestSuiteScheduler$schedule$8$1$1$2.invokeSuspend(ConcurrentTestSuiteScheduler.kt:72)
+        at kotlin.coroutines.jvm.internal.BaseContinuationImpl.resumeWith(ContinuationImpl.kt:33)
+        at kotlinx.coroutines.DispatchedTask.run(DispatchedTask.kt:108)
+        at kotlinx.coroutines.EventLoopImplBase.processNextEvent(EventLoop.common.kt:280)
+        at kotlinx.coroutines.BlockingCoroutine.joinBlocking(Builders.kt:85)
+        at kotlinx.coroutines.BuildersKt__BuildersKt.runBlocking(Builders.kt:59)
+        at kotlinx.coroutines.BuildersKt.runBlocking(Unknown Source)
+        at kotlinx.coroutines.BuildersKt__BuildersKt.runBlocking$default(Builders.kt:38)
+        at kotlinx.coroutines.BuildersKt.runBlocking$default(Unknown Source)
+        at io.kotest.common.RunBlockingKt.runBlocking(runBlocking.kt:3)
+        at io.kotest.engine.TestEngineLauncher.launch(TestEngineLauncher.kt:250)
+        at io.kotest.runner.junit.platform.KotestJunitPlatformTestEngine.execute(KotestJunitPlatformTestEngine.kt:88)
+        at io.kotest.runner.junit.platform.KotestJunitPlatformTestEngine.execute(KotestJunitPlatformTestEngine.kt:60)
+        at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:198)
+        at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:169)
+        at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:93)
+        at org.junit.platform.launcher.core.EngineExecutionOrchestrator.lambda$execute$0(EngineExecutionOrchestrator.java:58)
+        at org.junit.platform.launcher.core.EngineExecutionOrchestrator.withInterceptedStreams(EngineExecutionOrchestrator.java:141)
+        at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:57)
+        at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:103)
+        at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:85)
+        at org.junit.platform.launcher.core.DelegatingLauncher.execute(DelegatingLauncher.java:47)
+        at org.gradle.api.internal.tasks.testing.junitplatform.JUnitPlatformTestClassProcessor$CollectAllTestClassesExecutor.processAllTestClasses(JUnitPlatformTestClassProcessor.java:124)
+        at org.gradle.api.internal.tasks.testing.junitplatform.JUnitPlatformTestClassProcessor$CollectAllTestClassesExecutor.access$000(JUnitPlatformTestClassProcessor.java:99)
+        at org.gradle.api.internal.tasks.testing.junitplatform.JUnitPlatformTestClassProcessor.stop(JUnitPlatformTestClassProcessor.java:94)
+        at org.gradle.api.internal.tasks.testing.SuiteTestClassProcessor.stop(SuiteTestClassProcessor.java:63)
+        at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+        at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+        at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+        at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+        at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:36)
+        at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:24)
+        at org.gradle.internal.dispatch.ContextClassLoaderDispatch.dispatch(ContextClassLoaderDispatch.java:33)
+        at org.gradle.internal.dispatch.ProxyDispatchAdapter$DispatchingInvocationHandler.invoke(ProxyDispatchAdapter.java:92)
+        at jdk.proxy1/jdk.proxy1.$Proxy4.stop(Unknown Source)
+        at org.gradle.api.internal.tasks.testing.worker.TestWorker$3.run(TestWorker.java:200)
+        at org.gradle.api.internal.tasks.testing.worker.TestWorker.executeAndMaintainThreadName(TestWorker.java:132)
+        at org.gradle.api.internal.tasks.testing.worker.TestWorker.execute(TestWorker.java:103)
+        at org.gradle.api.internal.tasks.testing.worker.TestWorker.execute(TestWorker.java:63)
+        at org.gradle.process.internal.worker.child.ActionExecutionWorker.execute(ActionExecutionWorker.java:56)
+        at org.gradle.process.internal.worker.child.SystemApplicationClassLoaderWorker.call(SystemApplicationClassLoaderWorker.java:121)
+        at org.gradle.process.internal.worker.child.SystemApplicationClassLoaderWorker.call(SystemApplicationClassLoaderWorker.java:71)
+        at worker.org.gradle.process.internal.worker.GradleWorkerMain.run(GradleWorkerMain.java:69)
+        at worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74)
+    Caused by: org.xml.sax.SAXParseException; systemId: file:/home/red1/Projects/blackerp/build/resources/test/logback-test.xml; lineNumber: 2; columnNumber: 6; The processing instruction target matching "[xX][mM][lL]" is not allowed.
+        at java.xml/com.sun.org.apache.xerces.internal.parsers.AbstractSAXParser.parse(AbstractSAXParser.java:1251)
+        at java.xml/com.sun.org.apache.xerces.internal.jaxp.SAXParserImpl$JAXPSAXParser.parse(SAXParserImpl.java:637)
+        at java.xml/com.sun.org.apache.xerces.internal.jaxp.SAXParserImpl.parse(SAXParserImpl.java:326)
+        at ch.qos.logback.core.joran.event.SaxEventRecorder.recordEvents(SaxEventRecorder.java:64)
+        ... 135 more
+
+org.blackerp.infrastructure.persistence.SimpleTest STANDARD_OUT
+    07:57:21,163 |-INFO in ch.qos.logback.classic.LoggerContext[default] - This is logback-classic version 1.4.11
+    07:57:21,167 |-INFO in ch.qos.logback.classic.util.ContextInitializer@440eaa07 - Here is a list of configurators discovered as a service, by rank: 
+    07:57:21,167 |-INFO in ch.qos.logback.classic.util.ContextInitializer@440eaa07 -   org.springframework.boot.logging.logback.RootLogLevelConfigurator
+    07:57:21,167 |-INFO in ch.qos.logback.classic.util.ContextInitializer@440eaa07 - They will be invoked in order until ExecutionStatus.DO_NOT_INVOKE_NEXT_IF_ANY is returned.
+    07:57:21,167 |-INFO in ch.qos.logback.classic.util.ContextInitializer@440eaa07 - Constructed configurator of type class org.springframework.boot.logging.logback.RootLogLevelConfigurator
+    07:57:21,187 |-INFO in ch.qos.logback.classic.util.ContextInitializer@440eaa07 - org.springframework.boot.logging.logback.RootLogLevelConfigurator.configure() call lasted 1 milliseconds. ExecutionStatus=INVOKE_NEXT_IF_ANY
+    07:57:21,187 |-INFO in ch.qos.logback.classic.util.ContextInitializer@440eaa07 - Trying to configure with ch.qos.logback.classic.joran.SerializedModelConfigurator
+    07:57:21,189 |-INFO in ch.qos.logback.classic.util.ContextInitializer@440eaa07 - Constructed configurator of type class ch.qos.logback.classic.joran.SerializedModelConfigurator
+    07:57:21,209 |-INFO in ch.qos.logback.classic.LoggerContext[default] - Could NOT find resource [logback-test.scmo]
+    07:57:21,209 |-INFO in ch.qos.logback.classic.LoggerContext[default] - Could NOT find resource [logback.scmo]
+    07:57:21,209 |-INFO in ch.qos.logback.classic.util.ContextInitializer@440eaa07 - ch.qos.logback.classic.joran.SerializedModelConfigurator.configure() call lasted 20 milliseconds. ExecutionStatus=INVOKE_NEXT_IF_ANY
+    07:57:21,209 |-INFO in ch.qos.logback.classic.util.ContextInitializer@440eaa07 - Trying to configure with ch.qos.logback.classic.util.DefaultJoranConfigurator
+    07:57:21,211 |-INFO in ch.qos.logback.classic.util.ContextInitializer@440eaa07 - Constructed configurator of type class ch.qos.logback.classic.util.DefaultJoranConfigurator
+    07:57:21,214 |-INFO in ch.qos.logback.classic.LoggerContext[default] - Found resource [logback-test.xml] at [file:/home/red1/Projects/blackerp/build/resources/test/logback-test.xml]
+    07:57:21,277 |-ERROR in ch.qos.logback.core.joran.event.SaxEventRecorder@7fc7c4a - XML_PARSING - Parsing fatal error on line 2 and column 6
+    07:57:21,277 |-ERROR in ch.qos.logback.core.joran.event.SaxEventRecorder@7fc7c4a - org.xml.sax.SAXParseException; systemId: file:/home/red1/Projects/blackerp/build/resources/test/logback-test.xml; lineNumber: 2; columnNumber: 6; The processing instruction target matching "[xX][mM][lL]" is not allowed.
+    07:57:21,307 |-INFO in ch.qos.logback.classic.util.ContextInitializer@440eaa07 - ch.qos.logback.classic.util.DefaultJoranConfigurator.configure() call lasted 95 milliseconds. ExecutionStatus=DO_NOT_INVOKE_NEXT_IF_ANY
+
+
+org.blackerp.infrastructure.persistence.SimpleTest STANDARD_ERROR
+    Logging system failed to initialize using configuration from 'null'
+    java.lang.IllegalStateException: Could not initialize Logback logging from classpath:logback-test.xml
+        at org.springframework.boot.logging.logback.LogbackLoggingSystem.lambda$loadConfiguration$1(LogbackLoggingSystem.java:252)
+        at org.springframework.boot.logging.logback.LogbackLoggingSystem.withLoggingSuppressed(LogbackLoggingSystem.java:467)
+        at org.springframework.boot.logging.logback.LogbackLoggingSystem.loadConfiguration(LogbackLoggingSystem.java:244)
+        at org.springframework.boot.logging.logback.LogbackLoggingSystem.reinitialize(LogbackLoggingSystem.java:334)
+        at org.springframework.boot.logging.AbstractLoggingSystem.initializeWithConventions(AbstractLoggingSystem.java:74)
+        at org.springframework.boot.logging.AbstractLoggingSystem.initialize(AbstractLoggingSystem.java:61)
+        at org.springframework.boot.logging.logback.LogbackLoggingSystem.initialize(LogbackLoggingSystem.java:189)
+        at org.springframework.boot.context.logging.LoggingApplicationListener.initializeSystem(LoggingApplicationListener.java:332)
+        at org.springframework.boot.context.logging.LoggingApplicationListener.initialize(LoggingApplicationListener.java:298)
+        at org.springframework.boot.context.logging.LoggingApplicationListener.onApplicationEnvironmentPreparedEvent(LoggingApplicationListener.java:246)
+        at org.springframework.boot.context.logging.LoggingApplicationListener.onApplicationEvent(LoggingApplicationListener.java:223)
+        at org.springframework.context.event.SimpleApplicationEventMulticaster.doInvokeListener(SimpleApplicationEventMulticaster.java:178)
+        at org.springframework.context.event.SimpleApplicationEventMulticaster.invokeListener(SimpleApplicationEventMulticaster.java:171)
+        at org.springframework.context.event.SimpleApplicationEventMulticaster.multicastEvent(SimpleApplicationEventMulticaster.java:149)
+        at org.springframework.context.event.SimpleApplicationEventMulticaster.multicastEvent(SimpleApplicationEventMulticaster.java:137)
+        at org.springframework.boot.context.event.EventPublishingRunListener.multicastInitialEvent(EventPublishingRunListener.java:136)
+        at org.springframework.boot.context.event.EventPublishingRunListener.environmentPrepared(EventPublishingRunListener.java:81)
+        at org.springframework.boot.SpringApplicationRunListeners.lambda$environmentPrepared$2(SpringApplicationRunListeners.java:64)
+        at java.base/java.lang.Iterable.forEach(Iterable.java:75)
+        at org.springframework.boot.SpringApplicationRunListeners.doWithListeners(SpringApplicationRunListeners.java:118)
+        at org.springframework.boot.SpringApplicationRunListeners.doWithListeners(SpringApplicationRunListeners.java:112)
+        at org.springframework.boot.SpringApplicationRunListeners.environmentPrepared(SpringApplicationRunListeners.java:63)
+        at org.springframework.boot.SpringApplication.prepareEnvironment(SpringApplication.java:366)
+        at org.springframework.boot.SpringApplication.run(SpringApplication.java:318)
+        at org.springframework.boot.test.context.SpringBootContextLoader.lambda$loadContext$3(SpringBootContextLoader.java:137)
+        at org.springframework.util.function.ThrowingSupplier.get(ThrowingSupplier.java:58)
+        at org.springframework.util.function.ThrowingSupplier.get(ThrowingSupplier.java:46)
+        at org.springframework.boot.SpringApplication.withHook(SpringApplication.java:1442)
+        at org.springframework.boot.test.context.SpringBootContextLoader$ContextLoaderHook.run(SpringBootContextLoader.java:552)
+        at org.springframework.boot.test.context.SpringBootContextLoader.loadContext(SpringBootContextLoader.java:137)
+        at org.springframework.boot.test.context.SpringBootContextLoader.loadContext(SpringBootContextLoader.java:108)
+        at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContextInternal(DefaultCacheAwareContextLoaderDelegate.java:225)
+        at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:152)
+        at org.springframework.test.context.support.DefaultTestContext.getApplicationContext(DefaultTestContext.java:130)
+        at io.kotest.extensions.spring.SpringAutowireConstructorExtension.instantiate(SpringAutowireConstructorExtension.kt:27)
+        at io.kotest.engine.spec.InstantiateSpecKt.createAndInitializeSpec(instantiateSpec.kt:30)
+        at io.kotest.engine.spec.InstantiateSpecKt.instantiate(instantiateSpec.kt:11)
+        at io.kotest.engine.spec.SpecRefKt.instance(SpecRef.kt:14)
+        at io.kotest.engine.spec.SpecExecutor.createInstance-gIAlu-s(SpecExecutor.kt:63)
+        at io.kotest.engine.spec.SpecExecutor.access$createInstance-gIAlu-s(SpecExecutor.kt:24)
+        at io.kotest.engine.spec.SpecExecutor$execute$innerExecute$1.invokeSuspend(SpecExecutor.kt:40)
+        at io.kotest.engine.spec.SpecExecutor$execute$innerExecute$1.invoke(SpecExecutor.kt)
+        at io.kotest.engine.spec.SpecExecutor$execute$innerExecute$1.invoke(SpecExecutor.kt)
+        at io.kotest.engine.spec.interceptor.ref.FinalizeSpecInterceptor.intercept-0E7RQCE(FinalizeSpecInterceptor.kt:24)
+        at io.kotest.engine.spec.interceptor.SpecRefInterceptorPipeline$execute$3$1.invokeSuspend(SpecRefInterceptorPipeline.kt:49)
+        at io.kotest.engine.spec.interceptor.SpecRefInterceptorPipeline$execute$3$1.invoke(SpecRefInterceptorPipeline.kt)
+        at io.kotest.engine.spec.interceptor.SpecRefInterceptorPipeline$execute$3$1.invoke(SpecRefInterceptorPipeline.kt)
+        at io.kotest.engine.spec.interceptor.ref.BeforeSpecStateInterceptor.intercept-0E7RQCE(BeforeSpecStateInterceptor.kt:25)
+        at io.kotest.engine.spec.interceptor.SpecRefInterceptorPipeline$execute$3$1.invokeSuspend(SpecRefInterceptorPipeline.kt:49)
+        at io.kotest.engine.spec.interceptor.SpecRefInterceptorPipeline$execute$3$1.invoke(SpecRefInterceptorPipeline.kt)
+        at io.kotest.engine.spec.interceptor.SpecRefInterceptorPipeline$execute$3$1.invoke(SpecRefInterceptorPipeline.kt)
+        at io.kotest.engine.spec.interceptor.ref.PrepareSpecInterceptor.intercept-0E7RQCE(PrepareSpecInterceptor.kt:25)
+        at io.kotest.engine.spec.interceptor.SpecRefInterceptorPipeline$execute$3$1.invokeSuspend(SpecRefInterceptorPipeline.kt:49)
+        at io.kotest.engine.spec.interceptor.SpecRefInterceptorPipeline$execute$3$1.invoke(SpecRefInterceptorPipeline.kt)
+        at io.kotest.engine.spec.interceptor.SpecRefInterceptorPipeline$execute$3$1.invoke(SpecRefInterceptorPipeline.kt)
+        at io.kotest.engine.spec.interceptor.ref.ApplyExtensionsInterceptor.intercept-0E7RQCE(ApplyExtensionsInterceptor.kt:36)
+        at io.kotest.engine.spec.interceptor.SpecRefInterceptorPipeline$execute$3$1.invokeSuspend(SpecRefInterceptorPipeline.kt:49)
+        at io.kotest.engine.spec.interceptor.SpecRefInterceptorPipeline$execute$3$1.invoke(SpecRefInterceptorPipeline.kt)
+        at io.kotest.engine.spec.interceptor.SpecRefInterceptorPipeline$execute$3$1.invoke(SpecRefInterceptorPipeline.kt)
+        at io.kotest.engine.spec.interceptor.ref.SpecFinishedInterceptor.intercept-0E7RQCE(SpecFinishedInterceptor.kt:22)
+        at io.kotest.engine.spec.interceptor.SpecRefInterceptorPipeline$execute$3$1.invokeSuspend(SpecRefInterceptorPipeline.kt:49)
+        at io.kotest.engine.spec.interceptor.SpecRefInterceptorPipeline$execute$3$1.invoke(SpecRefInterceptorPipeline.kt)
+        at io.kotest.engine.spec.interceptor.SpecRefInterceptorPipeline$execute$3$1.invoke(SpecRefInterceptorPipeline.kt)
+        at io.kotest.engine.spec.interceptor.ref.SpecStartedInterceptor.intercept-0E7RQCE(SpecStartedInterceptor.kt:20)
+        at io.kotest.engine.spec.interceptor.SpecRefInterceptorPipeline$execute$3$1.invokeSuspend(SpecRefInterceptorPipeline.kt:49)
+        at io.kotest.engine.spec.interceptor.SpecRefInterceptorPipeline$execute$3$1.invoke(SpecRefInterceptorPipeline.kt)
+        at io.kotest.engine.spec.interceptor.SpecRefInterceptorPipeline$execute$3$1.invoke(SpecRefInterceptorPipeline.kt)
+        at io.kotest.engine.spec.interceptor.ref.SpecRefExtensionInterceptor$intercept$inner$1.invokeSuspend(SpecRefExtensionInterceptor.kt:28)
+        at io.kotest.engine.spec.interceptor.ref.SpecRefExtensionInterceptor$intercept$inner$1.invoke(SpecRefExtensionInterceptor.kt)
+        at io.kotest.engine.spec.interceptor.ref.SpecRefExtensionInterceptor$intercept$inner$1.invoke(SpecRefExtensionInterceptor.kt)
+        at io.kotest.engine.spec.interceptor.ref.SpecRefExtensionInterceptor.intercept-0E7RQCE(SpecRefExtensionInterceptor.kt:31)
+        at io.kotest.engine.spec.interceptor.SpecRefInterceptorPipeline$execute$3$1.invokeSuspend(SpecRefInterceptorPipeline.kt:49)
+        at io.kotest.engine.spec.interceptor.SpecRefInterceptorPipeline$execute$3$1.invoke(SpecRefInterceptorPipeline.kt)
+        at io.kotest.engine.spec.interceptor.SpecRefInterceptorPipeline$execute$3$1.invoke(SpecRefInterceptorPipeline.kt)
+        at io.kotest.engine.spec.interceptor.ref.RequiresTagInterceptor.intercept-0E7RQCE(RequiresTagInterceptor.kt:35)
+        at io.kotest.engine.spec.interceptor.SpecRefInterceptorPipeline$execute$3$1.invokeSuspend(SpecRefInterceptorPipeline.kt:49)
+        at io.kotest.engine.spec.interceptor.SpecRefInterceptorPipeline$execute$3$1.invoke(SpecRefInterceptorPipeline.kt)
+        at io.kotest.engine.spec.interceptor.SpecRefInterceptorPipeline$execute$3$1.invoke(SpecRefInterceptorPipeline.kt)
+        at io.kotest.engine.spec.interceptor.ref.TagsInterceptor.intercept-0E7RQCE(TagsInterceptor.kt:38)
+        at io.kotest.engine.spec.interceptor.SpecRefInterceptorPipeline$execute$3$1.invokeSuspend(SpecRefInterceptorPipeline.kt:49)
+        at io.kotest.engine.spec.interceptor.SpecRefInterceptorPipeline$execute$3$1.invoke(SpecRefInterceptorPipeline.kt)
+        at io.kotest.engine.spec.interceptor.SpecRefInterceptorPipeline$execute$3$1.invoke(SpecRefInterceptorPipeline.kt)
+        at io.kotest.engine.spec.interceptor.ref.SystemPropertySpecFilterInterceptor.intercept-0E7RQCE(SystemPropertySpecFilterInterceptor.kt:48)
+        at io.kotest.engine.spec.interceptor.SpecRefInterceptorPipeline$execute$3$1.invokeSuspend(SpecRefInterceptorPipeline.kt:49)
+        at io.kotest.engine.spec.interceptor.SpecRefInterceptorPipeline$execute$3$1.invoke(SpecRefInterceptorPipeline.kt)
+        at io.kotest.engine.spec.interceptor.SpecRefInterceptorPipeline$execute$3$1.invoke(SpecRefInterceptorPipeline.kt)
+        at io.kotest.engine.spec.interceptor.ref.SpecFilterInterceptor.intercept-0E7RQCE(SpecFilterInterceptor.kt:38)
+        at io.kotest.engine.spec.interceptor.SpecRefInterceptorPipeline$execute$3$1.invokeSuspend(SpecRefInterceptorPipeline.kt:49)
+        at io.kotest.engine.spec.interceptor.SpecRefInterceptorPipeline$execute$3$1.invoke(SpecRefInterceptorPipeline.kt)
+        at io.kotest.engine.spec.interceptor.SpecRefInterceptorPipeline$execute$3$1.invoke(SpecRefInterceptorPipeline.kt)
+        at io.kotest.engine.spec.interceptor.ref.IgnoredSpecInterceptor.intercept-0E7RQCE(IgnoredSpecInterceptor.kt:51)
+        at io.kotest.engine.spec.interceptor.SpecRefInterceptorPipeline$execute$3$1.invokeSuspend(SpecRefInterceptorPipeline.kt:49)
+        at io.kotest.engine.spec.interceptor.SpecRefInterceptorPipeline$execute$3$1.invoke(SpecRefInterceptorPipeline.kt)
+        at io.kotest.engine.spec.interceptor.SpecRefInterceptorPipeline$execute$3$1.invoke(SpecRefInterceptorPipeline.kt)
+        at io.kotest.engine.spec.interceptor.ref.EnabledIfInterceptor.intercept-0E7RQCE(EnabledIfInterceptor.kt:41)
+        at io.kotest.engine.spec.interceptor.SpecRefInterceptorPipeline$execute$3$1.invokeSuspend(SpecRefInterceptorPipeline.kt:49)
+        at io.kotest.engine.spec.interceptor.SpecRefInterceptorPipeline$execute$3$1.invoke(SpecRefInterceptorPipeline.kt)
+        at io.kotest.engine.spec.interceptor.SpecRefInterceptorPipeline$execute$3$1.invoke(SpecRefInterceptorPipeline.kt)
+        at io.kotest.engine.spec.interceptor.ref.RequiresPlatformInterceptor.intercept-0E7RQCE(RequiresPlatformInterceptor.kt:32)
+        at io.kotest.engine.spec.interceptor.SpecRefInterceptorPipeline$execute$3$1.invokeSuspend(SpecRefInterceptorPipeline.kt:49)
+        at io.kotest.engine.spec.interceptor.SpecRefInterceptorPipeline$execute$3$1.invoke(SpecRefInterceptorPipeline.kt)
+        at io.kotest.engine.spec.interceptor.SpecRefInterceptorPipeline$execute$3$1.invoke(SpecRefInterceptorPipeline.kt)
+        at io.kotest.engine.spec.interceptor.SpecRefInterceptorPipeline.execute-0E7RQCE(SpecRefInterceptorPipeline.kt:50)
+        at io.kotest.engine.spec.SpecExecutor.execute(SpecExecutor.kt:42)
+        at io.kotest.engine.ConcurrentTestSuiteScheduler$schedule$8$1$1$2.invokeSuspend(ConcurrentTestSuiteScheduler.kt:72)
+        at kotlin.coroutines.jvm.internal.BaseContinuationImpl.resumeWith(ContinuationImpl.kt:33)
+        at kotlinx.coroutines.DispatchedTask.run(DispatchedTask.kt:108)
+        at kotlinx.coroutines.EventLoopImplBase.processNextEvent(EventLoop.common.kt:280)
+        at kotlinx.coroutines.BlockingCoroutine.joinBlocking(Builders.kt:85)
+        at kotlinx.coroutines.BuildersKt__BuildersKt.runBlocking(Builders.kt:59)
+        at kotlinx.coroutines.BuildersKt.runBlocking(Unknown Source)
+        at kotlinx.coroutines.BuildersKt__BuildersKt.runBlocking$default(Builders.kt:38)
+        at kotlinx.coroutines.BuildersKt.runBlocking$default(Unknown Source)
+        at io.kotest.common.RunBlockingKt.runBlocking(runBlocking.kt:3)
+        at io.kotest.engine.TestEngineLauncher.launch(TestEngineLauncher.kt:250)
+        at io.kotest.runner.junit.platform.KotestJunitPlatformTestEngine.execute(KotestJunitPlatformTestEngine.kt:88)
+        at io.kotest.runner.junit.platform.KotestJunitPlatformTestEngine.execute(KotestJunitPlatformTestEngine.kt:60)
+        at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:198)
+        at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:169)
+        at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:93)
+        at org.junit.platform.launcher.core.EngineExecutionOrchestrator.lambda$execute$0(EngineExecutionOrchestrator.java:58)
+        at org.junit.platform.launcher.core.EngineExecutionOrchestrator.withInterceptedStreams(EngineExecutionOrchestrator.java:141)
+        at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:57)
+        at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:103)
+        at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:85)
+        at org.junit.platform.launcher.core.DelegatingLauncher.execute(DelegatingLauncher.java:47)
+        at org.gradle.api.internal.tasks.testing.junitplatform.JUnitPlatformTestClassProcessor$CollectAllTestClassesExecutor.processAllTestClasses(JUnitPlatformTestClassProcessor.java:124)
+        at org.gradle.api.internal.tasks.testing.junitplatform.JUnitPlatformTestClassProcessor$CollectAllTestClassesExecutor.access$000(JUnitPlatformTestClassProcessor.java:99)
+        at org.gradle.api.internal.tasks.testing.junitplatform.JUnitPlatformTestClassProcessor.stop(JUnitPlatformTestClassProcessor.java:94)
+        at org.gradle.api.internal.tasks.testing.SuiteTestClassProcessor.stop(SuiteTestClassProcessor.java:63)
+        at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+        at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+        at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+        at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+        at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:36)
+        at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:24)
+        at org.gradle.internal.dispatch.ContextClassLoaderDispatch.dispatch(ContextClassLoaderDispatch.java:33)
+        at org.gradle.internal.dispatch.ProxyDispatchAdapter$DispatchingInvocationHandler.invoke(ProxyDispatchAdapter.java:92)
+        at jdk.proxy1/jdk.proxy1.$Proxy4.stop(Unknown Source)
+        at org.gradle.api.internal.tasks.testing.worker.TestWorker$3.run(TestWorker.java:200)
+        at org.gradle.api.internal.tasks.testing.worker.TestWorker.executeAndMaintainThreadName(TestWorker.java:132)
+        at org.gradle.api.internal.tasks.testing.worker.TestWorker.execute(TestWorker.java:103)
+        at org.gradle.api.internal.tasks.testing.worker.TestWorker.execute(TestWorker.java:63)
+        at org.gradle.process.internal.worker.child.ActionExecutionWorker.execute(ActionExecutionWorker.java:56)
+        at org.gradle.process.internal.worker.child.SystemApplicationClassLoaderWorker.call(SystemApplicationClassLoaderWorker.java:121)
+        at org.gradle.process.internal.worker.child.SystemApplicationClassLoaderWorker.call(SystemApplicationClassLoaderWorker.java:71)
+        at worker.org.gradle.process.internal.worker.GradleWorkerMain.run(GradleWorkerMain.java:69)
+        at worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74)
+    Caused by: ch.qos.logback.core.joran.spi.JoranException: Problem parsing XML document. See previously reported errors.
+        at ch.qos.logback.core.joran.event.SaxEventRecorder.recordEvents(SaxEventRecorder.java:70)
+        at ch.qos.logback.core.joran.GenericXMLConfigurator.populateSaxEventRecorder(GenericXMLConfigurator.java:184)
+        at ch.qos.logback.core.joran.GenericXMLConfigurator.doConfigure(GenericXMLConfigurator.java:158)
+        at ch.qos.logback.core.joran.GenericXMLConfigurator.doConfigure(GenericXMLConfigurator.java:122)
+        at ch.qos.logback.core.joran.GenericXMLConfigurator.doConfigure(GenericXMLConfigurator.java:65)
+        at org.springframework.boot.logging.logback.LogbackLoggingSystem.configureByResourceUrl(LogbackLoggingSystem.java:287)
+        at org.springframework.boot.logging.logback.LogbackLoggingSystem.lambda$loadConfiguration$1(LogbackLoggingSystem.java:249)
+        ... 147 more
+    Caused by: org.xml.sax.SAXParseException; systemId: file:/home/red1/Projects/blackerp/build/resources/test/logback-test.xml; lineNumber: 2; columnNumber: 6; The processing instruction target matching "[xX][mM][lL]" is not allowed.
+        at java.xml/com.sun.org.apache.xerces.internal.parsers.AbstractSAXParser.parse(AbstractSAXParser.java:1251)
+        at java.xml/com.sun.org.apache.xerces.internal.jaxp.SAXParserImpl$JAXPSAXParser.parse(SAXParserImpl.java:637)
+        at java.xml/com.sun.org.apache.xerces.internal.jaxp.SAXParserImpl.parse(SAXParserImpl.java:326)
+        at ch.qos.logback.core.joran.event.SaxEventRecorder.recordEvents(SaxEventRecorder.java:64)
+        ... 153 more
+
+org.blackerp.infrastructure.persistence.SimpleTest > IllegalStateException FAILED
+    java.lang.IllegalStateException: java.lang.IllegalStateException: Could not initialize Logback logging from classpath:logback-test.xml
+        at org.springframework.boot.context.logging.LoggingApplicationListener.initializeSystem(LoggingApplicationListener.java:347)
+        at org.springframework.boot.context.logging.LoggingApplicationListener.initialize(LoggingApplicationListener.java:298)
+        at org.springframework.boot.context.logging.LoggingApplicationListener.onApplicationEnvironmentPreparedEvent(LoggingApplicationListener.java:246)
+        at org.springframework.boot.context.logging.LoggingApplicationListener.onApplicationEvent(LoggingApplicationListener.java:223)
+        at org.springframework.context.event.SimpleApplicationEventMulticaster.doInvokeListener(SimpleApplicationEventMulticaster.java:178)
+        at org.springframework.context.event.SimpleApplicationEventMulticaster.invokeListener(SimpleApplicationEventMulticaster.java:171)
+        at org.springframework.context.event.SimpleApplicationEventMulticaster.multicastEvent(SimpleApplicationEventMulticaster.java:149)
+        at org.springframework.context.event.SimpleApplicationEventMulticaster.multicastEvent(SimpleApplicationEventMulticaster.java:137)
+        at org.springframework.boot.context.event.EventPublishingRunListener.multicastInitialEvent(EventPublishingRunListener.java:136)
+        at org.springframework.boot.context.event.EventPublishingRunListener.environmentPrepared(EventPublishingRunListener.java:81)
+        at org.springframework.boot.SpringApplicationRunListeners.lambda$environmentPrepared$2(SpringApplicationRunListeners.java:64)
+        at java.base/java.lang.Iterable.forEach(Iterable.java:75)
+        at org.springframework.boot.SpringApplicationRunListeners.doWithListeners(SpringApplicationRunListeners.java:118)
+        at org.springframework.boot.SpringApplicationRunListeners.doWithListeners(SpringApplicationRunListeners.java:112)
+        at org.springframework.boot.SpringApplicationRunListeners.environmentPrepared(SpringApplicationRunListeners.java:63)
+        at org.springframework.boot.SpringApplication.prepareEnvironment(SpringApplication.java:366)
+        at org.springframework.boot.SpringApplication.run(SpringApplication.java:318)
+        at org.springframework.boot.test.context.SpringBootContextLoader.lambda$loadContext$3(SpringBootContextLoader.java:137)
+        at org.springframework.util.function.ThrowingSupplier.get(ThrowingSupplier.java:58)
+        at org.springframework.util.function.ThrowingSupplier.get(ThrowingSupplier.java:46)
+        at org.springframework.boot.SpringApplication.withHook(SpringApplication.java:1442)
+        at org.springframework.boot.test.context.SpringBootContextLoader$ContextLoaderHook.run(SpringBootContextLoader.java:552)
+        at org.springframework.boot.test.context.SpringBootContextLoader.loadContext(SpringBootContextLoader.java:137)
+        at org.springframework.boot.test.context.SpringBootContextLoader.loadContext(SpringBootContextLoader.java:108)
+        at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContextInternal(DefaultCacheAwareContextLoaderDelegate.java:225)
+        at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:152)
+        at org.springframework.test.context.support.DefaultTestContext.getApplicationContext(DefaultTestContext.java:130)
+        at io.kotest.extensions.spring.SpringAutowireConstructorExtension.instantiate(SpringAutowireConstructorExtension.kt:27)
+        at io.kotest.engine.spec.InstantiateSpecKt.createAndInitializeSpec(instantiateSpec.kt:30)
+        at io.kotest.engine.spec.InstantiateSpecKt.instantiate(instantiateSpec.kt:11)
+        at io.kotest.engine.spec.SpecRefKt.instance(SpecRef.kt:14)
+        at io.kotest.engine.spec.SpecExecutor.createInstance-gIAlu-s(SpecExecutor.kt:63)
+        at io.kotest.engine.spec.SpecExecutor.access$createInstance-gIAlu-s(SpecExecutor.kt:24)
+        at io.kotest.engine.spec.SpecExecutor$execute$innerExecute$1.invokeSuspend(SpecExecutor.kt:40)
+        at io.kotest.engine.spec.SpecExecutor$execute$innerExecute$1.invoke(SpecExecutor.kt)
+        at io.kotest.engine.spec.SpecExecutor$execute$innerExecute$1.invoke(SpecExecutor.kt)
+        at io.kotest.engine.spec.interceptor.ref.FinalizeSpecInterceptor.intercept-0E7RQCE(FinalizeSpecInterceptor.kt:24)
+        at io.kotest.engine.spec.interceptor.SpecRefInterceptorPipeline$execute$3$1.invokeSuspend(SpecRefInterceptorPipeline.kt:49)
+        at io.kotest.engine.spec.interceptor.SpecRefInterceptorPipeline$execute$3$1.invoke(SpecRefInterceptorPipeline.kt)
+        at io.kotest.engine.spec.interceptor.SpecRefInterceptorPipeline$execute$3$1.invoke(SpecRefInterceptorPipeline.kt)
+        at io.kotest.engine.spec.interceptor.ref.BeforeSpecStateInterceptor.intercept-0E7RQCE(BeforeSpecStateInterceptor.kt:25)
+        at io.kotest.engine.spec.interceptor.SpecRefInterceptorPipeline$execute$3$1.invokeSuspend(SpecRefInterceptorPipeline.kt:49)
+        at io.kotest.engine.spec.interceptor.SpecRefInterceptorPipeline$execute$3$1.invoke(SpecRefInterceptorPipeline.kt)
+        at io.kotest.engine.spec.interceptor.SpecRefInterceptorPipeline$execute$3$1.invoke(SpecRefInterceptorPipeline.kt)
+        at io.kotest.engine.spec.interceptor.ref.PrepareSpecInterceptor.intercept-0E7RQCE(PrepareSpecInterceptor.kt:25)
+        at io.kotest.engine.spec.interceptor.SpecRefInterceptorPipeline$execute$3$1.invokeSuspend(SpecRefInterceptorPipeline.kt:49)
+        at io.kotest.engine.spec.interceptor.SpecRefInterceptorPipeline$execute$3$1.invoke(SpecRefInterceptorPipeline.kt)
+        at io.kotest.engine.spec.interceptor.SpecRefInterceptorPipeline$execute$3$1.invoke(SpecRefInterceptorPipeline.kt)
+        at io.kotest.engine.spec.interceptor.ref.ApplyExtensionsInterceptor.intercept-0E7RQCE(ApplyExtensionsInterceptor.kt:36)
+        at io.kotest.engine.spec.interceptor.SpecRefInterceptorPipeline$execute$3$1.invokeSuspend(SpecRefInterceptorPipeline.kt:49)
+        at io.kotest.engine.spec.interceptor.SpecRefInterceptorPipeline$execute$3$1.invoke(SpecRefInterceptorPipeline.kt)
+        at io.kotest.engine.spec.interceptor.SpecRefInterceptorPipeline$execute$3$1.invoke(SpecRefInterceptorPipeline.kt)
+        at io.kotest.engine.spec.interceptor.ref.SpecFinishedInterceptor.intercept-0E7RQCE(SpecFinishedInterceptor.kt:22)
+        at io.kotest.engine.spec.interceptor.SpecRefInterceptorPipeline$execute$3$1.invokeSuspend(SpecRefInterceptorPipeline.kt:49)
+        at io.kotest.engine.spec.interceptor.SpecRefInterceptorPipeline$execute$3$1.invoke(SpecRefInterceptorPipeline.kt)
+        at io.kotest.engine.spec.interceptor.SpecRefInterceptorPipeline$execute$3$1.invoke(SpecRefInterceptorPipeline.kt)
+        at io.kotest.engine.spec.interceptor.ref.SpecStartedInterceptor.intercept-0E7RQCE(SpecStartedInterceptor.kt:20)
+        at io.kotest.engine.spec.interceptor.SpecRefInterceptorPipeline$execute$3$1.invokeSuspend(SpecRefInterceptorPipeline.kt:49)
+        at io.kotest.engine.spec.interceptor.SpecRefInterceptorPipeline$execute$3$1.invoke(SpecRefInterceptorPipeline.kt)
+        at io.kotest.engine.spec.interceptor.SpecRefInterceptorPipeline$execute$3$1.invoke(SpecRefInterceptorPipeline.kt)
+        at io.kotest.engine.spec.interceptor.ref.SpecRefExtensionInterceptor$intercept$inner$1.invokeSuspend(SpecRefExtensionInterceptor.kt:28)
+        at io.kotest.engine.spec.interceptor.ref.SpecRefExtensionInterceptor$intercept$inner$1.invoke(SpecRefExtensionInterceptor.kt)
+        at io.kotest.engine.spec.interceptor.ref.SpecRefExtensionInterceptor$intercept$inner$1.invoke(SpecRefExtensionInterceptor.kt)
+        at io.kotest.engine.spec.interceptor.ref.SpecRefExtensionInterceptor.intercept-0E7RQCE(SpecRefExtensionInterceptor.kt:31)
+        at io.kotest.engine.spec.interceptor.SpecRefInterceptorPipeline$execute$3$1.invokeSuspend(SpecRefInterceptorPipeline.kt:49)
+        at io.kotest.engine.spec.interceptor.SpecRefInterceptorPipeline$execute$3$1.invoke(SpecRefInterceptorPipeline.kt)
+        at io.kotest.engine.spec.interceptor.SpecRefInterceptorPipeline$execute$3$1.invoke(SpecRefInterceptorPipeline.kt)
+        at io.kotest.engine.spec.interceptor.ref.RequiresTagInterceptor.intercept-0E7RQCE(RequiresTagInterceptor.kt:35)
+        at io.kotest.engine.spec.interceptor.SpecRefInterceptorPipeline$execute$3$1.invokeSuspend(SpecRefInterceptorPipeline.kt:49)
+        at io.kotest.engine.spec.interceptor.SpecRefInterceptorPipeline$execute$3$1.invoke(SpecRefInterceptorPipeline.kt)
+        at io.kotest.engine.spec.interceptor.SpecRefInterceptorPipeline$execute$3$1.invoke(SpecRefInterceptorPipeline.kt)
+        at io.kotest.engine.spec.interceptor.ref.TagsInterceptor.intercept-0E7RQCE(TagsInterceptor.kt:38)
+        at io.kotest.engine.spec.interceptor.SpecRefInterceptorPipeline$execute$3$1.invokeSuspend(SpecRefInterceptorPipeline.kt:49)
+        at io.kotest.engine.spec.interceptor.SpecRefInterceptorPipeline$execute$3$1.invoke(SpecRefInterceptorPipeline.kt)
+        at io.kotest.engine.spec.interceptor.SpecRefInterceptorPipeline$execute$3$1.invoke(SpecRefInterceptorPipeline.kt)
+        at io.kotest.engine.spec.interceptor.ref.SystemPropertySpecFilterInterceptor.intercept-0E7RQCE(SystemPropertySpecFilterInterceptor.kt:48)
+        at io.kotest.engine.spec.interceptor.SpecRefInterceptorPipeline$execute$3$1.invokeSuspend(SpecRefInterceptorPipeline.kt:49)
+        at io.kotest.engine.spec.interceptor.SpecRefInterceptorPipeline$execute$3$1.invoke(SpecRefInterceptorPipeline.kt)
+        at io.kotest.engine.spec.interceptor.SpecRefInterceptorPipeline$execute$3$1.invoke(SpecRefInterceptorPipeline.kt)
+        at io.kotest.engine.spec.interceptor.ref.SpecFilterInterceptor.intercept-0E7RQCE(SpecFilterInterceptor.kt:38)
+        at io.kotest.engine.spec.interceptor.SpecRefInterceptorPipeline$execute$3$1.invokeSuspend(SpecRefInterceptorPipeline.kt:49)
+        at io.kotest.engine.spec.interceptor.SpecRefInterceptorPipeline$execute$3$1.invoke(SpecRefInterceptorPipeline.kt)
+        at io.kotest.engine.spec.interceptor.SpecRefInterceptorPipeline$execute$3$1.invoke(SpecRefInterceptorPipeline.kt)
+        at io.kotest.engine.spec.interceptor.ref.IgnoredSpecInterceptor.intercept-0E7RQCE(IgnoredSpecInterceptor.kt:51)
+        at io.kotest.engine.spec.interceptor.SpecRefInterceptorPipeline$execute$3$1.invokeSuspend(SpecRefInterceptorPipeline.kt:49)
+        at io.kotest.engine.spec.interceptor.SpecRefInterceptorPipeline$execute$3$1.invoke(SpecRefInterceptorPipeline.kt)
+        at io.kotest.engine.spec.interceptor.SpecRefInterceptorPipeline$execute$3$1.invoke(SpecRefInterceptorPipeline.kt)
+        at io.kotest.engine.spec.interceptor.ref.EnabledIfInterceptor.intercept-0E7RQCE(EnabledIfInterceptor.kt:41)
+        at io.kotest.engine.spec.interceptor.SpecRefInterceptorPipeline$execute$3$1.invokeSuspend(SpecRefInterceptorPipeline.kt:49)
+        at io.kotest.engine.spec.interceptor.SpecRefInterceptorPipeline$execute$3$1.invoke(SpecRefInterceptorPipeline.kt)
+        at io.kotest.engine.spec.interceptor.SpecRefInterceptorPipeline$execute$3$1.invoke(SpecRefInterceptorPipeline.kt)
+        at io.kotest.engine.spec.interceptor.ref.RequiresPlatformInterceptor.intercept-0E7RQCE(RequiresPlatformInterceptor.kt:32)
+        at io.kotest.engine.spec.interceptor.SpecRefInterceptorPipeline$execute$3$1.invokeSuspend(SpecRefInterceptorPipeline.kt:49)
+        at io.kotest.engine.spec.interceptor.SpecRefInterceptorPipeline$execute$3$1.invoke(SpecRefInterceptorPipeline.kt)
+        at io.kotest.engine.spec.interceptor.SpecRefInterceptorPipeline$execute$3$1.invoke(SpecRefInterceptorPipeline.kt)
+        at io.kotest.engine.spec.interceptor.SpecRefInterceptorPipeline.execute-0E7RQCE(SpecRefInterceptorPipeline.kt:50)
+        at io.kotest.engine.spec.SpecExecutor.execute(SpecExecutor.kt:42)
+        at io.kotest.engine.ConcurrentTestSuiteScheduler$schedule$8$1$1$2.invokeSuspend(ConcurrentTestSuiteScheduler.kt:72)
+        at kotlin.coroutines.jvm.internal.BaseContinuationImpl.resumeWith(ContinuationImpl.kt:33)
+        at kotlinx.coroutines.DispatchedTask.run(DispatchedTask.kt:108)
+        at kotlinx.coroutines.EventLoopImplBase.processNextEvent(EventLoop.common.kt:280)
+        at kotlinx.coroutines.BlockingCoroutine.joinBlocking(Builders.kt:85)
+        at kotlinx.coroutines.BuildersKt__BuildersKt.runBlocking(Builders.kt:59)
+        at kotlinx.coroutines.BuildersKt.runBlocking(Unknown Source)
+        at kotlinx.coroutines.BuildersKt__BuildersKt.runBlocking$default(Builders.kt:38)
+        at kotlinx.coroutines.BuildersKt.runBlocking$default(Unknown Source)
+        at io.kotest.common.RunBlockingKt.runBlocking(runBlocking.kt:3)
+        at io.kotest.engine.TestEngineLauncher.launch(TestEngineLauncher.kt:250)
+        at io.kotest.runner.junit.platform.KotestJunitPlatformTestEngine.execute(KotestJunitPlatformTestEngine.kt:88)
+        at io.kotest.runner.junit.platform.KotestJunitPlatformTestEngine.execute(KotestJunitPlatformTestEngine.kt:60)
+
+        Caused by:
+        java.lang.IllegalStateException: Could not initialize Logback logging from classpath:logback-test.xml
+            at org.springframework.boot.logging.logback.LogbackLoggingSystem.lambda$loadConfiguration$1(LogbackLoggingSystem.java:252)
+            at org.springframework.boot.logging.logback.LogbackLoggingSystem.withLoggingSuppressed(LogbackLoggingSystem.java:467)
+            at org.springframework.boot.logging.logback.LogbackLoggingSystem.loadConfiguration(LogbackLoggingSystem.java:244)
+            at org.springframework.boot.logging.logback.LogbackLoggingSystem.reinitialize(LogbackLoggingSystem.java:334)
+            at org.springframework.boot.logging.AbstractLoggingSystem.initializeWithConventions(AbstractLoggingSystem.java:74)
+            at org.springframework.boot.logging.AbstractLoggingSystem.initialize(AbstractLoggingSystem.java:61)
+            at org.springframework.boot.logging.logback.LogbackLoggingSystem.initialize(LogbackLoggingSystem.java:189)
+            at org.springframework.boot.context.logging.LoggingApplicationListener.initializeSystem(LoggingApplicationListener.java:332)
+            ... 109 more
+
+            Caused by:
+            ch.qos.logback.core.joran.spi.JoranException: Problem parsing XML document. See previously reported errors.
+                at app//ch.qos.logback.core.joran.event.SaxEventRecorder.recordEvents(SaxEventRecorder.java:70)
+                at app//ch.qos.logback.core.joran.GenericXMLConfigurator.populateSaxEventRecorder(GenericXMLConfigurator.java:184)
+                at app//ch.qos.logback.core.joran.GenericXMLConfigurator.doConfigure(GenericXMLConfigurator.java:158)
+                at app//ch.qos.logback.core.joran.GenericXMLConfigurator.doConfigure(GenericXMLConfigurator.java:122)
+                at app//ch.qos.logback.core.joran.GenericXMLConfigurator.doConfigure(GenericXMLConfigurator.java:65)
+                at app//org.springframework.boot.logging.logback.LogbackLoggingSystem.configureByResourceUrl(LogbackLoggingSystem.java:287)
+                at app//org.springframework.boot.logging.logback.LogbackLoggingSystem.lambda$loadConfiguration$1(LogbackLoggingSystem.java:249)
+                ... 116 more
+
+                Caused by:
+                org.xml.sax.SAXParseException; systemId: file:/home/red1/Projects/blackerp/build/resources/test/logback-test.xml; lineNumber: 2; columnNumber: 6; The processing instruction target matching "[xX][mM][lL]" is not allowed.
+                    at java.xml/com.sun.org.apache.xerces.internal.parsers.AbstractSAXParser.parse(AbstractSAXParser.java:1251)
+                    at java.xml/com.sun.org.apache.xerces.internal.jaxp.SAXParserImpl$JAXPSAXParser.parse(SAXParserImpl.java:637)
+                    at java.xml/com.sun.org.apache.xerces.internal.jaxp.SAXParserImpl.parse(SAXParserImpl.java:326)
+                    at ch.qos.logback.core.joran.event.SaxEventRecorder.recordEvents(SaxEventRecorder.java:64)
+                    ... 122 more
+
+Gradle Test Executor 11 finished executing tests.
+
+> Task :test FAILED
+
+org.blackerp.infrastructure.persistence.SimpleTest > executionError FAILED
+    java.lang.IllegalStateException: Failed to load ApplicationContext for [WebMergedContextConfiguration@16132f21 testClass = org.blackerp.infrastructure.persistence.SimpleTest, locations = [], classes = [org.blackerp.BlackErpApplication, org.blackerp.config.TestConfig], contextInitializerClasses = [], activeProfiles = ["test"], propertySourceDescriptors = [], propertySourceProperties = ["org.springframework.boot.test.context.SpringBootTestContextBootstrapper=true"], contextCustomizers = [org.springframework.boot.test.autoconfigure.actuate.observability.ObservabilityContextCustomizerFactory$DisableObservabilityContextCustomizer@1f, org.springframework.boot.test.autoconfigure.properties.PropertyMappingContextCustomizer@0, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverContextCustomizer@6ff6efdc, org.springframework.boot.test.context.filter.ExcludeFilterContextCustomizer@44924587, org.springframework.boot.test.json.DuplicateJsonObjectContextCustomizerFactory$DuplicateJsonObjectContextCustomizer@3a08078c, org.springframework.boot.test.mock.mockito.MockitoContextCustomizer@0, org.springframework.boot.test.web.client.TestRestTemplateContextCustomizer@1bc776b7, org.springframework.boot.test.context.SpringBootTestAnnotation@e4f63f19], resourceBasePath = "src/main/webapp", contextLoader = org.springframework.boot.test.context.SpringBootContextLoader, parent = null]
+        at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:180)
+        at org.springframework.test.context.support.DefaultTestContext.getApplicationContext(DefaultTestContext.java:130)
+        at io.kotest.extensions.spring.SpringAutowireConstructorExtension.instantiate(SpringAutowireConstructorExtension.kt:27)
+        at io.kotest.engine.spec.InstantiateSpecKt.createAndInitializeSpec(instantiateSpec.kt:30)
+        at io.kotest.engine.spec.InstantiateSpecKt.instantiate(instantiateSpec.kt:11)
+        at io.kotest.engine.spec.SpecRefKt.instance(SpecRef.kt:14)
+        at io.kotest.engine.spec.SpecExecutor.createInstance-gIAlu-s(SpecExecutor.kt:63)
+        at io.kotest.engine.spec.SpecExecutor.access$createInstance-gIAlu-s(SpecExecutor.kt:24)
+        at io.kotest.engine.spec.SpecExecutor$execute$innerExecute$1.invokeSuspend(SpecExecutor.kt:40)
+        at io.kotest.engine.spec.SpecExecutor$execute$innerExecute$1.invoke(SpecExecutor.kt)
+        at io.kotest.engine.spec.SpecExecutor$execute$innerExecute$1.invoke(SpecExecutor.kt)
+        at io.kotest.engine.spec.interceptor.ref.FinalizeSpecInterceptor.intercept-0E7RQCE(FinalizeSpecInterceptor.kt:24)
+        at io.kotest.engine.spec.interceptor.SpecRefInterceptorPipeline$execute$3$1.invokeSuspend(SpecRefInterceptorPipeline.kt:49)
+        at io.kotest.engine.spec.interceptor.SpecRefInterceptorPipeline$execute$3$1.invoke(SpecRefInterceptorPipeline.kt)
+        at io.kotest.engine.spec.interceptor.SpecRefInterceptorPipeline$execute$3$1.invoke(SpecRefInterceptorPipeline.kt)
+        at io.kotest.engine.spec.interceptor.ref.BeforeSpecStateInterceptor.intercept-0E7RQCE(BeforeSpecStateInterceptor.kt:25)
+        at io.kotest.engine.spec.interceptor.SpecRefInterceptorPipeline$execute$3$1.invokeSuspend(SpecRefInterceptorPipeline.kt:49)
+        at io.kotest.engine.spec.interceptor.SpecRefInterceptorPipeline$execute$3$1.invoke(SpecRefInterceptorPipeline.kt)
+        at io.kotest.engine.spec.interceptor.SpecRefInterceptorPipeline$execute$3$1.invoke(SpecRefInterceptorPipeline.kt)
+        at io.kotest.engine.spec.interceptor.ref.PrepareSpecInterceptor.intercept-0E7RQCE(PrepareSpecInterceptor.kt:25)
+        at io.kotest.engine.spec.interceptor.SpecRefInterceptorPipeline$execute$3$1.invokeSuspend(SpecRefInterceptorPipeline.kt:49)
+        at io.kotest.engine.spec.interceptor.SpecRefInterceptorPipeline$execute$3$1.invoke(SpecRefInterceptorPipeline.kt)
+        at io.kotest.engine.spec.interceptor.SpecRefInterceptorPipeline$execute$3$1.invoke(SpecRefInterceptorPipeline.kt)
+        at io.kotest.engine.spec.interceptor.ref.ApplyExtensionsInterceptor.intercept-0E7RQCE(ApplyExtensionsInterceptor.kt:36)
+        at io.kotest.engine.spec.interceptor.SpecRefInterceptorPipeline$execute$3$1.invokeSuspend(SpecRefInterceptorPipeline.kt:49)
+        at io.kotest.engine.spec.interceptor.SpecRefInterceptorPipeline$execute$3$1.invoke(SpecRefInterceptorPipeline.kt)
+        at io.kotest.engine.spec.interceptor.SpecRefInterceptorPipeline$execute$3$1.invoke(SpecRefInterceptorPipeline.kt)
+        at io.kotest.engine.spec.interceptor.ref.SpecFinishedInterceptor.intercept-0E7RQCE(SpecFinishedInterceptor.kt:22)
+        at io.kotest.engine.spec.interceptor.SpecRefInterceptorPipeline$execute$3$1.invokeSuspend(SpecRefInterceptorPipeline.kt:49)
+        at io.kotest.engine.spec.interceptor.SpecRefInterceptorPipeline$execute$3$1.invoke(SpecRefInterceptorPipeline.kt)
+        at io.kotest.engine.spec.interceptor.SpecRefInterceptorPipeline$execute$3$1.invoke(SpecRefInterceptorPipeline.kt)
+        at io.kotest.engine.spec.interceptor.ref.SpecStartedInterceptor.intercept-0E7RQCE(SpecStartedInterceptor.kt:20)
+        at io.kotest.engine.spec.interceptor.SpecRefInterceptorPipeline$execute$3$1.invokeSuspend(SpecRefInterceptorPipeline.kt:49)
+        at io.kotest.engine.spec.interceptor.SpecRefInterceptorPipeline$execute$3$1.invoke(SpecRefInterceptorPipeline.kt)
+        at io.kotest.engine.spec.interceptor.SpecRefInterceptorPipeline$execute$3$1.invoke(SpecRefInterceptorPipeline.kt)
+        at io.kotest.engine.spec.interceptor.ref.SpecRefExtensionInterceptor$intercept$inner$1.invokeSuspend(SpecRefExtensionInterceptor.kt:28)
+        at io.kotest.engine.spec.interceptor.ref.SpecRefExtensionInterceptor$intercept$inner$1.invoke(SpecRefExtensionInterceptor.kt)
+        at io.kotest.engine.spec.interceptor.ref.SpecRefExtensionInterceptor$intercept$inner$1.invoke(SpecRefExtensionInterceptor.kt)
+        at io.kotest.engine.spec.interceptor.ref.SpecRefExtensionInterceptor.intercept-0E7RQCE(SpecRefExtensionInterceptor.kt:31)
+        at io.kotest.engine.spec.interceptor.SpecRefInterceptorPipeline$execute$3$1.invokeSuspend(SpecRefInterceptorPipeline.kt:49)
+        at io.kotest.engine.spec.interceptor.SpecRefInterceptorPipeline$execute$3$1.invoke(SpecRefInterceptorPipeline.kt)
+        at io.kotest.engine.spec.interceptor.SpecRefInterceptorPipeline$execute$3$1.invoke(SpecRefInterceptorPipeline.kt)
+        at io.kotest.engine.spec.interceptor.ref.RequiresTagInterceptor.intercept-0E7RQCE(RequiresTagInterceptor.kt:35)
+        at io.kotest.engine.spec.interceptor.SpecRefInterceptorPipeline$execute$3$1.invokeSuspend(SpecRefInterceptorPipeline.kt:49)
+        at io.kotest.engine.spec.interceptor.SpecRefInterceptorPipeline$execute$3$1.invoke(SpecRefInterceptorPipeline.kt)
+        at io.kotest.engine.spec.interceptor.SpecRefInterceptorPipeline$execute$3$1.invoke(SpecRefInterceptorPipeline.kt)
+        at io.kotest.engine.spec.interceptor.ref.TagsInterceptor.intercept-0E7RQCE(TagsInterceptor.kt:38)
+        at io.kotest.engine.spec.interceptor.SpecRefInterceptorPipeline$execute$3$1.invokeSuspend(SpecRefInterceptorPipeline.kt:49)
+        at io.kotest.engine.spec.interceptor.SpecRefInterceptorPipeline$execute$3$1.invoke(SpecRefInterceptorPipeline.kt)
+        at io.kotest.engine.spec.interceptor.SpecRefInterceptorPipeline$execute$3$1.invoke(SpecRefInterceptorPipeline.kt)
+        at io.kotest.engine.spec.interceptor.ref.SystemPropertySpecFilterInterceptor.intercept-0E7RQCE(SystemPropertySpecFilterInterceptor.kt:48)
+        at io.kotest.engine.spec.interceptor.SpecRefInterceptorPipeline$execute$3$1.invokeSuspend(SpecRefInterceptorPipeline.kt:49)
+        at io.kotest.engine.spec.interceptor.SpecRefInterceptorPipeline$execute$3$1.invoke(SpecRefInterceptorPipeline.kt)
+        at io.kotest.engine.spec.interceptor.SpecRefInterceptorPipeline$execute$3$1.invoke(SpecRefInterceptorPipeline.kt)
+        at io.kotest.engine.spec.interceptor.ref.SpecFilterInterceptor.intercept-0E7RQCE(SpecFilterInterceptor.kt:38)
+        at io.kotest.engine.spec.interceptor.SpecRefInterceptorPipeline$execute$3$1.invokeSuspend(SpecRefInterceptorPipeline.kt:49)
+        at io.kotest.engine.spec.interceptor.SpecRefInterceptorPipeline$execute$3$1.invoke(SpecRefInterceptorPipeline.kt)
+        at io.kotest.engine.spec.interceptor.SpecRefInterceptorPipeline$execute$3$1.invoke(SpecRefInterceptorPipeline.kt)
+        at io.kotest.engine.spec.interceptor.ref.IgnoredSpecInterceptor.intercept-0E7RQCE(IgnoredSpecInterceptor.kt:51)
+        at io.kotest.engine.spec.interceptor.SpecRefInterceptorPipeline$execute$3$1.invokeSuspend(SpecRefInterceptorPipeline.kt:49)
+        at io.kotest.engine.spec.interceptor.SpecRefInterceptorPipeline$execute$3$1.invoke(SpecRefInterceptorPipeline.kt)
+        at io.kotest.engine.spec.interceptor.SpecRefInterceptorPipeline$execute$3$1.invoke(SpecRefInterceptorPipeline.kt)
+        at io.kotest.engine.spec.interceptor.ref.EnabledIfInterceptor.intercept-0E7RQCE(EnabledIfInterceptor.kt:41)
+        at io.kotest.engine.spec.interceptor.SpecRefInterceptorPipeline$execute$3$1.invokeSuspend(SpecRefInterceptorPipeline.kt:49)
+        at io.kotest.engine.spec.interceptor.SpecRefInterceptorPipeline$execute$3$1.invoke(SpecRefInterceptorPipeline.kt)
+        at io.kotest.engine.spec.interceptor.SpecRefInterceptorPipeline$execute$3$1.invoke(SpecRefInterceptorPipeline.kt)
+        at io.kotest.engine.spec.interceptor.ref.RequiresPlatformInterceptor.intercept-0E7RQCE(RequiresPlatformInterceptor.kt:32)
+        at io.kotest.engine.spec.interceptor.SpecRefInterceptorPipeline$execute$3$1.invokeSuspend(SpecRefInterceptorPipeline.kt:49)
+        at io.kotest.engine.spec.interceptor.SpecRefInterceptorPipeline$execute$3$1.invoke(SpecRefInterceptorPipeline.kt)
+        at io.kotest.engine.spec.interceptor.SpecRefInterceptorPipeline$execute$3$1.invoke(SpecRefInterceptorPipeline.kt)
+        at io.kotest.engine.spec.interceptor.SpecRefInterceptorPipeline.execute-0E7RQCE(SpecRefInterceptorPipeline.kt:50)
+        at io.kotest.engine.spec.SpecExecutor.execute(SpecExecutor.kt:42)
+        at io.kotest.engine.ConcurrentTestSuiteScheduler$schedule$8$1$1$2.invokeSuspend(ConcurrentTestSuiteScheduler.kt:72)
+        at kotlin.coroutines.jvm.internal.BaseContinuationImpl.resumeWith(ContinuationImpl.kt:33)
+        at kotlinx.coroutines.DispatchedTask.run(DispatchedTask.kt:108)
+        at kotlinx.coroutines.EventLoopImplBase.processNextEvent(EventLoop.common.kt:280)
+        at kotlinx.coroutines.BlockingCoroutine.joinBlocking(Builders.kt:85)
+        at kotlinx.coroutines.BuildersKt__BuildersKt.runBlocking(Builders.kt:59)
+        at kotlinx.coroutines.BuildersKt.runBlocking(Unknown Source)
+        at kotlinx.coroutines.BuildersKt__BuildersKt.runBlocking$default(Builders.kt:38)
+        at kotlinx.coroutines.BuildersKt.runBlocking$default(Unknown Source)
+        at io.kotest.common.RunBlockingKt.runBlocking(runBlocking.kt:3)
+        at io.kotest.engine.TestEngineLauncher.launch(TestEngineLauncher.kt:250)
+        at io.kotest.runner.junit.platform.KotestJunitPlatformTestEngine.execute(KotestJunitPlatformTestEngine.kt:88)
+        at io.kotest.runner.junit.platform.KotestJunitPlatformTestEngine.execute(KotestJunitPlatformTestEngine.kt:60)
+
+        Caused by:
+        java.lang.IllegalStateException: java.lang.IllegalStateException: Could not initialize Logback logging from classpath:logback-test.xml
+            at org.springframework.boot.context.logging.LoggingApplicationListener.initializeSystem(LoggingApplicationListener.java:347)
+            at org.springframework.boot.context.logging.LoggingApplicationListener.initialize(LoggingApplicationListener.java:298)
+            at org.springframework.boot.context.logging.LoggingApplicationListener.onApplicationEnvironmentPreparedEvent(LoggingApplicationListener.java:246)
+            at org.springframework.boot.context.logging.LoggingApplicationListener.onApplicationEvent(LoggingApplicationListener.java:223)
+            at org.springframework.context.event.SimpleApplicationEventMulticaster.doInvokeListener(SimpleApplicationEventMulticaster.java:178)
+            at org.springframework.context.event.SimpleApplicationEventMulticaster.invokeListener(SimpleApplicationEventMulticaster.java:171)
+            at org.springframework.context.event.SimpleApplicationEventMulticaster.multicastEvent(SimpleApplicationEventMulticaster.java:149)
+            at org.springframework.context.event.SimpleApplicationEventMulticaster.multicastEvent(SimpleApplicationEventMulticaster.java:137)
+            at org.springframework.boot.context.event.EventPublishingRunListener.multicastInitialEvent(EventPublishingRunListener.java:136)
+            at org.springframework.boot.context.event.EventPublishingRunListener.environmentPrepared(EventPublishingRunListener.java:81)
+            at org.springframework.boot.SpringApplicationRunListeners.lambda$environmentPrepared$2(SpringApplicationRunListeners.java:64)
+            at java.base/java.lang.Iterable.forEach(Iterable.java:75)
+            at org.springframework.boot.SpringApplicationRunListeners.doWithListeners(SpringApplicationRunListeners.java:118)
+            at org.springframework.boot.SpringApplicationRunListeners.doWithListeners(SpringApplicationRunListeners.java:112)
+            at org.springframework.boot.SpringApplicationRunListeners.environmentPrepared(SpringApplicationRunListeners.java:63)
+            at org.springframework.boot.SpringApplication.prepareEnvironment(SpringApplication.java:366)
+            at org.springframework.boot.SpringApplication.run(SpringApplication.java:318)
+            at org.springframework.boot.test.context.SpringBootContextLoader.lambda$loadContext$3(SpringBootContextLoader.java:137)
+            at org.springframework.util.function.ThrowingSupplier.get(ThrowingSupplier.java:58)
+            at org.springframework.util.function.ThrowingSupplier.get(ThrowingSupplier.java:46)
+            at org.springframework.boot.SpringApplication.withHook(SpringApplication.java:1442)
+            at org.springframework.boot.test.context.SpringBootContextLoader$ContextLoaderHook.run(SpringBootContextLoader.java:552)
+            at org.springframework.boot.test.context.SpringBootContextLoader.loadContext(SpringBootContextLoader.java:137)
+            at org.springframework.boot.test.context.SpringBootContextLoader.loadContext(SpringBootContextLoader.java:108)
+            at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContextInternal(DefaultCacheAwareContextLoaderDelegate.java:225)
+            at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:152)
+            ... 84 more
+
+            Caused by:
+            java.lang.IllegalStateException: Could not initialize Logback logging from classpath:logback-test.xml
+                at org.springframework.boot.logging.logback.LogbackLoggingSystem.lambda$loadConfiguration$1(LogbackLoggingSystem.java:252)
+                at org.springframework.boot.logging.logback.LogbackLoggingSystem.withLoggingSuppressed(LogbackLoggingSystem.java:467)
+                at org.springframework.boot.logging.logback.LogbackLoggingSystem.loadConfiguration(LogbackLoggingSystem.java:244)
+                at org.springframework.boot.logging.logback.LogbackLoggingSystem.reinitialize(LogbackLoggingSystem.java:334)
+                at org.springframework.boot.logging.AbstractLoggingSystem.initializeWithConventions(AbstractLoggingSystem.java:74)
+                at org.springframework.boot.logging.AbstractLoggingSystem.initialize(AbstractLoggingSystem.java:61)
+                at org.springframework.boot.logging.logback.LogbackLoggingSystem.initialize(LogbackLoggingSystem.java:189)
+                at org.springframework.boot.context.logging.LoggingApplicationListener.initializeSystem(LoggingApplicationListener.java:332)
+                ... 109 more
+
+                Caused by:
+                ch.qos.logback.core.joran.spi.JoranException: Problem parsing XML document. See previously reported errors.
+                    at app//ch.qos.logback.core.joran.event.SaxEventRecorder.recordEvents(SaxEventRecorder.java:70)
+                    at app//ch.qos.logback.core.joran.GenericXMLConfigurator.populateSaxEventRecorder(GenericXMLConfigurator.java:184)
+                    at app//ch.qos.logback.core.joran.GenericXMLConfigurator.doConfigure(GenericXMLConfigurator.java:158)
+                    at app//ch.qos.logback.core.joran.GenericXMLConfigurator.doConfigure(GenericXMLConfigurator.java:122)
+                    at app//ch.qos.logback.core.joran.GenericXMLConfigurator.doConfigure(GenericXMLConfigurator.java:65)
+                    at app//org.springframework.boot.logging.logback.LogbackLoggingSystem.configureByResourceUrl(LogbackLoggingSystem.java:287)
+                    at app//org.springframework.boot.logging.logback.LogbackLoggingSystem.lambda$loadConfiguration$1(LogbackLoggingSystem.java:249)
+                    ... 116 more
+
+                    Caused by:
+                    org.xml.sax.SAXParseException; systemId: file:/home/red1/Projects/blackerp/build/resources/test/logback-test.xml; lineNumber: 2; columnNumber: 6; The processing instruction target matching "[xX][mM][lL]" is not allowed.
+                        at java.xml/com.sun.org.apache.xerces.internal.parsers.AbstractSAXParser.parse(AbstractSAXParser.java:1251)
+                        at java.xml/com.sun.org.apache.xerces.internal.jaxp.SAXParserImpl$JAXPSAXParser.parse(SAXParserImpl.java:637)
+                        at java.xml/com.sun.org.apache.xerces.internal.jaxp.SAXParserImpl.parse(SAXParserImpl.java:326)
+                        at ch.qos.logback.core.joran.event.SaxEventRecorder.recordEvents(SaxEventRecorder.java:64)
+                        ... 122 more
+
+2 tests completed, 2 failed
+Finished generating test XML results (0.006 secs) into: /home/red1/Projects/blackerp/build/test-results/test
+Generating HTML test report...
+Finished generating test html results (0.008 secs) into: /home/red1/Projects/blackerp/build/reports/tests/test
+
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+Execution failed for task ':test'.
+> There were failing tests. See the report at: file:///home/red1/Projects/blackerp/build/reports/tests/test/index.html
+
+* Try:
+> Run with --scan to get full insights.
+
+Deprecated Gradle features were used in this build, making it incompatible with Gradle 9.0.
+
+You can use '--warning-mode all' to show the individual deprecation warnings and determine if they come from your own scripts or plugins.
+
+For more on this, please refer to https://docs.gradle.org/8.10.2/userguide/command_line_interface.html#sec:command_line_warnings in the Gradle documentation.
+
+BUILD FAILED in 11s
+6 actionable tasks: 2 executed, 4 up-to-date
+

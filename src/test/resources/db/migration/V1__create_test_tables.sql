@@ -1,0 +1,8 @@
+CREATE TABLE IF NOT EXISTS ad_table (
+    id VARCHAR(36) PRIMARY KEY,
+    name VARCHAR(60) NOT NULL,
+    display_name VARCHAR(60) NOT NULL,
+    created_by VARCHAR(60) NOT NULL,
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    CONSTRAINT uk_ad_table_name UNIQUE (name)
+);
