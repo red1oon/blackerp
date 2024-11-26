@@ -1,206 +1,165 @@
 #!/bin/bash
 
-BASE_DIR="$(pwd)"
-TEST_DIR="$BASE_DIR/src/test/kotlin/org/blackerp"
+# add_tenant_awareness.sh
+# Script to add tenant awareness to existing domain model
 
-# Integration test directory structure
-INTEGRATION_DIR="$TEST_DIR/integration"
+set -e  # Exit on error
 
-# First clean up previously created files
-echo "Cleaning up previous integration test files..."
-rm -rf "$INTEGRATION_DIR"
+# Base directory structure (already exists)
+DOMAIN_DIR="src/main/kotlin/org/blackerp/domain"
+TEST_DIR="src/test/kotlin/org/blackerp/domain"
 
-# Recreate directory structure
-mkdir -p "$INTEGRATION_DIR/api"
-mkdir -p "$INTEGRATION_DIR/db"
-mkdir -p "$INTEGRATION_DIR/plugin"
+# Create tenant-aware interfaces
+cat > "$DOMAIN_DIR/tenant/TenantAware.kt" << 'EOF'
+package org.blackerp.domain.tenant
 
-echo "Creating new integration test files..."
+import java.util.UUID
 
-# Integration test configuration
-cat > "$INTEGRATION_DIR/IntegrationTestConfig.kt" << 'EOF'
-package org.blackerp.integration
-
-import org.springframework.boot.test.context.TestConfiguration
-import org.springframework.boot.test.context.SpringBootTest
-import org.springframework.context.annotation.Bean
-import org.springframework.test.context.ActiveProfiles
-import javax.sql.DataSource
-import org.springframework.boot.test.web.client.TestRestTemplate
-import org.springframework.boot.test.web.server.LocalServerPort
-import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder
-import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType
-
-@TestConfiguration
-class IntegrationTestConfig {
-    @Bean
-    fun dataSource(): DataSource =
-        EmbeddedDatabaseBuilder()
-            .setType(EmbeddedDatabaseType.H2)
-            .addScript("db/h2-schema.sql")
-            .build()
-
-    @Bean
-    fun testRestTemplate() = TestRestTemplate()
+interface TenantAware {
+    val tenantId: UUID
 }
 EOF
 
-# API Integration Tests
-cat > "$INTEGRATION_DIR/api/TableApiIntegrationTest.kt" << 'EOF'
-package org.blackerp.integration.api
+# Update ADTable to be tenant-aware
+cat > "$DOMAIN_DIR/table/TenantAwareTable.kt" << 'EOF'
+package org.blackerp.domain.table
 
-import io.kotest.core.spec.style.DescribeSpec
-import io.kotest.matchers.shouldBe
-import org.springframework.boot.test.context.SpringBootTest
-import org.springframework.boot.test.web.client.TestRestTemplate
-import org.springframework.boot.test.web.server.LocalServerPort
-import org.springframework.http.HttpStatus
-import org.springframework.test.context.ActiveProfiles
-import org.blackerp.integration.IntegrationTestConfig
-import org.springframework.context.annotation.Import
-import org.blackerp.api.dto.CreateTableRequest
-import org.blackerp.shared.TestFactory
+import org.blackerp.domain.tenant.TenantAware
+import org.blackerp.domain.DomainEntity
+import org.blackerp.domain.EntityMetadata
+import org.blackerp.domain.values.*
+import java.util.UUID
 
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-@ActiveProfiles("test")
-@Import(IntegrationTestConfig::class)
-class TableApiIntegrationTest(
-    private val restTemplate: TestRestTemplate,
-    @LocalServerPort private val port: Int
-) : DescribeSpec({
-    
-    describe("Table API") {
-        context("POST /api/tables") {
-            it("should create table successfully") {
-                // given
-                val request = TestFactory.createTableRequest()
-                
-                // when
-                val response = restTemplate.postForEntity(
-                    "http://localhost:$port/api/tables",
-                    request,
-                    Any::class.java
-                )
-                
-                // then
-                response.statusCode shouldBe HttpStatus.OK
-            }
-        }
+data class TenantAwareTable(
+    override val metadata: EntityMetadata,
+    override val tenantId: UUID,
+    val delegate: ADTable
+) : DomainEntity by delegate, TenantAware {
+    companion object {
+        fun from(table: ADTable, tenantId: UUID): TenantAwareTable =
+            TenantAwareTable(
+                metadata = table.metadata,
+                tenantId = tenantId,
+                delegate = table
+            )
     }
-})
+}
 EOF
 
-# Database Integration Tests
-cat > "$INTEGRATION_DIR/db/TableRepositoryIntegrationTest.kt" << 'EOF'
-package org.blackerp.integration.db
+# Add tenant filter for operations
+cat > "$DOMAIN_DIR/tenant/TenantFilter.kt" << 'EOF'
+package org.blackerp.domain.tenant
+
+import arrow.core.Either
+import arrow.core.right
+import arrow.core.left
+import org.blackerp.shared.ValidationError
+
+data class TenantFilter(val tenantId: String?) {
+    companion object {
+        fun create(tenantId: String?): Either<ValidationError, TenantFilter> =
+            when {
+                tenantId == null -> TenantFilter(null).right()
+                !tenantId.matches(Regex("^[0-9a-fA-F-]{36}$")) ->
+                    ValidationError.InvalidFormat("Invalid UUID format").left()
+                else -> TenantFilter(tenantId).right()
+            }
+    }
+}
+EOF
+
+# Add tenant context for current tenant tracking
+cat > "$DOMAIN_DIR/tenant/TenantContext.kt" << 'EOF'
+package org.blackerp.domain.tenant
+
+import java.util.UUID
+
+object TenantContext {
+    private val currentTenant = ThreadLocal<UUID>()
+    
+    fun getCurrentTenant(): UUID? = currentTenant.get()
+    
+    fun setCurrentTenant(tenantId: UUID) {
+        currentTenant.set(tenantId)
+    }
+    
+    fun clear() {
+        currentTenant.remove()
+    }
+}
+EOF
+
+# Add test for tenant awareness
+cat > "$TEST_DIR/tenant/TenantAwareTableTest.kt" << 'EOF'
+package org.blackerp.domain.tenant
 
 import io.kotest.core.spec.style.DescribeSpec
 import io.kotest.matchers.shouldBe
-import io.kotest.assertions.arrow.core.shouldBeRight
-import org.springframework.boot.test.context.SpringBootTest
-import org.springframework.test.context.ActiveProfiles
-import org.blackerp.integration.IntegrationTestConfig
-import org.springframework.context.annotation.Import
-import org.blackerp.infrastructure.persistence.store.PostgresTableOperations
 import org.blackerp.shared.TestFactory
-import org.springframework.jdbc.core.JdbcTemplate
+import java.util.UUID
 
-@SpringBootTest
-@ActiveProfiles("test")
-@Import(IntegrationTestConfig::class)
-class TableRepositoryIntegrationTest(
-    private val jdbcTemplate: JdbcTemplate
-) : DescribeSpec({
-    
-    lateinit var tableOperations: PostgresTableOperations
-    
-    beforeTest {
-        tableOperations = PostgresTableOperations(jdbcTemplate)
-    }
-    
-    describe("TableRepository") {
-        it("should save and retrieve table") {
+class TenantAwareTableTest : DescribeSpec({
+    describe("TenantAwareTable") {
+        it("should wrap ADTable with tenant ID") {
             // given
             val table = TestFactory.createTestTable()
+            val tenantId = UUID.randomUUID()
             
             // when
-            val saveResult = tableOperations.save(table)
-            val findResult = tableOperations.findById(table.metadata.id)
+            val tenantAwareTable = TenantAwareTable.from(table, tenantId)
             
             // then
-            saveResult.shouldBeRight()
-            findResult.shouldBeRight()
+            tenantAwareTable.tenantId shouldBe tenantId
+            tenantAwareTable.metadata shouldBe table.metadata
+            tenantAwareTable.name shouldBe table.name
+            tenantAwareTable.displayName shouldBe table.displayName
         }
     }
 })
 EOF
 
-# Plugin Integration Tests
-cat > "$INTEGRATION_DIR/plugin/PluginLifecycleIntegrationTest.kt" << 'EOF'
-package org.blackerp.integration.plugin
+# Add test for tenant context
+cat > "$TEST_DIR/tenant/TenantContextTest.kt" << 'EOF'
+package org.blackerp.domain.tenant
 
 import io.kotest.core.spec.style.DescribeSpec
 import io.kotest.matchers.shouldBe
-import io.kotest.assertions.arrow.core.shouldBeRight
-import org.springframework.boot.test.context.SpringBootTest
-import org.springframework.test.context.ActiveProfiles
-import org.blackerp.integration.IntegrationTestConfig
-import org.springframework.context.annotation.Import
-import org.blackerp.plugin.*
-import org.blackerp.plugin.registry.DefaultPluginRegistry
-import org.blackerp.plugin.registry.PluginRegistry
+import java.util.UUID
 
-@SpringBootTest
-@ActiveProfiles("test")
-@Import(IntegrationTestConfig::class)
-class PluginLifecycleIntegrationTest : DescribeSpec({
+class TenantContextTest : DescribeSpec({
+    afterTest {
+        TenantContext.clear()
+    }
     
-    val pluginRegistry: PluginRegistry = DefaultPluginRegistry()
-    val extensionRegistry: ExtensionRegistry = InMemoryExtensionRegistry()
-    
-    describe("Plugin Lifecycle") {
-        it("should load and initialize plugin") {
+    describe("TenantContext") {
+        it("should manage current tenant") {
             // given
-            val pluginId = PluginId.create("test-plugin").getOrNull()!!
-            val version = Version.create("1.0.0").getOrNull()!!
-            val metadata = PluginMetadata.create(
-                id = pluginId,
-                version = version,
-                name = "Test Plugin",
-                description = "Test plugin",
-                vendor = "Test Vendor"
-            ).getOrNull()!!
-            
-            val plugin = TestPlugin(metadata)
+            val tenantId = UUID.randomUUID()
             
             // when
-            val registerResult = pluginRegistry.register(plugin)
+            TenantContext.setCurrentTenant(tenantId)
             
             // then
-            registerResult.shouldBeRight()
+            TenantContext.getCurrentTenant() shouldBe tenantId
+        }
+        
+        it("should clear tenant context") {
+            // given
+            val tenantId = UUID.randomUUID()
+            TenantContext.setCurrentTenant(tenantId)
+            
+            // when
+            TenantContext.clear()
+            
+            // then
+            TenantContext.getCurrentTenant() shouldBe null
         }
     }
 })
 EOF
 
-echo "Recreated integration test files:"
-echo "1. $INTEGRATION_DIR/IntegrationTestConfig.kt"
-echo "2. $INTEGRATION_DIR/api/TableApiIntegrationTest.kt"
-echo "3. $INTEGRATION_DIR/db/TableRepositoryIntegrationTest.kt"
-echo "4. $INTEGRATION_DIR/plugin/PluginLifecycleIntegrationTest.kt"
-echo ""
+echo "Tenant awareness components added successfully!"
 echo "Next steps:"
-echo "1. Run './gradlew test' to verify integration tests"
-EOF
-
-chmod +x recreate_integration_tests.sh
-
-This script will:
-1. Clean up any previously created files
-2. Create fresh integration test structure
-3. Use existing test configuration from src/test/resources/application.yml
-
-Would you like me to:
-1. Make any adjustments to the test implementations?
-2. Proceed with the roadmap updates?
-3. Focus on something else?
+echo "1. Review and run tests"
+echo "2. Integrate tenant awareness into existing repositories"
+echo "3. Add tenant filtering to queries"

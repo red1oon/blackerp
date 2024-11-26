@@ -136,10 +136,20 @@ Generating folder structure...
 │   │   │           │   │   ├── TableCreated.kt
 │   │   │           │   │   ├── TableError.kt
 │   │   │           │   │   ├── TableId.kt
-│   │   │           │   │   └── TableOperations.kt
+│   │   │           │   │   ├── TableOperations.kt
+│   │   │           │   │   └── TenantAwareTable.kt
+│   │   │           │   ├── tenant
+│   │   │           │   │   ├── TenantAware.kt
+│   │   │           │   │   ├── TenantContext.kt
+│   │   │           │   │   └── TenantFilter.kt
+│   │   │           │   ├── transaction
+│   │   │           │   │   ├── TransactionError.kt
+│   │   │           │   │   └── Transaction.kt
 │   │   │           │   └── values
 │   │   │           │       ├── AccessLevel.kt
+│   │   │           │       ├── Amount.kt
 │   │   │           │       ├── ColumnName.kt
+│   │   │           │       ├── Currency.kt
 │   │   │           │       ├── DataType.kt
 │   │   │           │       ├── Description.kt
 │   │   │           │       ├── DisplayName.kt
@@ -210,7 +220,14 @@ Generating folder structure...
 │       │           │   │   │   ├── RelationshipTestFactory.kt
 │       │           │   │   │   └── TableRelationshipTest.kt
 │       │           │   │   └── TableOperationsTest.kt
+│       │           │   ├── tenant
+│       │           │   │   ├── TenantAwareTableTest.kt
+│       │           │   │   └── TenantContextTest.kt
+│       │           │   ├── transaction
+│       │           │   │   └── TransactionTest.kt
 │       │           │   └── values
+│       │           │       ├── AmountTest.kt
+│       │           │       ├── CurrencyTest.kt
 │       │           │       ├── DataTypeTest.kt
 │       │           │       ├── DisplayNameTest.kt
 │       │           │       └── TableNameTest.kt
@@ -256,7 +273,7 @@ Generating folder structure...
 ├── testdebug.txt
 └── verify-setup.sh
 
-94 directories, 161 files
+98 directories, 174 files
 
 
 
@@ -1313,6 +1330,66 @@ abstract class DomainException(message: String) : Exception(message)
 
 
 
+File: ./src/main/kotlin/org/blackerp/domain/tenant/TenantFilter.kt
+// Classpath: src.main.kotlin.org.blackerp.domain.tenant.TenantFilter
+
+package org.blackerp.domain.tenant
+
+import arrow.core.Either
+import arrow.core.right
+import arrow.core.left
+import org.blackerp.shared.ValidationError
+
+data class TenantFilter(val tenantId: String?) {
+    companion object {
+        fun create(tenantId: String?): Either<ValidationError, TenantFilter> =
+            when {
+                tenantId == null -> TenantFilter(null).right()
+                !tenantId.matches(Regex("^[0-9a-fA-F-]{36}$")) ->
+                    ValidationError.InvalidFormat("Invalid UUID format").left()
+                else -> TenantFilter(tenantId).right()
+            }
+    }
+}
+
+
+
+File: ./src/main/kotlin/org/blackerp/domain/tenant/TenantContext.kt
+// Classpath: src.main.kotlin.org.blackerp.domain.tenant.TenantContext
+
+package org.blackerp.domain.tenant
+
+import java.util.UUID
+
+object TenantContext {
+    private val currentTenant = ThreadLocal<UUID>()
+    
+    fun getCurrentTenant(): UUID? = currentTenant.get()
+    
+    fun setCurrentTenant(tenantId: UUID) {
+        currentTenant.set(tenantId)
+    }
+    
+    fun clear() {
+        currentTenant.remove()
+    }
+}
+
+
+
+File: ./src/main/kotlin/org/blackerp/domain/tenant/TenantAware.kt
+// Classpath: src.main.kotlin.org.blackerp.domain.tenant.TenantAware
+
+package org.blackerp.domain.tenant
+
+import java.util.UUID
+
+interface TenantAware {
+    val tenantId: UUID
+}
+
+
+
 File: ./src/main/kotlin/org/blackerp/domain/values/DataType.kt
 // Classpath: src.main.kotlin.org.blackerp.domain.values.DataType
 
@@ -1402,6 +1479,31 @@ value class Description private constructor(val value: String) {
                 value.length > 255 ->
                     ValidationError.InvalidLength("description", 0, 255).left()
                 else -> Description(value).right()
+            }
+    }
+}
+
+
+
+File: ./src/main/kotlin/org/blackerp/domain/values/Amount.kt
+// Classpath: src.main.kotlin.org.blackerp.domain.values.Amount
+
+package org.blackerp.domain.values
+
+import arrow.core.Either
+import arrow.core.left
+import arrow.core.right
+import org.blackerp.shared.ValidationError
+import java.math.BigDecimal
+
+@JvmInline
+value class Amount private constructor(val value: BigDecimal) {
+    companion object {
+        fun create(value: BigDecimal): Either<ValidationError, Amount> =
+            when {
+                value < BigDecimal.ZERO ->
+                    ValidationError.InvalidValue("Amount cannot be negative").left()
+                else -> Amount(value).right()
             }
     }
 }
@@ -1526,6 +1628,30 @@ value class TableName private constructor(val value: String) {
 
 
 
+File: ./src/main/kotlin/org/blackerp/domain/values/Currency.kt
+// Classpath: src.main.kotlin.org.blackerp.domain.values.Currency
+
+package org.blackerp.domain.values
+
+import arrow.core.Either
+import arrow.core.left
+import arrow.core.right
+import org.blackerp.shared.ValidationError
+
+@JvmInline
+value class Currency private constructor(val code: String) {
+    companion object {
+        fun create(code: String): Either<ValidationError, Currency> =
+            when {
+                !code.matches(Regex("^[A-Z]{3}$")) ->
+                    ValidationError.InvalidFormat("Currency code must be 3 uppercase letters").left()
+                else -> Currency(code).right()
+            }
+    }
+}
+
+
+
 File: ./src/main/kotlin/org/blackerp/domain/values/DisplayName.kt
 // Classpath: src.main.kotlin.org.blackerp.domain.values.DisplayName
 
@@ -1548,6 +1674,68 @@ value class DisplayName private constructor(val value: String) {
                 else -> DisplayName(value).right()
             }
     }
+}
+
+
+
+File: ./src/main/kotlin/org/blackerp/domain/transaction/Transaction.kt
+// Classpath: src.main.kotlin.org.blackerp.domain.transaction.Transaction
+
+package org.blackerp.domain.transaction
+
+import arrow.core.Either
+import arrow.core.right
+import org.blackerp.domain.DomainEntity
+import org.blackerp.domain.EntityMetadata
+import org.blackerp.domain.values.Amount
+import org.blackerp.domain.values.Currency
+import java.time.Instant
+
+data class Transaction(
+    override val metadata: EntityMetadata,
+    val amount: Amount,
+    val currency: Currency,
+    val timestamp: Instant,
+    val description: String?
+) : DomainEntity {
+    companion object {
+        fun create(params: CreateTransactionParams): Either<TransactionError, Transaction> =
+            Transaction(
+                metadata = params.metadata,
+                amount = params.amount,
+                currency = params.currency,
+                timestamp = params.timestamp,
+                description = params.description
+            ).right()
+    }
+}
+
+data class CreateTransactionParams(
+    val metadata: EntityMetadata,
+    val amount: Amount,
+    val currency: Currency,
+    val timestamp: Instant = Instant.now(),
+    val description: String?
+)
+
+
+
+File: ./src/main/kotlin/org/blackerp/domain/transaction/TransactionError.kt
+// Classpath: src.main.kotlin.org.blackerp.domain.transaction.TransactionError
+
+package org.blackerp.domain.transaction
+
+import org.blackerp.shared.ValidationError
+
+sealed class TransactionError(message: String) {
+    data class ValidationFailed(val errors: List<ValidationError>) : 
+        TransactionError("Validation failed: ${errors.joinToString { it.message }}")
+    
+    data class InvalidAmount(val amount: String) : 
+        TransactionError("Invalid amount: $amount")
+    
+    data class InvalidCurrency(val currency: String) : 
+        TransactionError("Invalid currency: $currency")
 }
 
 
@@ -1714,6 +1902,39 @@ data class CreateColumnParams(
     val mandatory: Boolean = false,
     val defaultValue: String? = null
 )
+
+
+
+File: ./src/main/kotlin/org/blackerp/domain/table/TenantAwareTable.kt
+// Classpath: src.main.kotlin.org.blackerp.domain.table.TenantAwareTable
+
+package org.blackerp.domain.table
+
+import org.blackerp.domain.tenant.TenantAware
+import org.blackerp.domain.DomainEntity
+import org.blackerp.domain.EntityMetadata
+import org.blackerp.domain.values.*
+import java.util.UUID
+
+data class TenantAwareTable(
+    override val metadata: EntityMetadata,
+    override val tenantId: UUID,
+    val delegate: ADTable
+) : DomainEntity by delegate, TenantAware {
+    val name: TableName
+        get() = delegate.name
+
+    val displayName: DisplayName
+        get() = delegate.displayName
+    companion object {
+        fun from(table: ADTable, tenantId: UUID): TenantAwareTable =
+            TenantAwareTable(
+                metadata = table.metadata,
+                tenantId = tenantId,
+                delegate = table
+            )
+    }
+}
 
 
 
@@ -3657,6 +3878,109 @@ class DefaultPluginRegistryTest : DescribeSpec({
 
 
 
+File: ./src/test/kotlin/org/blackerp/domain/tenant/TenantAwareTableTest.kt
+// Classpath: src.test.kotlin.org.blackerp.domain.tenant.TenantAwareTableTest
+
+package org.blackerp.domain.tenant
+
+import io.kotest.core.spec.style.DescribeSpec
+import io.kotest.matchers.shouldBe
+import org.blackerp.shared.TestFactory
+import org.blackerp.domain.table.TenantAwareTable
+import java.util.UUID 
+
+class TenantAwareTableTest : DescribeSpec({
+    describe("TenantAwareTable") {
+        it("should wrap ADTable with tenant ID") {
+            // given
+            val table = TestFactory.createTestTable()
+            val tenantId = UUID.randomUUID()
+            
+            // when
+            val tenantAwareTable = TenantAwareTable.from(table, tenantId)
+            
+            // then
+            tenantAwareTable.tenantId shouldBe tenantId
+            tenantAwareTable.metadata shouldBe table.metadata
+            tenantAwareTable.name.value shouldBe table.name.value
+            tenantAwareTable.displayName.value shouldBe table.displayName.value
+        }
+    }
+})
+
+
+
+File: ./src/test/kotlin/org/blackerp/domain/tenant/TenantContextTest.kt
+// Classpath: src.test.kotlin.org.blackerp.domain.tenant.TenantContextTest
+
+package org.blackerp.domain.tenant
+
+import io.kotest.core.spec.style.DescribeSpec
+import io.kotest.matchers.shouldBe
+import java.util.UUID
+
+class TenantContextTest : DescribeSpec({
+    afterTest {
+        TenantContext.clear()
+    }
+    
+    describe("TenantContext") {
+        it("should manage current tenant") {
+            // given
+            val tenantId = UUID.randomUUID()
+            
+            // when
+            TenantContext.setCurrentTenant(tenantId)
+            
+            // then
+            TenantContext.getCurrentTenant() shouldBe tenantId
+        }
+        
+        it("should clear tenant context") {
+            // given
+            val tenantId = UUID.randomUUID()
+            TenantContext.setCurrentTenant(tenantId)
+            
+            // when
+            TenantContext.clear()
+            
+            // then
+            TenantContext.getCurrentTenant() shouldBe null
+        }
+    }
+})
+
+
+
+File: ./src/test/kotlin/org/blackerp/domain/values/AmountTest.kt
+// Classpath: src.test.kotlin.org.blackerp.domain.values.AmountTest
+
+package org.blackerp.domain.values
+
+import io.kotest.core.spec.style.DescribeSpec
+import io.kotest.matchers.shouldBe
+import io.kotest.assertions.arrow.core.shouldBeRight
+import io.kotest.assertions.arrow.core.shouldBeLeft
+import java.math.BigDecimal
+
+class AmountTest : DescribeSpec({
+    describe("Amount") {
+        describe("create") {
+            it("should create valid amount") {
+                val result = Amount.create(BigDecimal("100.00"))
+                result.shouldBeRight()
+            }
+
+            it("should reject negative amount") {
+                val result = Amount.create(BigDecimal("-100.00"))
+                result.shouldBeLeft()
+            }
+        }
+    }
+})
+
+
+
 File: ./src/test/kotlin/org/blackerp/domain/values/DisplayNameTest.kt
 // Classpath: src.test.kotlin.org.blackerp.domain.values.DisplayNameTest
 
@@ -3719,6 +4043,34 @@ class TableNameTest : DescribeSpec({
 })
 
 
+File: ./src/test/kotlin/org/blackerp/domain/values/CurrencyTest.kt
+// Classpath: src.test.kotlin.org.blackerp.domain.values.CurrencyTest
+
+package org.blackerp.domain.values
+
+import io.kotest.core.spec.style.DescribeSpec
+import io.kotest.matchers.shouldBe
+import io.kotest.assertions.arrow.core.shouldBeRight
+import io.kotest.assertions.arrow.core.shouldBeLeft
+
+class CurrencyTest : DescribeSpec({
+    describe("Currency") {
+        describe("create") {
+            it("should create valid currency code") {
+                val result = Currency.create("USD")
+                result.shouldBeRight()
+            }
+
+            it("should reject invalid format") {
+                val result = Currency.create("usd")
+                result.shouldBeLeft()
+            }
+        }
+    }
+})
+
+
+
 File: ./src/test/kotlin/org/blackerp/domain/values/DataTypeTest.kt
 // Classpath: src.test.kotlin.org.blackerp.domain.values.DataTypeTest
 
@@ -3741,6 +4093,44 @@ class DataTypeTest : DescribeSpec({
                 shouldThrow<IllegalArgumentException> {
                     DataType.fromString("INVALID_TYPE")
                 }
+            }
+        }
+    }
+})
+
+
+
+File: ./src/test/kotlin/org/blackerp/domain/transaction/TransactionTest.kt
+// Classpath: src.test.kotlin.org.blackerp.domain.transaction.TransactionTest
+
+package org.blackerp.domain.transaction
+
+import io.kotest.core.spec.style.DescribeSpec
+import io.kotest.matchers.shouldBe
+import io.kotest.assertions.arrow.core.shouldBeRight
+import org.blackerp.domain.values.Amount
+import org.blackerp.domain.values.Currency
+import org.blackerp.shared.TestFactory
+import java.math.BigDecimal
+import java.time.Instant
+
+class TransactionTest : DescribeSpec({
+    describe("Transaction") {
+        describe("create") {
+            it("should create valid transaction") {
+                val amount = Amount.create(BigDecimal("100.00")).getOrNull()!!
+                val currency = Currency.create("USD").getOrNull()!!
+                
+                val params = CreateTransactionParams(
+                    metadata = TestFactory.createMetadata(),
+                    amount = amount,
+                    currency = currency,
+                    timestamp = Instant.now(),
+                    description = "Test transaction"
+                )
+                
+                val result = Transaction.create(params)
+                result.shouldBeRight()
             }
         }
     }
