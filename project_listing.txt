@@ -93,6 +93,18 @@ Generating folder structure...
 │   │   │           │       └── CreateTableUseCase.kt
 │   │   │           ├── BlackErpApplication.kt
 │   │   │           ├── domain
+│   │   │           │   ├── ad
+│   │   │           │   │   ├── ADModule.kt
+│   │   │           │   │   ├── ADObject.kt
+│   │   │           │   │   ├── reference
+│   │   │           │   │   │   ├── ADReference.kt
+│   │   │           │   │   │   └── value
+│   │   │           │   │   │       └── ReferenceName.kt
+│   │   │           │   │   ├── value
+│   │   │           │   │   │   └── ModuleName.kt
+│   │   │           │   │   └── window
+│   │   │           │   │       └── value
+│   │   │           │   │           └── WindowName.kt
 │   │   │           │   ├── common
 │   │   │           │   ├── DomainEntity.kt
 │   │   │           │   ├── DomainEvent.kt
@@ -214,6 +226,17 @@ Generating folder structure...
 │       │           │   ├── KotestProjectConfig.kt
 │       │           │   └── TestConfig.kt
 │       │           ├── domain
+│       │           │   ├── ad
+│       │           │   │   ├── ADModuleTest.kt
+│       │           │   │   ├── reference
+│       │           │   │   │   ├── ADReferenceTest.kt
+│       │           │   │   │   └── value
+│       │           │   │   │       └── ReferenceNameTest.kt
+│       │           │   │   ├── value
+│       │           │   │   │   └── ModuleNameTest.kt
+│       │           │   │   └── window
+│       │           │   │       └── value
+│       │           │   │           └── WindowNameTest.kt
 │       │           │   ├── EntityMetadataTest.kt
 │       │           │   ├── error
 │       │           │   │   └── DomainErrorTest.kt
@@ -289,7 +312,7 @@ Generating folder structure...
 ├── testdebug.txt
 └── verify-setup.sh
 
-105 directories, 183 files
+117 directories, 194 files
 
 
 
@@ -1359,6 +1382,217 @@ data class PluginMetadata private constructor(
                 else -> PluginMetadata(id, version, name, description, vendor).right()
             }
     }
+}
+
+
+
+File: ./src/main/kotlin/org/blackerp/domain/ad/ADModule.kt
+// Classpath: src.main.kotlin.org.blackerp.domain.ad.ADModule
+
+package org.blackerp.domain.ad
+
+import arrow.core.Either
+import arrow.core.left
+import arrow.core.right
+import org.blackerp.domain.EntityMetadata
+import org.blackerp.domain.ad.value.ModuleName
+import org.blackerp.domain.values.DisplayName
+import org.blackerp.domain.values.Description
+import org.blackerp.shared.ValidationError
+import org.blackerp.plugin.Version
+
+data class ADModule(
+    override val metadata: EntityMetadata,
+    val name: ModuleName,
+    override val displayName: DisplayName,
+    override val description: Description?,
+    val version: Version
+) : ADObject {
+    companion object {
+        fun create(params: CreateModuleParams): Either<ValidationError, ADModule> =
+            ADModule(
+                metadata = params.metadata,
+                name = params.name,
+                displayName = params.displayName,
+                description = params.description,
+                version = params.version
+            ).right()
+    }
+}
+
+data class CreateModuleParams(
+    val metadata: EntityMetadata,
+    val name: ModuleName,
+    val displayName: DisplayName,
+    val description: Description?,
+    val version: Version
+)
+
+
+
+File: ./src/main/kotlin/org/blackerp/domain/ad/window/value/WindowName.kt
+// Classpath: src.main.kotlin.org.blackerp.domain.ad.window.value.WindowName
+
+
+package org.blackerp.domain.ad.window.value
+
+import arrow.core.Either
+import arrow.core.left
+import arrow.core.right
+import org.blackerp.shared.ValidationError
+
+@JvmInline
+value class WindowName private constructor(val value: String) {
+    companion object {
+        fun create(value: String): Either<ValidationError, WindowName> =
+            when {
+                !value.matches(Regex("^[a-z][a-z0-9_]*$")) ->
+                    ValidationError.InvalidFormat(
+                        "Window name must start with lowercase letter and contain only lowercase letters, numbers, and underscores"
+                    ).left()
+                value.length !in 3..50 ->
+                    ValidationError.InvalidLength("window name", 3, 50).left()
+                else -> WindowName(value).right()
+            }
+    }
+}
+
+
+
+File: ./src/main/kotlin/org/blackerp/domain/ad/ADObject.kt
+// Classpath: src.main.kotlin.org.blackerp.domain.ad.ADObject
+
+package org.blackerp.domain.ad
+
+import org.blackerp.domain.DomainEntity
+import org.blackerp.domain.values.DisplayName
+import org.blackerp.domain.values.Description
+
+interface ADObject : DomainEntity {
+    val displayName: DisplayName
+    val description: Description?
+}
+
+
+
+File: ./src/main/kotlin/org/blackerp/domain/ad/value/ModuleName.kt
+// Classpath: src.main.kotlin.org.blackerp.domain.ad.value.ModuleName
+
+package org.blackerp.domain.ad.value
+
+import arrow.core.Either
+import arrow.core.left
+import arrow.core.right
+import org.blackerp.shared.ValidationError
+
+@JvmInline
+value class ModuleName private constructor(val value: String) {
+    companion object {
+        fun create(value: String): Either<ValidationError, ModuleName> =
+            when {
+                !value.matches(Regex("^[a-z][a-z0-9-]*$")) ->
+                    ValidationError.InvalidFormat(
+                        "Module name must start with lowercase letter and contain only lowercase letters, numbers, and hyphens"
+                    ).left()
+                value.length !in 3..50 ->
+                    ValidationError.InvalidLength("module name", 3, 50).left()
+                else -> ModuleName(value).right()
+            }
+    }
+}
+
+
+
+File: ./src/main/kotlin/org/blackerp/domain/ad/reference/value/ReferenceName.kt
+// Classpath: src.main.kotlin.org.blackerp.domain.ad.reference.value.ReferenceName
+
+
+package org.blackerp.domain.ad.reference.value
+
+import arrow.core.Either
+import arrow.core.left
+import arrow.core.right
+import org.blackerp.shared.ValidationError
+
+@JvmInline
+value class ReferenceName private constructor(val value: String) {
+    companion object {
+        fun create(value: String): Either<ValidationError, ReferenceName> =
+            when {
+                !value.matches(Regex("^[a-z][a-z0-9_]*$")) ->
+                    ValidationError.InvalidFormat(
+                        "Reference name must start with lowercase letter and contain only lowercase letters, numbers, and underscores"
+                    ).left()
+                value.length !in 3..50 ->
+                    ValidationError.InvalidLength("reference name", 3, 50).left()
+                else -> ReferenceName(value).right()
+            }
+    }
+}
+
+
+
+File: ./src/main/kotlin/org/blackerp/domain/ad/reference/ADReference.kt
+// Classpath: src.main.kotlin.org.blackerp.domain.ad.reference.ADReference
+
+
+package org.blackerp.domain.ad.reference
+
+import arrow.core.Either
+import arrow.core.right
+import org.blackerp.domain.EntityMetadata
+import org.blackerp.domain.ad.ADObject
+import org.blackerp.domain.ad.reference.value.ReferenceName
+import org.blackerp.domain.values.DisplayName
+import org.blackerp.domain.values.Description
+import org.blackerp.shared.ValidationError
+
+data class ADReference(
+    override val metadata: EntityMetadata,
+    val name: ReferenceName,
+    override val displayName: DisplayName,
+    override val description: Description?,
+    val type: ReferenceType,
+    val validationRule: ValidationRule?
+) : ADObject {
+    companion object {
+        fun create(params: CreateReferenceParams): Either<ReferenceError, ADReference> =
+            ADReference(
+                metadata = params.metadata,
+                name = params.name,
+                displayName = params.displayName,
+                description = params.description,
+                type = params.type,
+                validationRule = params.validationRule
+            ).right()
+    }
+}
+
+data class ValidationRule(
+    val expression: String,
+    val errorMessage: String
+)
+
+sealed interface ReferenceType {
+    object List : ReferenceType
+    data class Table(val tableName: String, val keyColumn: String, val displayColumn: String) : ReferenceType
+    object Search : ReferenceType
+    data class Custom(val validatorClass: String) : ReferenceType
+}
+
+data class CreateReferenceParams(
+    val metadata: EntityMetadata,
+    val name: ReferenceName,
+    val displayName: DisplayName,
+    val description: Description?,
+    val type: ReferenceType,
+    val validationRule: ValidationRule? = null
+)
+
+sealed class ReferenceError {
+    data class ValidationFailed(val errors: List<ValidationError>) : ReferenceError()
+    data class DuplicateReference(val name: String) : ReferenceError()
+    data class ReferenceNotFound(val name: String) : ReferenceError()
 }
 
 
@@ -4119,6 +4353,242 @@ class DefaultPluginRegistryTest : DescribeSpec({
                 registry.register(plugin)
                 registry.unregister(pluginId).isRight() shouldBe true
                 registry.getPlugins().isEmpty() shouldBe true
+            }
+        }
+    }
+})
+
+
+
+File: ./src/test/kotlin/org/blackerp/domain/ad/window/value/WindowNameTest.kt
+// Classpath: src.test.kotlin.org.blackerp.domain.ad.window.value.WindowNameTest
+
+
+package org.blackerp.domain.ad.window.value
+
+import io.kotest.core.spec.style.DescribeSpec
+import io.kotest.matchers.shouldBe
+import io.kotest.assertions.arrow.core.shouldBeRight
+import io.kotest.assertions.arrow.core.shouldBeLeft
+import org.blackerp.shared.ValidationError
+
+class WindowNameTest : DescribeSpec({
+    describe("WindowName") {
+        describe("create") {
+            it("should create valid window name") {
+                val result = WindowName.create("valid_window")
+                result.shouldBeRight()
+            }
+
+            it("should reject invalid format") {
+                val result = WindowName.create("Invalid Window")
+                result.shouldBeLeft()
+            }
+
+            it("should enforce length constraints") {
+                WindowName.create("ab").shouldBeLeft()
+                WindowName.create("a".repeat(51)).shouldBeLeft()
+            }
+        }
+    }
+})
+
+
+
+File: ./src/test/kotlin/org/blackerp/domain/ad/ADModuleTest.kt
+// Classpath: src.test.kotlin.org.blackerp.domain.ad.ADModuleTest
+
+package org.blackerp.domain.ad
+
+import io.kotest.core.spec.style.DescribeSpec
+import io.kotest.matchers.shouldBe
+import io.kotest.assertions.arrow.core.shouldBeRight
+import org.blackerp.domain.ad.value.ModuleName
+import org.blackerp.domain.values.DisplayName
+import org.blackerp.domain.values.Description
+import org.blackerp.plugin.Version
+import org.blackerp.shared.TestFactory
+
+class ADModuleTest : DescribeSpec({
+    describe("ADModule") {
+        describe("create") {
+            it("should create valid module") {
+                // Given
+                val name = ModuleName.create("test-module").getOrNull()!!
+                val displayName = DisplayName.create("Test Module").getOrNull()!!
+                val description = Description.create("Test Description").getOrNull()!!
+                val version = Version.create("1.0.0").getOrNull()!!
+
+                val params = CreateModuleParams(
+                    metadata = TestFactory.createMetadata(),
+                    name = name,
+                    displayName = displayName,
+                    description = description,
+                    version = version
+                )
+
+                // When
+                val result = ADModule.create(params)
+
+                // Then
+                result.shouldBeRight().also { module ->
+                    module.name shouldBe name
+                    module.displayName shouldBe displayName
+                    module.description shouldBe description
+                    module.version shouldBe version
+                }
+            }
+        }
+    }
+})
+
+
+
+File: ./src/test/kotlin/org/blackerp/domain/ad/value/ModuleNameTest.kt
+// Classpath: src.test.kotlin.org.blackerp.domain.ad.value.ModuleNameTest
+
+package org.blackerp.domain.ad.value
+
+import io.kotest.core.spec.style.DescribeSpec
+import io.kotest.matchers.shouldBe
+import io.kotest.assertions.arrow.core.shouldBeRight
+import io.kotest.assertions.arrow.core.shouldBeLeft
+import org.blackerp.shared.ValidationError
+
+class ModuleNameTest : DescribeSpec({
+    describe("ModuleName") {
+        describe("create") {
+            it("should create valid module name") {
+                val result = ModuleName.create("valid-module")
+                result.shouldBeRight().also { name ->
+                    name.value shouldBe "valid-module"
+                }
+            }
+
+            it("should reject invalid format") {
+                val result = ModuleName.create("Invalid Module")
+                result.shouldBeLeft().also { error ->
+                    error.message shouldBe "Module name must start with lowercase letter and contain only lowercase letters, numbers, and hyphens"
+                }
+            }
+
+            it("should enforce length constraints") {
+                ModuleName.create("ab").shouldBeLeft().also { error ->
+                    error shouldBe ValidationError.InvalidLength("module name", 3, 50)
+                }
+
+                ModuleName.create("a".repeat(51)).shouldBeLeft().also { error ->
+                    error shouldBe ValidationError.InvalidLength("module name", 3, 50)
+                }
+            }
+        }
+    }
+})
+
+
+
+File: ./src/test/kotlin/org/blackerp/domain/ad/reference/ADReferenceTest.kt
+// Classpath: src.test.kotlin.org.blackerp.domain.ad.reference.ADReferenceTest
+
+package org.blackerp.domain.ad.reference
+
+import io.kotest.core.spec.style.DescribeSpec
+import io.kotest.matchers.shouldBe
+import io.kotest.matchers.types.shouldBeTypeOf
+import io.kotest.assertions.arrow.core.shouldBeRight
+import org.blackerp.domain.ad.reference.value.ReferenceName
+import org.blackerp.domain.values.DisplayName
+import org.blackerp.domain.values.Description
+import org.blackerp.shared.TestFactory
+
+class ADReferenceTest : DescribeSpec({
+    describe("ADReference") {
+        it("should create list reference") {
+            // given
+            val name = ReferenceName.create("test_reference").getOrNull()!!
+            val displayName = DisplayName.create("Test Reference").getOrNull()!!
+            val description = Description.create("Test reference description").getOrNull()
+            
+            val params = CreateReferenceParams(
+                metadata = TestFactory.createMetadata(),
+                name = name,
+                displayName = displayName,
+                description = description,
+                type = ReferenceType.List
+            )
+            
+            // when
+            val result = ADReference.create(params)
+            
+            // then
+            result.shouldBeRight().also { reference ->
+                reference.name shouldBe name
+                reference.displayName shouldBe displayName
+                reference.description shouldBe description
+                reference.type shouldBe ReferenceType.List
+            }
+        }
+
+        it("should create table reference") {
+            // given
+            val name = ReferenceName.create("table_reference").getOrNull()!!
+            val displayName = DisplayName.create("Table Reference").getOrNull()!!
+            
+            val params = CreateReferenceParams(
+                metadata = TestFactory.createMetadata(),
+                name = name,
+                displayName = displayName,
+                description = null,
+                type = ReferenceType.Table(
+                    tableName = "test_table",
+                    keyColumn = "id",
+                    displayColumn = "name"
+                )
+            )
+            
+            // when
+            val result = ADReference.create(params)
+            
+            // then
+            result.shouldBeRight().also { reference ->
+                val tableRef = reference.type as ReferenceType.Table
+                tableRef.tableName shouldBe "test_table"
+                tableRef.keyColumn shouldBe "id"
+                tableRef.displayColumn shouldBe "name"
+            }
+        }
+    }
+})
+
+
+File: ./src/test/kotlin/org/blackerp/domain/ad/reference/value/ReferenceNameTest.kt
+// Classpath: src.test.kotlin.org.blackerp.domain.ad.reference.value.ReferenceNameTest
+
+
+package org.blackerp.domain.ad.reference.value
+
+import io.kotest.core.spec.style.DescribeSpec
+import io.kotest.matchers.shouldBe
+import io.kotest.assertions.arrow.core.shouldBeRight
+import io.kotest.assertions.arrow.core.shouldBeLeft
+import org.blackerp.shared.ValidationError
+
+class ReferenceNameTest : DescribeSpec({
+    describe("ReferenceName") {
+        describe("create") {
+            it("should create valid reference name") {
+                val result = ReferenceName.create("valid_reference")
+                result.shouldBeRight()
+            }
+
+            it("should reject invalid format") {
+                val result = ReferenceName.create("Invalid Reference")
+                result.shouldBeLeft()
+            }
+
+            it("should enforce length constraints") {
+                ReferenceName.create("ab").shouldBeLeft()
+                ReferenceName.create("a".repeat(51)).shouldBeLeft()
             }
         }
     }
