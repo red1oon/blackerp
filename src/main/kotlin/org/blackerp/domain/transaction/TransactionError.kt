@@ -2,13 +2,21 @@ package org.blackerp.domain.transaction
 
 import org.blackerp.shared.ValidationError
 
-sealed class TransactionError(message: String) {
-    data class ValidationFailed(val errors: List<ValidationError>) : 
-        TransactionError("Validation failed: ${errors.joinToString { it.message }}")
+sealed class TransactionError {
+    abstract val message: String
+
+    data class ValidationFailed(
+        override val message: String,
+        val errors: List<ValidationError>
+    ) : TransactionError()
     
-    data class InvalidAmount(val amount: String) : 
-        TransactionError("Invalid amount: $amount")
+    data class InvalidAmount(
+        val amount: String,
+        override val message: String = "Invalid amount: $amount"
+    ) : TransactionError()
     
-    data class InvalidCurrency(val currency: String) : 
-        TransactionError("Invalid currency: $currency")
+    data class InvalidCurrency(
+        val currency: String,
+        override val message: String = "Invalid currency: $currency"
+    ) : TransactionError()
 }

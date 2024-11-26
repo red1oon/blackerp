@@ -98,10 +98,17 @@ Generating folder structure...
 │   │   │           │   ├── DomainEvent.kt
 │   │   │           │   ├── DomainException.kt
 │   │   │           │   ├── EntityMetadata.kt
+│   │   │           │   ├── error
+│   │   │           │   │   └── DomainError.kt
 │   │   │           │   ├── event
 │   │   │           │   │   ├── DomainEvent.kt
 │   │   │           │   │   ├── EventMetadata.kt
 │   │   │           │   │   └── TableCreated.kt
+│   │   │           │   ├── query
+│   │   │           │   │   ├── QueryCriteria.kt
+│   │   │           │   │   └── QueryResult.kt
+│   │   │           │   ├── security
+│   │   │           │   │   └── SecurityContext.kt
 │   │   │           │   ├── table
 │   │   │           │   │   ├── ADTable.kt
 │   │   │           │   │   ├── behavior
@@ -159,6 +166,9 @@ Generating folder structure...
 │   │   │           │       ├── Scale.kt
 │   │   │           │       └── TableName.kt
 │   │   │           ├── infrastructure
+│   │   │           │   ├── cache
+│   │   │           │   │   ├── CacheService.kt
+│   │   │           │   │   └── InMemoryCacheService.kt
 │   │   │           │   ├── event
 │   │   │           │   │   └── EventPublisher.kt
 │   │   │           │   ├── persistence
@@ -205,6 +215,10 @@ Generating folder structure...
 │       │           │   └── TestConfig.kt
 │       │           ├── domain
 │       │           │   ├── EntityMetadataTest.kt
+│       │           │   ├── error
+│       │           │   │   └── DomainErrorTest.kt
+│       │           │   ├── query
+│       │           │   │   └── QueryCriteriaTest.kt
 │       │           │   ├── table
 │       │           │   │   ├── behavior
 │       │           │   │   ├── constraint
@@ -232,6 +246,8 @@ Generating folder structure...
 │       │           │       ├── DisplayNameTest.kt
 │       │           │       └── TableNameTest.kt
 │       │           ├── infrastructure
+│       │           │   ├── cache
+│       │           │   │   └── InMemoryCacheServiceTest.kt
 │       │           │   └── persistence
 │       │           │       ├── SimpleTest.kt
 │       │           │       ├── store
@@ -273,7 +289,7 @@ Generating folder structure...
 ├── testdebug.txt
 └── verify-setup.sh
 
-98 directories, 174 files
+105 directories, 183 files
 
 
 
@@ -654,6 +670,74 @@ import org.blackerp.domain.table.TableError
 
 interface EventPublisher {
     suspend fun publish(event: DomainEvent): Either<TableError, Unit>
+}
+
+
+
+File: ./src/main/kotlin/org/blackerp/infrastructure/cache/CacheService.kt
+// Classpath: src.main.kotlin.org.blackerp.infrastructure.cache.CacheService
+
+package org.blackerp.infrastructure.cache
+
+import arrow.core.Either
+import org.blackerp.domain.error.DomainError
+import java.time.Duration
+
+interface CacheService {
+    suspend fun <T> get(key: String): Either<DomainError, T?>
+    suspend fun <T> set(key: String, value: T, ttl: Duration? = null): Either<DomainError, Unit>
+    suspend fun delete(key: String): Either<DomainError, Unit>
+    suspend fun clear(): Either<DomainError, Unit>
+}
+
+
+
+File: ./src/main/kotlin/org/blackerp/infrastructure/cache/InMemoryCacheService.kt
+// Classpath: src.main.kotlin.org.blackerp.infrastructure.cache.InMemoryCacheService
+
+package org.blackerp.infrastructure.cache
+
+import arrow.core.Either
+import arrow.core.right
+import org.blackerp.domain.error.DomainError
+import java.time.Duration
+import java.time.Instant
+import java.util.concurrent.ConcurrentHashMap
+
+class InMemoryCacheService : CacheService {
+    private data class CacheEntry<T>(
+        val value: T,
+        val expiry: Instant?
+    )
+
+    private val cache = ConcurrentHashMap<String, CacheEntry<Any>>()
+
+    @Suppress("UNCHECKED_CAST")
+    override suspend fun <T> get(key: String): Either<DomainError, T?> =
+        cache[key]?.let { entry ->
+            if (entry.expiry == null || entry.expiry > Instant.now()) {
+                (entry.value as T).right()
+            } else {
+                cache.remove(key)
+                null.right()
+            }
+        } ?: null.right()
+
+    override suspend fun <T> set(key: String, value: T, ttl: Duration?): Either<DomainError, Unit> {
+        val expiry = ttl?.let { Instant.now().plus(it) }
+        cache[key] = CacheEntry(value as Any, expiry)
+        return Unit.right()
+    }
+
+    override suspend fun delete(key: String): Either<DomainError, Unit> {
+        cache.remove(key)
+        return Unit.right()
+    }
+
+    override suspend fun clear(): Either<DomainError, Unit> {
+        cache.clear()
+        return Unit.right()
+    }
 }
 
 
@@ -1330,6 +1414,47 @@ abstract class DomainException(message: String) : Exception(message)
 
 
 
+File: ./src/main/kotlin/org/blackerp/domain/error/DomainError.kt
+// Classpath: src.main.kotlin.org.blackerp.domain.error.DomainError
+
+package org.blackerp.domain.error
+
+sealed interface DomainError {
+    val message: String
+    
+    data class ValidationError(
+        override val message: String,
+        val field: String? = null
+    ) : DomainError
+
+    data class NotFoundError(
+        override val message: String,
+        val id: String
+    ) : DomainError
+    
+    data class SecurityError(
+        override val message: String,
+        val reason: String
+    ) : DomainError
+    
+    data class CacheError(
+        override val message: String,
+        val cause: Throwable? = null
+    ) : DomainError
+    
+    data class QueryError(
+        override val message: String,
+        val reason: String
+    ) : DomainError
+
+    data class SystemError(
+        override val message: String,
+        val cause: Throwable? = null
+    ) : DomainError
+}
+
+
+
 File: ./src/main/kotlin/org/blackerp/domain/tenant/TenantFilter.kt
 // Classpath: src.main.kotlin.org.blackerp.domain.tenant.TenantFilter
 
@@ -1727,15 +1852,60 @@ package org.blackerp.domain.transaction
 
 import org.blackerp.shared.ValidationError
 
-sealed class TransactionError(message: String) {
-    data class ValidationFailed(val errors: List<ValidationError>) : 
-        TransactionError("Validation failed: ${errors.joinToString { it.message }}")
+sealed class TransactionError {
+    abstract val message: String
+
+    data class ValidationFailed(
+        override val message: String,
+        val errors: List<ValidationError>
+    ) : TransactionError()
     
-    data class InvalidAmount(val amount: String) : 
-        TransactionError("Invalid amount: $amount")
+    data class InvalidAmount(
+        val amount: String,
+        override val message: String = "Invalid amount: $amount"
+    ) : TransactionError()
     
-    data class InvalidCurrency(val currency: String) : 
-        TransactionError("Invalid currency: $currency")
+    data class InvalidCurrency(
+        val currency: String,
+        override val message: String = "Invalid currency: $currency"
+    ) : TransactionError()
+}
+
+
+
+File: ./src/main/kotlin/org/blackerp/domain/query/QueryResult.kt
+// Classpath: src.main.kotlin.org.blackerp.domain.query.QueryResult
+
+package org.blackerp.domain.query
+
+import arrow.core.Either
+import org.blackerp.domain.error.DomainError
+
+data class QueryResult<T>(
+    val items: List<T>,
+    val total: Long,
+    val page: Int,
+    val pageSize: Int
+)
+
+interface QueryExecutor<T> {
+    suspend fun execute(criteria: QueryCriteria, page: Int, pageSize: Int): Either<DomainError, QueryResult<T>>
+}
+
+
+
+File: ./src/main/kotlin/org/blackerp/domain/query/QueryCriteria.kt
+// Classpath: src.main.kotlin.org.blackerp.domain.query.QueryCriteria
+
+package org.blackerp.domain.query
+
+sealed interface QueryCriteria {
+    data class Equals(val field: String, val value: Any) : QueryCriteria
+    data class Like(val field: String, val pattern: String) : QueryCriteria
+    data class Between(val field: String, val start: Any, val end: Any) : QueryCriteria
+    data class In(val field: String, val values: List<Any>) : QueryCriteria
+    data class And(val criteria: List<QueryCriteria>) : QueryCriteria
+    data class Or(val criteria: List<QueryCriteria>) : QueryCriteria
 }
 
 
@@ -2718,6 +2888,48 @@ data class EntityMetadata(
 
 
 
+File: ./src/main/kotlin/org/blackerp/domain/security/SecurityContext.kt
+// Classpath: src.main.kotlin.org.blackerp.domain.security.SecurityContext
+
+package org.blackerp.domain.security
+
+import arrow.core.Either
+import org.blackerp.domain.error.DomainError
+import java.util.UUID
+
+interface SecurityContext {
+    suspend fun getCurrentUser(): Either<DomainError, User>
+    suspend fun hasPermission(permission: Permission): Either<DomainError, Boolean>
+    suspend fun authenticate(credentials: Credentials): Either<DomainError, User>
+}
+
+data class User(
+    val id: UUID,
+    val username: String,
+    val roles: Set<Role>,
+    val tenantId: UUID?
+)
+
+data class Role(
+    val id: UUID,
+    val name: String,
+    val permissions: Set<Permission>
+)
+
+data class Permission(
+    val id: UUID,
+    val name: String,
+    val resource: String,
+    val action: String
+)
+
+sealed interface Credentials {
+    data class Basic(val username: String, val password: String) : Credentials
+    data class Token(val token: String) : Credentials
+}
+
+
+
 File: ./src/main/kotlin/org/blackerp/api/mappers/TableMapper.kt
 // Classpath: src.main.kotlin.org.blackerp.api.mappers.TableMapper
 
@@ -3204,6 +3416,45 @@ CREATE TABLE IF NOT EXISTS ad_table (
 );
 
 
+File: ./src/test/kotlin/org/blackerp/infrastructure/cache/InMemoryCacheServiceTest.kt
+// Classpath: src.test.kotlin.org.blackerp.infrastructure.cache.InMemoryCacheServiceTest
+
+package org.blackerp.infrastructure.cache
+
+import io.kotest.core.spec.style.DescribeSpec
+import io.kotest.matchers.shouldBe
+import kotlinx.coroutines.test.runTest
+import java.time.Duration
+
+class InMemoryCacheServiceTest : DescribeSpec({
+    lateinit var cacheService: CacheService
+
+    beforeTest {
+        cacheService = InMemoryCacheService()
+    }
+
+    describe("InMemoryCacheService") {
+        it("should store and retrieve values") {
+            runTest {
+                cacheService.set("test", "value")
+                val result = cacheService.get<String>("test")
+                result.getOrNull() shouldBe "value"
+            }
+        }
+
+        it("should handle TTL") {
+            runTest {
+                cacheService.set("test", "value", Duration.ofMillis(1))
+                Thread.sleep(10)
+                val result = cacheService.get<String>("test")
+                result.getOrNull() shouldBe null
+            }
+        }
+    }
+})
+
+
+
 File: ./src/test/kotlin/org/blackerp/infrastructure/persistence/TestDatabaseConfig.kt
 // Classpath: src.test.kotlin.org.blackerp.infrastructure.persistence.TestDatabaseConfig
 
@@ -3238,21 +3489,18 @@ class TestDatabaseConfig {
 File: ./src/test/kotlin/org/blackerp/infrastructure/persistence/SimpleTest.kt
 // Classpath: src.test.kotlin.org.blackerp.infrastructure.persistence.SimpleTest
 
-// File: src/test/kotlin/org/blackerp/infrastructure/persistence/SimpleTest.kt
 package org.blackerp.infrastructure.persistence
 
 import io.kotest.core.spec.style.DescribeSpec
 import io.kotest.matchers.shouldBe
 import org.blackerp.config.TestConfig
 import org.springframework.jdbc.core.JdbcTemplate
-import org.slf4j.LoggerFactory
 import java.time.Instant
 import java.util.UUID
 
 class SimpleTest : DescribeSpec({
     
     val jdbcTemplate = TestConfig().jdbcTemplate(TestConfig().dataSource())
-    val logger = LoggerFactory.getLogger(SimpleTest::class.java)
 
     beforeSpec {
         // Create test table if it doesn't exist
@@ -3878,6 +4126,46 @@ class DefaultPluginRegistryTest : DescribeSpec({
 
 
 
+File: ./src/test/kotlin/org/blackerp/domain/error/DomainErrorTest.kt
+// Classpath: src.test.kotlin.org.blackerp.domain.error.DomainErrorTest
+
+package org.blackerp.domain.error
+
+import io.kotest.core.spec.style.DescribeSpec
+import io.kotest.matchers.shouldBe
+import io.kotest.matchers.types.shouldBeTypeOf
+
+class DomainErrorTest : DescribeSpec({
+    describe("DomainError") {
+        it("should create validation error") {
+            val error = DomainError.ValidationError("Invalid input", "field1")
+            error.shouldBeTypeOf<DomainError.ValidationError>()
+            error.message shouldBe "Invalid input"
+            error.field shouldBe "field1"
+        }
+        
+        it("should create security error") {
+            val error = DomainError.SecurityError(
+                message = "Access denied",
+                reason = "Insufficient permissions"
+            )
+            error.shouldBeTypeOf<DomainError.SecurityError>()
+            error.message shouldBe "Access denied"
+            error.reason shouldBe "Insufficient permissions"
+        }
+        
+        it("should create system error with cause") {
+            val cause = RuntimeException("Test exception")
+            val error = DomainError.SystemError("System failure", cause)
+            error.shouldBeTypeOf<DomainError.SystemError>()
+            error.message shouldBe "System failure"
+            error.cause shouldBe cause
+        }
+    }
+})
+
+
+
 File: ./src/test/kotlin/org/blackerp/domain/tenant/TenantAwareTableTest.kt
 // Classpath: src.test.kotlin.org.blackerp.domain.tenant.TenantAwareTableTest
 
@@ -4132,6 +4420,37 @@ class TransactionTest : DescribeSpec({
                 val result = Transaction.create(params)
                 result.shouldBeRight()
             }
+        }
+    }
+})
+
+
+
+File: ./src/test/kotlin/org/blackerp/domain/query/QueryCriteriaTest.kt
+// Classpath: src.test.kotlin.org.blackerp.domain.query.QueryCriteriaTest
+
+package org.blackerp.domain.query
+
+import io.kotest.core.spec.style.DescribeSpec
+import io.kotest.matchers.should
+import io.kotest.matchers.types.beInstanceOf
+
+class QueryCriteriaTest : DescribeSpec({
+    describe("QueryCriteria") {
+        it("should create complex criteria") {
+            val criteria = QueryCriteria.And(
+                listOf(
+                    QueryCriteria.Equals("name", "test"),
+                    QueryCriteria.Or(
+                        listOf(
+                            QueryCriteria.Like("description", "%test%"),
+                            QueryCriteria.In("status", listOf("active", "pending"))
+                        )
+                    )
+                )
+            )
+            
+            criteria should beInstanceOf<QueryCriteria.And>()
         }
     }
 })
@@ -5301,7 +5620,6 @@ File: ./src/test/kotlin/org/blackerp/integration/plugin/PluginLifecycleIntegrati
 package org.blackerp.integration.plugin
 
 import io.kotest.core.spec.style.DescribeSpec
-import io.kotest.matchers.shouldBe
 import io.kotest.assertions.arrow.core.shouldBeRight
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.test.context.ActiveProfiles
@@ -5317,7 +5635,6 @@ import org.blackerp.plugin.registry.PluginRegistry
 class PluginLifecycleIntegrationTest : DescribeSpec({
     
     val pluginRegistry: PluginRegistry = DefaultPluginRegistry()
-    val extensionRegistry: ExtensionRegistry = InMemoryExtensionRegistry()
     
     describe("Plugin Lifecycle") {
         it("should load and initialize plugin") {

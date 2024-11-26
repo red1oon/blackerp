@@ -1,7 +1,6 @@
 package org.blackerp.integration.plugin
 
 import io.kotest.core.spec.style.DescribeSpec
-import io.kotest.matchers.shouldBe
 import io.kotest.assertions.arrow.core.shouldBeRight
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.test.context.ActiveProfiles
@@ -17,7 +16,6 @@ import org.blackerp.plugin.registry.PluginRegistry
 class PluginLifecycleIntegrationTest : DescribeSpec({
     
     val pluginRegistry: PluginRegistry = DefaultPluginRegistry()
-    val extensionRegistry: ExtensionRegistry = InMemoryExtensionRegistry()
     
     describe("Plugin Lifecycle") {
         it("should load and initialize plugin") {

@@ -1,18 +1,15 @@
-// File: src/test/kotlin/org/blackerp/infrastructure/persistence/SimpleTest.kt
 package org.blackerp.infrastructure.persistence
 
 import io.kotest.core.spec.style.DescribeSpec
 import io.kotest.matchers.shouldBe
 import org.blackerp.config.TestConfig
 import org.springframework.jdbc.core.JdbcTemplate
-import org.slf4j.LoggerFactory
 import java.time.Instant
 import java.util.UUID
 
 class SimpleTest : DescribeSpec({
     
     val jdbcTemplate = TestConfig().jdbcTemplate(TestConfig().dataSource())
-    val logger = LoggerFactory.getLogger(SimpleTest::class.java)
 
     beforeSpec {
         // Create test table if it doesn't exist
