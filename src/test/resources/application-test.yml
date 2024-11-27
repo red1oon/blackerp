@@ -4,7 +4,7 @@ spring:
     username: sa
     password:
     driver-class-name: org.h2.Driver
-  
+
   jpa:
     database-platform: org.hibernate.dialect.H2Dialect
     hibernate:
@@ -13,12 +13,12 @@ spring:
     properties:
       hibernate:
         format_sql: true
-  
+
   flyway:
     enabled: false
     locations: classpath:db/migration
     baseline-on-migrate: true
-    
+
   h2:
     console:
       enabled: true
@@ -30,3 +30,6 @@ logging:
     org.blackerp: DEBUG
     org.hibernate.SQL: DEBUG
     org.hibernate.type.descriptor.sql: TRACE
+
+profiles:
+  active: test

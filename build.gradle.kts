@@ -19,9 +19,10 @@ repositories {
 }
 
 dependencies {
+    implementation("com.h2database:h2:2.1.214")
     implementation("org.flywaydb:flyway-core")
     implementation("com.fasterxml.uuid:java-uuid-generator:4.2.0")
-    
+
     // Kotlin
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.jetbrains.kotlin:kotlin-stdlib")
@@ -29,6 +30,7 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor")
 
     // Spring
+    implementation("org.springframework.boot:spring-boot-starter") 
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("org.springframework.boot:spring-boot-starter-validation")
     implementation("org.springframework.boot:spring-boot-starter-jdbc")
@@ -39,6 +41,7 @@ dependencies {
     implementation("io.arrow-kt:arrow-fx-coroutines:1.2.0")
     
     // Testing
+    testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("org.springframework.boot:spring-boot-starter-test") {
         exclude(module = "mockito-core")
     }

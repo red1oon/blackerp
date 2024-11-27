@@ -1,8 +1,382 @@
 Generating folder structure...
 -------------------------------------------
-.  [error opening dir]
+.
+├── bash.sh
+├── build.gradle.kts
+├── createdomainlayers.sh
+├── createproject1.sh
+├── docker-compose.yml
+├── frontend
+│   ├── frontend.sh
+│   ├── index.html
+│   ├── package.json
+│   ├── package-lock.json
+│   ├── postcss.config.cjs
+│   ├── project_listing.txt
+│   ├── README.md
+│   ├── src
+│   │   ├── api
+│   │   │   ├── mockData.ts
+│   │   │   └── tableApi.ts
+│   │   ├── App.tsx
+│   │   ├── assets
+│   │   ├── components
+│   │   │   ├── tables
+│   │   │   │   ├── DataTableWithState.tsx
+│   │   │   │   ├── index.ts
+│   │   │   │   └── TableManagement.tsx
+│   │   │   └── ui
+│   │   │       ├── alert.tsx
+│   │   │       ├── button.tsx
+│   │   │       ├── card.tsx
+│   │   │       └── table.tsx
+│   │   ├── hooks
+│   │   │   └── useTableOperations.ts
+│   │   ├── index.css
+│   │   ├── layouts
+│   │   ├── lib
+│   │   │   ├── providers
+│   │   │   │   └── QueryProvider.tsx
+│   │   │   ├── utils
+│   │   │   └── utils.ts
+│   │   ├── main.tsx
+│   │   ├── pages
+│   │   ├── __tests__
+│   │   ├── types
+│   │   │   └── table.ts
+│   │   └── utils
+│   ├── tailwind.config.cjs
+│   ├── tsconfig.json
+│   ├── tsconfig.node.json
+│   └── vite.config.ts
+├── generate_project_listing.sh
+├── .gitattributes
+├── .gitignore
+├── .gradle
+│   ├── 8.10.2
+│   │   ├── checksums
+│   │   │   ├── checksums.lock
+│   │   │   ├── md5-checksums.bin
+│   │   │   └── sha1-checksums.bin
+│   │   ├── dependencies-accessors
+│   │   │   └── gc.properties
+│   │   ├── executionHistory
+│   │   │   ├── executionHistory.bin
+│   │   │   └── executionHistory.lock
+│   │   ├── expanded
+│   │   ├── fileChanges
+│   │   │   └── last-build.bin
+│   │   ├── fileHashes
+│   │   │   ├── fileHashes.bin
+│   │   │   ├── fileHashes.lock
+│   │   │   └── resourceHashesCache.bin
+│   │   ├── gc.properties
+│   │   └── vcsMetadata
+│   ├── 8.2
+│   │   ├── checksums
+│   │   │   ├── checksums.lock
+│   │   │   ├── md5-checksums.bin
+│   │   │   └── sha1-checksums.bin
+│   │   ├── dependencies-accessors
+│   │   │   ├── dependencies-accessors.lock
+│   │   │   └── gc.properties
+│   │   ├── executionHistory
+│   │   │   ├── executionHistory.bin
+│   │   │   └── executionHistory.lock
+│   │   ├── fileChanges
+│   │   │   └── last-build.bin
+│   │   ├── fileHashes
+│   │   │   ├── fileHashes.bin
+│   │   │   ├── fileHashes.lock
+│   │   │   └── resourceHashesCache.bin
+│   │   ├── gc.properties
+│   │   └── vcsMetadata
+│   ├── buildOutputCleanup
+│   │   ├── buildOutputCleanup.lock
+│   │   ├── cache.properties
+│   │   └── outputFiles.bin
+│   ├── file-system.probe
+│   ├── kotlin
+│   │   ├── errors
+│   │   └── sessions
+│   └── vcs-1
+│       └── gc.properties
+├── gradle
+│   └── wrapper
+│       ├── gradle-wrapper.jar
+│       └── gradle-wrapper.properties
+├── gradlew
+├── gradlew.bat
+├── HELP.md
+├── LICENSE
+├── package-lock.json
+├── project_documentation.txt
+├── project_listing.txt
+├── README.md
+├── restore_tests.sh
+├── settings.gradle.kts
+├── src
+│   ├── main
+│   │   ├── kotlin
+│   │   │   └── org
+│   │   │       └── blackerp
+│   │   │           ├── api
+│   │   │           │   ├── controllers
+│   │   │           │   │   └── TableController.kt
+│   │   │           │   ├── dto
+│   │   │           │   │   ├── CreateTableRequest.kt
+│   │   │           │   │   └── TableResponse.kt
+│   │   │           │   ├── error
+│   │   │           │   │   └── ErrorHandler.kt
+│   │   │           │   ├── mappers
+│   │   │           │   │   └── TableMapper.kt
+│   │   │           │   └── validation
+│   │   │           ├── application
+│   │   │           │   └── table
+│   │   │           │       ├── CreateTableCommand.kt
+│   │   │           │       └── CreateTableUseCase.kt
+│   │   │           ├── BlackErpApplication.kt
+│   │   │           ├── domain
+│   │   │           │   ├── ad
+│   │   │           │   │   ├── ADModule.kt
+│   │   │           │   │   ├── ADObject.kt
+│   │   │           │   │   ├── reference
+│   │   │           │   │   │   ├── ADReference.kt
+│   │   │           │   │   │   └── value
+│   │   │           │   │   │       └── ReferenceName.kt
+│   │   │           │   │   ├── tab
+│   │   │           │   │   │   ├── ADTab.kt
+│   │   │           │   │   │   ├── CreateTabParams.kt
+│   │   │           │   │   │   ├── OrderBySpec.kt
+│   │   │           │   │   │   ├── TabError.kt
+│   │   │           │   │   │   ├── TabOperations.kt
+│   │   │           │   │   │   └── value
+│   │   │           │   │   │       └── TabName.kt
+│   │   │           │   │   ├── value
+│   │   │           │   │   │   └── ModuleName.kt
+│   │   │           │   │   └── window
+│   │   │           │   │       └── value
+│   │   │           │   │           └── WindowName.kt
+│   │   │           │   ├── common
+│   │   │           │   ├── DomainEntity.kt
+│   │   │           │   ├── DomainEvent.kt
+│   │   │           │   ├── DomainException.kt
+│   │   │           │   ├── EntityMetadata.kt
+│   │   │           │   ├── error
+│   │   │           │   │   └── DomainError.kt
+│   │   │           │   ├── event
+│   │   │           │   │   ├── DomainEvent.kt
+│   │   │           │   │   ├── EventMetadata.kt
+│   │   │           │   │   └── TableCreated.kt
+│   │   │           │   ├── query
+│   │   │           │   │   ├── QueryCriteria.kt
+│   │   │           │   │   └── QueryResult.kt
+│   │   │           │   ├── security
+│   │   │           │   │   └── SecurityContext.kt
+│   │   │           │   ├── table
+│   │   │           │   │   ├── ADTable.kt
+│   │   │           │   │   ├── behavior
+│   │   │           │   │   │   └── TableBehavior.kt
+│   │   │           │   │   ├── ColumnDefinition.kt
+│   │   │           │   │   ├── constraint
+│   │   │           │   │   │   ├── NotNullConstraint.kt
+│   │   │           │   │   │   ├── ReferenceConstraint.kt
+│   │   │           │   │   │   ├── TableConstraint.kt
+│   │   │           │   │   │   └── UniqueConstraint.kt
+│   │   │           │   │   ├── CreateColumnParams.kt
+│   │   │           │   │   ├── definition
+│   │   │           │   │   │   └── TableDefinition.kt
+│   │   │           │   │   ├── extension
+│   │   │           │   │   │   ├── TableExtension.kt
+│   │   │           │   │   │   └── TableExtensionPoint.kt
+│   │   │           │   │   ├── relationship
+│   │   │           │   │   │   ├── constraint
+│   │   │           │   │   │   │   └── IndexConstraint.kt
+│   │   │           │   │   │   ├── CreateRelationshipParams.kt
+│   │   │           │   │   │   ├── event
+│   │   │           │   │   │   │   └── RelationshipEvent.kt
+│   │   │           │   │   │   ├── RelationshipConstraint.kt
+│   │   │           │   │   │   ├── RelationshipOperations.kt
+│   │   │           │   │   │   ├── TableRelationshipError.kt
+│   │   │           │   │   │   ├── TableRelationship.kt
+│   │   │           │   │   │   └── value
+│   │   │           │   │   │       ├── DeleteRule.kt
+│   │   │           │   │   │       ├── RelationshipName.kt
+│   │   │           │   │   │       ├── RelationType.kt
+│   │   │           │   │   │       └── UpdateRule.kt
+│   │   │           │   │   ├── TableCreated.kt
+│   │   │           │   │   ├── TableError.kt
+│   │   │           │   │   ├── TableId.kt
+│   │   │           │   │   ├── TableOperations.kt
+│   │   │           │   │   └── TenantAwareTable.kt
+│   │   │           │   ├── tenant
+│   │   │           │   │   ├── TenantAware.kt
+│   │   │           │   │   ├── TenantContext.kt
+│   │   │           │   │   └── TenantFilter.kt
+│   │   │           │   ├── transaction
+│   │   │           │   │   ├── TransactionError.kt
+│   │   │           │   │   └── Transaction.kt
+│   │   │           │   └── values
+│   │   │           │       ├── AccessLevel.kt
+│   │   │           │       ├── Amount.kt
+│   │   │           │       ├── ColumnName.kt
+│   │   │           │       ├── Currency.kt
+│   │   │           │       ├── DataType.kt
+│   │   │           │       ├── Description.kt
+│   │   │           │       ├── DisplayName.kt
+│   │   │           │       ├── EventMetadata.kt
+│   │   │           │       ├── Length.kt
+│   │   │           │       ├── Precision.kt
+│   │   │           │       ├── Scale.kt
+│   │   │           │       └── TableName.kt
+│   │   │           ├── infrastructure
+│   │   │           │   ├── cache
+│   │   │           │   │   ├── CacheService.kt
+│   │   │           │   │   └── InMemoryCacheService.kt
+│   │   │           │   ├── event
+│   │   │           │   │   └── EventPublisher.kt
+│   │   │           │   ├── persistence
+│   │   │           │   │   └── store
+│   │   │           │   │       ├── PostgresRelationshipOperations.kt
+│   │   │           │   │       ├── PostgresTableOperations.kt
+│   │   │           │   │       └── PostgresTabOperations.kt
+│   │   │           │   └── store
+│   │   │           ├── plugin
+│   │   │           │   ├── discovery
+│   │   │           │   │   ├── FileSystemPluginDiscovery.kt
+│   │   │           │   │   └── PluginDiscovery.kt
+│   │   │           │   ├── Extension.kt
+│   │   │           │   ├── ExtensionRegistry.kt
+│   │   │           │   ├── PluginError.kt
+│   │   │           │   ├── PluginId.kt
+│   │   │           │   ├── Plugin.kt
+│   │   │           │   ├── PluginMetadata.kt
+│   │   │           │   ├── registry
+│   │   │           │   │   ├── DefaultPluginRegistry.kt
+│   │   │           │   │   └── PluginRegistry.kt
+│   │   │           │   └── Version.kt
+│   │   │           └── shared
+│   │   │               ├── ReferenceValidation.kt
+│   │   │               ├── TimeBasedId.kt
+│   │   │               └── ValidationError.kt
+│   │   └── resources
+│   │       ├── application.yml
+│   │       └── db
+│   │           └── migration
+│   │               ├── V1__Create_table_schema.sql
+│   │               ├── V2_create_relationship_schema.sql
+│   │               └── V3__Create_tab_schema.sql
+│   └── test
+│       ├── kotlin
+│       │   └── org
+│       │       └── blackerp
+│       │           ├── api
+│       │           │   └── controllers
+│       │           │       └── TableControllerTest.kt
+│       │           ├── application
+│       │           │   └── table
+│       │           │       └── CreateTableUseCaseTest.kt
+│       │           ├── config
+│       │           │   ├── KotestProjectConfig.kt
+│       │           │   ├── TestConfig.kt
+│       │           │   └── UnifiedTestConfig.kt
+│       │           ├── domain
+│       │           │   ├── ad
+│       │           │   │   ├── ADModuleTest.kt
+│       │           │   │   ├── reference
+│       │           │   │   │   ├── ADReferenceTest.kt
+│       │           │   │   │   └── value
+│       │           │   │   │       └── ReferenceNameTest.kt
+│       │           │   │   ├── tab
+│       │           │   │   │   ├── ADTabTest.kt
+│       │           │   │   │   └── value
+│       │           │   │   │       └── TabNameTest.kt
+│       │           │   │   ├── value
+│       │           │   │   │   └── ModuleNameTest.kt
+│       │           │   │   └── window
+│       │           │   │       └── value
+│       │           │   │           └── WindowNameTest.kt
+│       │           │   ├── EntityMetadataTest.kt
+│       │           │   ├── error
+│       │           │   │   └── DomainErrorTest.kt
+│       │           │   ├── query
+│       │           │   │   └── QueryCriteriaTest.kt
+│       │           │   ├── table
+│       │           │   │   ├── behavior
+│       │           │   │   ├── constraint
+│       │           │   │   │   ├── NotNullConstraintTest.kt
+│       │           │   │   │   ├── ReferenceConstraintTest.kt
+│       │           │   │   │   └── UniqueConstraintTest.kt
+│       │           │   │   ├── definition
+│       │           │   │   │   └── TableDefinitionTest.kt
+│       │           │   │   ├── extension
+│       │           │   │   │   └── TableExtensionPointTest.kt
+│       │           │   │   ├── relationship
+│       │           │   │   │   ├── RelationshipOperationsTest.kt
+│       │           │   │   │   ├── RelationshipTestFactory.kt
+│       │           │   │   │   └── TableRelationshipTest.kt
+│       │           │   │   └── TableOperationsTest.kt
+│       │           │   ├── tenant
+│       │           │   │   ├── TenantAwareTableTest.kt
+│       │           │   │   └── TenantContextTest.kt
+│       │           │   ├── transaction
+│       │           │   │   └── TransactionTest.kt
+│       │           │   └── values
+│       │           │       ├── AmountTest.kt
+│       │           │       ├── CurrencyTest.kt
+│       │           │       ├── DataTypeTest.kt
+│       │           │       ├── DisplayNameTest.kt
+│       │           │       └── TableNameTest.kt
+│       │           ├── infrastructure
+│       │           │   ├── cache
+│       │           │   │   └── InMemoryCacheServiceTest.kt
+│       │           │   └── persistence
+│       │           │       ├── SimpleTest.kt
+│       │           │       ├── store
+│       │           │       │   ├── InMemoryRelationshipOperations.kt
+│       │           │       │   ├── InMemoryTableOperations.kt
+│       │           │       │   ├── InMemoryTabOperations.kt
+│       │           │       │   └── PostgresTabOperationsTest.kt
+│       │           │       └── TestDatabaseConfig.kt
+│       │           ├── integration
+│       │           │   ├── api
+│       │           │   │   └── TableApiIntegrationTest.kt
+│       │           │   ├── db
+│       │           │   │   └── TableRepositoryIntegrationTest.kt
+│       │           │   ├── IntegrationTestConfig.kt
+│       │           │   └── plugin
+│       │           │       └── PluginLifecycleIntegrationTest.kt
+│       │           ├── plugin
+│       │           │   ├── discovery
+│       │           │   │   └── FileSystemPluginDiscoveryTest.kt
+│       │           │   ├── InMemoryExtensionRegistry.kt
+│       │           │   ├── integration
+│       │           │   ├── PluginIdTest.kt
+│       │           │   ├── PluginMetadataTest.kt
+│       │           │   ├── PluginTest.kt
+│       │           │   ├── registry
+│       │           │   │   └── DefaultPluginRegistryTest.kt
+│       │           │   ├── TestPlugin.kt
+│       │           │   └── VersionTest.kt
+│       │           └── shared
+│       │               ├── TestFactory.kt
+│       │               └── TimeBasedIdTest.kt
+│       └── resources
+│           ├── application-test.properties
+│           ├── application-test.yml
+│           ├── application.yml
+│           ├── application.yml.backup.20241127_051405
+│           ├── db
+│           │   ├── h2-schema.sql
+│           │   ├── migration
+│           │   │   └── V4__create_test_tables.sql
+│           │   └── schema.sql
+│           └── logback-test.xml
+├── testdebug.txt
+├── verify-setup.sh
+└── verify_test.sh
 
-0 directories, 1 file
+137 directories, 238 files
 
 
 
