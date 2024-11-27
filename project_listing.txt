@@ -1,318 +1,8 @@
 Generating folder structure...
 -------------------------------------------
-.
-├── build.gradle.kts
-├── createdomainlayers.sh
-├── createproject1.sh
-├── docker-compose.yml
-├── fix.sh
-├── generate_project_listing.sh
-├── .gitattributes
-├── .gitignore
-├── .gradle
-│   ├── 8.10.2
-│   │   ├── checksums
-│   │   │   ├── checksums.lock
-│   │   │   ├── md5-checksums.bin
-│   │   │   └── sha1-checksums.bin
-│   │   ├── dependencies-accessors
-│   │   │   └── gc.properties
-│   │   ├── executionHistory
-│   │   │   ├── executionHistory.bin
-│   │   │   └── executionHistory.lock
-│   │   ├── expanded
-│   │   ├── fileChanges
-│   │   │   └── last-build.bin
-│   │   ├── fileHashes
-│   │   │   ├── fileHashes.bin
-│   │   │   ├── fileHashes.lock
-│   │   │   └── resourceHashesCache.bin
-│   │   ├── gc.properties
-│   │   └── vcsMetadata
-│   ├── 8.2
-│   │   ├── checksums
-│   │   │   ├── checksums.lock
-│   │   │   ├── md5-checksums.bin
-│   │   │   └── sha1-checksums.bin
-│   │   ├── dependencies-accessors
-│   │   │   ├── dependencies-accessors.lock
-│   │   │   └── gc.properties
-│   │   ├── executionHistory
-│   │   │   ├── executionHistory.bin
-│   │   │   └── executionHistory.lock
-│   │   ├── fileChanges
-│   │   │   └── last-build.bin
-│   │   ├── fileHashes
-│   │   │   ├── fileHashes.bin
-│   │   │   ├── fileHashes.lock
-│   │   │   └── resourceHashesCache.bin
-│   │   ├── gc.properties
-│   │   └── vcsMetadata
-│   ├── buildOutputCleanup
-│   │   ├── buildOutputCleanup.lock
-│   │   ├── cache.properties
-│   │   └── outputFiles.bin
-│   ├── file-system.probe
-│   ├── kotlin
-│   │   ├── errors
-│   │   └── sessions
-│   └── vcs-1
-│       └── gc.properties
-├── gradle
-│   └── wrapper
-│       ├── gradle-wrapper.jar
-│       └── gradle-wrapper.properties
-├── gradlew
-├── gradlew.bat
-├── HELP.md
-├── LICENSE
-├── project_documentation.txt
-├── project_listing.txt
-├── README.md
-├── restore_tests.sh
-├── settings.gradle.kts
-├── src
-│   ├── main
-│   │   ├── kotlin
-│   │   │   └── org
-│   │   │       └── blackerp
-│   │   │           ├── api
-│   │   │           │   ├── controllers
-│   │   │           │   │   └── TableController.kt
-│   │   │           │   ├── dto
-│   │   │           │   │   ├── CreateTableRequest.kt
-│   │   │           │   │   └── TableResponse.kt
-│   │   │           │   ├── error
-│   │   │           │   │   └── ErrorHandler.kt
-│   │   │           │   ├── mappers
-│   │   │           │   │   └── TableMapper.kt
-│   │   │           │   └── validation
-│   │   │           ├── application
-│   │   │           │   └── table
-│   │   │           │       ├── CreateTableCommand.kt
-│   │   │           │       └── CreateTableUseCase.kt
-│   │   │           ├── BlackErpApplication.kt
-│   │   │           ├── domain
-│   │   │           │   ├── ad
-│   │   │           │   │   ├── ADModule.kt
-│   │   │           │   │   ├── ADObject.kt
-│   │   │           │   │   ├── reference
-│   │   │           │   │   │   ├── ADReference.kt
-│   │   │           │   │   │   └── value
-│   │   │           │   │   │       └── ReferenceName.kt
-│   │   │           │   │   ├── value
-│   │   │           │   │   │   └── ModuleName.kt
-│   │   │           │   │   └── window
-│   │   │           │   │       └── value
-│   │   │           │   │           └── WindowName.kt
-│   │   │           │   ├── common
-│   │   │           │   ├── DomainEntity.kt
-│   │   │           │   ├── DomainEvent.kt
-│   │   │           │   ├── DomainException.kt
-│   │   │           │   ├── EntityMetadata.kt
-│   │   │           │   ├── error
-│   │   │           │   │   └── DomainError.kt
-│   │   │           │   ├── event
-│   │   │           │   │   ├── DomainEvent.kt
-│   │   │           │   │   ├── EventMetadata.kt
-│   │   │           │   │   └── TableCreated.kt
-│   │   │           │   ├── query
-│   │   │           │   │   ├── QueryCriteria.kt
-│   │   │           │   │   └── QueryResult.kt
-│   │   │           │   ├── security
-│   │   │           │   │   └── SecurityContext.kt
-│   │   │           │   ├── table
-│   │   │           │   │   ├── ADTable.kt
-│   │   │           │   │   ├── behavior
-│   │   │           │   │   │   └── TableBehavior.kt
-│   │   │           │   │   ├── ColumnDefinition.kt
-│   │   │           │   │   ├── constraint
-│   │   │           │   │   │   ├── NotNullConstraint.kt
-│   │   │           │   │   │   ├── ReferenceConstraint.kt
-│   │   │           │   │   │   ├── TableConstraint.kt
-│   │   │           │   │   │   └── UniqueConstraint.kt
-│   │   │           │   │   ├── CreateColumnParams.kt
-│   │   │           │   │   ├── definition
-│   │   │           │   │   │   └── TableDefinition.kt
-│   │   │           │   │   ├── extension
-│   │   │           │   │   │   ├── TableExtension.kt
-│   │   │           │   │   │   └── TableExtensionPoint.kt
-│   │   │           │   │   ├── relationship
-│   │   │           │   │   │   ├── constraint
-│   │   │           │   │   │   │   └── IndexConstraint.kt
-│   │   │           │   │   │   ├── CreateRelationshipParams.kt
-│   │   │           │   │   │   ├── event
-│   │   │           │   │   │   │   └── RelationshipEvent.kt
-│   │   │           │   │   │   ├── RelationshipConstraint.kt
-│   │   │           │   │   │   ├── RelationshipOperations.kt
-│   │   │           │   │   │   ├── TableRelationshipError.kt
-│   │   │           │   │   │   ├── TableRelationship.kt
-│   │   │           │   │   │   └── value
-│   │   │           │   │   │       ├── DeleteRule.kt
-│   │   │           │   │   │       ├── RelationshipName.kt
-│   │   │           │   │   │       ├── RelationType.kt
-│   │   │           │   │   │       └── UpdateRule.kt
-│   │   │           │   │   ├── TableCreated.kt
-│   │   │           │   │   ├── TableError.kt
-│   │   │           │   │   ├── TableId.kt
-│   │   │           │   │   ├── TableOperations.kt
-│   │   │           │   │   └── TenantAwareTable.kt
-│   │   │           │   ├── tenant
-│   │   │           │   │   ├── TenantAware.kt
-│   │   │           │   │   ├── TenantContext.kt
-│   │   │           │   │   └── TenantFilter.kt
-│   │   │           │   ├── transaction
-│   │   │           │   │   ├── TransactionError.kt
-│   │   │           │   │   └── Transaction.kt
-│   │   │           │   └── values
-│   │   │           │       ├── AccessLevel.kt
-│   │   │           │       ├── Amount.kt
-│   │   │           │       ├── ColumnName.kt
-│   │   │           │       ├── Currency.kt
-│   │   │           │       ├── DataType.kt
-│   │   │           │       ├── Description.kt
-│   │   │           │       ├── DisplayName.kt
-│   │   │           │       ├── EventMetadata.kt
-│   │   │           │       ├── Length.kt
-│   │   │           │       ├── Precision.kt
-│   │   │           │       ├── Scale.kt
-│   │   │           │       └── TableName.kt
-│   │   │           ├── infrastructure
-│   │   │           │   ├── cache
-│   │   │           │   │   ├── CacheService.kt
-│   │   │           │   │   └── InMemoryCacheService.kt
-│   │   │           │   ├── event
-│   │   │           │   │   └── EventPublisher.kt
-│   │   │           │   ├── persistence
-│   │   │           │   │   └── store
-│   │   │           │   │       ├── PostgresRelationshipOperations.kt
-│   │   │           │   │       └── PostgresTableOperations.kt
-│   │   │           │   └── store
-│   │   │           ├── plugin
-│   │   │           │   ├── discovery
-│   │   │           │   │   ├── FileSystemPluginDiscovery.kt
-│   │   │           │   │   └── PluginDiscovery.kt
-│   │   │           │   ├── Extension.kt
-│   │   │           │   ├── ExtensionRegistry.kt
-│   │   │           │   ├── PluginError.kt
-│   │   │           │   ├── PluginId.kt
-│   │   │           │   ├── Plugin.kt
-│   │   │           │   ├── PluginMetadata.kt
-│   │   │           │   ├── registry
-│   │   │           │   │   ├── DefaultPluginRegistry.kt
-│   │   │           │   │   └── PluginRegistry.kt
-│   │   │           │   └── Version.kt
-│   │   │           └── shared
-│   │   │               ├── ReferenceValidation.kt
-│   │   │               ├── TimeBasedId.kt
-│   │   │               └── ValidationError.kt
-│   │   └── resources
-│   │       ├── application.yml
-│   │       └── db
-│   │           └── migration
-│   │               ├── V1__Create_table_schema.sql
-│   │               └── V2_create_relationship_schema.sql
-│   └── test
-│       ├── kotlin
-│       │   └── org
-│       │       └── blackerp
-│       │           ├── api
-│       │           │   └── controllers
-│       │           │       └── TableControllerTest.kt
-│       │           ├── application
-│       │           │   └── table
-│       │           │       └── CreateTableUseCaseTest.kt
-│       │           ├── config
-│       │           │   ├── KotestProjectConfig.kt
-│       │           │   └── TestConfig.kt
-│       │           ├── domain
-│       │           │   ├── ad
-│       │           │   │   ├── ADModuleTest.kt
-│       │           │   │   ├── reference
-│       │           │   │   │   ├── ADReferenceTest.kt
-│       │           │   │   │   └── value
-│       │           │   │   │       └── ReferenceNameTest.kt
-│       │           │   │   ├── value
-│       │           │   │   │   └── ModuleNameTest.kt
-│       │           │   │   └── window
-│       │           │   │       └── value
-│       │           │   │           └── WindowNameTest.kt
-│       │           │   ├── EntityMetadataTest.kt
-│       │           │   ├── error
-│       │           │   │   └── DomainErrorTest.kt
-│       │           │   ├── query
-│       │           │   │   └── QueryCriteriaTest.kt
-│       │           │   ├── table
-│       │           │   │   ├── behavior
-│       │           │   │   ├── constraint
-│       │           │   │   │   ├── NotNullConstraintTest.kt
-│       │           │   │   │   ├── ReferenceConstraintTest.kt
-│       │           │   │   │   └── UniqueConstraintTest.kt
-│       │           │   │   ├── definition
-│       │           │   │   │   └── TableDefinitionTest.kt
-│       │           │   │   ├── extension
-│       │           │   │   │   └── TableExtensionPointTest.kt
-│       │           │   │   ├── relationship
-│       │           │   │   │   ├── RelationshipOperationsTest.kt
-│       │           │   │   │   ├── RelationshipTestFactory.kt
-│       │           │   │   │   └── TableRelationshipTest.kt
-│       │           │   │   └── TableOperationsTest.kt
-│       │           │   ├── tenant
-│       │           │   │   ├── TenantAwareTableTest.kt
-│       │           │   │   └── TenantContextTest.kt
-│       │           │   ├── transaction
-│       │           │   │   └── TransactionTest.kt
-│       │           │   └── values
-│       │           │       ├── AmountTest.kt
-│       │           │       ├── CurrencyTest.kt
-│       │           │       ├── DataTypeTest.kt
-│       │           │       ├── DisplayNameTest.kt
-│       │           │       └── TableNameTest.kt
-│       │           ├── infrastructure
-│       │           │   ├── cache
-│       │           │   │   └── InMemoryCacheServiceTest.kt
-│       │           │   └── persistence
-│       │           │       ├── SimpleTest.kt
-│       │           │       ├── store
-│       │           │       │   ├── InMemoryRelationshipOperations.kt
-│       │           │       │   └── InMemoryTableOperations.kt
-│       │           │       └── TestDatabaseConfig.kt
-│       │           ├── integration
-│       │           │   ├── api
-│       │           │   │   └── TableApiIntegrationTest.kt
-│       │           │   ├── db
-│       │           │   │   └── TableRepositoryIntegrationTest.kt
-│       │           │   ├── IntegrationTestConfig.kt
-│       │           │   └── plugin
-│       │           │       └── PluginLifecycleIntegrationTest.kt
-│       │           ├── plugin
-│       │           │   ├── discovery
-│       │           │   │   └── FileSystemPluginDiscoveryTest.kt
-│       │           │   ├── InMemoryExtensionRegistry.kt
-│       │           │   ├── integration
-│       │           │   ├── PluginIdTest.kt
-│       │           │   ├── PluginMetadataTest.kt
-│       │           │   ├── PluginTest.kt
-│       │           │   ├── registry
-│       │           │   │   └── DefaultPluginRegistryTest.kt
-│       │           │   ├── TestPlugin.kt
-│       │           │   └── VersionTest.kt
-│       │           └── shared
-│       │               ├── TestFactory.kt
-│       │               └── TimeBasedIdTest.kt
-│       └── resources
-│           ├── application-test.properties
-│           ├── application.yml
-│           ├── db
-│           │   ├── h2-schema.sql
-│           │   ├── migration
-│           │   │   └── V1__create_test_tables.sql
-│           │   └── schema.sql
-│           └── logback-test.xml
-├── testdebug.txt
-└── verify-setup.sh
+.  [error opening dir]
 
-117 directories, 194 files
+0 directories, 1 file
 
 
 
@@ -322,6 +12,322 @@ File: ./settings.gradle.kts
 // Classpath: settings.gradle
 
 rootProject.name = "blackerp"
+
+
+
+File: ./frontend/node_modules/balanced-match/.github/FUNDING.yml
+// Classpath: frontend.node_modules.balanced-match..github.FUNDING
+
+tidelift: "npm/balanced-match"
+patreon: juliangruber
+
+
+
+File: ./frontend/node_modules/resolve/.github/FUNDING.yml
+// Classpath: frontend.node_modules.resolve..github.FUNDING
+
+# These are supported funding model platforms
+
+github: [ljharb]
+patreon: # Replace with a single Patreon username
+open_collective: # Replace with a single Open Collective username
+ko_fi: # Replace with a single Ko-fi username
+tidelift: npm/resolve
+community_bridge: # Replace with a single Community Bridge project-name e.g., cloud-foundry
+liberapay: # Replace with a single Liberapay username
+issuehunt: # Replace with a single IssueHunt username
+otechie: # Replace with a single Otechie username
+custom: # Replace with up to 4 custom sponsorship URLs e.g., ['link1', 'link2']
+
+
+
+File: ./frontend/node_modules/hasown/.github/FUNDING.yml
+// Classpath: frontend.node_modules.hasown..github.FUNDING
+
+# These are supported funding model platforms
+
+github: [ljharb]
+patreon: # Replace with a single Patreon username
+open_collective: # Replace with a single Open Collective username
+ko_fi: # Replace with a single Ko-fi username
+tidelift: npm/hasown
+community_bridge: # Replace with a single Community Bridge project-name e.g., cloud-foundry
+liberapay: # Replace with a single Liberapay username
+issuehunt: # Replace with a single IssueHunt username
+otechie: # Replace with a single Otechie username
+custom: # Replace with a single custom sponsorship URL
+
+
+
+File: ./frontend/node_modules/fastq/.github/workflows/ci.yml
+// Classpath: frontend.node_modules.fastq..github.workflows.ci
+
+name: ci
+
+on: [push, pull_request]
+
+jobs:
+  legacy:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: ['0.10', '0.12', 4.x, 6.x, 8.x]
+
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          persist-credentials: false
+
+      - name: Use Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Install
+        run: |
+          npm install --production && npm install tape
+
+      - name: Run tests
+        run: |
+          npm run legacy
+
+  test:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [10.x, 12.x, 13.x, 14.x, 15.x, 16.x, 18.x, 20.x]
+
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          persist-credentials: false
+
+      - name: Use Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Install
+        run: |
+          npm install
+
+      - name: Run tests
+        run: |
+          npm run test
+
+  types:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          persist-credentials: false
+
+      - name: Use Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+
+      - name: Install
+        run: |
+          npm install
+
+      - name: Run types tests
+        run: |
+          npm run typescript
+
+
+
+File: ./frontend/node_modules/fastq/.github/dependabot.yml
+// Classpath: frontend.node_modules.fastq..github.dependabot
+
+version: 2
+updates:
+- package-ecosystem: npm
+  directory: "/"
+  schedule:
+    interval: daily
+  open-pull-requests-limit: 10
+  ignore:
+  - dependency-name: standard
+    versions:
+    - 16.0.3
+
+
+
+File: ./frontend/node_modules/bl/.github/workflows/test-and-release.yml
+// Classpath: frontend.node_modules.bl..github.workflows.test-and-release
+
+name: Test & Maybe Release
+on: [push, pull_request]
+jobs:
+  test:
+    strategy:
+      fail-fast: false
+      matrix:
+        node: [14.x, 16.x, 18.x, lts/*, current]
+        os: [macos-latest, ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+      - name: Use Node.js ${{ matrix.node }}
+        uses: actions/setup-node@v3.5.1
+        with:
+          node-version: ${{ matrix.node }}
+      - name: Install Dependencies
+        run: |
+          npm install --no-progress
+      - name: Run tests
+        run: |
+          npm config set script-shell bash
+          npm run test:ci
+  release:
+    name: Release
+    needs: test
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: Setup Node.js
+        uses: actions/setup-node@v3.5.1
+        with:
+          node-version: 14
+      - name: Install dependencies
+        run: |
+          npm install --no-progress --no-package-lock --no-save
+      - name: Build
+        run: |
+          npm run build
+      - name: Install plugins
+        run: |
+          npm install \
+            @semantic-release/commit-analyzer \
+            conventional-changelog-conventionalcommits \
+            @semantic-release/release-notes-generator \
+            @semantic-release/npm \
+            @semantic-release/github \
+            @semantic-release/git \
+            @semantic-release/changelog \
+            --no-progress --no-package-lock --no-save
+      - name: Release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: npx semantic-release
+
+
+
+
+File: ./frontend/node_modules/bl/.github/dependabot.yml
+// Classpath: frontend.node_modules.bl..github.dependabot
+
+version: 2
+updates:
+  - package-ecosystem: 'github-actions'
+    directory: '/'
+    schedule:
+      interval: 'daily'
+    commit-message:
+      prefix: 'chore'
+      include: 'scope'
+  - package-ecosystem: 'npm'
+    directory: '/'
+    schedule:
+      interval: 'daily'
+    commit-message:
+      prefix: 'chore'
+      include: 'scope'
+
+
+
+File: ./frontend/node_modules/reusify/.coveralls.yml
+// Classpath: frontend.node_modules.reusify..coveralls
+
+repo_token: yIxhFqtaaz5iGVYfie9mODehFYogm8S8L
+
+
+
+File: ./frontend/node_modules/reusify/.travis.yml
+// Classpath: frontend.node_modules.reusify..travis
+
+language: node_js
+sudo: false
+
+node_js:
+  - 9
+  - 8
+  - 7
+  - 6
+  - 5
+  - 4
+  - 4.0
+  - iojs-v3
+  - iojs-v2
+  - iojs-v1
+  - 0.12
+  - 0.10
+
+cache:
+  directories:
+    - node_modules
+
+after_script:
+- npm run coverage
+
+notifications:
+  email:
+    on_success: never
+    on_failure: always
+
+
+
+File: ./frontend/node_modules/brace-expansion/.github/FUNDING.yml
+// Classpath: frontend.node_modules.brace-expansion..github.FUNDING
+
+tidelift: "npm/brace-expansion"
+patreon: juliangruber
+
+
+
+File: ./frontend/node_modules/supports-preserve-symlinks-flag/.github/FUNDING.yml
+// Classpath: frontend.node_modules.supports-preserve-symlinks-flag..github.FUNDING
+
+# These are supported funding model platforms
+
+github: [ljharb]
+patreon: # Replace with a single Patreon username
+open_collective: # Replace with a single Open Collective username
+ko_fi: # Replace with a single Ko-fi username
+tidelift: npm/supports-preserve-symlink-flag
+community_bridge: # Replace with a single Community Bridge project-name e.g., cloud-foundry
+liberapay: # Replace with a single Liberapay username
+issuehunt: # Replace with a single IssueHunt username
+otechie: # Replace with a single Otechie username
+custom: # Replace with up to 4 custom sponsorship URLs e.g., ['link1', 'link2']
+
+
+
+File: ./frontend/node_modules/function-bind/.github/FUNDING.yml
+// Classpath: frontend.node_modules.function-bind..github.FUNDING
+
+# These are supported funding model platforms
+
+github: [ljharb]
+patreon: # Replace with a single Patreon username
+open_collective: # Replace with a single Open Collective username
+ko_fi: # Replace with a single Ko-fi username
+tidelift: npm/function-bind
+community_bridge: # Replace with a single Community Bridge project-name e.g., cloud-foundry
+liberapay: # Replace with a single Liberapay username
+issuehunt: # Replace with a single IssueHunt username
+otechie: # Replace with a single Otechie username
+custom: # Replace with up to 4 custom sponsorship URLs e.g., ['link1', 'link2']
 
 
 
@@ -354,6 +360,8 @@ plugins {
     kotlin("plugin.spring") version "1.9.20"
     id("org.springframework.boot") version "3.2.0"
     id("io.spring.dependency-management") version "1.1.4"
+    id("org.flywaydb.flyway") version "9.21.0"
+    id("jacoco")
 }
 
 group = "org.blackerp"
@@ -368,7 +376,9 @@ repositories {
 }
 
 dependencies {
+    implementation("org.flywaydb:flyway-core")
     implementation("com.fasterxml.uuid:java-uuid-generator:4.2.0")
+    
     // Kotlin
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.jetbrains.kotlin:kotlin-stdlib")
@@ -381,13 +391,17 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-jdbc")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     
+    // Arrow
+    implementation("io.arrow-kt:arrow-core:1.2.0")
+    implementation("io.arrow-kt:arrow-fx-coroutines:1.2.0")
+    
     // Testing
     testImplementation("org.springframework.boot:spring-boot-starter-test") {
         exclude(module = "mockito-core")
     }
     testImplementation("com.ninja-squad:springmockk:4.0.2")
     testImplementation("io.mockk:mockk:1.13.8")
-    testImplementation("com.h2database:h2:2.2.220")
+    testImplementation("com.h2database:h2:2.1.214")
     
     // Kotest
     testImplementation("io.kotest:kotest-runner-junit5:5.8.0")
@@ -398,10 +412,6 @@ dependencies {
     testImplementation("io.kotest.extensions:kotest-assertions-arrow:1.3.3")
     
     testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.3")
-    
-    // Arrow
-    implementation("io.arrow-kt:arrow-core:1.2.0")
-    implementation("io.arrow-kt:arrow-fx-coroutines:1.2.0")
 }
 
 tasks.withType<Test> {
@@ -415,24 +425,125 @@ tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
     }
 }
 
+jacoco {
+    toolVersion = "0.8.9"
+}
+
+tasks.jacocoTestReport {
+    dependsOn(tasks.test)
+    
+    reports {
+        xml.required.set(true)
+        html.required.set(true)
+        html.outputLocation.set(layout.buildDirectory.dir("reports/jacoco"))
+    }
+    
+    classDirectories.setFrom(
+        files(classDirectories.files.map {
+            fileTree(it) {
+                exclude(
+                    // Exclude classes that don't need test coverage
+                    "**/BlackErpApplication*",
+                    "**/config/**",
+                    "**/dto/**",
+                    "**/*Error*",
+                    "**/infrastructure/persistence/store/PostgresTabOperations.kt"
+                )
+            }
+        })
+    )
+}
+
+tasks.test {
+    finalizedBy(tasks.jacocoTestReport)
+}
+
+flyway {
+    url = "jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1;MODE=PostgreSQL"
+    user = "sa"
+    password = ""
+    baselineOnMigrate = true
+    locations = arrayOf("classpath:db/migration")
+}
+
 
 File: ./build/resources/main/application.yml
 // Classpath: build.resources.main.application
 
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/blackerp
-    username: postgres
-    password: postgres
+    url: jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1;MODE=PostgreSQL;DATABASE_TO_LOWER=TRUE;DEFAULT_NULL_ORDERING=HIGH
+    username: sa
+    password:
+    driver-class-name: org.h2.Driver
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+  flyway:
+    locations: classpath:db/migration
+    baseline-on-migrate: true
   jpa:
-    hibernate:
-      ddl-auto: update
+    database-platform: org.hibernate.dialect.H2Dialect
+    show-sql: true
     properties:
       hibernate:
-        dialect: org.hibernate.dialect.PostgreSQLDialect
         format_sql: true
-    show-sql: true
 
+
+
+File: ./build/resources/main/db/migration/V3__Create_tab_schema.sql
+// Classpath: build.resources.main.db.migration.V3__Create_tab_schema
+
+-- src/main/resources/db/migration/V3__Create_tab_schema.sql
+CREATE TABLE ad_tab (
+    id UUID PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    display_name VARCHAR(100) NOT NULL,
+    description TEXT,
+    table_name VARCHAR(100) NOT NULL,
+    created TIMESTAMP NOT NULL,
+    created_by VARCHAR(100) NOT NULL,
+    updated TIMESTAMP NOT NULL,
+    updated_by VARCHAR(100) NOT NULL,
+    version INTEGER NOT NULL DEFAULT 0,
+    active BOOLEAN NOT NULL DEFAULT true,
+    CONSTRAINT uk_tab_name UNIQUE (name),
+    CONSTRAINT fk_tab_table FOREIGN KEY (table_name) 
+        REFERENCES ad_table(name)
+);
+
+CREATE INDEX idx_tab_name ON ad_tab(name);
+CREATE INDEX idx_tab_table ON ad_tab(table_name);
+
+CREATE TABLE ad_tab_query_column (
+    tab_id UUID NOT NULL,
+    column_name VARCHAR(100) NOT NULL,
+    sequence INTEGER NOT NULL,
+    PRIMARY KEY (tab_id, column_name),
+    CONSTRAINT fk_query_tab FOREIGN KEY (tab_id) 
+        REFERENCES ad_tab(id) ON DELETE CASCADE
+);
+
+CREATE TABLE ad_tab_display_column (
+    tab_id UUID NOT NULL,
+    column_name VARCHAR(100) NOT NULL,
+    sequence INTEGER NOT NULL,
+    PRIMARY KEY (tab_id, column_name),
+    CONSTRAINT fk_display_tab FOREIGN KEY (tab_id) 
+        REFERENCES ad_tab(id) ON DELETE CASCADE
+);
+
+CREATE TABLE ad_tab_order_by (
+    tab_id UUID NOT NULL,
+    column_name VARCHAR(100) NOT NULL,
+    direction VARCHAR(4) NOT NULL,
+    sequence INTEGER NOT NULL,
+    PRIMARY KEY (tab_id, column_name),
+    CONSTRAINT fk_order_tab FOREIGN KEY (tab_id) 
+        REFERENCES ad_tab(id) ON DELETE CASCADE,
+    CONSTRAINT chk_direction CHECK (direction IN ('ASC', 'DESC'))
+);
 
 
 File: ./build/resources/main/db/migration/V2_create_relationship_schema.sql
@@ -507,8 +618,12 @@ File: ./build/resources/test/application.yml
 // Classpath: build.resources.test.application
 
 spring:
-  main:
-    allow-bean-definition-overriding: true
+  datasource:
+    url: jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1;MODE=PostgreSQL;DATABASE_TO_LOWER=TRUE;DEFAULT_NULL_ORDERING=HIGH
+    username: sa
+    password:
+    driver-class-name: org.h2.Driver
+  
   jpa:
     database-platform: org.hibernate.dialect.H2Dialect
     hibernate:
@@ -517,11 +632,16 @@ spring:
     properties:
       hibernate:
         format_sql: true
-  datasource:
-    driver-class-name: org.h2.Driver
-    url: jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1;MODE=PostgreSQL;DATABASE_TO_LOWER=TRUE;DEFAULT_NULL_ORDERING=HIGH
-    username: sa
-    password:
+  
+  flyway:
+    enabled: false
+    locations: classpath:db/migration
+    baseline-on-migrate: true
+    
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
 
 logging:
   level:
@@ -532,8 +652,46 @@ logging:
 
 
 
-File: ./build/resources/test/db/migration/V1__create_test_tables.sql
-// Classpath: build.resources.test.db.migration.V1__create_test_tables
+File: ./build/resources/test/application-test.yml
+// Classpath: build.resources.test.application-test
+
+spring:
+  datasource:
+    url: jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1;MODE=PostgreSQL;DATABASE_TO_LOWER=TRUE;DEFAULT_NULL_ORDERING=HIGH
+    username: sa
+    password:
+    driver-class-name: org.h2.Driver
+  
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: none
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+  
+  flyway:
+    enabled: false
+    locations: classpath:db/migration
+    baseline-on-migrate: true
+    
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+
+logging:
+  level:
+    org.springframework: INFO
+    org.blackerp: DEBUG
+    org.hibernate.SQL: DEBUG
+    org.hibernate.type.descriptor.sql: TRACE
+
+
+
+File: ./build/resources/test/db/migration/V4__create_test_tables.sql
+// Classpath: build.resources.test.db.migration.V4__create_test_tables
 
 CREATE TABLE IF NOT EXISTS ad_table (
     id VARCHAR(36) PRIMARY KEY,
@@ -548,50 +706,163 @@ CREATE TABLE IF NOT EXISTS ad_table (
 File: ./build/resources/test/db/h2-schema.sql
 // Classpath: build.resources.test.db.h2-schema
 
--- File: src/test/resources/db/h2-schema.sql
--- Drop table if exists to ensure clean state
+-- Drop existing tables if they exist
+DROP TABLE IF EXISTS ad_tab_order_by;
+DROP TABLE IF EXISTS ad_tab_display_column;
+DROP TABLE IF EXISTS ad_tab_query_column;
+DROP TABLE IF EXISTS ad_tab;
+DROP TABLE IF EXISTS ad_table_relationship;
 DROP TABLE IF EXISTS ad_table;
 
--- Create table with basic structure and H2-compatible syntax
+-- Create ad_table with H2-compatible syntax
 CREATE TABLE ad_table (
-    id VARCHAR(36) PRIMARY KEY,
-    name VARCHAR(60) NOT NULL,
-    display_name VARCHAR(60) NOT NULL,
-    description VARCHAR(255),
-    access_level VARCHAR(30) NOT NULL,
+    id UUID PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    display_name VARCHAR(100) NOT NULL,
+    description TEXT,
+    access_level VARCHAR(50) NOT NULL,
     created TIMESTAMP NOT NULL,
-    created_by VARCHAR(60) NOT NULL,
+    created_by VARCHAR(100) NOT NULL,
     updated TIMESTAMP NOT NULL,
-    updated_by VARCHAR(60) NOT NULL,
-    version INT NOT NULL DEFAULT 0,
-    active BOOLEAN NOT NULL DEFAULT true
+    updated_by VARCHAR(100) NOT NULL,
+    version INTEGER NOT NULL DEFAULT 0,
+    active BOOLEAN NOT NULL DEFAULT true,
+    CONSTRAINT uk_table_name UNIQUE (name)
 );
 
--- Add unique constraint
-ALTER TABLE ad_table ADD CONSTRAINT uk_ad_table_name UNIQUE (name);
-
--- Add check constraint using H2 syntax
-ALTER TABLE ad_table ADD CONSTRAINT chk_ad_table_name 
+-- Use REGEXP_LIKE for H2 name format check
+ALTER TABLE ad_table ADD CONSTRAINT chk_table_name 
     CHECK (REGEXP_LIKE(name, '^[a-z][a-z0-9_]*$'));
+
+-- Create relationship table
+CREATE TABLE ad_table_relationship (
+    id UUID PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    source_table VARCHAR(100) NOT NULL,
+    target_table VARCHAR(100) NOT NULL,
+    type VARCHAR(20) NOT NULL,
+    source_column VARCHAR(100) NOT NULL,
+    target_column VARCHAR(100) NOT NULL,
+    delete_rule VARCHAR(20) NOT NULL,
+    update_rule VARCHAR(20) NOT NULL,
+    junction_table VARCHAR(100),
+    created TIMESTAMP NOT NULL,
+    created_by VARCHAR(100) NOT NULL,
+    updated TIMESTAMP NOT NULL,
+    updated_by VARCHAR(100) NOT NULL,
+    version INTEGER NOT NULL DEFAULT 0,
+    active BOOLEAN NOT NULL DEFAULT true,
+    CONSTRAINT uk_relationship_name UNIQUE (name),
+    CONSTRAINT fk_source_table FOREIGN KEY (source_table) REFERENCES ad_table(name),
+    CONSTRAINT fk_target_table FOREIGN KEY (target_table) REFERENCES ad_table(name),
+    CONSTRAINT fk_junction_table FOREIGN KEY (junction_table) REFERENCES ad_table(name),
+    CONSTRAINT chk_relationship_type CHECK (type IN ('ONE_TO_ONE', 'ONE_TO_MANY', 'MANY_TO_MANY')),
+    CONSTRAINT chk_delete_rule CHECK (delete_rule IN ('RESTRICT', 'CASCADE', 'SET_NULL', 'NO_ACTION')),
+    CONSTRAINT chk_update_rule CHECK (update_rule IN ('RESTRICT', 'CASCADE', 'SET_NULL', 'NO_ACTION'))
+);
+
+-- Create tab and related tables
+CREATE TABLE ad_tab (
+    id UUID PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    display_name VARCHAR(100) NOT NULL,
+    description TEXT,
+    table_name VARCHAR(100) NOT NULL,
+    created TIMESTAMP NOT NULL,
+    created_by VARCHAR(100) NOT NULL,
+    updated TIMESTAMP NOT NULL,
+    updated_by VARCHAR(100) NOT NULL,
+    version INTEGER NOT NULL DEFAULT 0,
+    active BOOLEAN NOT NULL DEFAULT true,
+    CONSTRAINT uk_tab_name UNIQUE (name),
+    CONSTRAINT fk_tab_table FOREIGN KEY (table_name) REFERENCES ad_table(name)
+);
+
+CREATE TABLE ad_tab_query_column (
+    tab_id UUID NOT NULL,
+    column_name VARCHAR(100) NOT NULL,
+    sequence INTEGER NOT NULL,
+    PRIMARY KEY (tab_id, column_name),
+    CONSTRAINT fk_query_tab FOREIGN KEY (tab_id) REFERENCES ad_tab(id) ON DELETE CASCADE
+);
+
+CREATE TABLE ad_tab_display_column (
+    tab_id UUID NOT NULL,
+    column_name VARCHAR(100) NOT NULL,
+    sequence INTEGER NOT NULL,
+    PRIMARY KEY (tab_id, column_name),
+    CONSTRAINT fk_display_tab FOREIGN KEY (tab_id) REFERENCES ad_tab(id) ON DELETE CASCADE
+);
+
+CREATE TABLE ad_tab_order_by (
+    tab_id UUID NOT NULL,
+    column_name VARCHAR(100) NOT NULL,
+    direction VARCHAR(4) NOT NULL,
+    sequence INTEGER NOT NULL,
+    PRIMARY KEY (tab_id, column_name),
+    CONSTRAINT fk_order_tab FOREIGN KEY (tab_id) REFERENCES ad_tab(id) ON DELETE CASCADE,
+    CONSTRAINT chk_direction CHECK (direction IN ('ASC', 'DESC'))
+);
+
+-- Create indexes for better performance
+CREATE INDEX idx_table_name ON ad_table(name);
+CREATE INDEX idx_table_active ON ad_table(active);
+CREATE INDEX idx_relationship_source ON ad_table_relationship(source_table);
+CREATE INDEX idx_relationship_target ON ad_table_relationship(target_table);
+CREATE INDEX idx_relationship_active ON ad_table_relationship(active);
+CREATE INDEX idx_tab_name ON ad_tab(name);
+CREATE INDEX idx_tab_table ON ad_tab(table_name);
 
 
 File: ./build/resources/test/db/schema.sql
 // Classpath: build.resources.test.db.schema
 
--- File: src/test/resources/db/schema.sql
-CREATE TABLE IF NOT EXISTS ad_table (
+-- src/test/resources/db/schema.sql
+-- Add after existing tables
+
+CREATE TABLE IF NOT EXISTS ad_tab (
     id UUID PRIMARY KEY,
-    name VARCHAR(60) NOT NULL CONSTRAINT ad_table_name_check CHECK (name ~ '^[a-z][a-z0-9_]*$'),
+    name VARCHAR(60) NOT NULL CONSTRAINT uk_tab_name UNIQUE,
     display_name VARCHAR(60) NOT NULL,
     description VARCHAR(255),
-    access_level VARCHAR(30) NOT NULL,
+    table_name VARCHAR(60) NOT NULL,
     created TIMESTAMP NOT NULL,
     created_by VARCHAR(60) NOT NULL,
     updated TIMESTAMP NOT NULL,
     updated_by VARCHAR(60) NOT NULL,
     version INT NOT NULL DEFAULT 0,
     active BOOLEAN NOT NULL DEFAULT true,
-    CONSTRAINT ad_table_name_unique UNIQUE (name)
+    CONSTRAINT fk_tab_table FOREIGN KEY (table_name) 
+        REFERENCES ad_table(name)
+);
+
+CREATE TABLE IF NOT EXISTS ad_tab_query_column (
+    tab_id UUID NOT NULL,
+    column_name VARCHAR(60) NOT NULL,
+    sequence INT NOT NULL,
+    PRIMARY KEY (tab_id, column_name),
+    CONSTRAINT fk_query_tab FOREIGN KEY (tab_id) 
+        REFERENCES ad_tab(id) ON DELETE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS ad_tab_display_column (
+    tab_id UUID NOT NULL,
+    column_name VARCHAR(60) NOT NULL,
+    sequence INT NOT NULL,
+    PRIMARY KEY (tab_id, column_name),
+    CONSTRAINT fk_display_tab FOREIGN KEY (tab_id) 
+        REFERENCES ad_tab(id) ON DELETE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS ad_tab_order_by (
+    tab_id UUID NOT NULL,
+    column_name VARCHAR(60) NOT NULL,
+    direction VARCHAR(4) NOT NULL,
+    sequence INT NOT NULL,
+    PRIMARY KEY (tab_id, column_name),
+    CONSTRAINT fk_order_tab FOREIGN KEY (tab_id) 
+        REFERENCES ad_tab(id) ON DELETE CASCADE,
+    CONSTRAINT chk_direction CHECK (direction IN ('ASC', 'DESC'))
 );
 
 
@@ -600,18 +871,78 @@ File: ./src/main/resources/application.yml
 
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/blackerp
-    username: postgres
-    password: postgres
+    url: jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1;MODE=PostgreSQL;DATABASE_TO_LOWER=TRUE;DEFAULT_NULL_ORDERING=HIGH
+    username: sa
+    password:
+    driver-class-name: org.h2.Driver
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+  flyway:
+    locations: classpath:db/migration
+    baseline-on-migrate: true
   jpa:
-    hibernate:
-      ddl-auto: update
+    database-platform: org.hibernate.dialect.H2Dialect
+    show-sql: true
     properties:
       hibernate:
-        dialect: org.hibernate.dialect.PostgreSQLDialect
         format_sql: true
-    show-sql: true
 
+
+
+File: ./src/main/resources/db/migration/V3__Create_tab_schema.sql
+// Classpath: src.main.resources.db.migration.V3__Create_tab_schema
+
+-- src/main/resources/db/migration/V3__Create_tab_schema.sql
+CREATE TABLE ad_tab (
+    id UUID PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    display_name VARCHAR(100) NOT NULL,
+    description TEXT,
+    table_name VARCHAR(100) NOT NULL,
+    created TIMESTAMP NOT NULL,
+    created_by VARCHAR(100) NOT NULL,
+    updated TIMESTAMP NOT NULL,
+    updated_by VARCHAR(100) NOT NULL,
+    version INTEGER NOT NULL DEFAULT 0,
+    active BOOLEAN NOT NULL DEFAULT true,
+    CONSTRAINT uk_tab_name UNIQUE (name),
+    CONSTRAINT fk_tab_table FOREIGN KEY (table_name) 
+        REFERENCES ad_table(name)
+);
+
+CREATE INDEX idx_tab_name ON ad_tab(name);
+CREATE INDEX idx_tab_table ON ad_tab(table_name);
+
+CREATE TABLE ad_tab_query_column (
+    tab_id UUID NOT NULL,
+    column_name VARCHAR(100) NOT NULL,
+    sequence INTEGER NOT NULL,
+    PRIMARY KEY (tab_id, column_name),
+    CONSTRAINT fk_query_tab FOREIGN KEY (tab_id) 
+        REFERENCES ad_tab(id) ON DELETE CASCADE
+);
+
+CREATE TABLE ad_tab_display_column (
+    tab_id UUID NOT NULL,
+    column_name VARCHAR(100) NOT NULL,
+    sequence INTEGER NOT NULL,
+    PRIMARY KEY (tab_id, column_name),
+    CONSTRAINT fk_display_tab FOREIGN KEY (tab_id) 
+        REFERENCES ad_tab(id) ON DELETE CASCADE
+);
+
+CREATE TABLE ad_tab_order_by (
+    tab_id UUID NOT NULL,
+    column_name VARCHAR(100) NOT NULL,
+    direction VARCHAR(4) NOT NULL,
+    sequence INTEGER NOT NULL,
+    PRIMARY KEY (tab_id, column_name),
+    CONSTRAINT fk_order_tab FOREIGN KEY (tab_id) 
+        REFERENCES ad_tab(id) ON DELETE CASCADE,
+    CONSTRAINT chk_direction CHECK (direction IN ('ASC', 'DESC'))
+);
 
 
 File: ./src/main/resources/db/migration/V2_create_relationship_schema.sql
@@ -1032,6 +1363,256 @@ class PostgresRelationshipOperations(
                 constraints = emptyList(), // Load constraints if needed
                 deleteRule = DeleteRule.valueOf(rs.getString("delete_rule")),
                 updateRule = UpdateRule.valueOf(rs.getString("update_rule"))
+            )
+        }
+    }
+}
+
+
+File: ./src/main/kotlin/org/blackerp/infrastructure/persistence/store/PostgresTabOperations.kt
+// Classpath: src.main.kotlin.org.blackerp.infrastructure.persistence.store.PostgresTabOperations
+
+package org.blackerp.infrastructure.persistence.store
+
+import arrow.core.Either
+import arrow.core.left
+import arrow.core.right
+import org.blackerp.domain.EntityMetadata
+import org.blackerp.domain.ad.tab.*
+import org.blackerp.domain.ad.tab.value.TabName
+import org.blackerp.domain.values.*
+import org.blackerp.domain.table.TableOperations
+import org.blackerp.shared.ValidationError
+import org.springframework.jdbc.core.JdbcTemplate
+import org.springframework.jdbc.core.RowMapper
+import org.springframework.stereotype.Repository
+import java.sql.ResultSet
+import java.time.Instant
+import java.util.UUID
+import java.io.File
+
+@Repository
+class PostgresTabOperations(
+    private val jdbcTemplate: JdbcTemplate,
+    private val tableOperations: TableOperations
+) : TabOperations {
+
+    private fun debug(msg: String) {
+        File("testdebug.txt").appendText("${Instant.now()}: $msg\n")
+    }
+    
+    override suspend fun save(tab: ADTab): Either<TabError, ADTab> = 
+        Either.catch {
+            debug("Saving tab: ${tab.name.value}")
+            
+            // First, verify the table exists
+            val tableExists = jdbcTemplate.queryForObject(
+                "SELECT COUNT(*) FROM ad_table WHERE name = ?",
+                Int::class.java,
+                tab.table.name.value
+            ) ?: 0
+            
+            debug("Table exists check: $tableExists")
+            if (tableExists == 0) {
+                throw IllegalStateException("Referenced table ${tab.table.name.value} does not exist")
+            }
+
+            // Insert/Update tab using MERGE
+            val mergeResult = jdbcTemplate.update("""
+                MERGE INTO ad_tab KEY(id) VALUES (
+                    ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
+                )
+                """,
+                tab.metadata.id,
+                tab.name.value,
+                tab.displayName.value,
+                tab.description?.value,
+                tab.table.name.value,
+                tab.metadata.created,
+                tab.metadata.createdBy,
+                tab.metadata.updated,
+                tab.metadata.updatedBy,
+                tab.metadata.version,
+                tab.metadata.active
+            )
+            debug("Tab merge result: $mergeResult")
+
+            // Update query columns
+            jdbcTemplate.update("DELETE FROM ad_tab_query_column WHERE tab_id = ?", tab.metadata.id)
+            tab.queryColumns.forEachIndexed { index, column ->
+                val qcResult = jdbcTemplate.update("""
+                    INSERT INTO ad_tab_query_column (tab_id, column_name, sequence)
+                    VALUES (?, ?, ?)
+                    """,
+                    tab.metadata.id,
+                    column.value,
+                    index
+                )
+                debug("Query column insert result: $qcResult")
+            }
+
+            // Update display columns
+            jdbcTemplate.update("DELETE FROM ad_tab_display_column WHERE tab_id = ?", tab.metadata.id)
+            tab.displayColumns.forEachIndexed { index, column ->
+                val dcResult = jdbcTemplate.update("""
+                    INSERT INTO ad_tab_display_column (tab_id, column_name, sequence)
+                    VALUES (?, ?, ?)
+                    """,
+                    tab.metadata.id,
+                    column.value,
+                    index
+                )
+                debug("Display column insert result: $dcResult")
+            }
+
+            // Update order by specifications
+            jdbcTemplate.update("DELETE FROM ad_tab_order_by WHERE tab_id = ?", tab.metadata.id)
+            tab.orderBy.forEachIndexed { index, spec ->
+                val obResult = jdbcTemplate.update("""
+                    INSERT INTO ad_tab_order_by (tab_id, column_name, direction, sequence)
+                    VALUES (?, ?, ?, ?)
+                    """,
+                    tab.metadata.id,
+                    spec.column.value,
+                    spec.direction.name,
+                    index
+                )
+                debug("Order by insert result: $obResult")
+            }
+
+            tab
+        }.mapLeft { e -> 
+            debug("Error saving tab: ${e.message}")
+            e.printStackTrace(File("testdebug.txt").printWriter())
+            when (e) {
+                is IllegalStateException -> TabError.ValidationFailed(
+                    listOf(ValidationError.InvalidValue(e.message ?: "Unknown error"))
+                )
+                else -> TabError.ValidationFailed(
+                    listOf(ValidationError.InvalidValue(e.message ?: "Unknown error"))
+                )
+            }
+        }
+
+    override suspend fun findById(id: UUID): Either<TabError, ADTab?> =
+        Either.catch {
+            val results = jdbcTemplate.query(
+                """
+                SELECT t.*, 
+                       array_agg(DISTINCT qc.column_name) as query_columns,
+                       array_agg(DISTINCT dc.column_name) as display_columns,
+                       array_agg(DISTINCT ob.column_name || ',' || ob.direction) as order_by
+                FROM ad_tab t
+                LEFT JOIN ad_tab_query_column qc ON t.id = qc.tab_id
+                LEFT JOIN ad_tab_display_column dc ON t.id = dc.tab_id
+                LEFT JOIN ad_tab_order_by ob ON t.id = ob.tab_id
+                WHERE t.id = ?
+                GROUP BY t.id, t.name, t.display_name, t.description, t.table_name,
+                         t.created, t.created_by, t.updated, t.updated_by, t.version, t.active
+                """,
+                TabRowMapper(tableOperations),
+                id
+            )
+            
+            results.firstOrNull()
+        }.mapLeft { e -> 
+            TabError.ValidationFailed(
+                listOf(ValidationError.InvalidValue(e.message ?: "Unknown error"))
+            )
+        }
+
+    override suspend fun findByTable(tableName: TableName): Either<TabError, List<ADTab>> =
+        Either.catch {
+            jdbcTemplate.query(
+                """
+                SELECT t.*, 
+                       array_agg(DISTINCT qc.column_name) as query_columns,
+                       array_agg(DISTINCT dc.column_name) as display_columns,
+                       array_agg(DISTINCT ob.column_name || ',' || ob.direction) as order_by
+                FROM ad_tab t
+                LEFT JOIN ad_tab_query_column qc ON t.id = qc.tab_id
+                LEFT JOIN ad_tab_display_column dc ON t.id = dc.tab_id
+                LEFT JOIN ad_tab_order_by ob ON t.id = ob.tab_id
+                WHERE t.table_name = ?
+                GROUP BY t.id, t.name, t.display_name, t.description, t.table_name,
+                         t.created, t.created_by, t.updated, t.updated_by, t.version, t.active
+                """,
+                TabRowMapper(tableOperations),
+                tableName.value
+            )
+        }.mapLeft { e -> 
+            TabError.ValidationFailed(
+                listOf(ValidationError.InvalidValue(e.message ?: "Unknown error"))
+            )
+        }
+
+    override suspend fun delete(id: UUID): Either<TabError, Unit> =
+        Either.catch {
+            val count = jdbcTemplate.update("DELETE FROM ad_tab WHERE id = ?", id)
+            if (count == 0) throw IllegalStateException("Tab not found: $id")
+            Unit
+        }.mapLeft { e -> 
+            TabError.ValidationFailed(
+                listOf(ValidationError.InvalidValue(e.message ?: "Unknown error"))
+            )
+        }
+
+    private class TabRowMapper(
+        private val tableOperations: TableOperations
+    ) : RowMapper<ADTab> {
+        override fun mapRow(rs: ResultSet, rowNum: Int): ADTab {
+            val metadata = EntityMetadata(
+                id = UUID.fromString(rs.getString("id")),
+                created = rs.getTimestamp("created").toInstant(),
+                createdBy = rs.getString("created_by"),
+                updated = rs.getTimestamp("updated").toInstant(),
+                updatedBy = rs.getString("updated_by"),
+                version = rs.getInt("version"),
+                active = rs.getBoolean("active")
+            )
+
+            val tableName = rs.getString("table_name")
+            val table = kotlinx.coroutines.runBlocking { 
+                tableOperations.findByName(tableName).getOrNull()
+                    ?: throw IllegalStateException("Table not found: $tableName")
+            }
+
+            // Safe array handling
+            val queryColumns = (rs.getArray("query_columns")?.array as? Array<*>)
+                ?.filterNotNull()
+                ?.map { it.toString() }
+                ?.map { ColumnName.create(it).getOrNull()!! }
+                ?: emptyList()
+
+            val displayColumns = (rs.getArray("display_columns")?.array as? Array<*>)
+                ?.filterNotNull()
+                ?.map { it.toString() }
+                ?.map { ColumnName.create(it).getOrNull()!! }
+                ?: emptyList()
+
+            val orderBy = (rs.getArray("order_by")?.array as? Array<*>)
+                ?.filterNotNull()
+                ?.map { it.toString() }
+                ?.map { spec -> 
+                    val (col, dir) = spec.split(",")
+                    OrderBySpec(
+                        column = ColumnName.create(col).getOrNull()!!,
+                        direction = SortDirection.valueOf(dir)
+                    )
+                }
+                ?: emptyList()
+
+            return ADTab(
+                metadata = metadata,
+                name = TabName.create(rs.getString("name")).getOrNull()!!,
+                displayName = DisplayName.create(rs.getString("display_name")).getOrNull()!!,
+                description = rs.getString("description")?.let { 
+                    Description.create(it).getOrNull()
+                },
+                table = table,
+                queryColumns = queryColumns,
+                displayColumns = displayColumns,
+                orderBy = orderBy
             )
         }
     }
@@ -1471,6 +2052,206 @@ import org.blackerp.domain.values.Description
 interface ADObject : DomainEntity {
     val displayName: DisplayName
     val description: Description?
+}
+
+
+
+File: ./src/main/kotlin/org/blackerp/domain/ad/tab/TabOperations.kt
+// Classpath: src.main.kotlin.org.blackerp.domain.ad.tab.TabOperations
+
+package org.blackerp.domain.ad.tab
+
+import arrow.core.Either
+import org.blackerp.domain.values.TableName
+import java.util.UUID
+
+interface TabOperations {
+    suspend fun save(tab: ADTab): Either<TabError, ADTab>
+    suspend fun findById(id: UUID): Either<TabError, ADTab?>
+    suspend fun findByTable(tableName: TableName): Either<TabError, List<ADTab>>
+    suspend fun delete(id: UUID): Either<TabError, Unit>
+}
+
+
+File: ./src/main/kotlin/org/blackerp/domain/ad/tab/CreateTabParams.kt
+// Classpath: src.main.kotlin.org.blackerp.domain.ad.tab.CreateTabParams
+
+
+package org.blackerp.domain.ad.tab
+
+import org.blackerp.domain.EntityMetadata
+import org.blackerp.domain.table.ADTable
+import org.blackerp.domain.values.ColumnName
+import org.blackerp.domain.values.DisplayName
+import org.blackerp.domain.values.Description
+import org.blackerp.domain.ad.tab.value.TabName
+
+data class CreateTabParams(
+    val metadata: EntityMetadata,
+    val name: TabName,
+    val displayName: DisplayName,
+    val description: Description?,
+    val table: ADTable,
+    val queryColumns: List<ColumnName>,
+    val displayColumns: List<ColumnName>,
+    val orderBy: List<OrderBySpec>
+)
+
+
+
+File: ./src/main/kotlin/org/blackerp/domain/ad/tab/OrderBySpec.kt
+// Classpath: src.main.kotlin.org.blackerp.domain.ad.tab.OrderBySpec
+
+
+package org.blackerp.domain.ad.tab
+
+import org.blackerp.domain.values.ColumnName
+
+data class OrderBySpec(
+    val column: ColumnName,
+    val direction: SortDirection
+)
+
+enum class SortDirection {
+    ASC, DESC;
+
+    companion object {
+        fun fromString(value: String): SortDirection =
+            values().find { it.name.equals(value, ignoreCase = true) }
+                ?: throw IllegalArgumentException("Invalid sort direction: $value")
+    }
+}
+
+
+
+File: ./src/main/kotlin/org/blackerp/domain/ad/tab/value/TabName.kt
+// Classpath: src.main.kotlin.org.blackerp.domain.ad.tab.value.TabName
+
+
+package org.blackerp.domain.ad.tab.value
+
+import arrow.core.Either
+import arrow.core.left
+import arrow.core.right
+import org.blackerp.shared.ValidationError
+
+@JvmInline
+value class TabName private constructor(val value: String) {
+    companion object {
+        fun create(value: String): Either<ValidationError, TabName> =
+            when {
+                !value.matches(Regex("^[a-z][a-z0-9_]*$")) ->
+                    ValidationError.InvalidFormat(
+                        "Tab name must start with lowercase letter and contain only lowercase letters, numbers, and underscores"
+                    ).left()
+                value.length !in 3..50 ->
+                    ValidationError.InvalidLength("tab name", 3, 50).left()
+                else -> TabName(value).right()
+            }
+    }
+}
+
+
+
+File: ./src/main/kotlin/org/blackerp/domain/ad/tab/TabError.kt
+// Classpath: src.main.kotlin.org.blackerp.domain.ad.tab.TabError
+
+
+package org.blackerp.domain.ad.tab
+
+import org.blackerp.domain.DomainException
+import org.blackerp.shared.ValidationError
+
+sealed class TabError(message: String) : DomainException(message) {
+    data class ValidationFailed(val errors: List<ValidationError>) : 
+        TabError("Validation failed: ${errors.joinToString { it.message }}")
+    
+    data class NotFound(val id: String) : 
+        TabError("Tab not found: $id")
+    
+    data class DuplicateTab(val name: String) : 
+        TabError("Tab already exists: $name")
+}
+
+
+
+File: ./src/main/kotlin/org/blackerp/domain/ad/tab/ADTab.kt
+// Classpath: src.main.kotlin.org.blackerp.domain.ad.tab.ADTab
+
+
+package org.blackerp.domain.ad.tab
+
+import arrow.core.Either
+import arrow.core.right
+import arrow.core.left
+import org.blackerp.domain.DomainEntity
+import org.blackerp.domain.EntityMetadata
+import org.blackerp.domain.ad.ADObject
+import org.blackerp.domain.ad.tab.value.TabName
+import org.blackerp.domain.values.*
+import org.blackerp.domain.table.ADTable
+import org.blackerp.shared.ValidationError
+
+data class ADTab(
+    override val metadata: EntityMetadata,
+    val name: TabName,
+    override val displayName: DisplayName,
+    override val description: Description?,
+    val table: ADTable,
+    val queryColumns: List<ColumnName>,
+    val displayColumns: List<ColumnName>,
+    val orderBy: List<OrderBySpec>
+) : ADObject {
+    companion object {
+        fun create(params: CreateTabParams): Either<TabError, ADTab> {
+            val errors = mutableListOf<ValidationError>()
+            
+            // Validate query columns exist in table
+            val invalidQueryColumns = params.queryColumns.filter { queryCol ->
+                !params.table.columns.any { it.name == queryCol }
+            }
+            if (invalidQueryColumns.isNotEmpty()) {
+                errors.add(ValidationError.InvalidValue(
+                    "Query columns not found in table: ${invalidQueryColumns.joinToString { it.value }}"
+                ))
+            }
+            
+            // Validate display columns exist in table
+            val invalidDisplayColumns = params.displayColumns.filter { displayCol ->
+                !params.table.columns.any { it.name == displayCol }
+            }
+            if (invalidDisplayColumns.isNotEmpty()) {
+                errors.add(ValidationError.InvalidValue(
+                    "Display columns not found in table: ${invalidDisplayColumns.joinToString { it.value }}"
+                ))
+            }
+
+            // Validate order by columns exist in table
+            val invalidOrderColumns = params.orderBy.filter { orderSpec ->
+                !params.table.columns.any { it.name == orderSpec.column }
+            }
+            if (invalidOrderColumns.isNotEmpty()) {
+                errors.add(ValidationError.InvalidValue(
+                    "Order by columns not found in table: ${invalidOrderColumns.joinToString { it.column.value }}"
+                ))
+            }
+
+            if (errors.isNotEmpty()) {
+                return TabError.ValidationFailed(errors).left()
+            }
+
+            return ADTab(
+                metadata = params.metadata,
+                name = params.name,
+                displayName = params.displayName,
+                description = params.description,
+                table = params.table,
+                queryColumns = params.queryColumns,
+                displayColumns = params.displayColumns,
+                orderBy = params.orderBy
+            ).right()
+        }
+    }
 }
 
 
@@ -3562,8 +4343,12 @@ File: ./src/test/resources/application.yml
 // Classpath: src.test.resources.application
 
 spring:
-  main:
-    allow-bean-definition-overriding: true
+  datasource:
+    url: jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1;MODE=PostgreSQL;DATABASE_TO_LOWER=TRUE;DEFAULT_NULL_ORDERING=HIGH
+    username: sa
+    password:
+    driver-class-name: org.h2.Driver
+  
   jpa:
     database-platform: org.hibernate.dialect.H2Dialect
     hibernate:
@@ -3572,11 +4357,16 @@ spring:
     properties:
       hibernate:
         format_sql: true
-  datasource:
-    driver-class-name: org.h2.Driver
-    url: jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1;MODE=PostgreSQL;DATABASE_TO_LOWER=TRUE;DEFAULT_NULL_ORDERING=HIGH
-    username: sa
-    password:
+  
+  flyway:
+    enabled: false
+    locations: classpath:db/migration
+    baseline-on-migrate: true
+    
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
 
 logging:
   level:
@@ -3587,8 +4377,46 @@ logging:
 
 
 
-File: ./src/test/resources/db/migration/V1__create_test_tables.sql
-// Classpath: src.test.resources.db.migration.V1__create_test_tables
+File: ./src/test/resources/application-test.yml
+// Classpath: src.test.resources.application-test
+
+spring:
+  datasource:
+    url: jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1;MODE=PostgreSQL;DATABASE_TO_LOWER=TRUE;DEFAULT_NULL_ORDERING=HIGH
+    username: sa
+    password:
+    driver-class-name: org.h2.Driver
+  
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: none
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+  
+  flyway:
+    enabled: false
+    locations: classpath:db/migration
+    baseline-on-migrate: true
+    
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+
+logging:
+  level:
+    org.springframework: INFO
+    org.blackerp: DEBUG
+    org.hibernate.SQL: DEBUG
+    org.hibernate.type.descriptor.sql: TRACE
+
+
+
+File: ./src/test/resources/db/migration/V4__create_test_tables.sql
+// Classpath: src.test.resources.db.migration.V4__create_test_tables
 
 CREATE TABLE IF NOT EXISTS ad_table (
     id VARCHAR(36) PRIMARY KEY,
@@ -3603,50 +4431,163 @@ CREATE TABLE IF NOT EXISTS ad_table (
 File: ./src/test/resources/db/h2-schema.sql
 // Classpath: src.test.resources.db.h2-schema
 
--- File: src/test/resources/db/h2-schema.sql
--- Drop table if exists to ensure clean state
+-- Drop existing tables if they exist
+DROP TABLE IF EXISTS ad_tab_order_by;
+DROP TABLE IF EXISTS ad_tab_display_column;
+DROP TABLE IF EXISTS ad_tab_query_column;
+DROP TABLE IF EXISTS ad_tab;
+DROP TABLE IF EXISTS ad_table_relationship;
 DROP TABLE IF EXISTS ad_table;
 
--- Create table with basic structure and H2-compatible syntax
+-- Create ad_table with H2-compatible syntax
 CREATE TABLE ad_table (
-    id VARCHAR(36) PRIMARY KEY,
-    name VARCHAR(60) NOT NULL,
-    display_name VARCHAR(60) NOT NULL,
-    description VARCHAR(255),
-    access_level VARCHAR(30) NOT NULL,
+    id UUID PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    display_name VARCHAR(100) NOT NULL,
+    description TEXT,
+    access_level VARCHAR(50) NOT NULL,
     created TIMESTAMP NOT NULL,
-    created_by VARCHAR(60) NOT NULL,
+    created_by VARCHAR(100) NOT NULL,
     updated TIMESTAMP NOT NULL,
-    updated_by VARCHAR(60) NOT NULL,
-    version INT NOT NULL DEFAULT 0,
-    active BOOLEAN NOT NULL DEFAULT true
+    updated_by VARCHAR(100) NOT NULL,
+    version INTEGER NOT NULL DEFAULT 0,
+    active BOOLEAN NOT NULL DEFAULT true,
+    CONSTRAINT uk_table_name UNIQUE (name)
 );
 
--- Add unique constraint
-ALTER TABLE ad_table ADD CONSTRAINT uk_ad_table_name UNIQUE (name);
-
--- Add check constraint using H2 syntax
-ALTER TABLE ad_table ADD CONSTRAINT chk_ad_table_name 
+-- Use REGEXP_LIKE for H2 name format check
+ALTER TABLE ad_table ADD CONSTRAINT chk_table_name 
     CHECK (REGEXP_LIKE(name, '^[a-z][a-z0-9_]*$'));
+
+-- Create relationship table
+CREATE TABLE ad_table_relationship (
+    id UUID PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    source_table VARCHAR(100) NOT NULL,
+    target_table VARCHAR(100) NOT NULL,
+    type VARCHAR(20) NOT NULL,
+    source_column VARCHAR(100) NOT NULL,
+    target_column VARCHAR(100) NOT NULL,
+    delete_rule VARCHAR(20) NOT NULL,
+    update_rule VARCHAR(20) NOT NULL,
+    junction_table VARCHAR(100),
+    created TIMESTAMP NOT NULL,
+    created_by VARCHAR(100) NOT NULL,
+    updated TIMESTAMP NOT NULL,
+    updated_by VARCHAR(100) NOT NULL,
+    version INTEGER NOT NULL DEFAULT 0,
+    active BOOLEAN NOT NULL DEFAULT true,
+    CONSTRAINT uk_relationship_name UNIQUE (name),
+    CONSTRAINT fk_source_table FOREIGN KEY (source_table) REFERENCES ad_table(name),
+    CONSTRAINT fk_target_table FOREIGN KEY (target_table) REFERENCES ad_table(name),
+    CONSTRAINT fk_junction_table FOREIGN KEY (junction_table) REFERENCES ad_table(name),
+    CONSTRAINT chk_relationship_type CHECK (type IN ('ONE_TO_ONE', 'ONE_TO_MANY', 'MANY_TO_MANY')),
+    CONSTRAINT chk_delete_rule CHECK (delete_rule IN ('RESTRICT', 'CASCADE', 'SET_NULL', 'NO_ACTION')),
+    CONSTRAINT chk_update_rule CHECK (update_rule IN ('RESTRICT', 'CASCADE', 'SET_NULL', 'NO_ACTION'))
+);
+
+-- Create tab and related tables
+CREATE TABLE ad_tab (
+    id UUID PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    display_name VARCHAR(100) NOT NULL,
+    description TEXT,
+    table_name VARCHAR(100) NOT NULL,
+    created TIMESTAMP NOT NULL,
+    created_by VARCHAR(100) NOT NULL,
+    updated TIMESTAMP NOT NULL,
+    updated_by VARCHAR(100) NOT NULL,
+    version INTEGER NOT NULL DEFAULT 0,
+    active BOOLEAN NOT NULL DEFAULT true,
+    CONSTRAINT uk_tab_name UNIQUE (name),
+    CONSTRAINT fk_tab_table FOREIGN KEY (table_name) REFERENCES ad_table(name)
+);
+
+CREATE TABLE ad_tab_query_column (
+    tab_id UUID NOT NULL,
+    column_name VARCHAR(100) NOT NULL,
+    sequence INTEGER NOT NULL,
+    PRIMARY KEY (tab_id, column_name),
+    CONSTRAINT fk_query_tab FOREIGN KEY (tab_id) REFERENCES ad_tab(id) ON DELETE CASCADE
+);
+
+CREATE TABLE ad_tab_display_column (
+    tab_id UUID NOT NULL,
+    column_name VARCHAR(100) NOT NULL,
+    sequence INTEGER NOT NULL,
+    PRIMARY KEY (tab_id, column_name),
+    CONSTRAINT fk_display_tab FOREIGN KEY (tab_id) REFERENCES ad_tab(id) ON DELETE CASCADE
+);
+
+CREATE TABLE ad_tab_order_by (
+    tab_id UUID NOT NULL,
+    column_name VARCHAR(100) NOT NULL,
+    direction VARCHAR(4) NOT NULL,
+    sequence INTEGER NOT NULL,
+    PRIMARY KEY (tab_id, column_name),
+    CONSTRAINT fk_order_tab FOREIGN KEY (tab_id) REFERENCES ad_tab(id) ON DELETE CASCADE,
+    CONSTRAINT chk_direction CHECK (direction IN ('ASC', 'DESC'))
+);
+
+-- Create indexes for better performance
+CREATE INDEX idx_table_name ON ad_table(name);
+CREATE INDEX idx_table_active ON ad_table(active);
+CREATE INDEX idx_relationship_source ON ad_table_relationship(source_table);
+CREATE INDEX idx_relationship_target ON ad_table_relationship(target_table);
+CREATE INDEX idx_relationship_active ON ad_table_relationship(active);
+CREATE INDEX idx_tab_name ON ad_tab(name);
+CREATE INDEX idx_tab_table ON ad_tab(table_name);
 
 
 File: ./src/test/resources/db/schema.sql
 // Classpath: src.test.resources.db.schema
 
--- File: src/test/resources/db/schema.sql
-CREATE TABLE IF NOT EXISTS ad_table (
+-- src/test/resources/db/schema.sql
+-- Add after existing tables
+
+CREATE TABLE IF NOT EXISTS ad_tab (
     id UUID PRIMARY KEY,
-    name VARCHAR(60) NOT NULL CONSTRAINT ad_table_name_check CHECK (name ~ '^[a-z][a-z0-9_]*$'),
+    name VARCHAR(60) NOT NULL CONSTRAINT uk_tab_name UNIQUE,
     display_name VARCHAR(60) NOT NULL,
     description VARCHAR(255),
-    access_level VARCHAR(30) NOT NULL,
+    table_name VARCHAR(60) NOT NULL,
     created TIMESTAMP NOT NULL,
     created_by VARCHAR(60) NOT NULL,
     updated TIMESTAMP NOT NULL,
     updated_by VARCHAR(60) NOT NULL,
     version INT NOT NULL DEFAULT 0,
     active BOOLEAN NOT NULL DEFAULT true,
-    CONSTRAINT ad_table_name_unique UNIQUE (name)
+    CONSTRAINT fk_tab_table FOREIGN KEY (table_name) 
+        REFERENCES ad_table(name)
+);
+
+CREATE TABLE IF NOT EXISTS ad_tab_query_column (
+    tab_id UUID NOT NULL,
+    column_name VARCHAR(60) NOT NULL,
+    sequence INT NOT NULL,
+    PRIMARY KEY (tab_id, column_name),
+    CONSTRAINT fk_query_tab FOREIGN KEY (tab_id) 
+        REFERENCES ad_tab(id) ON DELETE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS ad_tab_display_column (
+    tab_id UUID NOT NULL,
+    column_name VARCHAR(60) NOT NULL,
+    sequence INT NOT NULL,
+    PRIMARY KEY (tab_id, column_name),
+    CONSTRAINT fk_display_tab FOREIGN KEY (tab_id) 
+        REFERENCES ad_tab(id) ON DELETE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS ad_tab_order_by (
+    tab_id UUID NOT NULL,
+    column_name VARCHAR(60) NOT NULL,
+    direction VARCHAR(4) NOT NULL,
+    sequence INT NOT NULL,
+    PRIMARY KEY (tab_id, column_name),
+    CONSTRAINT fk_order_tab FOREIGN KEY (tab_id) 
+        REFERENCES ad_tab(id) ON DELETE CASCADE,
+    CONSTRAINT chk_direction CHECK (direction IN ('ASC', 'DESC'))
 );
 
 
@@ -3799,6 +4740,79 @@ class SimpleTest : DescribeSpec({
 
 
 
+File: ./src/test/kotlin/org/blackerp/infrastructure/persistence/store/InMemoryTabOperations.kt
+// Classpath: src.test.kotlin.org.blackerp.infrastructure.persistence.store.InMemoryTabOperations
+
+
+package org.blackerp.infrastructure.persistence.store
+
+import arrow.core.Either
+import arrow.core.left
+import arrow.core.right
+import org.blackerp.domain.ad.tab.*
+import org.blackerp.domain.values.TableName
+import org.blackerp.shared.ValidationError
+import java.util.UUID
+import java.util.concurrent.ConcurrentHashMap
+
+class InMemoryTabOperations : TabOperations {
+    private val tabs = ConcurrentHashMap<UUID, ADTab>()
+    private val tabsByTable = ConcurrentHashMap<String, MutableSet<UUID>>()
+
+    override suspend fun save(tab: ADTab): Either<TabError, ADTab> =
+        Either.catch {
+            // Check for duplicate name
+            val existingTab = tabs.values.find { 
+                it.name == tab.name && it.metadata.id != tab.metadata.id 
+            }
+            if (existingTab != null) {
+                return TabError.DuplicateTab(tab.name.value).left()
+            }
+
+            tabs[tab.metadata.id] = tab
+            tabsByTable.computeIfAbsent(tab.table.name.value) { mutableSetOf() }
+                .add(tab.metadata.id)
+            tab
+        }.mapLeft { e -> 
+            TabError.ValidationFailed(
+                listOf(ValidationError.InvalidValue(e.message ?: "Unknown error"))
+            )
+        }
+
+    override suspend fun findById(id: UUID): Either<TabError, ADTab?> =
+        Either.catch {
+            tabs[id]
+        }.mapLeft { e -> 
+            TabError.ValidationFailed(
+                listOf(ValidationError.InvalidValue(e.message ?: "Unknown error"))
+            )
+        }
+
+    override suspend fun findByTable(tableName: TableName): Either<TabError, List<ADTab>> =
+        Either.catch {
+            tabsByTable[tableName.value]?.mapNotNull { tabs[it] } ?: emptyList()
+        }.mapLeft { e -> 
+            TabError.ValidationFailed(
+                listOf(ValidationError.InvalidValue(e.message ?: "Unknown error"))
+            )
+        }
+
+    override suspend fun delete(id: UUID): Either<TabError, Unit> =
+        Either.catch {
+            tabs[id]?.let { tab ->
+                tabs.remove(id)
+                tabsByTable[tab.table.name.value]?.remove(id)
+                Unit
+            } ?: throw IllegalStateException("Tab not found: $id")
+        }.mapLeft { e -> 
+            TabError.ValidationFailed(
+                listOf(ValidationError.InvalidValue(e.message ?: "Unknown error"))
+            )
+        }
+}
+
+
+
 File: ./src/test/kotlin/org/blackerp/infrastructure/persistence/store/InMemoryRelationshipOperations.kt
 // Classpath: src.test.kotlin.org.blackerp.infrastructure.persistence.store.InMemoryRelationshipOperations
 
@@ -3932,6 +4946,126 @@ class InMemoryTableOperations : TableOperations {
             TableError.StorageError(it)
         }
 }
+
+
+
+File: ./src/test/kotlin/org/blackerp/infrastructure/persistence/store/PostgresTabOperationsTest.kt
+// Classpath: src.test.kotlin.org.blackerp.infrastructure.persistence.store.PostgresTabOperationsTest
+
+package org.blackerp.infrastructure.persistence.store
+
+import io.kotest.core.spec.style.DescribeSpec
+import io.kotest.matchers.shouldBe
+import io.kotest.matchers.shouldNotBe
+import io.kotest.assertions.arrow.core.shouldBeRight
+import io.kotest.assertions.arrow.core.shouldBeLeft
+import kotlinx.coroutines.test.runTest
+import org.blackerp.domain.ad.tab.*
+import org.blackerp.domain.ad.tab.value.TabName
+import org.blackerp.domain.table.TableOperations
+import org.blackerp.domain.values.*
+import org.blackerp.shared.TestFactory
+import org.blackerp.config.UnifiedTestConfig
+import org.springframework.boot.test.context.SpringBootTest
+import org.springframework.test.context.ActiveProfiles
+import org.springframework.jdbc.core.JdbcTemplate
+import org.slf4j.LoggerFactory
+import java.util.UUID
+
+@SpringBootTest(classes = [UnifiedTestConfig::class])
+@ActiveProfiles("test")
+class PostgresTabOperationsTest(
+    private val jdbcTemplate: JdbcTemplate,
+    private val tableOperations: TableOperations
+) : DescribeSpec({
+    
+    val logger = LoggerFactory.getLogger(PostgresTabOperationsTest::class.java)
+    lateinit var tabOperations: PostgresTabOperations
+
+    beforeTest {
+        tabOperations = PostgresTabOperations(jdbcTemplate, tableOperations)
+        
+        // Clean up test data
+        listOf(
+            "DELETE FROM ad_tab_query_column",
+            "DELETE FROM ad_tab_display_column",
+            "DELETE FROM ad_tab_order_by",
+            "DELETE FROM ad_tab",
+            "DELETE FROM ad_table"
+        ).forEach { sql ->
+            try {
+                jdbcTemplate.execute(sql)
+            } catch (e: Exception) {
+                logger.warn("Failed to execute cleanup SQL: $sql", e)
+            }
+        }
+    }
+
+    describe("PostgresTabOperations") {
+        context("save") {
+            it("should save tab with all related data") {
+                runTest {
+                    // Create and save the table first
+                    val table = TestFactory.createTestTable()
+                    logger.debug("Created test table: ${table.name.value}")
+                    
+                    val savedTableResult = tableOperations.save(table)
+                    savedTableResult.shouldBeRight()
+                    logger.debug("Saved test table successfully")
+
+                    // Verify the table exists
+                    val tableCount = jdbcTemplate.queryForObject(
+                        "SELECT COUNT(*) FROM ad_table WHERE name = ?",
+                        Int::class.java,
+                        table.name.value
+                    )
+                    tableCount shouldBe 1
+                    logger.debug("Verified table exists in database")
+
+                    // Create the tab
+                    val columnName = table.columns.first().name
+                    val tab = ADTab(
+                        metadata = TestFactory.createMetadata(),
+                        name = TabName.create("test_tab").getOrNull()!!,
+                        displayName = DisplayName.create("Test Tab").getOrNull()!!,
+                        description = Description.create("Test Description").getOrNull(),
+                        table = table,
+                        queryColumns = listOf(columnName),
+                        displayColumns = listOf(columnName),
+                        orderBy = listOf(
+                            OrderBySpec(columnName, SortDirection.ASC)
+                        )
+                    )
+                    logger.debug("Created test tab object")
+
+                    // Save the tab
+                    val saveResult = tabOperations.save(tab)
+                    logger.debug("Save result: $saveResult")
+
+                    saveResult.shouldBeRight().also { savedTab ->
+                        logger.debug("Verifying saved tab...")
+                        savedTab.name.value shouldBe "test_tab"
+                        savedTab.queryColumns.size shouldBe 1
+                        savedTab.queryColumns.first().value shouldBe columnName.value
+                        savedTab.displayColumns.size shouldBe 1
+                        savedTab.displayColumns.first().value shouldBe columnName.value
+                        savedTab.orderBy.size shouldBe 1
+                        savedTab.orderBy.first().column.value shouldBe columnName.value
+                    }
+
+                    // Verify in database
+                    val tabCount = jdbcTemplate.queryForObject(
+                        "SELECT COUNT(*) FROM ad_tab WHERE name = ?",
+                        Int::class.java,
+                        "test_tab"
+                    )
+                    tabCount shouldBe 1
+                    logger.debug("Verified tab exists in database")
+                }
+            }
+        }
+    }
+})
 
 
 
@@ -4389,6 +5523,104 @@ class WindowNameTest : DescribeSpec({
                 WindowName.create("ab").shouldBeLeft()
                 WindowName.create("a".repeat(51)).shouldBeLeft()
             }
+        }
+    }
+})
+
+
+
+File: ./src/test/kotlin/org/blackerp/domain/ad/tab/value/TabNameTest.kt
+// Classpath: src.test.kotlin.org.blackerp.domain.ad.tab.value.TabNameTest
+
+
+package org.blackerp.domain.ad.tab.value
+
+import io.kotest.core.spec.style.DescribeSpec
+import io.kotest.matchers.shouldBe
+import io.kotest.assertions.arrow.core.shouldBeRight
+import io.kotest.assertions.arrow.core.shouldBeLeft
+import org.blackerp.shared.ValidationError
+
+class TabNameTest : DescribeSpec({
+    describe("TabName") {
+        describe("create") {
+            it("should create valid tab name") {
+                val result = TabName.create("valid_tab")
+                result.shouldBeRight()
+            }
+
+            it("should reject invalid format") {
+                val result = TabName.create("Invalid Tab")
+                result.shouldBeLeft()
+            }
+        }
+    }
+})
+
+
+
+File: ./src/test/kotlin/org/blackerp/domain/ad/tab/ADTabTest.kt
+// Classpath: src.test.kotlin.org.blackerp.domain.ad.tab.ADTabTest
+
+
+package org.blackerp.domain.ad.tab
+
+import io.kotest.core.spec.style.DescribeSpec
+import io.kotest.matchers.shouldBe
+import io.kotest.assertions.arrow.core.shouldBeRight
+import io.kotest.assertions.arrow.core.shouldBeLeft
+import org.blackerp.domain.values.*
+import org.blackerp.domain.ad.tab.value.TabName
+import org.blackerp.shared.TestFactory
+
+class ADTabTest : DescribeSpec({
+    describe("ADTab") {
+        it("should create valid tab") {
+            // given
+            val table = TestFactory.createTestTable()
+            val columnName = table.columns.first().name
+            
+            val params = CreateTabParams(
+                metadata = TestFactory.createMetadata(),
+                name = TabName.create("test_tab").getOrNull()!!,
+                displayName = DisplayName.create("Test Tab").getOrNull()!!,
+                description = null,
+                table = table,
+                queryColumns = listOf(columnName),
+                displayColumns = listOf(columnName),
+                orderBy = listOf(
+                    OrderBySpec(columnName, SortDirection.ASC)
+                )
+            )
+
+            // when
+            val result = ADTab.create(params)
+
+            // then
+            result.shouldBeRight()
+        }
+
+        it("should validate column existence") {
+            // given
+            val table = TestFactory.createTestTable()
+            val invalidColumnName = ColumnName.create("invalid_column").getOrNull()!!
+            
+            val params = CreateTabParams(
+                metadata = TestFactory.createMetadata(),
+                name = TabName.create("test_tab").getOrNull()!!,
+                displayName = DisplayName.create("Test Tab").getOrNull()!!,
+                description = null,
+                table = table,
+                queryColumns = listOf(invalidColumnName),
+                displayColumns = emptyList(),
+                orderBy = emptyList()
+            )
+
+            // when
+            val result = ADTab.create(params)
+
+            // then
+            result.shouldBeLeft()
         }
     }
 })
@@ -5653,6 +6885,75 @@ class EntityMetadataTest : DescribeSpec({
 
 
 
+File: ./src/test/kotlin/org/blackerp/config/UnifiedTestConfig.kt
+// Classpath: src.test.kotlin.org.blackerp.config.UnifiedTestConfig
+
+package org.blackerp.config
+
+import org.springframework.boot.test.context.TestConfiguration
+import org.springframework.context.annotation.Bean
+import org.springframework.context.annotation.Primary
+import org.springframework.jdbc.core.JdbcTemplate
+import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder
+import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType
+import javax.sql.DataSource
+import org.blackerp.application.table.CreateTableUseCase
+import org.blackerp.domain.table.TableOperations
+import org.blackerp.infrastructure.event.EventPublisher
+import org.blackerp.infrastructure.persistence.store.*
+import org.springframework.boot.test.web.client.TestRestTemplate
+import io.mockk.mockk
+import org.springframework.boot.autoconfigure.flyway.FlywayMigrationStrategy
+
+@TestConfiguration
+class UnifiedTestConfig {
+    
+    @Bean
+    @Primary
+    fun dataSource(): DataSource {
+        return EmbeddedDatabaseBuilder()
+            .setType(EmbeddedDatabaseType.H2)
+            .addScript("db/h2-schema.sql")
+            .build()
+    }
+
+    @Bean
+    fun jdbcTemplate(dataSource: DataSource): JdbcTemplate = 
+        JdbcTemplate(dataSource)
+
+    @Bean
+    fun testRestTemplate(): TestRestTemplate = 
+        TestRestTemplate()
+
+    @Bean
+    fun eventPublisher(): EventPublisher = 
+        mockk(relaxed = true)
+
+    @Bean
+    @Primary
+    fun tableOperations(jdbcTemplate: JdbcTemplate): TableOperations =
+        PostgresTableOperations(jdbcTemplate)
+
+    @Bean
+    fun postgresTabOperations(
+        jdbcTemplate: JdbcTemplate,
+        tableOperations: TableOperations
+    ): PostgresTabOperations =
+        PostgresTabOperations(jdbcTemplate, tableOperations)
+
+    @Bean
+    fun createTableUseCase(
+        tableOperations: TableOperations,
+        eventPublisher: EventPublisher
+    ): CreateTableUseCase =
+        CreateTableUseCase(tableOperations, eventPublisher)
+
+    @Bean
+    fun flywayMigrationStrategy(): FlywayMigrationStrategy =
+        FlywayMigrationStrategy { _ -> /* disable automatic migrations */ }
+}
+
+
 File: ./src/test/kotlin/org/blackerp/config/TestConfig.kt
 // Classpath: src.test.kotlin.org.blackerp.config.TestConfig
 
@@ -5951,17 +7252,17 @@ File: ./src/test/kotlin/org/blackerp/shared/TestFactory.kt
 
 package org.blackerp.shared
 
-import org.blackerp.application.table.CreateColumnCommand
-import org.blackerp.application.table.CreateTableCommand
 import org.blackerp.api.dto.CreateTableRequest
 import org.blackerp.api.dto.CreateColumnRequest
+import org.blackerp.api.dto.TableResponse
+import org.blackerp.application.table.CreateTableCommand
+import org.blackerp.application.table.CreateColumnCommand
 import org.blackerp.domain.EntityMetadata
 import org.blackerp.domain.table.ADTable
 import org.blackerp.domain.table.ColumnDefinition
 import org.blackerp.domain.values.*
 import java.time.Instant
 import java.util.UUID
-import org.blackerp.api.dto.TableResponse
 
 object TestFactory {
     fun createMetadata(
@@ -5980,90 +7281,39 @@ object TestFactory {
         active = active
     )
 
-    fun createTableResponse() = TableResponse(
-        id = UUID.randomUUID(),
-        name = "test_table",
-        displayName = "Test Table",
-        description = "Test Description",
-        accessLevel = "SYSTEM"
-    )
-
     fun createValidTableName(name: String = "test_table") = 
         TableName.create(name).getOrNull()
-            ?: throw IllegalArgumentException("Invalid table name: $name")
+            ?: throw IllegalStateException("Failed to create valid table name: $name")
 
     fun createValidDisplayName(name: String = "Test Table") = 
         DisplayName.create(name).getOrNull()
-            ?: throw IllegalArgumentException("Invalid display name: $name")
+            ?: throw IllegalStateException("Failed to create valid display name: $name")
 
     fun createValidDescription(text: String = "Test description") = 
         Description.create(text).getOrNull()
 
-    private fun createDefaultColumn() = ColumnDefinition(
-        metadata = createMetadata(),
-        name = ColumnName.create("test_column").getOrNull()!!,
-        displayName = DisplayName.create("Test Column").getOrNull()!!,
-        description = null,
-        dataType = DataType.STRING,
-        length = Length.create(50).getOrNull(),
-        precision = null,
-        scale = null,
-        mandatory = false,
-        defaultValue = null
-    )
+    fun createTestColumn(): ColumnDefinition {
+        val metadata = createMetadata()
+        val name = ColumnName.create("test_column").getOrNull()!!
+        val displayName = DisplayName.create("Test Column").getOrNull()!!
+        val description = Description.create("Test column description").getOrNull()
+        val length = Length.create(50).getOrNull()!!
 
-    fun createTestTable(
-        id: UUID = TimeBasedId.generate(),
-        name: String = "test_table",
-        displayName: String = "Test Table",
-        description: String? = "Test Description",
-        accessLevel: AccessLevel = AccessLevel.SYSTEM,
-        createdBy: String = "test-user",
-        updatedBy: String = createdBy,
-        columns: List<ColumnDefinition> = emptyList()
-    ): ADTable {
-        val metadata = EntityMetadata(
-            id = id,
-            created = Instant.now(),
-            createdBy = createdBy,
-            updated = Instant.now(),
-            updatedBy = updatedBy,
-            version = 0,
-            active = true
-        )
-        return ADTable(
+        return ColumnDefinition(
             metadata = metadata,
-            name = createValidTableName(name),
-            displayName = createValidDisplayName(displayName),
-            description = description?.let { createValidDescription(it) },
-            accessLevel = accessLevel,
-            columns = columns.ifEmpty { listOf(createDefaultColumn()) }
+            name = name,
+            displayName = displayName,
+            description = description,
+            dataType = DataType.STRING,
+            length = length,
+            precision = null,
+            scale = null,
+            mandatory = false,
+            defaultValue = null
         )
     }
 
-    fun createTableCommand(): CreateTableCommand {
-        val columns = listOf(
-            CreateColumnCommand(
-                name = "test_column",
-                displayName = "Test Column",
-                description = "Test column description",
-                dataType = DataType.STRING,
-                length = 50,
-                precision = null,
-                scale = null
-            )
-        )
-
-        return CreateTableCommand(
-            name = "test_table",
-            displayName = "Test Table",
-            description = "Test Description",
-            accessLevel = AccessLevel.SYSTEM,
-            createdBy = "test-user",
-            columns = columns
-        )
-    }
-
+    // Add inside TestFactory object
     fun createTableRequest() = CreateTableRequest(
         name = "test_table",
         displayName = "Test Table",
@@ -6073,7 +7323,7 @@ object TestFactory {
             CreateColumnRequest(
                 name = "test_column",
                 displayName = "Test Column",
-                description = "Test Column Description",
+                description = "Test column description",
                 dataType = "STRING",
                 length = 50,
                 precision = null,
@@ -6081,7 +7331,60 @@ object TestFactory {
             )
         )
     )
+
+    fun createTableCommand() = CreateTableCommand(
+        name = "test_table",
+        displayName = "Test Table",
+        description = "Test Description",
+        accessLevel = AccessLevel.SYSTEM,
+        createdBy = "test-user",
+        columns = listOf(
+            CreateColumnCommand(
+                name = "test_column",
+                displayName = "Test Column",
+                description = "Test column description", 
+                dataType = DataType.STRING,
+                length = 50,
+                precision = null,
+                scale = null
+            )
+        )
+    )
+
+    fun createTableResponse() = TableResponse(
+        id = UUID.randomUUID(),
+        name = "test_table",
+        displayName = "Test Table",
+        description = "Test Description",
+        accessLevel = "SYSTEM"
+    )
+
+    fun createTestTable(
+        id: UUID = TimeBasedId.generate(),
+        name: String = "test_table",
+        displayName: String = "Test Table",
+        description: String? = "Test Description",
+        accessLevel: AccessLevel = AccessLevel.SYSTEM,
+        createdBy: String = "test-user",
+        updatedBy: String = createdBy
+    ): ADTable {
+        val metadata = createMetadata(
+            id = id,
+            createdBy = createdBy,
+            updatedBy = updatedBy
+        )
+
+        return ADTable(
+            metadata = metadata,
+            name = createValidTableName(name),
+            displayName = createValidDisplayName(displayName),
+            description = description?.let { createValidDescription(it) },
+            accessLevel = accessLevel,
+            columns = listOf(createTestColumn())
+        )
+    }
 }
+
 
 
 File: ./src/test/kotlin/org/blackerp/integration/plugin/PluginLifecycleIntegrationTest.kt
