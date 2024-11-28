@@ -1,120 +1,173 @@
 #!/bin/bash
 
-# setup-backend-events.sh
+# reorganize-dtos.sh
 # Run from project root directory
-# Sets up event infrastructure for backend
 
-echo "Setting up backend event infrastructure..."
+echo "Reorganizing DTOs into separate files..."
 
-# Create necessary directories
-mkdir -p src/main/kotlin/org/blackerp/infrastructure/event
-mkdir -p src/main/kotlin/org/blackerp/config
+# Create directories
+mkdir -p src/main/kotlin/org/blackerp/api/dto/request
+mkdir -p src/main/kotlin/org/blackerp/api/dto/response
 
-# Create EventPublisher implementation
-cat > src/main/kotlin/org/blackerp/infrastructure/event/DefaultEventPublisher.kt << 'EOL'
-package org.blackerp.infrastructure.event
+# Create request DTOs
+cat > src/main/kotlin/org/blackerp/api/dto/request/TableRequests.kt << 'EOL'
+package org.blackerp.api.dto.request
 
-import arrow.core.Either
-import arrow.core.right
-import org.blackerp.domain.event.DomainEvent
-import org.blackerp.domain.table.TableError
+import jakarta.validation.constraints.NotBlank
+import jakarta.validation.constraints.Pattern
+import jakarta.validation.constraints.Size
+import jakarta.validation.Valid
+import jakarta.validation.constraints.NotEmpty
+
+data class CreateTableRequest(
+    @field:NotBlank
+    @field:Pattern(regexp = "^[a-z][a-z0-9_]*$")
+    @field:Size(min = 1, max = 60)
+    val name: String,
+    
+    @field:NotBlank
+    @field:Size(min = 1, max = 60)
+    val displayName: String,
+    
+    val description: String?,
+    
+    @field:NotBlank
+    val accessLevel: String,
+    
+    @field:Valid
+    @field:NotEmpty
+    val columns: List<CreateColumnRequest>
+)
+
+data class CreateColumnRequest(
+    @field:NotBlank
+    @field:Pattern(regexp = "^[a-z][a-z0-9_]*$")
+    val name: String,
+    
+    @field:NotBlank
+    val displayName: String,
+    
+    val description: String?,
+    
+    @field:NotBlank
+    val dataType: String,
+    
+    val length: Int?,
+    val precision: Int?,
+    val scale: Int?
+)
+EOL
+
+# Create response DTOs
+cat > src/main/kotlin/org/blackerp/api/dto/response/TableResponses.kt << 'EOL'
+package org.blackerp.api.dto.response
+
+import java.util.UUID
+
+data class TableResponse(
+    val id: UUID,
+    val name: String,
+    val displayName: String,
+    val description: String?,
+    val accessLevel: String
+)
+
+data class TablesResponse(
+    val tables: List<TableResponse>
+)
+EOL
+
+# Update TableController to use new DTO packages
+cat > src/main/kotlin/org/blackerp/api/controllers/TableController.kt << 'EOL'
+package org.blackerp.api.controllers
+
+import org.springframework.web.bind.annotation.*
+import org.springframework.http.ResponseEntity
+import org.blackerp.application.table.CreateTableUseCase
+import org.blackerp.domain.table.TableOperations
+import org.blackerp.api.dto.response.TableResponse
+import org.blackerp.api.dto.response.TablesResponse
 import org.slf4j.LoggerFactory
-import org.springframework.stereotype.Component
+import java.util.UUID
 
-@Component
-class DefaultEventPublisher : EventPublisher {
-    private val logger = LoggerFactory.getLogger(DefaultEventPublisher::class.java)
+@RestController
+@RequestMapping("/api/tables")
+class TableController(
+    private val tableOperations: TableOperations,
+    private val createTableUseCase: CreateTableUseCase
+) {
+    private val logger = LoggerFactory.getLogger(TableController::class.java)
 
-    override suspend fun publish(event: DomainEvent): Either<TableError, Unit> {
-        logger.info("Publishing event: ${event::class.simpleName} with ID: ${event.metadata.id}")
-        // In a real implementation, you might:
-        // 1. Persist the event
-        // 2. Send to message broker
-        // 3. Notify subscribers
-        return Unit.right()
+    @GetMapping
+    suspend fun getTables(): ResponseEntity<TablesResponse> {
+        logger.debug("Fetching all tables")
+        return ResponseEntity.ok(
+            TablesResponse(
+                tables = listOf(
+                    TableResponse(
+                        id = UUID.randomUUID(),
+                        name = "example_table",
+                        displayName = "Example Table",
+                        description = "An example table for testing",
+                        accessLevel = "SYSTEM"
+                    )
+                )
+            )
+        )
+    }
+
+    @GetMapping("/{id}")
+    suspend fun getTable(@PathVariable id: UUID): ResponseEntity<TableResponse> {
+        logger.debug("Fetching table with id: $id")
+        // TODO: Implement actual table fetching
+        return ResponseEntity.ok(
+            TableResponse(
+                id = id,
+                name = "example_table",
+                displayName = "Example Table",
+                description = "An example table for testing",
+                accessLevel = "SYSTEM"
+            )
+        )
     }
 }
 EOL
 
-# Create Spring configuration
-cat > src/main/kotlin/org/blackerp/config/EventConfig.kt << 'EOL'
-package org.blackerp.config
+# Remove any old DTO files to prevent conflicts
+rm -f src/main/kotlin/org/blackerp/api/dto/TableResponse.kt
+rm -f src/main/kotlin/org/blackerp/api/dto/TableResponses.kt
+rm -f src/main/kotlin/org/blackerp/api/dto/CreateTableRequest.kt
 
-import org.blackerp.infrastructure.event.DefaultEventPublisher
-import org.blackerp.infrastructure.event.EventPublisher
-import org.springframework.context.annotation.Bean
-import org.springframework.context.annotation.Configuration
+# Update build.gradle.kts to ensure validation dependency
+cat >> build.gradle.kts << 'EOL'
 
-@Configuration
-class EventConfig {
-    @Bean
-    fun eventPublisher(): EventPublisher = DefaultEventPublisher()
+dependencies {
+    implementation("org.springframework.boot:spring-boot-starter-validation")
 }
 EOL
 
-# Update Application class with component scanning
-cat > src/main/kotlin/org/blackerp/BlackErpApplication.kt << 'EOL'
-package org.blackerp
+echo "DTO reorganization complete!"
+echo "DTOs are now organized in:"
+echo "- request/TableRequests.kt"
+echo "- response/TableResponses.kt"
+echo "Make sure to run './gradlew build' to verify changes"
 
-import org.springframework.boot.autoconfigure.SpringBootApplication
-import org.springframework.boot.runApplication
+chmod +x reorganize-dtos.sh
 
-@SpringBootApplication(
-    scanBasePackages = ["org.blackerp"]
-)
-class BlackErpApplication
-
-fun main(args: Array<String>) {
-    runApplication<BlackErpApplication>(*args)
-}
-EOL
-
-# Create test configuration
-mkdir -p src/test/kotlin/org/blackerp/config
-
-cat > src/test/kotlin/org/blackerp/config/TestEventConfig.kt << 'EOL'
-package org.blackerp.config
-
-import io.mockk.mockk
-import org.blackerp.infrastructure.event.EventPublisher
-import org.springframework.boot.test.context.TestConfiguration
-import org.springframework.context.annotation.Bean
-import org.springframework.context.annotation.Primary
-
-@TestConfiguration
-class TestEventConfig {
-    @Bean
-    @Primary
-    fun testEventPublisher(): EventPublisher = mockk(relaxed = true)
-}
-EOL
-
-echo "Setup complete! Make sure you have the following dependencies in your build.gradle.kts:"
-echo "1. implementation(\"org.springframework.boot:spring-boot-starter\")"
-echo "2. implementation(\"io.arrow-kt:arrow-core:1.2.0\")"
-echo "3. testImplementation(\"io.mockk:mockk:1.13.8\")"
-
-chmod +x setup-backend-events.sh
-
-This script:
-1. Creates the `DefaultEventPublisher` implementation
-2. Sets up Spring configuration for event publishing
-3. Updates the main application class with proper component scanning
-4. Creates test configuration for mocking events in tests
+The changes:
+1. Separated DTOs into request and response packages
+2. Added validation annotations to request DTOs
+3. Updated imports in TableController
+4. Removed old conflicting files
+5. Added validation dependency
 
 To use:
-1. Save as `setup-backend-events.sh`
-2. Make executable: `chmod +x setup-backend-events.sh`
-3. Run: `./setup-backend-events.sh`
-
-The key components are:
-
-1. `DefaultEventPublisher`: A basic implementation that logs events (can be enhanced later)
-2. `EventConfig`: Spring configuration to wire up the event publisher
-3. `TestEventConfig`: Test configuration using mockk for testing
-4. Updated application class with proper component scanning
+1. Save as `reorganize-dtos.sh`
+2. Make executable: `chmod +x reorganize-dtos.sh`
+3. Run: `./reorganize-dtos.sh`
+4. Run `./gradlew build` to verify changes
 
 Would you like me to:
-1. Add more features to the event publisher (like async handling)?
-2. Create test cases for the event infrastructure?
-3. Help with something else?
+1. Add more validations to the DTOs?
+2. Add error handling for validation failures?
+3. Add more endpoints to the controller?

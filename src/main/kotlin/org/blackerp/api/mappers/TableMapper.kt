@@ -1,9 +1,11 @@
+// File: src/main/kotlin/org/blackerp/api/mappers/TableMapper.kt
+
 package org.blackerp.api.mappers
 
 import org.springframework.stereotype.Component
-import org.blackerp.api.dto.CreateTableRequest
-import org.blackerp.api.dto.CreateColumnRequest
-import org.blackerp.api.dto.TableResponse
+import org.blackerp.api.dto.request.CreateTableRequest
+import org.blackerp.api.dto.request.CreateColumnRequest
+import org.blackerp.api.dto.response.TableResponse
 import org.blackerp.application.table.CreateTableCommand
 import org.blackerp.application.table.CreateColumnCommand
 import org.blackerp.domain.table.ADTable

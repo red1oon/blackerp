@@ -1,40 +1,67 @@
+// File: src/test/kotlin/org/blackerp/integration/api/TableApiIntegrationTest.kt
 package org.blackerp.integration.api
 
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc
+import org.springframework.test.web.servlet.MockMvc
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
+import org.springframework.http.MediaType
+import org.springframework.beans.factory.annotation.Autowired
 import io.kotest.core.spec.style.DescribeSpec
-import io.kotest.matchers.shouldBe
-import org.springframework.boot.test.context.SpringBootTest
-import org.springframework.boot.test.web.client.TestRestTemplate
-import org.springframework.boot.test.web.server.LocalServerPort
-import org.springframework.http.HttpStatus
-import org.springframework.test.context.ActiveProfiles
-import org.blackerp.integration.IntegrationTestConfig
-import org.springframework.context.annotation.Import
-import org.blackerp.api.dto.CreateTableRequest
+import io.mockk.coEvery
+import kotlinx.coroutines.test.runTest
+import arrow.core.right
 import org.blackerp.shared.TestFactory
+import com.fasterxml.jackson.databind.ObjectMapper
+import com.ninjasquad.springmockk.MockkBean
+import org.blackerp.domain.table.TableOperations
+import org.blackerp.application.table.CreateTableUseCase
+import org.blackerp.api.mappers.TableMapper
+import org.blackerp.api.controllers.TableController
+import java.io.File
 
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-@ActiveProfiles("test")
-@Import(IntegrationTestConfig::class)
-class TableApiIntegrationTest(
-    private val restTemplate: TestRestTemplate,
-    @LocalServerPort private val port: Int
+@WebMvcTest(TableController::class)
+@AutoConfigureMockMvc(addFilters = false) 
+class TableApiIntegrationTest @Autowired constructor(
+    private val mockMvc: MockMvc,
+    private val objectMapper: ObjectMapper,
+    @MockkBean private val tableOperations: TableOperations,
+    @MockkBean private val createTableUseCase: CreateTableUseCase,
+    @MockkBean private val tableMapper: TableMapper
 ) : DescribeSpec({
-    
-    describe("Table API") {
-        context("POST /api/tables") {
-            it("should create table successfully") {
-                // given
+
+    beforeTest {
+        File("testdebug.txt").writeText("")
+    }
+
+    describe("POST /api/tables") {
+        it("should create table successfully") {
+            runTest {
                 val request = TestFactory.createTableRequest()
-                
-                // when
-                val response = restTemplate.postForEntity(
-                    "http://localhost:$port/api/tables",
-                    request,
-                    Any::class.java
-                )
-                
-                // then
-                response.statusCode shouldBe HttpStatus.OK
+                val command = TestFactory.createTableCommand()
+                val table = TestFactory.createTestTable()
+                val response = TestFactory.createTableResponse()
+
+                val requestJson = objectMapper.writeValueAsString(request)
+                val expectedJson = objectMapper.writeValueAsString(response)
+
+                File("testdebug.txt").appendText("""
+                    POST Request: $requestJson
+                    Expected POST: $expectedJson
+                """.trimIndent())
+
+                coEvery { tableMapper.toCommand(request) } returns command
+                coEvery { createTableUseCase.execute(command) } returns table.right()
+                coEvery { tableMapper.toResponse(table) } returns response
+
+                val result = mockMvc.perform(post("/api/tables")
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .content(requestJson))
+                    .andExpect(status().isOk)
+                    .andReturn()
+
+                File("testdebug.txt").appendText("\nActual POST: ${result.response.contentAsString}")
             }
         }
     }

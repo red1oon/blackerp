@@ -1,62 +1,51 @@
+// File: src/test/kotlin/org/blackerp/api/controllers/TableControllerTest.kt
 package org.blackerp.api.controllers
 
-import com.ninjasquad.springmockk.MockkBean
-import io.kotest.core.spec.style.DescribeSpec
-import io.mockk.coEvery
-import kotlinx.coroutines.test.runTest
-import org.blackerp.application.table.CreateTableUseCase
-import org.blackerp.api.mappers.TableMapper
-import org.blackerp.shared.TestFactory
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc
 import org.springframework.test.web.servlet.MockMvc
-import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.http.MediaType
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
-import com.fasterxml.jackson.databind.ObjectMapper
+import org.springframework.http.MediaType
+import org.springframework.beans.factory.annotation.Autowired
+import io.kotest.core.spec.style.DescribeSpec
+import io.mockk.coEvery
+import kotlinx.coroutines.test.runTest
 import arrow.core.right
+import org.blackerp.shared.TestFactory
+import com.fasterxml.jackson.databind.ObjectMapper
+import com.ninjasquad.springmockk.MockkBean
+import org.blackerp.domain.table.TableOperations
+import org.blackerp.application.table.CreateTableUseCase
+import org.blackerp.api.mappers.TableMapper
 
 @WebMvcTest(TableController::class)
 @AutoConfigureMockMvc(addFilters = false)
-class TableControllerTest : DescribeSpec() {
+class TableControllerTest(
+    @Autowired private val mockMvc: MockMvc,
+    @Autowired private val objectMapper: ObjectMapper,
+    @MockkBean private val tableOperations: TableOperations,
+    @MockkBean private val createTableUseCase: CreateTableUseCase,
+    @MockkBean private val tableMapper: TableMapper
+) : DescribeSpec({
 
-    @Autowired
-    private lateinit var mockMvc: MockMvc
+    describe("POST /api/tables") {
+        it("should create table successfully") {
+            runTest {
+                val request = TestFactory.createTableRequest()
+                val command = TestFactory.createTableCommand()
+                val table = TestFactory.createTestTable()
+                val response = TestFactory.createTableResponse()
 
-    @MockkBean
-    private lateinit var createTableUseCase: CreateTableUseCase
+                coEvery { tableMapper.toCommand(request) } returns command
+                coEvery { createTableUseCase.execute(command) } returns table.right()
+                coEvery { tableMapper.toResponse(table) } returns response
 
-    @MockkBean
-    private lateinit var tableMapper: TableMapper
-
-    private val objectMapper = ObjectMapper()
-
-    init {
-        describe("TableController") {
-            context("POST /api/tables") {
-                it("should create table successfully") {
-                    runTest {
-                        // given
-                        val request = TestFactory.createTableRequest()
-                        val command = TestFactory.createTableCommand()
-                        val table = TestFactory.createTestTable()
-                        val response = TestFactory.createTableResponse()
-
-                        // Configure mocks
-                        coEvery { tableMapper.toCommand(request) } returns command
-                        coEvery { createTableUseCase.execute(command) } returns table.right()
-                        coEvery { tableMapper.toResponse(table) } returns response
-
-                        // when/then
-                        mockMvc.perform(
-                            post("/api/tables")
-                                .contentType(MediaType.APPLICATION_JSON)
-                                .content(objectMapper.writeValueAsString(request))
-                        ).andExpect(status().isOk)
-                    }
-                }
+                mockMvc.perform(post("/api/tables")
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .content(objectMapper.writeValueAsString(request)))
+                    .andExpect(status().isOk)
             }
         }
     }
-}
+})

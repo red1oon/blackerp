@@ -6,6 +6,12 @@ import java.util.UUID
 
 interface TableOperations {
     /**
+     * Returns all tables in the system
+     * @return Either an error or list of tables
+     */
+    suspend fun findAll(): Either<TableError, List<ADTable>>
+    
+    /**
      * Saves a table to the store
      * @param table The table to save
      * @return Either an error or the saved table

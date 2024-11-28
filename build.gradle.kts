@@ -19,6 +19,7 @@ repositories {
 }
 
 dependencies {
+    implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.15.3")
     implementation("com.h2database:h2:2.1.214")
     implementation("org.flywaydb:flyway-core")
     implementation("com.fasterxml.uuid:java-uuid-generator:4.2.0")
@@ -110,4 +111,14 @@ flyway {
     password = ""
     baselineOnMigrate = true
     locations = arrayOf("classpath:db/migration")
+}
+// Add these dependencies if they're not already present
+dependencies {
+    implementation("org.springframework.boot:spring-boot-starter-web")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor")
+    implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
+}
+
+dependencies {
+    implementation("org.springframework.boot:spring-boot-starter-validation")
 }

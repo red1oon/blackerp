@@ -1,8 +1,8 @@
 package org.blackerp.shared
-
-import org.blackerp.api.dto.CreateTableRequest
-import org.blackerp.api.dto.CreateColumnRequest
-import org.blackerp.api.dto.TableResponse
+ 
+import org.blackerp.api.dto.request.CreateTableRequest
+import org.blackerp.api.dto.request.CreateColumnRequest
+import org.blackerp.api.dto.response.TableResponse
 import org.blackerp.application.table.CreateTableCommand
 import org.blackerp.application.table.CreateColumnCommand
 import org.blackerp.domain.EntityMetadata

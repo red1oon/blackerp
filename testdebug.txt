@@ -1,36 +1,3 @@
-2024-11-26T22:59:06.113085150Z: Saving tab: test_tab
-2024-11-26T22:59:06.124681514Z: Table exists check: 1
-2024-11-26T22:59:06.134928749Z: Tab merge result: 1
-2024-11-26T22:59:06.142584289Z: Query column insert result: 1
-2024-11-26T22:59:06.148105014Z: Display column insert result: 1
-2024-11-26T22:59:06.152094656Z: Order by insert result: 1
-2024-11-26T23:17:40.315944211Z: Saving tab: test_tab
-2024-11-26T23:17:40.328941750Z: Table exists check: 1
-2024-11-26T23:17:40.342563077Z: Tab merge result: 1
-2024-11-26T23:17:40.349372731Z: Query column insert result: 1
-2024-11-26T23:17:40.356431604Z: Display column insert result: 1
-2024-11-26T23:17:40.362029520Z: Order by insert result: 1
-2024-11-26T23:19:09.249089918Z: Saving tab: test_tab
-2024-11-26T23:19:09.262804669Z: Table exists check: 1
-2024-11-26T23:19:09.274007032Z: Tab merge result: 1
-2024-11-26T23:19:09.279641441Z: Query column insert result: 1
-2024-11-26T23:19:09.285041571Z: Display column insert result: 1
-2024-11-26T23:19:09.289295138Z: Order by insert result: 1
-2024-11-27T04:07:08.096834161Z: Saving tab: test_tab
-2024-11-27T04:07:08.118673562Z: Table exists check: 1
-2024-11-27T04:07:08.129948124Z: Tab merge result: 1
-2024-11-27T04:07:08.136959188Z: Query column insert result: 1
-2024-11-27T04:07:08.143306035Z: Display column insert result: 1
-2024-11-27T04:07:08.149569641Z: Order by insert result: 1
-2024-11-27T04:10:12.922312629Z: Saving tab: test_tab
-2024-11-27T04:10:12.935676927Z: Table exists check: 1
-2024-11-27T04:10:12.947517624Z: Tab merge result: 1
-2024-11-27T04:10:12.953877417Z: Query column insert result: 1
-2024-11-27T04:10:12.960019788Z: Display column insert result: 1
-2024-11-27T04:10:12.967339446Z: Order by insert result: 1
-2024-11-27T04:42:23.025869504Z: Saving tab: test_tab
-2024-11-27T04:42:23.041230449Z: Table exists check: 1
-2024-11-27T04:42:23.053229687Z: Tab merge result: 1
-2024-11-27T04:42:23.058773130Z: Query column insert result: 1
-2024-11-27T04:42:23.063354999Z: Display column insert result: 1
-2024-11-27T04:42:23.068014435Z: Order by insert result: 1
+POST Request: {"name":"test_table","displayName":"Test Table","description":"Test Description","accessLevel":"SYSTEM","columns":[{"name":"test_column","displayName":"Test Column","description":"Test column description","dataType":"STRING","length":50,"precision":null,"scale":null}]}
+Expected POST: {"id":"8620e8f5-3dae-483c-ad44-ea6b252393a8","name":"test_table","displayName":"Test Table","description":"Test Description","accessLevel":"SYSTEM"}
+Actual POST: 

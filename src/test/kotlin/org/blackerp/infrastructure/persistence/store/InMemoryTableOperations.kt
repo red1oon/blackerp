@@ -13,6 +13,13 @@ class InMemoryTableOperations : TableOperations {
     private val tables = ConcurrentHashMap<UUID, ADTable>()
     private val nameIndex = ConcurrentHashMap<String, UUID>()
 
+    override suspend fun findAll(): Either<TableError, List<ADTable>> =
+        Either.catch {
+            tables.values.toList()
+        }.mapLeft { 
+            TableError.StorageError(it) 
+        }
+
     override suspend fun save(table: ADTable): Either<TableError, ADTable> =
         findByName(table.name.value).fold(
             { error -> error.left() },

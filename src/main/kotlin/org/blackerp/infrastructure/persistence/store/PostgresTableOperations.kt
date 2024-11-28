@@ -24,6 +24,21 @@ class PostgresTableOperations(
 ) : TableOperations {
     private val tableMapper = TableRowMapper()
 
+    override suspend fun findAll(): Either<TableError, List<ADTable>> = try {
+        val tables = jdbcTemplate.query(
+            """
+            SELECT id, name, display_name, description, access_level,
+                created, created_by, updated, updated_by, version, active
+            FROM ad_table
+            WHERE active = true
+            """,
+            tableMapper
+        )
+        tables.right()
+    } catch (e: Exception) {
+        TableError.StorageError(e).left()
+    }
+
     override suspend fun save(table: ADTable): Either<TableError, ADTable> = try {
         jdbcTemplate.update("""
             INSERT INTO ad_table (

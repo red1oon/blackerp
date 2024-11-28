@@ -1,7 +1,10 @@
-package org.blackerp.api.dto
+package org.blackerp.api.dto.request
 
-import jakarta.validation.constraints.*
+import jakarta.validation.constraints.NotBlank
+import jakarta.validation.constraints.Pattern
+import jakarta.validation.constraints.Size
 import jakarta.validation.Valid
+import jakarta.validation.constraints.NotEmpty
 
 data class CreateTableRequest(
     @field:NotBlank
@@ -33,7 +36,7 @@ data class CreateColumnRequest(
     
     val description: String?,
     
-    @field:NotNull
+    @field:NotBlank
     val dataType: String,
     
     val length: Int?,

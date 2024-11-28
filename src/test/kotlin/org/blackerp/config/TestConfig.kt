@@ -3,7 +3,7 @@ package org.blackerp.config
 
 import org.springframework.boot.test.context.TestConfiguration
 import org.springframework.context.annotation.Bean
-import org.springframework.context.annotation.Primary
+import org.springframework.context.annotation.Primary 
 import org.springframework.jdbc.core.JdbcTemplate
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType
@@ -17,32 +17,36 @@ import io.mockk.mockk
 
 @TestConfiguration
 class TestConfig {
-    
-    @Bean
+
+    @Bean 
     @Primary
-    fun dataSource(): DataSource =
+    fun dataSource(): DataSource = 
         EmbeddedDatabaseBuilder()
             .setType(EmbeddedDatabaseType.H2)
             .build()
 
     @Bean
-    fun jdbcTemplate(dataSource: DataSource): JdbcTemplate =
+    fun jdbcTemplate(dataSource: DataSource): JdbcTemplate = 
         JdbcTemplate(dataSource)
-    
+
     @Bean
     fun objectMapper(): ObjectMapper = ObjectMapper()
-    
+
     @Bean
     fun tableMapper(): TableMapper = TableMapper()
-    
+
     @Bean
-    fun eventPublisher(): EventPublisher = mockk(relaxed = true)
-    
+    fun eventPublisher(): EventPublisher = mockk(relaxed = true) 
+
     @Bean
+    fun tableOperations(): InMemoryTableOperations = mockk<InMemoryTableOperations>(relaxed = true)
+
+    @Bean  
     fun createTableUseCase(
+        tableOperations: InMemoryTableOperations,
         eventPublisher: EventPublisher
     ): CreateTableUseCase = CreateTableUseCase(
-        operations = InMemoryTableOperations(),
+        operations = tableOperations,
         eventPublisher = eventPublisher
     )
 }
