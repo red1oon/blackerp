@@ -1,13 +1,3 @@
-#!/bin/bash
-
-# Output file path
-OUTPUT_FILE="src/main/resources/db/migration/V5__Seed_initial_data.sql"
-
-# Ensure the directory exists before creating the file
-mkdir -p src/main/resources/db/migration
-
-# Write the SQL content to the output file
-cat > "$OUTPUT_FILE" <<EOL
 INSERT INTO ad_table (
     id, name, display_name, description, access_level,
     created, created_by, updated, updated_by, version, active
@@ -37,6 +27,3 @@ INSERT INTO ad_table (
     0,
     true
 );
-EOL
-
-echo "SQL script created at $OUTPUT_FILE"

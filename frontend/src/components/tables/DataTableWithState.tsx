@@ -1,4 +1,3 @@
-// frontend/src/components/tables/DataTableWithState.tsx
 import React from 'react';
 import { useQuery } from '@tanstack/react-query';
 import {
@@ -8,14 +7,16 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "../../components/ui/table";  // Changed from @/components/ui/table
-import { Alert, AlertTitle, AlertDescription } from "../../components/ui/alert";  // Changed from @/components/ui/alert
-import { Loader2 } from "lucide-react";
+} from '@/components/ui/table';
+import { Button } from '@/components/ui/button';
+import { Alert, AlertTitle, AlertDescription } from '@/components/ui/alert';
+import { Loader2, Pencil, Trash2 } from "lucide-react";
 
 export interface Table {
   id: string;
   name: string;
   displayName: string;
+  description?: string;
   accessLevel: string;
 }
 
@@ -28,7 +29,7 @@ export default function DataTableWithState() {
   } = useQuery<Table[]>({
     queryKey: ['tables'],
     queryFn: async () => {
-      const response = await fetch('/api/tables');
+      const response = await fetch('http://localhost:8080/api/tables');
       if (!response.ok) {
         throw new Error('Failed to fetch tables');
       }
@@ -62,25 +63,36 @@ export default function DataTableWithState() {
           <TableRow>
             <TableHead>Name</TableHead>
             <TableHead>Display Name</TableHead>
+            <TableHead>Description</TableHead>
             <TableHead>Access Level</TableHead>
-            <TableHead>Actions</TableHead>
+            <TableHead className="text-right">Actions</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
           {tables?.length === 0 ? (
             <TableRow>
-              <TableCell colSpan={4} className="text-center text-muted-foreground">
+              <TableCell colSpan={5} className="text-center text-muted-foreground">
                 No tables found
               </TableCell>
             </TableRow>
           ) : (
             tables?.map((table) => (
               <TableRow key={table.id}>
-                <TableCell>{table.name}</TableCell>
+                <TableCell className="font-medium">{table.name}</TableCell>
                 <TableCell>{table.displayName}</TableCell>
+                <TableCell>{table.description || '-'}</TableCell>
                 <TableCell>{table.accessLevel}</TableCell>
-                <TableCell>
-                  {/* Actions will be added later */}
+                <TableCell className="text-right">
+                  <div className="flex justify-end gap-2">
+                    <Button size="sm" variant="outline">
+                      <Pencil className="h-4 w-4 mr-1" />
+                      Edit
+                    </Button>
+                    <Button size="sm" variant="destructive">
+                      <Trash2 className="h-4 w-4 mr-1" />
+                      Delete
+                    </Button>
+                  </div>
                 </TableCell>
               </TableRow>
             ))

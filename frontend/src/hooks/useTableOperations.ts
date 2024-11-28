@@ -1,43 +1,50 @@
-import { useState, useCallback } from 'react';
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { Table } from '../types/table';
-import { mockTableApi } from '../api/mockData';
+import { tableApi } from '../api/tableApi';
 
 export function useTableOperations() {
-  const [tables, setTables] = useState<Table[]>([]);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+  const queryClient = useQueryClient();
 
-  const fetchTables = useCallback(async () => {
-    try {
-      setLoading(true);
-      setError(null);
-      const fetchedTables = await mockTableApi.getTables();
-      setTables(fetchedTables);
-    } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to fetch tables');
-    } finally {
-      setLoading(false);
-    }
-  }, []);
+  const {
+    data: tables,
+    isLoading,
+    error,
+  } = useQuery<Table[]>({
+    queryKey: ['tables'],
+    queryFn: () => tableApi.getTables(),
+  });
 
-  const getTableById = useCallback(async (id: string) => {
-    try {
-      setLoading(true);
-      setError(null);
-      return await mockTableApi.getTableById(id);
-    } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to fetch table');
-      return undefined;
-    } finally {
-      setLoading(false);
-    }
-  }, []);
+  const createTableMutation = useMutation({
+    mutationFn: (newTable: Omit<Table, 'id'>) => tableApi.createTable(newTable),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['tables'] });
+    },
+  });
+
+  const updateTableMutation = useMutation({
+    mutationFn: ({ id, table }: { id: string; table: Partial<Table> }) =>
+      tableApi.updateTable(id, table),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['tables'] });
+    },
+  });
+
+  const deleteTableMutation = useMutation({
+    mutationFn: (id: string) => tableApi.deleteTable(id),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['tables'] });
+    },
+  });
 
   return {
     tables,
-    loading,
+    isLoading,
     error,
-    fetchTables,
-    getTableById,
+    createTable: createTableMutation.mutate,
+    updateTable: updateTableMutation.mutate,
+    deleteTable: deleteTableMutation.mutate,
+    isCreating: createTableMutation.isPending,
+    isUpdating: updateTableMutation.isPending,
+    isDeleting: deleteTableMutation.isPending,
   };
 }
