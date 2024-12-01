@@ -1,3 +1,0 @@
-POST Request: {"name":"test_table","displayName":"Test Table","description":"Test Description","accessLevel":"SYSTEM","columns":[{"name":"test_column","displayName":"Test Column","description":"Test column description","dataType":"STRING","length":50,"precision":null,"scale":null}]}
-Expected POST: {"id":"8620e8f5-3dae-483c-ad44-ea6b252393a8","name":"test_table","displayName":"Test Table","description":"Test Description","accessLevel":"SYSTEM"}
-Actual POST: 

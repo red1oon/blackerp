@@ -1,8 +1,0 @@
-spring:
-  application:
-    name: blackerp
-
-logging:
-  level:
-    org.blackerp: DEBUG
-    org.springframework.web: INFO
