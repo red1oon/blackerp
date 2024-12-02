@@ -1,12 +1,28 @@
-
-plugins {
-    kotlin("jvm")
-    kotlin("plugin.spring")
+sourceSets {
+    main {
+        kotlin {
+            srcDirs(
+                "api/advice",
+                "api/controllers", 
+                "api/dto",
+                "api/mappers",
+                "services",
+                "usecases"
+            )
+        }
+    }
 }
 
 dependencies {
-    implementation(kotlin("stdlib"))
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3")
-    testImplementation("org.jetbrains.kotlin:kotlin-test")
+    implementation(project(":domain"))
+    implementation("org.springframework.boot:spring-boot-starter-web")
+    implementation("org.springframework.boot:spring-boot-starter-validation")
 }
 
+tasks.bootJar {
+    enabled = false
+}
+
+tasks.jar {
+    enabled = true
+}
