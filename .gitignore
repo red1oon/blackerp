@@ -6,6 +6,7 @@ build/
 !**/src/test/**/build/
 fix.sh
 project_listing.txt
+refactor.sh
 
 ### STS ###
 .apt_generated
