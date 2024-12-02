@@ -1,0 +1,75 @@
+/home/red1/Projects/blackerp
+├── application
+│   ├── api
+│   │   ├── advice
+│   │   ├── controllers
+│   │   └── dto
+│   ├── build
+│   │   ├── classes
+│   │   ├── libs
+│   │   ├── resources
+│   │   └── tmp
+│   ├── build.gradle.kts
+│   ├── services
+│   └── usecases
+│       ├── table
+│       └── window
+├── build.gradle.kts
+├── domain
+│   ├── build
+│   │   ├── classes
+│   │   ├── libs
+│   │   ├── resources
+│   │   └── tmp
+│   ├── build.gradle.kts
+│   ├── core
+│   │   ├── entities
+│   │   ├── metadata
+│   │   ├── rules
+│   │   └── values
+│   ├── events
+│   │   ├── handlers
+│   │   └── publishers
+│   ├── services
+│   │   ├── implementations
+│   │   └── interfaces
+│   └── validation
+│       ├── rules
+│       └── validators
+├── gradle
+│   └── wrapper
+│       ├── gradle-wrapper.jar
+│       └── gradle-wrapper.properties
+├── gradlew
+├── gradlew.bat
+├── infrastructure
+│   ├── build
+│   │   ├── classes
+│   │   ├── libs
+│   │   ├── resources
+│   │   └── tmp
+│   ├── build.gradle.kts
+│   ├── cache
+│   │   ├── configs
+│   │   └── providers
+│   ├── integration
+│   │   ├── adapters
+│   │   └── clients
+│   ├── messaging
+│   │   ├── consumers
+│   │   └── publishers
+│   ├── persistence
+│   │   ├── mappings
+│   │   └── repositories
+│   ├── plugin
+│   │   ├── loaders
+│   │   └── registry
+│   └── scheduler
+│       ├── jobs
+│       └── triggers
+├── new_tree.txt
+├── old_tree.txt
+├── refactor.sh
+└── settings.gradle.kts
+
+61 directories, 12 files

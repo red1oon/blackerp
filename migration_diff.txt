@@ -1,0 +1,365 @@
+1,2c1
+< /home/red1/BackupProjects/blackerp
+< ├── apidoc_summary.md
+---
+> /home/red1/Projects/blackerp
+3a3,6
+> │   ├── api
+> │   │   ├── advice
+> │   │   ├── controllers
+> │   │   └── dto
+6d8
+< │   │   ├── kotlin
+8,9d9
+< │   │   ├── reports
+< │   │   ├── resolvedMainClassName
+11d10
+< │   │   ├── test-results
+14,37c13,16
+< │   ├── src
+< │   │   ├── main
+< │   │   └── test
+< │   └── testdebug.txt
+< ├── bash.sh
+< ├── bin
+< │   ├── main
+< │   │   ├── application.yml
+< │   │   ├── db
+< │   │   └── org
+< │   └── test
+< │       ├── application-test.properties
+< │       ├── application-test.yml
+< │       ├── application.yml
+< │       ├── application.yml.backup.20241127_051405
+< │       ├── db
+< │       ├── logback-test.xml
+< │       └── org
+< ├── blackerp_backup_20241130_064424.tar.gz
+< ├── build
+< │   ├── libs
+< │   │   └── blackerp-1.0.0.jar
+< │   └── tmp
+< │       └── jar
+---
+> │   ├── services
+> │   └── usecases
+> │       ├── table
+> │       └── window
+39,42c18
+< ├── createdomainlayers.sh
+< ├── createproject1.sh
+< ├── docker-compose.yml
+< ├── domain-entities
+---
+> ├── domain
+45d20
+< │   │   ├── kotlin
+47,48c22
+< │   │   ├── reports
+< │   │   ├── test-results
+---
+> │   │   ├── resources
+51,278c25,38
+< │   └── src
+< │       ├── main
+< │       ├── test
+< │       └── testFixtures
+< ├── frontend
+< │   ├── frontend_listing.txt
+< │   ├── frontend.sh
+< │   ├── generate_project_listing.sh
+< │   ├── index.html
+< │   ├── node_modules
+< │   │   ├── @alloc
+< │   │   ├── @ampproject
+< │   │   ├── ansi-regex
+< │   │   ├── ansi-styles
+< │   │   ├── anymatch
+< │   │   ├── any-promise
+< │   │   ├── arg
+< │   │   ├── aria-hidden
+< │   │   ├── autoprefixer
+< │   │   ├── @babel
+< │   │   ├── balanced-match
+< │   │   ├── base64-js
+< │   │   ├── binary-extensions
+< │   │   ├── bl
+< │   │   ├── brace-expansion
+< │   │   ├── braces
+< │   │   ├── browserslist
+< │   │   ├── buffer
+< │   │   ├── camelcase-css
+< │   │   ├── caniuse-lite
+< │   │   ├── chalk
+< │   │   ├── chokidar
+< │   │   ├── class-variance-authority
+< │   │   ├── cli-cursor
+< │   │   ├── cli-spinners
+< │   │   ├── clone
+< │   │   ├── clsx
+< │   │   ├── color-convert
+< │   │   ├── color-name
+< │   │   ├── commander
+< │   │   ├── convert-source-map
+< │   │   ├── cross-spawn
+< │   │   ├── cssesc
+< │   │   ├── csstype
+< │   │   ├── data-uri-to-buffer
+< │   │   ├── debug
+< │   │   ├── defaults
+< │   │   ├── detect-node-es
+< │   │   ├── didyoumean
+< │   │   ├── dlv
+< │   │   ├── eastasianwidth
+< │   │   ├── electron-to-chromium
+< │   │   ├── emoji-regex
+< │   │   ├── @esbuild
+< │   │   ├── esbuild
+< │   │   ├── escalade
+< │   │   ├── execa
+< │   │   ├── fast-glob
+< │   │   ├── fastq
+< │   │   ├── fetch-blob
+< │   │   ├── fill-range
+< │   │   ├── foreground-child
+< │   │   ├── formdata-polyfill
+< │   │   ├── fraction.js
+< │   │   ├── fs-extra
+< │   │   ├── function-bind
+< │   │   ├── gensync
+< │   │   ├── get-nonce
+< │   │   ├── get-stream
+< │   │   ├── glob
+< │   │   ├── globals
+< │   │   ├── glob-parent
+< │   │   ├── graceful-fs
+< │   │   ├── hasown
+< │   │   ├── human-signals
+< │   │   ├── ieee754
+< │   │   ├── inherits
+< │   │   ├── invariant
+< │   │   ├── @isaacs
+< │   │   ├── is-binary-path
+< │   │   ├── is-core-module
+< │   │   ├── isexe
+< │   │   ├── is-extglob
+< │   │   ├── is-fullwidth-code-point
+< │   │   ├── is-glob
+< │   │   ├── is-interactive
+< │   │   ├── is-number
+< │   │   ├── is-stream
+< │   │   ├── is-unicode-supported
+< │   │   ├── jackspeak
+< │   │   ├── jiti
+< │   │   ├── @jridgewell
+< │   │   ├── jsesc
+< │   │   ├── json5
+< │   │   ├── jsonfile
+< │   │   ├── js-tokens
+< │   │   ├── kleur
+< │   │   ├── lilconfig
+< │   │   ├── lines-and-columns
+< │   │   ├── log-symbols
+< │   │   ├── loose-envify
+< │   │   ├── lru-cache
+< │   │   ├── lucide-react
+< │   │   ├── merge2
+< │   │   ├── merge-stream
+< │   │   ├── micromatch
+< │   │   ├── mimic-fn
+< │   │   ├── minimatch
+< │   │   ├── minipass
+< │   │   ├── ms
+< │   │   ├── mz
+< │   │   ├── nanoid
+< │   │   ├── node-domexception
+< │   │   ├── node-fetch
+< │   │   ├── @nodelib
+< │   │   ├── node-releases
+< │   │   ├── normalize-path
+< │   │   ├── normalize-range
+< │   │   ├── npm-run-path
+< │   │   ├── object-assign
+< │   │   ├── object-hash
+< │   │   ├── onetime
+< │   │   ├── ora
+< │   │   ├── package-json-from-dist
+< │   │   ├── path-key
+< │   │   ├── path-parse
+< │   │   ├── path-scurry
+< │   │   ├── picocolors
+< │   │   ├── picomatch
+< │   │   ├── pify
+< │   │   ├── pirates
+< │   │   ├── @pkgjs
+< │   │   ├── postcss
+< │   │   ├── postcss-import
+< │   │   ├── postcss-js
+< │   │   ├── postcss-load-config
+< │   │   ├── postcss-nested
+< │   │   ├── postcss-selector-parser
+< │   │   ├── postcss-value-parser
+< │   │   ├── prompts
+< │   │   ├── queue-microtask
+< │   │   ├── @radix-ui
+< │   │   ├── react
+< │   │   ├── react-dom
+< │   │   ├── react-refresh
+< │   │   ├── react-remove-scroll
+< │   │   ├── react-remove-scroll-bar
+< │   │   ├── react-style-singleton
+< │   │   ├── readable-stream
+< │   │   ├── read-cache
+< │   │   ├── readdirp
+< │   │   ├── resolve
+< │   │   ├── restore-cursor
+< │   │   ├── reusify
+< │   │   ├── rollup
+< │   │   ├── run-parallel
+< │   │   ├── safe-buffer
+< │   │   ├── scheduler
+< │   │   ├── semver
+< │   │   ├── @shadcn
+< │   │   ├── shebang-command
+< │   │   ├── shebang-regex
+< │   │   ├── signal-exit
+< │   │   ├── sisteransi
+< │   │   ├── source-map-js
+< │   │   ├── stdin-discarder
+< │   │   ├── string_decoder
+< │   │   ├── string-width
+< │   │   ├── string-width-cjs
+< │   │   ├── strip-ansi
+< │   │   ├── strip-ansi-cjs
+< │   │   ├── strip-final-newline
+< │   │   ├── sucrase
+< │   │   ├── supports-preserve-symlinks-flag
+< │   │   ├── tailwindcss
+< │   │   ├── tailwindcss-animate
+< │   │   ├── tailwind-merge
+< │   │   ├── @tanstack
+< │   │   ├── thenify
+< │   │   ├── thenify-all
+< │   │   ├── to-regex-range
+< │   │   ├── ts-interface-checker
+< │   │   ├── tslib
+< │   │   ├── @types
+< │   │   ├── typescript
+< │   │   ├── undici-types
+< │   │   ├── universalify
+< │   │   ├── update-browserslist-db
+< │   │   ├── use-callback-ref
+< │   │   ├── use-sidecar
+< │   │   ├── util-deprecate
+< │   │   ├── vite
+< │   │   ├── @vitejs
+< │   │   ├── wcwidth
+< │   │   ├── web-streams-polyfill
+< │   │   ├── which
+< │   │   ├── wrap-ansi
+< │   │   ├── wrap-ansi-cjs
+< │   │   ├── yallist
+< │   │   ├── yaml
+< │   │   └── zod
+< │   ├── package.json
+< │   ├── package-lock.json
+< │   ├── postcss.config.cjs
+< │   ├── project_listing.txt
+< │   ├── README.md
+< │   ├── src
+< │   │   ├── api
+< │   │   ├── App.tsx
+< │   │   ├── assets
+< │   │   ├── components
+< │   │   ├── env.d.ts
+< │   │   ├── hooks
+< │   │   ├── index.css
+< │   │   ├── layouts
+< │   │   ├── lib
+< │   │   ├── main
+< │   │   ├── main.tsx
+< │   │   ├── pages
+< │   │   ├── __tests__
+< │   │   ├── types
+< │   │   └── utils
+< │   ├── tailwind.config.cjs
+< │   ├── tsconfig.json
+< │   ├── tsconfig.node.json
+< │   └── vite.config.ts
+< ├── generatecontent.py
+< ├── generate_project_listing.sh
+---
+> │   ├── core
+> │   │   ├── entities
+> │   │   ├── metadata
+> │   │   ├── rules
+> │   │   └── values
+> │   ├── events
+> │   │   ├── handlers
+> │   │   └── publishers
+> │   ├── services
+> │   │   ├── implementations
+> │   │   └── interfaces
+> │   └── validation
+> │       ├── rules
+> │       └── validators
+283d42
+< ├── gradle.properties
+286,300c45
+< ├── HELP.md
+< ├── LICENSE
+< ├── package-lock.json
+< ├── project_documentation.txt
+< ├── project_listing_cleaned.txt
+< ├── project_listing_compact_optimized.txt
+< ├── project_listing_compact.txt
+< ├── project_listing_minimized.txt
+< ├── project_listing.txt
+< ├── project_summary.md
+< ├── README.md
+< ├── restore_tests.sh
+< ├── settings.gradle.kts
+< ├── testdebug.txt
+< ├── validation
+---
+> ├── infrastructure
+303d47
+< │   │   ├── kotlin
+305,306c49
+< │   │   ├── reports
+< │   │   ├── test-results
+---
+> │   │   ├── resources
+309,313c52,73
+< │   └── src
+< │       ├── main
+< │       └── test
+< ├── verify-setup.sh
+< └── verify_test.sh
+---
+> │   ├── cache
+> │   │   ├── configs
+> │   │   └── providers
+> │   ├── integration
+> │   │   ├── adapters
+> │   │   └── clients
+> │   ├── messaging
+> │   │   ├── consumers
+> │   │   └── publishers
+> │   ├── persistence
+> │   │   ├── mappings
+> │   │   └── repositories
+> │   ├── plugin
+> │   │   ├── loaders
+> │   │   └── registry
+> │   └── scheduler
+> │       ├── jobs
+> │       └── triggers
+> ├── new_tree.txt
+> ├── old_tree.txt
+> ├── refactor.sh
+> └── settings.gradle.kts
+315c75
+< 254 directories, 59 files
+---
+> 61 directories, 12 files

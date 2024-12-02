@@ -1,0 +1,24 @@
+/home/red1/BackupProjects/blackerp/validation
+├── build
+│   ├── classes
+│   │   └── kotlin
+│   ├── kotlin
+│   │   ├── compileKotlin
+│   │   └── compileTestKotlin
+│   ├── libs
+│   │   └── validation.jar
+│   ├── reports
+│   │   └── tests
+│   ├── test-results
+│   │   └── test
+│   └── tmp
+│       ├── jar
+│       └── test
+├── build.gradle.kts
+└── src
+    ├── main
+    │   └── kotlin
+    └── test
+        └── kotlin
+
+20 directories, 2 files
