@@ -1,5 +1,5 @@
 
-package org.blackerp.domain.values
+package org.blackerp.domain.core.values
 
 import arrow.core.Either
 import arrow.core.left

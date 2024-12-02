@@ -1,0 +1,4 @@
+/home/red1/Projects/blackerp/infrastructure/build.gradle.kts
+/home/red1/Projects/blackerp/domain/build.gradle.kts
+/home/red1/Projects/blackerp/build.gradle.kts
+/home/red1/Projects/blackerp/application/build.gradle.kts

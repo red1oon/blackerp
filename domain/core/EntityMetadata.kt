@@ -1,4 +1,4 @@
-package org.blackerp.domain
+package org.blackerp.domain.core.metadata
 
 import org.blackerp.shared.TimeBasedId
 import java.time.Instant

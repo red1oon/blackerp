@@ -1,4 +1,4 @@
-package org.blackerp.domain.values
+package org.blackerp.domain.core.values
 
 import java.time.Instant
 import java.util.UUID

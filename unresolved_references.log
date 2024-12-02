@@ -1,0 +1,939 @@
+openjdk version "17.0.13" 2024-10-15
+OpenJDK Runtime Environment (build 17.0.13+11-Ubuntu-2ubuntu124.04)
+OpenJDK 64-Bit Server VM (build 17.0.13+11-Ubuntu-2ubuntu124.04, mixed mode, sharing)
+Initialized native services in: /root/.gradle/native
+Initialized jansi services in: /root/.gradle/native
+Received JVM installation metadata from '/usr/lib/jvm/java-17-openjdk-amd64': {JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64, JAVA_VERSION=17.0.13, JAVA_VENDOR=Ubuntu, RUNTIME_NAME=OpenJDK Runtime Environment, RUNTIME_VERSION=17.0.13+11-Ubuntu-2ubuntu124.04, VM_NAME=OpenJDK 64-Bit Server VM, VM_VERSION=17.0.13+11-Ubuntu-2ubuntu124.04, VM_VENDOR=Ubuntu, OS_ARCH=amd64}
+The client will now receive all logging from the daemon (pid: 1447023). The daemon log file: /root/.gradle/daemon/8.5/daemon-1447023.out.log
+Starting 11th build in daemon [uptime: 55 mins 15.697 secs, performance: 100%, GC rate: 0.00/s, heap usage: 0% of 512 MiB, non-heap usage: 31% of 384 MiB]
+Using 8 worker leases.
+Now considering [/home/red1/Projects/blackerp] as hierarchies to watch
+Watching the file system is configured to be enabled if available
+File system watching is active
+Invalidating in-memory cache of /home/red1/Projects/blackerp/.gradle/8.5/checksums/md5-checksums.bin
+Invalidating in-memory cache of /home/red1/Projects/blackerp/.gradle/8.5/checksums/sha1-checksums.bin
+Invalidating in-memory cache of /home/red1/Projects/blackerp/.gradle/8.5/checksums/sha256-checksums.bin
+Invalidating in-memory cache of /home/red1/Projects/blackerp/.gradle/8.5/checksums/sha512-checksums.bin
+Invalidating in-memory cache of /home/red1/Projects/blackerp/.gradle/8.5/fileHashes/fileHashes.bin
+Invalidating in-memory cache of /home/red1/Projects/blackerp/.gradle/8.5/fileHashes/resourceHashesCache.bin
+Starting Build
+Settings evaluated using settings file '/home/red1/Projects/blackerp/settings.gradle.kts'.
+Projects loaded. Root project using build file '/home/red1/Projects/blackerp/build.gradle.kts'.
+Included projects: [root project 'blackerp', project ':application', project ':domain', project ':infrastructure']
+
+> Configure project :
+Evaluating root project 'blackerp' using build file '/home/red1/Projects/blackerp/build.gradle.kts'.
+Invalidating in-memory cache of /home/red1/Projects/blackerp/.gradle/buildOutputCleanup/outputFiles.bin
+Caching disabled for Kotlin DSL plugin specs accessors for classpath '88f21b562c7d422f7231428dbdb6eb94' because:
+  Build cache is disabled
+Skipping Kotlin DSL plugin specs accessors for classpath '88f21b562c7d422f7231428dbdb6eb94' as it is up-to-date.
+Caching disabled for Kotlin DSL script compilation (Project/TopLevel/stage1) because:
+  Build cache is disabled
+Kotlin DSL script compilation (Project/TopLevel/stage1) is not up-to-date because:
+  No history is available.
+Caching disabled for Kotlin DSL accessors for root project 'blackerp' because:
+  Build cache is disabled
+Kotlin DSL accessors for root project 'blackerp' is not up-to-date because:
+  No history is available.
+Caching disabled for Kotlin DSL script compilation (Project/TopLevel/stage2) because:
+  Build cache is disabled
+Kotlin DSL script compilation (Project/TopLevel/stage2) is not up-to-date because:
+  No history is available.
+Using Kotlin Gradle Plugin gradle81 variant
+kotlin scripting plugin: created the scripting discovery configuration: kotlinScriptDef
+kotlin scripting plugin: created the scripting discovery configuration: testKotlinScriptDef
+Applying dependency management to configuration 'annotationProcessor' in project 'application'
+Applying dependency management to configuration 'api' in project 'application'
+Applying dependency management to configuration 'apiDependenciesMetadata' in project 'application'
+Applying dependency management to configuration 'apiElements' in project 'application'
+Applying dependency management to configuration 'archives' in project 'application'
+Applying dependency management to configuration 'bootArchives' in project 'application'
+Applying dependency management to configuration 'compileClasspath' in project 'application'
+Applying dependency management to configuration 'compileOnly' in project 'application'
+Applying dependency management to configuration 'compileOnlyDependenciesMetadata' in project 'application'
+Applying dependency management to configuration 'default' in project 'application'
+Applying dependency management to configuration 'developmentOnly' in project 'application'
+Applying dependency management to configuration 'implementation' in project 'application'
+Applying dependency management to configuration 'implementationDependenciesMetadata' in project 'application'
+Applying dependency management to configuration 'intransitiveDependenciesMetadata' in project 'application'
+Applying dependency management to configuration 'kotlinBuildToolsApiClasspath' in project 'application'
+Applying dependency management to configuration 'kotlinCompilerClasspath' in project 'application'
+Applying dependency management to configuration 'kotlinCompilerPluginClasspath' in project 'application'
+Applying dependency management to configuration 'kotlinCompilerPluginClasspathMain' in project 'application'
+Applying dependency management to configuration 'kotlinCompilerPluginClasspathTest' in project 'application'
+Applying dependency management to configuration 'kotlinKlibCommonizerClasspath' in project 'application'
+Applying dependency management to configuration 'kotlinNativeCompilerPluginClasspath' in project 'application'
+Applying dependency management to configuration 'kotlinScriptDef' in project 'application'
+Applying dependency management to configuration 'kotlinScriptDefExtensions' in project 'application'
+Applying dependency management to configuration 'mainSourceElements' in project 'application'
+Applying dependency management to configuration 'productionRuntimeClasspath' in project 'application'
+Applying dependency management to configuration 'runtimeClasspath' in project 'application'
+Applying dependency management to configuration 'runtimeElements' in project 'application'
+Applying dependency management to configuration 'runtimeOnly' in project 'application'
+Applying dependency management to configuration 'testAndDevelopmentOnly' in project 'application'
+Applying dependency management to configuration 'testAnnotationProcessor' in project 'application'
+Applying dependency management to configuration 'testApi' in project 'application'
+Applying dependency management to configuration 'testApiDependenciesMetadata' in project 'application'
+Applying dependency management to configuration 'testCompileClasspath' in project 'application'
+Applying dependency management to configuration 'testCompileOnly' in project 'application'
+Applying dependency management to configuration 'testCompileOnlyDependenciesMetadata' in project 'application'
+Applying dependency management to configuration 'testImplementation' in project 'application'
+Applying dependency management to configuration 'testImplementationDependenciesMetadata' in project 'application'
+Applying dependency management to configuration 'testIntransitiveDependenciesMetadata' in project 'application'
+Applying dependency management to configuration 'testKotlinScriptDef' in project 'application'
+Applying dependency management to configuration 'testKotlinScriptDefExtensions' in project 'application'
+Applying dependency management to configuration 'testResultsElementsForTest' in project 'application'
+Applying dependency management to configuration 'testRuntimeClasspath' in project 'application'
+Applying dependency management to configuration 'testRuntimeOnly' in project 'application'
+Using Kotlin Gradle Plugin gradle81 variant
+kotlin scripting plugin: created the scripting discovery configuration: kotlinScriptDef
+kotlin scripting plugin: created the scripting discovery configuration: testKotlinScriptDef
+Applying dependency management to configuration 'annotationProcessor' in project 'domain'
+Applying dependency management to configuration 'api' in project 'domain'
+Applying dependency management to configuration 'apiDependenciesMetadata' in project 'domain'
+Applying dependency management to configuration 'apiElements' in project 'domain'
+Applying dependency management to configuration 'archives' in project 'domain'
+Applying dependency management to configuration 'bootArchives' in project 'domain'
+Applying dependency management to configuration 'compileClasspath' in project 'domain'
+Applying dependency management to configuration 'compileOnly' in project 'domain'
+Applying dependency management to configuration 'compileOnlyDependenciesMetadata' in project 'domain'
+Applying dependency management to configuration 'default' in project 'domain'
+Applying dependency management to configuration 'developmentOnly' in project 'domain'
+Applying dependency management to configuration 'implementation' in project 'domain'
+Applying dependency management to configuration 'implementationDependenciesMetadata' in project 'domain'
+Applying dependency management to configuration 'intransitiveDependenciesMetadata' in project 'domain'
+Applying dependency management to configuration 'kotlinBuildToolsApiClasspath' in project 'domain'
+Applying dependency management to configuration 'kotlinCompilerClasspath' in project 'domain'
+Applying dependency management to configuration 'kotlinCompilerPluginClasspath' in project 'domain'
+Applying dependency management to configuration 'kotlinCompilerPluginClasspathMain' in project 'domain'
+Applying dependency management to configuration 'kotlinCompilerPluginClasspathTest' in project 'domain'
+Applying dependency management to configuration 'kotlinKlibCommonizerClasspath' in project 'domain'
+Applying dependency management to configuration 'kotlinNativeCompilerPluginClasspath' in project 'domain'
+Applying dependency management to configuration 'kotlinScriptDef' in project 'domain'
+Applying dependency management to configuration 'kotlinScriptDefExtensions' in project 'domain'
+Applying dependency management to configuration 'mainSourceElements' in project 'domain'
+Applying dependency management to configuration 'productionRuntimeClasspath' in project 'domain'
+Applying dependency management to configuration 'runtimeClasspath' in project 'domain'
+Applying dependency management to configuration 'runtimeElements' in project 'domain'
+Applying dependency management to configuration 'runtimeOnly' in project 'domain'
+Applying dependency management to configuration 'testAndDevelopmentOnly' in project 'domain'
+Applying dependency management to configuration 'testAnnotationProcessor' in project 'domain'
+Applying dependency management to configuration 'testApi' in project 'domain'
+Applying dependency management to configuration 'testApiDependenciesMetadata' in project 'domain'
+Applying dependency management to configuration 'testCompileClasspath' in project 'domain'
+Applying dependency management to configuration 'testCompileOnly' in project 'domain'
+Applying dependency management to configuration 'testCompileOnlyDependenciesMetadata' in project 'domain'
+Applying dependency management to configuration 'testImplementation' in project 'domain'
+Applying dependency management to configuration 'testImplementationDependenciesMetadata' in project 'domain'
+Applying dependency management to configuration 'testIntransitiveDependenciesMetadata' in project 'domain'
+Applying dependency management to configuration 'testKotlinScriptDef' in project 'domain'
+Applying dependency management to configuration 'testKotlinScriptDefExtensions' in project 'domain'
+Applying dependency management to configuration 'testResultsElementsForTest' in project 'domain'
+Applying dependency management to configuration 'testRuntimeClasspath' in project 'domain'
+Applying dependency management to configuration 'testRuntimeOnly' in project 'domain'
+Using Kotlin Gradle Plugin gradle81 variant
+kotlin scripting plugin: created the scripting discovery configuration: kotlinScriptDef
+kotlin scripting plugin: created the scripting discovery configuration: testKotlinScriptDef
+Applying dependency management to configuration 'annotationProcessor' in project 'infrastructure'
+Applying dependency management to configuration 'api' in project 'infrastructure'
+Applying dependency management to configuration 'apiDependenciesMetadata' in project 'infrastructure'
+Applying dependency management to configuration 'apiElements' in project 'infrastructure'
+Applying dependency management to configuration 'archives' in project 'infrastructure'
+Applying dependency management to configuration 'bootArchives' in project 'infrastructure'
+Applying dependency management to configuration 'compileClasspath' in project 'infrastructure'
+Applying dependency management to configuration 'compileOnly' in project 'infrastructure'
+Applying dependency management to configuration 'compileOnlyDependenciesMetadata' in project 'infrastructure'
+Applying dependency management to configuration 'default' in project 'infrastructure'
+Applying dependency management to configuration 'developmentOnly' in project 'infrastructure'
+Applying dependency management to configuration 'implementation' in project 'infrastructure'
+Applying dependency management to configuration 'implementationDependenciesMetadata' in project 'infrastructure'
+Applying dependency management to configuration 'intransitiveDependenciesMetadata' in project 'infrastructure'
+Applying dependency management to configuration 'kotlinBuildToolsApiClasspath' in project 'infrastructure'
+Applying dependency management to configuration 'kotlinCompilerClasspath' in project 'infrastructure'
+Applying dependency management to configuration 'kotlinCompilerPluginClasspath' in project 'infrastructure'
+Applying dependency management to configuration 'kotlinCompilerPluginClasspathMain' in project 'infrastructure'
+Applying dependency management to configuration 'kotlinCompilerPluginClasspathTest' in project 'infrastructure'
+Applying dependency management to configuration 'kotlinKlibCommonizerClasspath' in project 'infrastructure'
+Applying dependency management to configuration 'kotlinNativeCompilerPluginClasspath' in project 'infrastructure'
+Applying dependency management to configuration 'kotlinScriptDef' in project 'infrastructure'
+Applying dependency management to configuration 'kotlinScriptDefExtensions' in project 'infrastructure'
+Applying dependency management to configuration 'mainSourceElements' in project 'infrastructure'
+Applying dependency management to configuration 'productionRuntimeClasspath' in project 'infrastructure'
+Applying dependency management to configuration 'runtimeClasspath' in project 'infrastructure'
+Applying dependency management to configuration 'runtimeElements' in project 'infrastructure'
+Applying dependency management to configuration 'runtimeOnly' in project 'infrastructure'
+Applying dependency management to configuration 'testAndDevelopmentOnly' in project 'infrastructure'
+Applying dependency management to configuration 'testAnnotationProcessor' in project 'infrastructure'
+Applying dependency management to configuration 'testApi' in project 'infrastructure'
+Applying dependency management to configuration 'testApiDependenciesMetadata' in project 'infrastructure'
+Applying dependency management to configuration 'testCompileClasspath' in project 'infrastructure'
+Applying dependency management to configuration 'testCompileOnly' in project 'infrastructure'
+Applying dependency management to configuration 'testCompileOnlyDependenciesMetadata' in project 'infrastructure'
+Applying dependency management to configuration 'testImplementation' in project 'infrastructure'
+Applying dependency management to configuration 'testImplementationDependenciesMetadata' in project 'infrastructure'
+Applying dependency management to configuration 'testIntransitiveDependenciesMetadata' in project 'infrastructure'
+Applying dependency management to configuration 'testKotlinScriptDef' in project 'infrastructure'
+Applying dependency management to configuration 'testKotlinScriptDefExtensions' in project 'infrastructure'
+Applying dependency management to configuration 'testResultsElementsForTest' in project 'infrastructure'
+Applying dependency management to configuration 'testRuntimeClasspath' in project 'infrastructure'
+Applying dependency management to configuration 'testRuntimeOnly' in project 'infrastructure'
+
+> Configure project :application
+Evaluating project ':application' using build file '/home/red1/Projects/blackerp/application/build.gradle.kts'.
+Caching disabled for Kotlin DSL script compilation (Project/TopLevel/stage1) because:
+  Build cache is disabled
+Kotlin DSL script compilation (Project/TopLevel/stage1) is not up-to-date because:
+  No history is available.
+Caching disabled for Kotlin DSL accessors for project ':application' because:
+  Build cache is disabled
+Kotlin DSL accessors for project ':application' is not up-to-date because:
+  No history is available.
+Caching disabled for Kotlin DSL script compilation (Project/TopLevel/stage2) because:
+  Build cache is disabled
+Kotlin DSL script compilation (Project/TopLevel/stage2) is not up-to-date because:
+  No history is available.
+Applying dependency management to configuration 'apiElements-published' in project 'application'
+Applying dependency management to configuration 'runtimeElements-published' in project 'application'
+
+> Configure project :domain
+Evaluating project ':domain' using build file '/home/red1/Projects/blackerp/domain/build.gradle.kts'.
+Caching disabled for Kotlin DSL script compilation (Project/TopLevel/stage1) because:
+  Build cache is disabled
+Kotlin DSL script compilation (Project/TopLevel/stage1) is not up-to-date because:
+  No history is available.
+Caching disabled for Kotlin DSL accessors for project ':domain' because:
+  Build cache is disabled
+Skipping Kotlin DSL accessors for project ':domain' as it is up-to-date.
+Caching disabled for Kotlin DSL script compilation (Project/TopLevel/stage2) because:
+  Build cache is disabled
+Kotlin DSL script compilation (Project/TopLevel/stage2) is not up-to-date because:
+  No history is available.
+Applying dependency management to configuration 'apiElements-published' in project 'domain'
+Applying dependency management to configuration 'runtimeElements-published' in project 'domain'
+
+> Configure project :infrastructure
+Evaluating project ':infrastructure' using build file '/home/red1/Projects/blackerp/infrastructure/build.gradle.kts'.
+Caching disabled for Kotlin DSL script compilation (Project/TopLevel/stage1) because:
+  Build cache is disabled
+Kotlin DSL script compilation (Project/TopLevel/stage1) is not up-to-date because:
+  No history is available.
+Caching disabled for Kotlin DSL accessors for project ':infrastructure' because:
+  Build cache is disabled
+Skipping Kotlin DSL accessors for project ':infrastructure' as it is up-to-date.
+Caching disabled for Kotlin DSL script compilation (Project/TopLevel/stage2) because:
+  Build cache is disabled
+Kotlin DSL script compilation (Project/TopLevel/stage2) is not up-to-date because:
+  No history is available.
+Applying dependency management to configuration 'apiElements-published' in project 'infrastructure'
+Applying dependency management to configuration 'runtimeElements-published' in project 'infrastructure'
+All projects evaluated.
+Task name matched 'clean'
+Task name matched 'build'
+Selected primary task 'clean' from project :
+Selected primary task 'build' from project :
+Tasks to be executed: [task ':clean', task ':application:clean', task ':domain:clean', task ':infrastructure:clean', task ':compileJava', task ':processResources', task ':classes', task ':jar', task ':startScripts', task ':distTar', task ':distZip', task ':assemble', task ':compileTestJava', task ':processTestResources', task ':testClasses', task ':test', task ':check', task ':build', task ':application:checkKotlinGradlePluginConfigurationErrors', task ':domain:checkKotlinGradlePluginConfigurationErrors', task ':domain:compileKotlin', task ':domain:compileJava', task ':domain:processResources', task ':domain:classes', task ':domain:jar', task ':application:compileKotlin', task ':application:compileJava', task ':application:processResources', task ':application:classes', task ':application:resolveMainClassName', task ':application:bootJar', task ':application:jar', task ':application:assemble', task ':application:compileTestKotlin', task ':application:compileTestJava', task ':application:processTestResources', task ':application:testClasses', task ':application:test', task ':application:check', task ':application:build', task ':domain:resolveMainClassName', task ':domain:bootJar', task ':domain:assemble', task ':domain:compileTestKotlin', task ':domain:compileTestJava', task ':domain:processTestResources', task ':domain:testClasses', task ':domain:test', task ':domain:check', task ':domain:build', task ':infrastructure:checkKotlinGradlePluginConfigurationErrors', task ':infrastructure:compileKotlin', task ':infrastructure:compileJava', task ':infrastructure:processResources', task ':infrastructure:classes', task ':infrastructure:resolveMainClassName', task ':infrastructure:bootJar', task ':infrastructure:jar', task ':infrastructure:assemble', task ':infrastructure:compileTestKotlin', task ':infrastructure:compileTestJava', task ':infrastructure:processTestResources', task ':infrastructure:testClasses', task ':infrastructure:test', task ':infrastructure:check', task ':infrastructure:build']
+Tasks that were excluded: []
+Resolve mutations for :clean (Thread[Execution worker Thread 2,5,main]) started.
+:clean (Thread[Execution worker Thread 2,5,main]) started.
+
+> Task :clean
+Caching disabled for task ':clean' because:
+  Build cache is disabled
+Task ':clean' is not up-to-date because:
+  Task has not declared any outputs despite executing actions.
+Resolve mutations for :application:clean (Thread[Execution worker Thread 2,5,main]) started.
+:application:clean (Thread[Execution worker Thread 2,5,main]) started.
+
+> Task :application:clean UP-TO-DATE
+Caching disabled for task ':application:clean' because:
+  Build cache is disabled
+Task ':application:clean' is not up-to-date because:
+  Task has not declared any outputs despite executing actions.
+Resolve mutations for :domain:clean (Thread[Execution worker Thread 2,5,main]) started.
+:domain:clean (Thread[Execution worker Thread 2,5,main]) started.
+
+> Task :domain:clean
+Caching disabled for task ':domain:clean' because:
+  Build cache is disabled
+Task ':domain:clean' is not up-to-date because:
+  Task has not declared any outputs despite executing actions.
+Resolve mutations for :infrastructure:clean (Thread[Execution worker Thread 2,5,main]) started.
+:infrastructure:clean (Thread[Execution worker Thread 2,5,main]) started.
+destroyer locations for task group 0 (Thread[included builds,5,main]) started.
+
+> Task :infrastructure:clean UP-TO-DATE
+Caching disabled for task ':infrastructure:clean' because:
+  Build cache is disabled
+Task ':infrastructure:clean' is not up-to-date because:
+  Task has not declared any outputs despite executing actions.
+Resolve mutations for :compileJava (Thread[Execution worker Thread 2,5,main]) started.
+:compileJava (Thread[Execution worker Thread 2,5,main]) started.
+
+> Task :compileJava NO-SOURCE
+Skipping task ':compileJava' as it has no source files and no previous output files.
+Resolve mutations for :processResources (Thread[Execution worker Thread 2,5,main]) started.
+:processResources (Thread[Execution worker Thread 2,5,main]) started.
+
+> Task :processResources NO-SOURCE
+Skipping task ':processResources' as it has no source files and no previous output files.
+Resolve mutations for :classes (Thread[Execution worker Thread 2,5,main]) started.
+:classes (Thread[Execution worker Thread 6,5,main]) started.
+
+> Task :classes UP-TO-DATE
+Skipping task ':classes' as it has no actions.
+Resolve mutations for :jar (Thread[Execution worker Thread 2,5,main]) started.
+:jar (Thread[Execution worker Thread 2,5,main]) started.
+
+> Task :jar
+Caching disabled for task ':jar' because:
+  Build cache is disabled
+Task ':jar' is not up-to-date because:
+  Output property 'archiveFile' file /home/red1/Projects/blackerp/build/libs/blackerp-1.0-SNAPSHOT.jar has been removed.
+file or directory '/home/red1/Projects/blackerp/build/classes/java/main', not found
+file or directory '/home/red1/Projects/blackerp/build/resources/main', not found
+Resolve mutations for :startScripts (Thread[Execution worker Thread 2,5,main]) started.
+:startScripts (Thread[Execution worker Thread 2,5,main]) started.
+
+> Task :startScripts
+Caching disabled for task ':startScripts' because:
+  Build cache is disabled
+Task ':startScripts' is not up-to-date because:
+  Output property 'outputDir' file /home/red1/Projects/blackerp/build/scripts has been removed.
+  Output property 'outputDir' file /home/red1/Projects/blackerp/build/scripts/blackerp has been removed.
+  Output property 'outputDir' file /home/red1/Projects/blackerp/build/scripts/blackerp.bat has been removed.
+Resolve mutations for :distTar (Thread[Execution worker Thread 2,5,main]) started.
+:distTar (Thread[Execution worker Thread 2,5,main]) started.
+
+> Task :distTar
+Caching disabled for task ':distTar' because:
+  Build cache is disabled
+Task ':distTar' is not up-to-date because:
+  Output property 'archiveFile' file /home/red1/Projects/blackerp/build/distributions/blackerp-1.0-SNAPSHOT.tar has been removed.
+file or directory '/home/red1/Projects/blackerp/src/main/dist', not found
+file or directory '/home/red1/Projects/blackerp/src/dist', not found
+Resolve mutations for :distZip (Thread[Execution worker Thread 2,5,main]) started.
+:distZip (Thread[Execution worker Thread 2,5,main]) started.
+
+> Task :distZip
+Caching disabled for task ':distZip' because:
+  Build cache is disabled
+Task ':distZip' is not up-to-date because:
+  Output property 'archiveFile' file /home/red1/Projects/blackerp/build/distributions/blackerp-1.0-SNAPSHOT.zip has been removed.
+file or directory '/home/red1/Projects/blackerp/src/main/dist', not found
+file or directory '/home/red1/Projects/blackerp/src/dist', not found
+Resolve mutations for :assemble (Thread[Execution worker Thread 2,5,main]) started.
+:assemble (Thread[Execution worker Thread 2,5,main]) started.
+
+> Task :assemble
+Skipping task ':assemble' as it has no actions.
+Resolve mutations for :compileTestJava (Thread[Execution worker Thread 2,5,main]) started.
+:compileTestJava (Thread[Execution worker Thread 2,5,main]) started.
+
+> Task :compileTestJava NO-SOURCE
+Skipping task ':compileTestJava' as it has no source files and no previous output files.
+Resolve mutations for :processTestResources (Thread[Execution worker Thread 2,5,main]) started.
+:processTestResources (Thread[Execution worker Thread 2,5,main]) started.
+
+> Task :processTestResources NO-SOURCE
+Skipping task ':processTestResources' as it has no source files and no previous output files.
+Resolve mutations for :testClasses (Thread[Execution worker Thread 2,5,main]) started.
+:testClasses (Thread[Execution worker Thread 2,5,main]) started.
+
+> Task :testClasses UP-TO-DATE
+Skipping task ':testClasses' as it has no actions.
+Resolve mutations for :test (Thread[Execution worker Thread 2,5,main]) started.
+:test (Thread[Execution worker Thread 2,5,main]) started.
+
+> Task :test NO-SOURCE
+Skipping task ':test' as it has no source files and no previous output files.
+Resolve mutations for :check (Thread[Execution worker Thread 2,5,main]) started.
+:check (Thread[Execution worker Thread 2,5,main]) started.
+
+> Task :check UP-TO-DATE
+Skipping task ':check' as it has no actions.
+Resolve mutations for :build (Thread[Execution worker Thread 2,5,main]) started.
+:build (Thread[Execution worker Thread 2,5,main]) started.
+
+> Task :build
+Skipping task ':build' as it has no actions.
+Resolve mutations for :application:checkKotlinGradlePluginConfigurationErrors (Thread[Execution worker Thread 2,5,main]) started.
+:application:checkKotlinGradlePluginConfigurationErrors (Thread[Execution worker Thread 2,5,main]) started.
+
+> Task :application:checkKotlinGradlePluginConfigurationErrors
+Caching disabled for task ':application:checkKotlinGradlePluginConfigurationErrors' because:
+  Build cache is disabled
+Task ':application:checkKotlinGradlePluginConfigurationErrors' is not up-to-date because:
+  Task has not declared any outputs despite executing actions.
+Resolve mutations for :domain:checkKotlinGradlePluginConfigurationErrors (Thread[Execution worker Thread 2,5,main]) started.
+:domain:checkKotlinGradlePluginConfigurationErrors (Thread[Execution worker Thread 2,5,main]) started.
+
+> Task :domain:checkKotlinGradlePluginConfigurationErrors
+Caching disabled for task ':domain:checkKotlinGradlePluginConfigurationErrors' because:
+  Build cache is disabled
+Task ':domain:checkKotlinGradlePluginConfigurationErrors' is not up-to-date because:
+  Task has not declared any outputs despite executing actions.
+Resolve mutations for :domain:compileKotlin (Thread[Execution worker Thread 2,5,main]) started.
+:domain:compileKotlin (Thread[Execution worker Thread 2,5,main]) started.
+
+> Task :domain:compileKotlin
+Resolving global dependency management for project 'domain'
+Downloading https://repo.maven.apache.org/maven2/org/springframework/boot/spring-boot-dependencies/3.2.0/spring-boot-dependencies-3.2.0.pom to /root/.gradle/.tmp/gradle_download5145111463488575103bin
+Found locally available resource with matching checksum: [https://repo.maven.apache.org/maven2/org/assertj/assertj-bom/3.24.2/assertj-bom-3.24.2.pom, /root/.m2/repository/org/assertj/assertj-bom/3.24.2/assertj-bom-3.24.2.pom]
+Downloading https://repo.maven.apache.org/maven2/io/zipkin/brave/brave-bom/5.16.0/brave-bom-5.16.0.pom to /root/.gradle/.tmp/gradle_download5076855949629068158bin
+Found locally available resource with matching checksum: [https://repo.maven.apache.org/maven2/io/zipkin/reporter2/zipkin-reporter-bom/2.16.3/zipkin-reporter-bom-2.16.3.pom, /root/.m2/repository/io/zipkin/reporter2/zipkin-reporter-bom/2.16.3/zipkin-reporter-bom-2.16.3.pom]
+Downloading https://repo.maven.apache.org/maven2/com/datastax/oss/java-driver-bom/4.17.0/java-driver-bom-4.17.0.pom to /root/.gradle/.tmp/gradle_download10713172511044332332bin
+Downloading https://repo.maven.apache.org/maven2/io/dropwizard/metrics/metrics-bom/4.2.22/metrics-bom-4.2.22.pom to /root/.gradle/.tmp/gradle_download3924642155725615632bin
+Downloading https://repo.maven.apache.org/maven2/io/dropwizard/metrics/metrics-parent/4.2.22/metrics-parent-4.2.22.pom to /root/.gradle/.tmp/gradle_download17055851808521070184bin
+Downloading https://repo.maven.apache.org/maven2/org/glassfish/jaxb/jaxb-bom/4.0.4/jaxb-bom-4.0.4.pom to /root/.gradle/.tmp/gradle_download5818493574534018913bin
+Found locally available resource with matching checksum: [https://repo.maven.apache.org/maven2/org/eclipse/ee4j/project/1.0.8/project-1.0.8.pom, /root/.m2/repository/org/eclipse/ee4j/project/1.0.8/project-1.0.8.pom]
+Downloading https://repo.maven.apache.org/maven2/org/apache/groovy/groovy-bom/4.0.15/groovy-bom-4.0.15.pom to /root/.gradle/.tmp/gradle_download9725505669201290003bin
+Downloading https://repo.maven.apache.org/maven2/org/apache/groovy/groovy-bom/4.0.15/groovy-bom-4.0.15.module to /root/.gradle/.tmp/gradle_download3947062727097313591bin
+Downloading https://repo.maven.apache.org/maven2/org/infinispan/infinispan-bom/14.0.21.Final/infinispan-bom-14.0.21.Final.pom to /root/.gradle/.tmp/gradle_download12700114890625251695bin
+Downloading https://repo.maven.apache.org/maven2/org/infinispan/infinispan-build-configuration-parent/14.0.21.Final/infinispan-build-configuration-parent-14.0.21.Final.pom to /root/.gradle/.tmp/gradle_download8488450734915500947bin
+Found locally available resource with matching checksum: [https://repo.maven.apache.org/maven2/org/jboss/jboss-parent/39/jboss-parent-39.pom, /root/.m2/repository/org/jboss/jboss-parent/39/jboss-parent-39.pom]
+Found locally available resource with matching checksum: [https://repo.maven.apache.org/maven2/com/fasterxml/jackson/jackson-bom/2.15.3/jackson-bom-2.15.3.pom, /root/.m2/repository/com/fasterxml/jackson/jackson-bom/2.15.3/jackson-bom-2.15.3.pom]
+Found locally available resource with matching checksum: [https://repo.maven.apache.org/maven2/com/fasterxml/jackson/jackson-parent/2.15/jackson-parent-2.15.pom, /root/.m2/repository/com/fasterxml/jackson/jackson-parent/2.15/jackson-parent-2.15.pom]
+Found locally available resource with matching checksum: [https://repo.maven.apache.org/maven2/com/fasterxml/oss-parent/50/oss-parent-50.pom, /root/.m2/repository/com/fasterxml/oss-parent/50/oss-parent-50.pom]
+Downloading https://repo.maven.apache.org/maven2/org/glassfish/jersey/jersey-bom/3.1.3/jersey-bom-3.1.3.pom to /root/.gradle/.tmp/gradle_download10217950405447381980bin
+Downloading https://repo.maven.apache.org/maven2/org/eclipse/jetty/ee10/jetty-ee10-bom/12.0.3/jetty-ee10-bom-12.0.3.pom to /root/.gradle/.tmp/gradle_download10710624142579737579bin
+Downloading https://repo.maven.apache.org/maven2/org/eclipse/jetty/jetty-bom/12.0.3/jetty-bom-12.0.3.pom to /root/.gradle/.tmp/gradle_download6375184794005784052bin
+Found locally available resource with matching checksum: [https://repo.maven.apache.org/maven2/org/junit/junit-bom/5.10.1/junit-bom-5.10.1.pom, /root/.m2/repository/org/junit/junit-bom/5.10.1/junit-bom-5.10.1.pom]
+Downloading https://repo.maven.apache.org/maven2/org/junit/junit-bom/5.10.1/junit-bom-5.10.1.module to /root/.gradle/.tmp/gradle_download17866945599567834390bin
+Downloading https://repo.maven.apache.org/maven2/org/jetbrains/kotlin/kotlin-bom/1.9.20/kotlin-bom-1.9.20.pom to /root/.gradle/.tmp/gradle_download3865335295259229371bin
+Downloading https://repo.maven.apache.org/maven2/org/jetbrains/kotlinx/kotlinx-coroutines-bom/1.7.3/kotlinx-coroutines-bom-1.7.3.pom to /root/.gradle/.tmp/gradle_download5783987483909700921bin
+Downloading https://repo.maven.apache.org/maven2/org/jetbrains/kotlinx/kotlinx-serialization-bom/1.6.1/kotlinx-serialization-bom-1.6.1.pom to /root/.gradle/.tmp/gradle_download7243501500380668975bin
+Downloading https://repo.maven.apache.org/maven2/org/apache/logging/log4j/log4j-bom/2.21.1/log4j-bom-2.21.1.pom to /root/.gradle/.tmp/gradle_download14354868675227678388bin
+Downloading https://repo.maven.apache.org/maven2/org/apache/logging/logging-parent/10.1.1/logging-parent-10.1.1.pom to /root/.gradle/.tmp/gradle_download13953627680422303619bin
+Found locally available resource with matching checksum: [https://repo.maven.apache.org/maven2/org/apache/apache/30/apache-30.pom, /root/.m2/repository/org/apache/apache/30/apache-30.pom]
+Downloading https://repo.maven.apache.org/maven2/io/micrometer/micrometer-bom/1.12.0/micrometer-bom-1.12.0.pom to /root/.gradle/.tmp/gradle_download15019768899255547496bin
+Downloading https://repo.maven.apache.org/maven2/io/micrometer/micrometer-tracing-bom/1.2.0/micrometer-tracing-bom-1.2.0.pom to /root/.gradle/.tmp/gradle_download15136634922731771282bin
+Downloading https://repo.maven.apache.org/maven2/org/mockito/mockito-bom/5.7.0/mockito-bom-5.7.0.pom to /root/.gradle/.tmp/gradle_download10283523549822010517bin
+Downloading https://repo.maven.apache.org/maven2/io/netty/netty-bom/4.1.101.Final/netty-bom-4.1.101.Final.pom to /root/.gradle/.tmp/gradle_download1742818759318531210bin
+Cached resource https://repo.maven.apache.org/maven2/org/sonatype/oss/oss-parent/7/oss-parent-7.pom is up-to-date (lastModified: Mon Mar 07 20:42:48 MYT 2011).
+Found locally available resource with matching checksum: [https://repo.maven.apache.org/maven2/com/squareup/okhttp3/okhttp-bom/4.12.0/okhttp-bom-4.12.0.pom, /root/.m2/repository/com/squareup/okhttp3/okhttp-bom/4.12.0/okhttp-bom-4.12.0.pom]
+Downloading https://repo.maven.apache.org/maven2/com/squareup/okhttp3/okhttp-bom/4.12.0/okhttp-bom-4.12.0.module to /root/.gradle/.tmp/gradle_download7504379346120503883bin
+Downloading https://repo.maven.apache.org/maven2/io/opentelemetry/opentelemetry-bom/1.31.0/opentelemetry-bom-1.31.0.pom to /root/.gradle/.tmp/gradle_download10643674519510820746bin
+Downloading https://repo.maven.apache.org/maven2/io/opentelemetry/opentelemetry-bom/1.31.0/opentelemetry-bom-1.31.0.module to /root/.gradle/.tmp/gradle_download10303644072258240558bin
+Downloading https://repo.maven.apache.org/maven2/com/oracle/database/jdbc/ojdbc-bom/23.3.0.23.09/ojdbc-bom-23.3.0.23.09.pom to /root/.gradle/.tmp/gradle_download13137918969494945867bin
+Found locally available resource with matching checksum: [https://repo.maven.apache.org/maven2/io/prometheus/simpleclient_bom/0.16.0/simpleclient_bom-0.16.0.pom, /root/.m2/repository/io/prometheus/simpleclient_bom/0.16.0/simpleclient_bom-0.16.0.pom]
+Found locally available resource with matching checksum: [https://repo.maven.apache.org/maven2/io/prometheus/parent/0.16.0/parent-0.16.0.pom, /root/.m2/repository/io/prometheus/parent/0.16.0/parent-0.16.0.pom]
+Found locally available resource with matching checksum: [https://repo.maven.apache.org/maven2/com/querydsl/querydsl-bom/5.0.0/querydsl-bom-5.0.0.pom, /root/.m2/repository/com/querydsl/querydsl-bom/5.0.0/querydsl-bom-5.0.0.pom]
+Downloading https://repo.maven.apache.org/maven2/io/projectreactor/reactor-bom/2023.0.0/reactor-bom-2023.0.0.pom to /root/.gradle/.tmp/gradle_download8616636718122714178bin
+Downloading https://repo.maven.apache.org/maven2/io/projectreactor/reactor-bom/2023.0.0/reactor-bom-2023.0.0.module to /root/.gradle/.tmp/gradle_download7785024819547683653bin
+Downloading https://repo.maven.apache.org/maven2/io/rest-assured/rest-assured-bom/5.3.2/rest-assured-bom-5.3.2.pom to /root/.gradle/.tmp/gradle_download5190290648274187671bin
+Found locally available resource with matching checksum: [https://repo.maven.apache.org/maven2/io/rsocket/rsocket-bom/1.1.3/rsocket-bom-1.1.3.pom, /root/.m2/repository/io/rsocket/rsocket-bom/1.1.3/rsocket-bom-1.1.3.pom]
+Downloading https://repo.maven.apache.org/maven2/org/seleniumhq/selenium/selenium-bom/4.14.1/selenium-bom-4.14.1.pom to /root/.gradle/.tmp/gradle_download5494368842579399645bin
+Downloading https://repo.maven.apache.org/maven2/org/springframework/amqp/spring-amqp-bom/3.1.0/spring-amqp-bom-3.1.0.pom to /root/.gradle/.tmp/gradle_download3109297381194111619bin
+Downloading https://repo.maven.apache.org/maven2/org/springframework/amqp/spring-amqp-bom/3.1.0/spring-amqp-bom-3.1.0.module to /root/.gradle/.tmp/gradle_download6976214303241082803bin
+Downloading https://repo.maven.apache.org/maven2/org/springframework/batch/spring-batch-bom/5.1.0/spring-batch-bom-5.1.0.pom to /root/.gradle/.tmp/gradle_download474523628443913361bin
+Downloading https://repo.maven.apache.org/maven2/org/springframework/data/spring-data-bom/2023.1.0/spring-data-bom-2023.1.0.pom to /root/.gradle/.tmp/gradle_download4922893475260652146bin
+Downloading https://repo.maven.apache.org/maven2/org/springframework/spring-framework-bom/6.1.1/spring-framework-bom-6.1.1.pom to /root/.gradle/.tmp/gradle_download599214906772340953bin
+Downloading https://repo.maven.apache.org/maven2/org/springframework/spring-framework-bom/6.1.1/spring-framework-bom-6.1.1.module to /root/.gradle/.tmp/gradle_download5040648839176737827bin
+Downloading https://repo.maven.apache.org/maven2/org/springframework/integration/spring-integration-bom/6.2.0/spring-integration-bom-6.2.0.pom to /root/.gradle/.tmp/gradle_download12802074661800768471bin
+Downloading https://repo.maven.apache.org/maven2/org/springframework/integration/spring-integration-bom/6.2.0/spring-integration-bom-6.2.0.module to /root/.gradle/.tmp/gradle_download17487572902187886905bin
+Found locally available resource with matching checksum: [https://repo.maven.apache.org/maven2/org/springframework/restdocs/spring-restdocs-bom/3.0.1/spring-restdocs-bom-3.0.1.pom, /root/.m2/repository/org/springframework/restdocs/spring-restdocs-bom/3.0.1/spring-restdocs-bom-3.0.1.pom]
+Downloading https://repo.maven.apache.org/maven2/org/springframework/security/spring-security-bom/6.2.0/spring-security-bom-6.2.0.pom to /root/.gradle/.tmp/gradle_download5836776205903437665bin
+Downloading https://repo.maven.apache.org/maven2/org/springframework/security/spring-security-bom/6.2.0/spring-security-bom-6.2.0.module to /root/.gradle/.tmp/gradle_download631014240177731312bin
+Downloading https://repo.maven.apache.org/maven2/org/springframework/session/spring-session-bom/3.2.0/spring-session-bom-3.2.0.pom to /root/.gradle/.tmp/gradle_download2668934300369544863bin
+Downloading https://repo.maven.apache.org/maven2/org/springframework/session/spring-session-bom/3.2.0/spring-session-bom-3.2.0.module to /root/.gradle/.tmp/gradle_download111919556652947730bin
+Downloading https://repo.maven.apache.org/maven2/org/springframework/ws/spring-ws-bom/4.0.8/spring-ws-bom-4.0.8.pom to /root/.gradle/.tmp/gradle_download6777690780508000721bin
+Downloading https://repo.maven.apache.org/maven2/org/testcontainers/testcontainers-bom/1.19.3/testcontainers-bom-1.19.3.pom to /root/.gradle/.tmp/gradle_download16536181603872472496bin
+Excluding []
+Downloading https://repo.maven.apache.org/maven2/io/arrow-kt/arrow-core/1.2.0/arrow-core-1.2.0.pom to /root/.gradle/.tmp/gradle_download554709129682291750bin
+Downloading https://repo.maven.apache.org/maven2/org/jetbrains/kotlinx/kotlinx-coroutines-core/1.7.3/kotlinx-coroutines-core-1.7.3.pom to /root/.gradle/.tmp/gradle_download3200594531096409290bin
+Downloading https://repo.maven.apache.org/maven2/org/springframework/spring-context/6.1.1/spring-context-6.1.1.pom to /root/.gradle/.tmp/gradle_download4609945479607959788bin
+Downloading https://repo.maven.apache.org/maven2/jakarta/validation/jakarta.validation-api/3.0.2/jakarta.validation-api-3.0.2.pom to /root/.gradle/.tmp/gradle_download6318274173726532135bin
+Downloading https://repo.maven.apache.org/maven2/org/jetbrains/kotlin/kotlin-stdlib/1.9.20/kotlin-stdlib-1.9.20.pom to /root/.gradle/.tmp/gradle_download9657855941948396507bin
+Downloading https://repo.maven.apache.org/maven2/org/jetbrains/kotlin/kotlin-stdlib/1.9.20/kotlin-stdlib-1.9.20.module to /root/.gradle/.tmp/gradle_download4886933696114366998bin
+Downloading https://repo.maven.apache.org/maven2/org/springframework/spring-context/6.1.1/spring-context-6.1.1.module to /root/.gradle/.tmp/gradle_download3392344332778978601bin
+Downloading https://repo.maven.apache.org/maven2/org/jetbrains/kotlinx/kotlinx-coroutines-core/1.7.3/kotlinx-coroutines-core-1.7.3.module to /root/.gradle/.tmp/gradle_download8597871949806773028bin
+Downloading https://repo.maven.apache.org/maven2/io/arrow-kt/arrow-core/1.2.0/arrow-core-1.2.0.module to /root/.gradle/.tmp/gradle_download5014549408868071509bin
+Found locally available resource with matching checksum: [https://repo.maven.apache.org/maven2/org/eclipse/ee4j/project/1.0.6/project-1.0.6.pom, /root/.m2/repository/org/eclipse/ee4j/project/1.0.6/project-1.0.6.pom]
+Downloading https://repo.maven.apache.org/maven2/org/jetbrains/kotlinx/kotlinx-coroutines-core-jvm/1.7.3/kotlinx-coroutines-core-jvm-1.7.3.pom to /root/.gradle/.tmp/gradle_download5686213923367770251bin
+Downloading https://repo.maven.apache.org/maven2/org/jetbrains/kotlinx/kotlinx-coroutines-core-jvm/1.7.3/kotlinx-coroutines-core-jvm-1.7.3.module to /root/.gradle/.tmp/gradle_download12535978107462595388bin
+Downloading https://repo.maven.apache.org/maven2/io/arrow-kt/arrow-core-jvm/1.2.0/arrow-core-jvm-1.2.0.pom to /root/.gradle/.tmp/gradle_download16063168351731499388bin
+Downloading https://repo.maven.apache.org/maven2/io/arrow-kt/arrow-core-jvm/1.2.0/arrow-core-jvm-1.2.0.module to /root/.gradle/.tmp/gradle_download13578069118148658050bin
+Downloading https://repo.maven.apache.org/maven2/org/springframework/spring-aop/6.1.1/spring-aop-6.1.1.pom to /root/.gradle/.tmp/gradle_download13872461068866886270bin
+Downloading https://repo.maven.apache.org/maven2/org/springframework/spring-expression/6.1.1/spring-expression-6.1.1.pom to /root/.gradle/.tmp/gradle_download3616474402583743130bin
+Downloading https://repo.maven.apache.org/maven2/org/springframework/spring-beans/6.1.1/spring-beans-6.1.1.pom to /root/.gradle/.tmp/gradle_download8688075906759669191bin
+Downloading https://repo.maven.apache.org/maven2/org/springframework/spring-core/6.1.1/spring-core-6.1.1.pom to /root/.gradle/.tmp/gradle_download12755449689569899162bin
+Downloading https://repo.maven.apache.org/maven2/io/micrometer/micrometer-observation/1.12.0/micrometer-observation-1.12.0.pom to /root/.gradle/.tmp/gradle_download12060243941488855290bin
+Downloading https://repo.maven.apache.org/maven2/org/springframework/spring-aop/6.1.1/spring-aop-6.1.1.module to /root/.gradle/.tmp/gradle_download2786143902757875116bin
+Downloading https://repo.maven.apache.org/maven2/org/springframework/spring-beans/6.1.1/spring-beans-6.1.1.module to /root/.gradle/.tmp/gradle_download18228234060073402174bin
+Downloading https://repo.maven.apache.org/maven2/org/springframework/spring-expression/6.1.1/spring-expression-6.1.1.module to /root/.gradle/.tmp/gradle_download15975258558597271951bin
+Downloading https://repo.maven.apache.org/maven2/org/springframework/spring-core/6.1.1/spring-core-6.1.1.module to /root/.gradle/.tmp/gradle_download6395197893368971494bin
+Downloading https://repo.maven.apache.org/maven2/org/jetbrains/annotations/13.0/annotations-13.0.pom to /root/.gradle/.tmp/gradle_download17774191859077735779bin
+Downloading https://repo.maven.apache.org/maven2/org/jetbrains/annotations/23.0.0/annotations-23.0.0.pom to /root/.gradle/.tmp/gradle_download1019967186569853158bin
+Downloading https://repo.maven.apache.org/maven2/org/jetbrains/kotlin/kotlin-stdlib-common/1.9.20/kotlin-stdlib-common-1.9.20.pom to /root/.gradle/.tmp/gradle_download10059014489746167626bin
+Downloading https://repo.maven.apache.org/maven2/org/jetbrains/kotlin/kotlin-stdlib-jdk8/1.9.20/kotlin-stdlib-jdk8-1.9.20.pom to /root/.gradle/.tmp/gradle_download13512621452643854182bin
+Downloading https://repo.maven.apache.org/maven2/org/jetbrains/kotlin/kotlin-stdlib-common/1.9.20/kotlin-stdlib-common-1.9.20.module to /root/.gradle/.tmp/gradle_download8104884223371904274bin
+Downloading https://repo.maven.apache.org/maven2/io/arrow-kt/arrow-atomic/1.2.0/arrow-atomic-1.2.0.pom to /root/.gradle/.tmp/gradle_download8866577789436997339bin
+Downloading https://repo.maven.apache.org/maven2/org/codehaus/mojo/animal-sniffer-annotations/1.23/animal-sniffer-annotations-1.23.pom to /root/.gradle/.tmp/gradle_download14271986782040076209bin
+Downloading https://repo.maven.apache.org/maven2/io/arrow-kt/arrow-annotations/1.2.0/arrow-annotations-1.2.0.pom to /root/.gradle/.tmp/gradle_download9915374678559657982bin
+Downloading https://repo.maven.apache.org/maven2/io/arrow-kt/arrow-continuations/1.2.0/arrow-continuations-1.2.0.pom to /root/.gradle/.tmp/gradle_download16661462679297906158bin
+Downloading https://repo.maven.apache.org/maven2/io/arrow-kt/arrow-atomic/1.2.0/arrow-atomic-1.2.0.module to /root/.gradle/.tmp/gradle_download18279352906083914721bin
+Downloading https://repo.maven.apache.org/maven2/io/arrow-kt/arrow-continuations/1.2.0/arrow-continuations-1.2.0.module to /root/.gradle/.tmp/gradle_download11935688320668627820bin
+Downloading https://repo.maven.apache.org/maven2/org/codehaus/mojo/animal-sniffer-parent/1.23/animal-sniffer-parent-1.23.pom to /root/.gradle/.tmp/gradle_download11872573487858108578bin
+Downloading https://repo.maven.apache.org/maven2/io/arrow-kt/arrow-annotations/1.2.0/arrow-annotations-1.2.0.module to /root/.gradle/.tmp/gradle_download4534925039246136577bin
+Downloading https://repo.maven.apache.org/maven2/org/codehaus/mojo/mojo-parent/74/mojo-parent-74.pom to /root/.gradle/.tmp/gradle_download12309454130286389504bin
+Found locally available resource with matching checksum: [https://repo.maven.apache.org/maven2/org/junit/junit-bom/5.9.2/junit-bom-5.9.2.pom, /root/.m2/repository/org/junit/junit-bom/5.9.2/junit-bom-5.9.2.pom]
+Downloading https://repo.maven.apache.org/maven2/org/junit/junit-bom/5.9.2/junit-bom-5.9.2.module to /root/.gradle/.tmp/gradle_download10107210042782520075bin
+Downloading https://repo.maven.apache.org/maven2/org/springframework/spring-jcl/6.1.1/spring-jcl-6.1.1.pom to /root/.gradle/.tmp/gradle_download884514236882884193bin
+Downloading https://repo.maven.apache.org/maven2/org/springframework/spring-jcl/6.1.1/spring-jcl-6.1.1.module to /root/.gradle/.tmp/gradle_download3270486536610721611bin
+Downloading https://repo.maven.apache.org/maven2/io/micrometer/micrometer-commons/1.12.0/micrometer-commons-1.12.0.pom to /root/.gradle/.tmp/gradle_download16633468624056998620bin
+Downloading https://repo.maven.apache.org/maven2/io/arrow-kt/arrow-atomic-jvm/1.2.0/arrow-atomic-jvm-1.2.0.pom to /root/.gradle/.tmp/gradle_download13314071653328792019bin
+Downloading https://repo.maven.apache.org/maven2/io/arrow-kt/arrow-atomic-jvm/1.2.0/arrow-atomic-jvm-1.2.0.module to /root/.gradle/.tmp/gradle_download5054222043043311446bin
+Downloading https://repo.maven.apache.org/maven2/io/arrow-kt/arrow-continuations-jvm/1.2.0/arrow-continuations-jvm-1.2.0.pom to /root/.gradle/.tmp/gradle_download11019105284423412042bin
+Downloading https://repo.maven.apache.org/maven2/io/arrow-kt/arrow-continuations-jvm/1.2.0/arrow-continuations-jvm-1.2.0.module to /root/.gradle/.tmp/gradle_download1505598709889824947bin
+Downloading https://repo.maven.apache.org/maven2/io/arrow-kt/arrow-annotations-jvm/1.2.0/arrow-annotations-jvm-1.2.0.pom to /root/.gradle/.tmp/gradle_download7303532083050567585bin
+Downloading https://repo.maven.apache.org/maven2/io/arrow-kt/arrow-annotations-jvm/1.2.0/arrow-annotations-jvm-1.2.0.module to /root/.gradle/.tmp/gradle_download2429038520560156250bin
+Downloading https://repo.maven.apache.org/maven2/org/jetbrains/kotlin/kotlin-stdlib-jdk7/1.9.20/kotlin-stdlib-jdk7-1.9.20.pom to /root/.gradle/.tmp/gradle_download13747498067971946714bin
+Excluding []
+Downloading https://repo.maven.apache.org/maven2/org/springframework/spring-context/6.1.1/spring-context-6.1.1.jar to /root/.gradle/.tmp/gradle_download9801366463548968223bin
+Downloading https://repo.maven.apache.org/maven2/io/arrow-kt/arrow-core-jvm/1.2.0/arrow-core-jvm-1.2.0.jar to /root/.gradle/.tmp/gradle_download17586719180193533249bin
+Downloading https://repo.maven.apache.org/maven2/jakarta/validation/jakarta.validation-api/3.0.2/jakarta.validation-api-3.0.2.jar to /root/.gradle/.tmp/gradle_download4598242904558978612bin
+Downloading https://repo.maven.apache.org/maven2/org/jetbrains/kotlin/kotlin-stdlib/1.9.20/kotlin-stdlib-1.9.20.jar to /root/.gradle/.tmp/gradle_download11865985152771635564bin
+Downloading https://repo.maven.apache.org/maven2/org/jetbrains/kotlin/kotlin-stdlib-jdk8/1.9.20/kotlin-stdlib-jdk8-1.9.20.jar to /root/.gradle/.tmp/gradle_download14757796507187099810bin
+Downloading https://repo.maven.apache.org/maven2/io/arrow-kt/arrow-atomic-jvm/1.2.0/arrow-atomic-jvm-1.2.0.jar to /root/.gradle/.tmp/gradle_download6944724940028458023bin
+Downloading https://repo.maven.apache.org/maven2/org/jetbrains/kotlin/kotlin-stdlib-jdk7/1.9.20/kotlin-stdlib-jdk7-1.9.20.jar to /root/.gradle/.tmp/gradle_download1423256849797442296bin
+Downloading https://repo.maven.apache.org/maven2/org/jetbrains/kotlinx/kotlinx-coroutines-core-jvm/1.7.3/kotlinx-coroutines-core-jvm-1.7.3.jar to /root/.gradle/.tmp/gradle_download4055718618912761681bin
+Downloading https://repo.maven.apache.org/maven2/org/jetbrains/annotations/23.0.0/annotations-23.0.0.jar to /root/.gradle/.tmp/gradle_download11978665423155615598bin
+Downloading https://repo.maven.apache.org/maven2/org/springframework/spring-aop/6.1.1/spring-aop-6.1.1.jar to /root/.gradle/.tmp/gradle_download13967082989087668442bin
+Downloading https://repo.maven.apache.org/maven2/org/springframework/spring-beans/6.1.1/spring-beans-6.1.1.jar to /root/.gradle/.tmp/gradle_download5809501024734652572bin
+Downloading https://repo.maven.apache.org/maven2/org/springframework/spring-core/6.1.1/spring-core-6.1.1.jar to /root/.gradle/.tmp/gradle_download12109260586079513788bin
+Downloading https://repo.maven.apache.org/maven2/org/springframework/spring-expression/6.1.1/spring-expression-6.1.1.jar to /root/.gradle/.tmp/gradle_download4431757289343874157bin
+Downloading https://repo.maven.apache.org/maven2/io/micrometer/micrometer-observation/1.12.0/micrometer-observation-1.12.0.jar to /root/.gradle/.tmp/gradle_download6870724960294706933bin
+Downloading https://repo.maven.apache.org/maven2/org/springframework/spring-jcl/6.1.1/spring-jcl-6.1.1.jar to /root/.gradle/.tmp/gradle_download5694016936866669878bin
+Downloading https://repo.maven.apache.org/maven2/io/arrow-kt/arrow-continuations-jvm/1.2.0/arrow-continuations-jvm-1.2.0.jar to /root/.gradle/.tmp/gradle_download9400169805440442958bin
+Downloading https://repo.maven.apache.org/maven2/io/micrometer/micrometer-commons/1.12.0/micrometer-commons-1.12.0.jar to /root/.gradle/.tmp/gradle_download4316497250525163698bin
+Downloading https://repo.maven.apache.org/maven2/io/arrow-kt/arrow-annotations-jvm/1.2.0/arrow-annotations-jvm-1.2.0.jar to /root/.gradle/.tmp/gradle_download16540759600332353991bin
+Transforming kotlinx-coroutines-core-jvm-1.7.3.jar with ClasspathEntrySnapshotTransform
+Transforming arrow-core-jvm-1.2.0.jar with ClasspathEntrySnapshotTransform
+Transforming arrow-atomic-jvm-1.2.0.jar with ClasspathEntrySnapshotTransform
+Transforming kotlin-stdlib-jdk8-1.9.20.jar with ClasspathEntrySnapshotTransform
+Transforming kotlin-stdlib-jdk7-1.9.20.jar with ClasspathEntrySnapshotTransform
+Transforming kotlin-stdlib-1.9.20.jar with ClasspathEntrySnapshotTransform
+Caching disabled for ClasspathEntrySnapshotTransform: /root/.gradle/caches/modules-2/files-2.1/io.arrow-kt/arrow-atomic-jvm/1.2.0/950772397da0a5983e86fc8cc63900a48e37ffca/arrow-atomic-jvm-1.2.0.jar because:
+  Build cache is disabled
+Caching disabled for ClasspathEntrySnapshotTransform: /root/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-stdlib-jdk8/1.9.20/e2b4d1f475ae0606d063a84fce4dccdb45c7e12a/kotlin-stdlib-jdk8-1.9.20.jar because:
+  Build cache is disabled
+Caching disabled for ClasspathEntrySnapshotTransform: /root/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-stdlib-jdk7/1.9.20/8b4b73f4e08efaae93fc01d8c6eaab58a72d2ab3/kotlin-stdlib-jdk7-1.9.20.jar because:
+  Build cache is disabled
+ClasspathEntrySnapshotTransform: /root/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-stdlib-jdk7/1.9.20/8b4b73f4e08efaae93fc01d8c6eaab58a72d2ab3/kotlin-stdlib-jdk7-1.9.20.jar is not up-to-date because:
+  No history is available.
+ClasspathEntrySnapshotTransform: /root/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-stdlib-jdk8/1.9.20/e2b4d1f475ae0606d063a84fce4dccdb45c7e12a/kotlin-stdlib-jdk8-1.9.20.jar is not up-to-date because:
+  No history is available.
+ClasspathEntrySnapshotTransform: /root/.gradle/caches/modules-2/files-2.1/io.arrow-kt/arrow-atomic-jvm/1.2.0/950772397da0a5983e86fc8cc63900a48e37ffca/arrow-atomic-jvm-1.2.0.jar is not up-to-date because:
+  No history is available.
+Transforming spring-context-6.1.1.jar with ClasspathEntrySnapshotTransform
+Caching disabled for ClasspathEntrySnapshotTransform: /root/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-stdlib/1.9.20/e58b4816ac517e9cc5df1db051120c63d4cde669/kotlin-stdlib-1.9.20.jar because:
+  Build cache is disabled
+ClasspathEntrySnapshotTransform: /root/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-stdlib/1.9.20/e58b4816ac517e9cc5df1db051120c63d4cde669/kotlin-stdlib-1.9.20.jar is not up-to-date because:
+  No history is available.
+Transforming jakarta.validation-api-3.0.2.jar with ClasspathEntrySnapshotTransform
+Transforming annotations-23.0.0.jar with ClasspathEntrySnapshotTransform
+Transforming spring-aop-6.1.1.jar with ClasspathEntrySnapshotTransform
+Transforming spring-beans-6.1.1.jar with ClasspathEntrySnapshotTransform
+Transforming spring-expression-6.1.1.jar with ClasspathEntrySnapshotTransform
+Transforming spring-core-6.1.1.jar with ClasspathEntrySnapshotTransform
+Transforming micrometer-observation-1.12.0.jar with ClasspathEntrySnapshotTransform
+Transforming spring-jcl-6.1.1.jar with ClasspathEntrySnapshotTransform
+Transforming micrometer-commons-1.12.0.jar with ClasspathEntrySnapshotTransform
+Transforming arrow-continuations-jvm-1.2.0.jar with ClasspathEntrySnapshotTransform
+Transforming arrow-annotations-jvm-1.2.0.jar with ClasspathEntrySnapshotTransform
+Caching disabled for ClasspathEntrySnapshotTransform: /root/.gradle/caches/modules-2/files-2.1/jakarta.validation/jakarta.validation-api/3.0.2/92b6631659ba35ca09e44874d3eb936edfeee532/jakarta.validation-api-3.0.2.jar because:
+  Build cache is disabled
+ClasspathEntrySnapshotTransform: /root/.gradle/caches/modules-2/files-2.1/jakarta.validation/jakarta.validation-api/3.0.2/92b6631659ba35ca09e44874d3eb936edfeee532/jakarta.validation-api-3.0.2.jar is not up-to-date because:
+  No history is available.
+Caching disabled for ClasspathEntrySnapshotTransform: /root/.gradle/caches/modules-2/files-2.1/org.jetbrains/annotations/23.0.0/8cc20c07506ec18e0834947b84a864bfc094484e/annotations-23.0.0.jar because:
+  Build cache is disabled
+ClasspathEntrySnapshotTransform: /root/.gradle/caches/modules-2/files-2.1/org.jetbrains/annotations/23.0.0/8cc20c07506ec18e0834947b84a864bfc094484e/annotations-23.0.0.jar is not up-to-date because:
+  No history is available.
+Caching disabled for ClasspathEntrySnapshotTransform: /root/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlinx/kotlinx-coroutines-core-jvm/1.7.3/2b09627576f0989a436a00a4a54b55fa5026fb86/kotlinx-coroutines-core-jvm-1.7.3.jar because:
+  Build cache is disabled
+ClasspathEntrySnapshotTransform: /root/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlinx/kotlinx-coroutines-core-jvm/1.7.3/2b09627576f0989a436a00a4a54b55fa5026fb86/kotlinx-coroutines-core-jvm-1.7.3.jar is not up-to-date because:
+  No history is available.
+Caching disabled for ClasspathEntrySnapshotTransform: /root/.gradle/caches/modules-2/files-2.1/org.springframework/spring-aop/6.1.1/66cb0e08770d4523ae3976b0b791cde767466c61/spring-aop-6.1.1.jar because:
+  Build cache is disabled
+ClasspathEntrySnapshotTransform: /root/.gradle/caches/modules-2/files-2.1/org.springframework/spring-aop/6.1.1/66cb0e08770d4523ae3976b0b791cde767466c61/spring-aop-6.1.1.jar is not up-to-date because:
+  No history is available.
+Caching disabled for ClasspathEntrySnapshotTransform: /root/.gradle/caches/modules-2/files-2.1/org.springframework/spring-context/6.1.1/610d7dd3f62d22d42b993a201e3110649b68e17/spring-context-6.1.1.jar because:
+  Build cache is disabled
+ClasspathEntrySnapshotTransform: /root/.gradle/caches/modules-2/files-2.1/org.springframework/spring-context/6.1.1/610d7dd3f62d22d42b993a201e3110649b68e17/spring-context-6.1.1.jar is not up-to-date because:
+  No history is available.
+Caching disabled for ClasspathEntrySnapshotTransform: /root/.gradle/caches/modules-2/files-2.1/io.arrow-kt/arrow-core-jvm/1.2.0/5bddff8110df16b996e9380e755f7a389e8dfba2/arrow-core-jvm-1.2.0.jar because:
+  Build cache is disabled
+ClasspathEntrySnapshotTransform: /root/.gradle/caches/modules-2/files-2.1/io.arrow-kt/arrow-core-jvm/1.2.0/5bddff8110df16b996e9380e755f7a389e8dfba2/arrow-core-jvm-1.2.0.jar is not up-to-date because:
+  No history is available.
+Caching disabled for ClasspathEntrySnapshotTransform: /root/.gradle/caches/modules-2/files-2.1/org.springframework/spring-beans/6.1.1/6af88af13193acf2197bc0a42f0ec4e5c481bfe9/spring-beans-6.1.1.jar because:
+  Build cache is disabled
+ClasspathEntrySnapshotTransform: /root/.gradle/caches/modules-2/files-2.1/org.springframework/spring-beans/6.1.1/6af88af13193acf2197bc0a42f0ec4e5c481bfe9/spring-beans-6.1.1.jar is not up-to-date because:
+  No history is available.
+Caching disabled for ClasspathEntrySnapshotTransform: /root/.gradle/caches/modules-2/files-2.1/org.springframework/spring-expression/6.1.1/807700a64cb055ed85af189d1fa0702bc0d2efba/spring-expression-6.1.1.jar because:
+  Build cache is disabled
+ClasspathEntrySnapshotTransform: /root/.gradle/caches/modules-2/files-2.1/org.springframework/spring-expression/6.1.1/807700a64cb055ed85af189d1fa0702bc0d2efba/spring-expression-6.1.1.jar is not up-to-date because:
+  No history is available.
+Caching disabled for ClasspathEntrySnapshotTransform: /root/.gradle/caches/modules-2/files-2.1/io.micrometer/micrometer-observation/1.12.0/4f4981faa7968441d0092107df9b750e057374af/micrometer-observation-1.12.0.jar because:
+  Build cache is disabled
+ClasspathEntrySnapshotTransform: /root/.gradle/caches/modules-2/files-2.1/io.micrometer/micrometer-observation/1.12.0/4f4981faa7968441d0092107df9b750e057374af/micrometer-observation-1.12.0.jar is not up-to-date because:
+  No history is available.
+Caching disabled for ClasspathEntrySnapshotTransform: /root/.gradle/caches/modules-2/files-2.1/org.springframework/spring-jcl/6.1.1/69ebbf7bad707d34e81d00213c756bc6fcc31dd7/spring-jcl-6.1.1.jar because:
+  Build cache is disabled
+ClasspathEntrySnapshotTransform: /root/.gradle/caches/modules-2/files-2.1/org.springframework/spring-jcl/6.1.1/69ebbf7bad707d34e81d00213c756bc6fcc31dd7/spring-jcl-6.1.1.jar is not up-to-date because:
+  No history is available.
+Caching disabled for ClasspathEntrySnapshotTransform: /root/.gradle/caches/modules-2/files-2.1/io.micrometer/micrometer-commons/1.12.0/2436654d439bd4ff6aad6419519357be8ba4f0d/micrometer-commons-1.12.0.jar because:
+  Build cache is disabled
+ClasspathEntrySnapshotTransform: /root/.gradle/caches/modules-2/files-2.1/io.micrometer/micrometer-commons/1.12.0/2436654d439bd4ff6aad6419519357be8ba4f0d/micrometer-commons-1.12.0.jar is not up-to-date because:
+  No history is available.
+Caching disabled for ClasspathEntrySnapshotTransform: /root/.gradle/caches/modules-2/files-2.1/io.arrow-kt/arrow-continuations-jvm/1.2.0/f7cef0167f6a42bb3a5c7a48561735a2975b6abd/arrow-continuations-jvm-1.2.0.jar because:
+  Build cache is disabled
+ClasspathEntrySnapshotTransform: /root/.gradle/caches/modules-2/files-2.1/io.arrow-kt/arrow-continuations-jvm/1.2.0/f7cef0167f6a42bb3a5c7a48561735a2975b6abd/arrow-continuations-jvm-1.2.0.jar is not up-to-date because:
+  No history is available.
+Caching disabled for ClasspathEntrySnapshotTransform: /root/.gradle/caches/modules-2/files-2.1/io.arrow-kt/arrow-annotations-jvm/1.2.0/2d000341e3ff976fb62fda6e3ba181dd04981d9d/arrow-annotations-jvm-1.2.0.jar because:
+  Build cache is disabled
+ClasspathEntrySnapshotTransform: /root/.gradle/caches/modules-2/files-2.1/io.arrow-kt/arrow-annotations-jvm/1.2.0/2d000341e3ff976fb62fda6e3ba181dd04981d9d/arrow-annotations-jvm-1.2.0.jar is not up-to-date because:
+  No history is available.
+Caching disabled for ClasspathEntrySnapshotTransform: /root/.gradle/caches/modules-2/files-2.1/org.springframework/spring-core/6.1.1/22d73bef97aff8a74a992716fe1aafc8f8a8a68d/spring-core-6.1.1.jar because:
+  Build cache is disabled
+ClasspathEntrySnapshotTransform: /root/.gradle/caches/modules-2/files-2.1/org.springframework/spring-core/6.1.1/22d73bef97aff8a74a992716fe1aafc8f8a8a68d/spring-core-6.1.1.jar is not up-to-date because:
+  No history is available.
+Cached resource https://repo.maven.apache.org/maven2/org/jetbrains/kotlin/kotlin-compiler-embeddable/1.9.20/kotlin-compiler-embeddable-1.9.20.pom is up-to-date (lastModified: Tue Oct 31 02:35:49 MYT 2023).
+Cached resource https://repo.maven.apache.org/maven2/org/jetbrains/kotlin/kotlin-daemon-embeddable/1.9.20/kotlin-daemon-embeddable-1.9.20.pom is up-to-date (lastModified: Tue Oct 31 02:35:51 MYT 2023).
+Cached resource https://repo.maven.apache.org/maven2/org/jetbrains/intellij/deps/trove4j/1.0.20200330/trove4j-1.0.20200330.pom is up-to-date (lastModified: Thu Apr 02 10:13:05 MYT 2020).
+Downloading https://repo.maven.apache.org/maven2/org/jetbrains/kotlin/kotlin-script-runtime/1.9.20/kotlin-script-runtime-1.9.20.pom to /root/.gradle/.tmp/gradle_download16276352083815875810bin
+Downloading https://repo.maven.apache.org/maven2/org/jetbrains/kotlin/kotlin-reflect/1.9.20/kotlin-reflect-1.9.20.pom to /root/.gradle/.tmp/gradle_download1542480715373806127bin
+Excluding []
+Cached resource https://repo.maven.apache.org/maven2/org/jetbrains/intellij/deps/trove4j/1.0.20200330/trove4j-1.0.20200330.jar is up-to-date (lastModified: Thu Apr 02 10:13:05 MYT 2020).
+Cached resource https://repo.maven.apache.org/maven2/org/jetbrains/kotlin/kotlin-compiler-embeddable/1.9.20/kotlin-compiler-embeddable-1.9.20.jar is up-to-date (lastModified: Tue Oct 31 02:35:47 MYT 2023).
+Cached resource https://repo.maven.apache.org/maven2/org/jetbrains/kotlin/kotlin-daemon-embeddable/1.9.20/kotlin-daemon-embeddable-1.9.20.jar is up-to-date (lastModified: Tue Oct 31 02:35:51 MYT 2023).
+Downloading https://repo.maven.apache.org/maven2/org/jetbrains/annotations/13.0/annotations-13.0.jar to /root/.gradle/.tmp/gradle_download15660458494904821011bin
+Downloading https://repo.maven.apache.org/maven2/org/jetbrains/kotlin/kotlin-reflect/1.9.20/kotlin-reflect-1.9.20.jar to /root/.gradle/.tmp/gradle_download3002258969002653333bin
+Downloading https://repo.maven.apache.org/maven2/org/jetbrains/kotlin/kotlin-script-runtime/1.9.20/kotlin-script-runtime-1.9.20.jar to /root/.gradle/.tmp/gradle_download383719643487746356bin
+Cached resource https://repo.maven.apache.org/maven2/org/jetbrains/kotlin/kotlin-scripting-compiler-embeddable/1.9.20/kotlin-scripting-compiler-embeddable-1.9.20.pom is up-to-date (lastModified: Tue Oct 31 02:36:31 MYT 2023).
+Downloading https://repo.maven.apache.org/maven2/org/jetbrains/kotlin/kotlin-allopen-compiler-plugin-embeddable/1.9.20/kotlin-allopen-compiler-plugin-embeddable-1.9.20.pom to /root/.gradle/.tmp/gradle_download6611582265674705006bin
+Cached resource https://repo.maven.apache.org/maven2/org/jetbrains/kotlin/kotlin-scripting-compiler-impl-embeddable/1.9.20/kotlin-scripting-compiler-impl-embeddable-1.9.20.pom is up-to-date (lastModified: Tue Oct 31 02:36:36 MYT 2023).
+Cached resource https://repo.maven.apache.org/maven2/org/jetbrains/kotlin/kotlin-scripting-common/1.9.20/kotlin-scripting-common-1.9.20.pom is up-to-date (lastModified: Tue Oct 31 02:36:33 MYT 2023).
+Cached resource https://repo.maven.apache.org/maven2/org/jetbrains/kotlin/kotlin-scripting-jvm/1.9.20/kotlin-scripting-jvm-1.9.20.pom is up-to-date (lastModified: Tue Oct 31 02:35:10 MYT 2023).
+Excluding []
+Cached resource https://repo.maven.apache.org/maven2/org/jetbrains/kotlin/kotlin-scripting-compiler-embeddable/1.9.20/kotlin-scripting-compiler-embeddable-1.9.20.jar is up-to-date (lastModified: Tue Oct 31 02:36:31 MYT 2023).
+Cached resource https://repo.maven.apache.org/maven2/org/jetbrains/kotlin/kotlin-scripting-common/1.9.20/kotlin-scripting-common-1.9.20.jar is up-to-date (lastModified: Tue Oct 31 02:36:33 MYT 2023).
+Cached resource https://repo.maven.apache.org/maven2/org/jetbrains/kotlin/kotlin-scripting-compiler-impl-embeddable/1.9.20/kotlin-scripting-compiler-impl-embeddable-1.9.20.jar is up-to-date (lastModified: Tue Oct 31 02:36:36 MYT 2023).
+Cached resource https://repo.maven.apache.org/maven2/org/jetbrains/kotlin/kotlin-scripting-jvm/1.9.20/kotlin-scripting-jvm-1.9.20.jar is up-to-date (lastModified: Tue Oct 31 02:35:10 MYT 2023).
+Downloading https://repo.maven.apache.org/maven2/org/jetbrains/kotlin/kotlin-allopen-compiler-plugin-embeddable/1.9.20/kotlin-allopen-compiler-plugin-embeddable-1.9.20.jar to /root/.gradle/.tmp/gradle_download2888748112258257759bin
+Caching disabled for task ':domain:compileKotlin' because:
+  Build cache is disabled
+Task ':domain:compileKotlin' is not up-to-date because:
+  Task has failed previously.
+The input changes require a full rebuild for incremental task ':domain:compileKotlin'.
+file or directory '/home/red1/Projects/blackerp/domain/src/main/kotlin', not found
+file or directory '/home/red1/Projects/blackerp/domain/src/main/java', not found
+file or directory '/home/red1/Projects/blackerp/domain/src/main/kotlin', not found
+file or directory '/home/red1/Projects/blackerp/domain/src/main/java', not found
+file or directory '/home/red1/Projects/blackerp/domain/src/main/kotlin', not found
+file or directory '/home/red1/Projects/blackerp/domain/src/main/java', not found
+file or directory '/home/red1/Projects/blackerp/domain/src/main/kotlin', not found
+file or directory '/home/red1/Projects/blackerp/domain/src/main/java', not found
+file or directory '/home/red1/Projects/blackerp/domain/src/main/kotlin', not found
+file or directory '/home/red1/Projects/blackerp/domain/src/main/java', not found
+Kotlin source files: /home/red1/Projects/blackerp/domain/core/ad/window/WindowName.kt, /home/red1/Projects/blackerp/domain/core/ad/process/ADProcess.kt, /home/red1/Projects/blackerp/domain/core/ad/process/ProcessImplementation.kt, /home/red1/Projects/blackerp/domain/core/ad/process/ADParameter.kt, /home/red1/Projects/blackerp/domain/core/ad/process/ProcessOperations.kt, /home/red1/Projects/blackerp/domain/core/ad/document/Document.kt, /home/red1/Projects/blackerp/domain/core/ad/document/DocumentOperations.kt, /home/red1/Projects/blackerp/domain/core/ad/document/DocumentStatus.kt, /home/red1/Projects/blackerp/domain/core/ad/document/DocumentType.kt, /home/red1/Projects/blackerp/domain/core/ad/shared/values/ProcessName.kt, /home/red1/Projects/blackerp/domain/core/ad/base/ADModule.kt, /home/red1/Projects/blackerp/domain/core/ad/base/ModuleName.kt, /home/red1/Projects/blackerp/domain/core/ad/base/ADObject.kt, /home/red1/Projects/blackerp/domain/core/ad/tab/TabOperations.kt, /home/red1/Projects/blackerp/domain/core/ad/tab/CreateTabParams.kt, /home/red1/Projects/blackerp/domain/core/ad/tab/OrderBySpec.kt, /home/red1/Projects/blackerp/domain/core/ad/tab/value/TabName.kt, /home/red1/Projects/blackerp/domain/core/ad/tab/TabError.kt, /home/red1/Projects/blackerp/domain/core/ad/tab/ADTab.kt, /home/red1/Projects/blackerp/domain/core/ad/table/TableConstraint.kt, /home/red1/Projects/blackerp/domain/core/ad/table/TableRelationship.kt, /home/red1/Projects/blackerp/domain/core/ad/table/ConstraintOperations.kt, /home/red1/Projects/blackerp/domain/core/ad/table/RelationshipOperations.kt, /home/red1/Projects/blackerp/domain/core/ad/workflow/WorkflowNode.kt, /home/red1/Projects/blackerp/domain/core/ad/workflow/NodeType.kt, /home/red1/Projects/blackerp/domain/core/ad/workflow/WorkflowOperations.kt, /home/red1/Projects/blackerp/domain/core/ad/workflow/WorkflowTransition.kt, /home/red1/Projects/blackerp/domain/core/ad/workflow/NodeAction.kt, /home/red1/Projects/blackerp/domain/core/ad/reference/ReferenceOperations.kt, /home/red1/Projects/blackerp/domain/core/ad/reference/value/ReferenceName.kt, /home/red1/Projects/blackerp/domain/core/ad/reference/ADReference.kt, /home/red1/Projects/blackerp/domain/core/error/PluginError.kt, /home/red1/Projects/blackerp/domain/core/error/TableErrors.kt, /home/red1/Projects/blackerp/domain/core/error/DomainError.kt, /home/red1/Projects/blackerp/domain/core/error/WorkflowErrors.kt, /home/red1/Projects/blackerp/domain/core/security/SecurityModel.kt, /home/red1/Projects/blackerp/domain/core/security/SecurityOperations.kt, /home/red1/Projects/blackerp/domain/core/tenant/TenantAware.kt, /home/red1/Projects/blackerp/domain/core/values/DataType.kt, /home/red1/Projects/blackerp/domain/core/values/Precision.kt, /home/red1/Projects/blackerp/domain/core/values/AccessLevel.kt, /home/red1/Projects/blackerp/domain/core/values/Description.kt, /home/red1/Projects/blackerp/domain/core/values/Amount.kt, /home/red1/Projects/blackerp/domain/core/values/ColumnName.kt, /home/red1/Projects/blackerp/domain/core/values/Scale.kt, /home/red1/Projects/blackerp/domain/core/values/Length.kt, /home/red1/Projects/blackerp/domain/core/values/EventMetadata.kt, /home/red1/Projects/blackerp/domain/core/values/TableName.kt, /home/red1/Projects/blackerp/domain/core/values/Currency.kt, /home/red1/Projects/blackerp/domain/core/values/DisplayName.kt, /home/red1/Projects/blackerp/domain/events/WorkflowEvents.kt, /home/red1/Projects/blackerp/domain/events/publishers/DomainEventPublisher.kt, /home/red1/Projects/blackerp/domain/events/RelationshipEvents.kt, /home/red1/Projects/blackerp/domain/events/handlers/RelationshipEventHandler.kt, /home/red1/Projects/blackerp/domain/events/handlers/ConstraintEventHandler.kt, /home/red1/Projects/blackerp/domain/events/EventMetadata.kt, /home/red1/Projects/blackerp/domain/events/DomainEvent.kt, /home/red1/Projects/blackerp/domain/events/ConstraintEvents.kt, /home/red1/Projects/blackerp/domain/validation/validators/module/ModuleValidator.kt, /home/red1/Projects/blackerp/domain/validation/validators/model/CircularReferenceValidator.kt, /home/red1/Projects/blackerp/domain/validation/validators/model/ConstraintValidator.kt, /home/red1/Projects/blackerp/domain/validation/validators/model/TableValidator.kt, /home/red1/Projects/blackerp/domain/validation/validators/model/CompositeValidator.kt, /home/red1/Projects/blackerp/domain/validation/validators/model/ColumnValidator.kt, /home/red1/Projects/blackerp/domain/validation/validators/model/RelationshipValidator.kt
+Java source files: 
+Script source files: 
+Script file extensions: 
+Using Kotlin/JVM incremental compilation
+[KOTLIN] Kotlin compilation 'jdkHome' argument: /usr/lib/jvm/java-17-openjdk-amd64
+
+Resolve mutations for :domain:processResources (Thread[Execution worker Thread 7,5,main]) started.
+:domain:processResources (Thread[Execution worker Thread 7,5,main]) started.
+
+> Task :domain:processResources NO-SOURCE
+Skipping task ':domain:processResources' as it has no source files and no previous output files.
+Resolve mutations for :application:processResources (Thread[Execution worker Thread 7,5,main]) started.
+:application:processResources (Thread[Execution worker Thread 7,5,main]) started.
+
+> Task :application:processResources NO-SOURCE
+Skipping task ':application:processResources' as it has no source files and no previous output files.
+Resolve mutations for :application:processTestResources (Thread[Execution worker Thread 7,5,main]) started.
+:application:processTestResources (Thread[Execution worker Thread 7,5,main]) started.
+
+> Task :application:processTestResources NO-SOURCE
+Skipping task ':application:processTestResources' as it has no source files and no previous output files.
+Resolve mutations for :domain:processTestResources (Thread[Execution worker Thread 7,5,main]) started.
+:domain:processTestResources (Thread[Execution worker Thread 7,5,main]) started.
+
+> Task :domain:processTestResources NO-SOURCE
+Skipping task ':domain:processTestResources' as it has no source files and no previous output files.
+Resolve mutations for :infrastructure:checkKotlinGradlePluginConfigurationErrors (Thread[Execution worker Thread 7,5,main]) started.
+:infrastructure:checkKotlinGradlePluginConfigurationErrors (Thread[Execution worker Thread 7,5,main]) started.
+
+> Task :infrastructure:checkKotlinGradlePluginConfigurationErrors
+Caching disabled for task ':infrastructure:checkKotlinGradlePluginConfigurationErrors' because:
+  Build cache is disabled
+Task ':infrastructure:checkKotlinGradlePluginConfigurationErrors' is not up-to-date because:
+  Task has not declared any outputs despite executing actions.
+Resolve mutations for :infrastructure:processResources (Thread[Execution worker Thread 7,5,main]) started.
+:infrastructure:processResources (Thread[Execution worker Thread 7,5,main]) started.
+
+> Task :infrastructure:processResources NO-SOURCE
+Skipping task ':infrastructure:processResources' as it has no source files and no previous output files.
+Resolve mutations for :infrastructure:processTestResources (Thread[Execution worker Thread 7,5,main]) started.
+:infrastructure:processTestResources (Thread[Execution worker Thread 7,5,main]) started.
+
+> Task :infrastructure:processTestResources NO-SOURCE
+Skipping task ':infrastructure:processTestResources' as it has no source files and no previous output files.
+
+> Task :domain:compileKotlin
+i: starting the daemon as: /usr/lib/jvm/java-17-openjdk-amd64/bin/java -cp /root/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-compiler-embeddable/1.9.20/b44d2f7d8c1c67c0ed66d40e57e52623ca753db7/kotlin-compiler-embeddable-1.9.20.jar:/root/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-stdlib/1.9.20/e58b4816ac517e9cc5df1db051120c63d4cde669/kotlin-stdlib-1.9.20.jar:/root/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-script-runtime/1.9.20/6fdfef711b8e07f1a4d0979a60acd7bc8a800777/kotlin-script-runtime-1.9.20.jar:/root/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-reflect/1.9.20/34eeb4eed5f493cdbb760ef50a5653ec414006bf/kotlin-reflect-1.9.20.jar:/root/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-daemon-embeddable/1.9.20/a2a6b491bc53049e2f1af33245481db49034ba52/kotlin-daemon-embeddable-1.9.20.jar:/root/.gradle/caches/modules-2/files-2.1/org.jetbrains.intellij.deps/trove4j/1.0.20200330/3afb14d5f9ceb459d724e907a21145e8ff394f02/trove4j-1.0.20200330.jar:/root/.gradle/caches/modules-2/files-2.1/org.jetbrains/annotations/13.0/919f0dfe192fb4e063e7dacadee7f8bb9a2672a9/annotations-13.0.jar -Djava.awt.headless=true -D$java.rmi.server.hostname=127.0.0.1 -Xmx512m -XX:MaxMetaspaceSize=384m -Dkotlin.environment.keepalive -ea --add-exports java.base/sun.nio.ch=ALL-UNNAMED org.jetbrains.kotlin.daemon.KotlinCompileDaemon --daemon-runFilesPath /root/.local/share/kotlin/daemon --daemon-autoshutdownIdleSeconds=7200 --daemon-compilerClasspath /root/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-compiler-embeddable/1.9.20/b44d2f7d8c1c67c0ed66d40e57e52623ca753db7/kotlin-compiler-embeddable-1.9.20.jar:/root/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-stdlib/1.9.20/e58b4816ac517e9cc5df1db051120c63d4cde669/kotlin-stdlib-1.9.20.jar:/root/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-script-runtime/1.9.20/6fdfef711b8e07f1a4d0979a60acd7bc8a800777/kotlin-script-runtime-1.9.20.jar:/root/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-reflect/1.9.20/34eeb4eed5f493cdbb760ef50a5653ec414006bf/kotlin-reflect-1.9.20.jar:/root/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-daemon-embeddable/1.9.20/a2a6b491bc53049e2f1af33245481db49034ba52/kotlin-daemon-embeddable-1.9.20.jar:/root/.gradle/caches/modules-2/files-2.1/org.jetbrains.intellij.deps/trove4j/1.0.20200330/3afb14d5f9ceb459d724e907a21145e8ff394f02/trove4j-1.0.20200330.jar:/root/.gradle/caches/modules-2/files-2.1/org.jetbrains/annotations/13.0/919f0dfe192fb4e063e7dacadee7f8bb9a2672a9/annotations-13.0.jar
+i: Received the message signalling that the daemon is ready
+i: new daemon started, trying to find it
+i: found daemon on port 17200 (16 ms old), trying to connect
+i: connected to the daemon
+Options for KOTLIN DAEMON: IncrementalCompilationOptions(super=CompilationOptions(compilerMode=INCREMENTAL_COMPILER, targetPlatform=JVM, reportCategories=[0, 3], reportSeverity=2, requestedCompilationResults=[0], kotlinScriptExtensions=[]), areFileChangesKnown=false, modifiedFiles=null, deletedFiles=null, classpathChanges=NotAvailableForNonIncrementalRun, workingDir=/home/red1/Projects/blackerp/domain/build/kotlin/compileKotlin/cacheable, multiModuleICSettings=MultiModuleICSettings(buildHistoryFile=/home/red1/Projects/blackerp/domain/build/kotlin/compileKotlin/local-state/build-history.bin, useModuleDetection=false), usePreciseJavaTracking=true, outputFiles=[/home/red1/Projects/blackerp/domain/build/classes/kotlin/main, /home/red1/Projects/blackerp/domain/build/kotlin/compileKotlin/cacheable, /home/red1/Projects/blackerp/domain/build/kotlin/compileKotlin/local-state])
+e: file:///home/red1/Projects/blackerp/domain/core/ad/base/ADModule.kt:6:28 Unresolved reference: EntityMetadata
+e: file:///home/red1/Projects/blackerp/domain/core/ad/base/ADModule.kt:10:21 Unresolved reference: shared
+e: file:///home/red1/Projects/blackerp/domain/core/ad/base/ADModule.kt:11:28 Unresolved reference: Version
+e: file:///home/red1/Projects/blackerp/domain/core/ad/base/ADModule.kt:14:5 'metadata' overrides nothing
+e: file:///home/red1/Projects/blackerp/domain/core/ad/base/ADModule.kt:14:28 Unresolved reference: EntityMetadata
+e: file:///home/red1/Projects/blackerp/domain/core/ad/base/ADModule.kt:18:18 Unresolved reference: Version
+e: file:///home/red1/Projects/blackerp/domain/core/ad/base/ADModule.kt:21:56 Unresolved reference: ValidationError
+e: file:///home/red1/Projects/blackerp/domain/core/ad/base/ADModule.kt:33:19 Unresolved reference: EntityMetadata
+e: file:///home/red1/Projects/blackerp/domain/core/ad/base/ADModule.kt:37:18 Unresolved reference: Version
+e: file:///home/red1/Projects/blackerp/domain/core/ad/base/ADObject.kt:3:28 Unresolved reference: DomainEntity
+e: file:///home/red1/Projects/blackerp/domain/core/ad/base/ADObject.kt:7:22 Unresolved reference: DomainEntity
+e: file:///home/red1/Projects/blackerp/domain/core/ad/base/ModuleName.kt:6:21 Unresolved reference: shared
+e: file:///home/red1/Projects/blackerp/domain/core/ad/base/ModuleName.kt:11:43 Unresolved reference: ValidationError
+e: file:///home/red1/Projects/blackerp/domain/core/ad/base/ModuleName.kt:14:21 Unresolved reference: ValidationError
+e: file:///home/red1/Projects/blackerp/domain/core/ad/base/ModuleName.kt:18:21 Unresolved reference: ValidationError
+e: file:///home/red1/Projects/blackerp/domain/core/ad/document/Document.kt:3:28 Unresolved reference: EntityMetadata
+e: file:///home/red1/Projects/blackerp/domain/core/ad/document/Document.kt:13:5 'metadata' overrides nothing
+e: file:///home/red1/Projects/blackerp/domain/core/ad/document/Document.kt:13:28 Unresolved reference: EntityMetadata
+e: file:///home/red1/Projects/blackerp/domain/core/ad/document/Document.kt:29:28 Unresolved reference: CreateDocumentParams
+e: file:///home/red1/Projects/blackerp/domain/core/ad/document/Document.kt:29:58 Unresolved reference: DocumentError
+e: file:///home/red1/Projects/blackerp/domain/core/ad/document/Document.kt:43:12 Redeclaration: DocumentLine
+e: file:///home/red1/Projects/blackerp/domain/core/ad/document/Document.kt:51:12 Redeclaration: DocumentType
+e: file:///home/red1/Projects/blackerp/domain/core/ad/document/Document.kt:82:12 Redeclaration: DocumentStatus
+e: file:///home/red1/Projects/blackerp/domain/core/ad/document/DocumentOperations.kt:8:52 Unresolved reference: DocumentError
+e: file:///home/red1/Projects/blackerp/domain/core/ad/document/DocumentOperations.kt:9:62 Unresolved reference: DocumentError
+e: file:///home/red1/Projects/blackerp/domain/core/ad/document/DocumentOperations.kt:10:44 Unresolved reference: DocumentError
+e: file:///home/red1/Projects/blackerp/domain/core/ad/document/DocumentOperations.kt:12:42 Unresolved reference: DocumentError
+e: file:///home/red1/Projects/blackerp/domain/core/ad/document/DocumentOperations.kt:13:72 Unresolved reference: DocumentError
+e: file:///home/red1/Projects/blackerp/domain/core/ad/document/DocumentOperations.kt:14:63 Unresolved reference: DocumentError
+e: file:///home/red1/Projects/blackerp/domain/core/ad/document/DocumentOperations.kt:15:80 Unresolved reference: DocumentError
+e: file:///home/red1/Projects/blackerp/domain/core/ad/document/DocumentOperations.kt:16:60 Unresolved reference: DocumentError
+e: file:///home/red1/Projects/blackerp/domain/core/ad/document/DocumentOperations.kt:17:62 Unresolved reference: DocumentError
+e: file:///home/red1/Projects/blackerp/domain/core/ad/document/DocumentOperations.kt:31:15 Unresolved reference: Instant
+e: file:///home/red1/Projects/blackerp/domain/core/ad/document/DocumentOperations.kt:32:13 Unresolved reference: Instant
+e: file:///home/red1/Projects/blackerp/domain/core/ad/document/DocumentOperations.kt:41:20 Unresolved reference: Instant
+e: file:///home/red1/Projects/blackerp/domain/core/ad/document/DocumentOperations.kt:44:30 Unresolved reference: ChangePair
+e: file:///home/red1/Projects/blackerp/domain/core/ad/document/DocumentStatus.kt:3:12 Redeclaration: DocumentStatus
+e: file:///home/red1/Projects/blackerp/domain/core/ad/document/DocumentType.kt:5:12 Redeclaration: DocumentType
+e: file:///home/red1/Projects/blackerp/domain/core/ad/document/DocumentType.kt:13:12 Redeclaration: DocumentLine
+e: file:///home/red1/Projects/blackerp/domain/core/ad/process/ADProcess.kt:3:28 Unresolved reference: EntityMetadata
+e: file:///home/red1/Projects/blackerp/domain/core/ad/process/ADProcess.kt:12:5 'metadata' overrides nothing
+e: file:///home/red1/Projects/blackerp/domain/core/ad/process/ADProcess.kt:12:28 Unresolved reference: EntityMetadata
+e: file:///home/red1/Projects/blackerp/domain/core/ad/process/ADProcess.kt:25:28 Unresolved reference: CreateProcessParams
+e: file:///home/red1/Projects/blackerp/domain/core/ad/process/ADProcess.kt:76:18 Redeclaration: ProcessImplementation
+e: file:///home/red1/Projects/blackerp/domain/core/ad/process/ADProcess.kt:101:12 Redeclaration: ProcessSchedule
+e: file:///home/red1/Projects/blackerp/domain/core/ad/process/ProcessImplementation.kt:3:18 Redeclaration: ProcessImplementation
+e: file:///home/red1/Projects/blackerp/domain/core/ad/process/ProcessImplementation.kt:9:12 Redeclaration: ProcessSchedule
+e: file:///home/red1/Projects/blackerp/domain/core/ad/reference/ADReference.kt:5:28 Unresolved reference: EntityMetadata
+e: file:///home/red1/Projects/blackerp/domain/core/ad/reference/ADReference.kt:10:21 Unresolved reference: shared
+e: file:///home/red1/Projects/blackerp/domain/core/ad/reference/ADReference.kt:14:5 'metadata' overrides nothing
+e: file:///home/red1/Projects/blackerp/domain/core/ad/reference/ADReference.kt:14:28 Unresolved reference: EntityMetadata
+e: file:///home/red1/Projects/blackerp/domain/core/ad/reference/ADReference.kt:72:19 Unresolved reference: EntityMetadata
+e: file:///home/red1/Projects/blackerp/domain/core/ad/reference/ADReference.kt:84:50 Unresolved reference: ValidationError
+e: file:///home/red1/Projects/blackerp/domain/core/ad/reference/value/ReferenceName.kt:7:21 Unresolved reference: shared
+e: file:///home/red1/Projects/blackerp/domain/core/ad/reference/value/ReferenceName.kt:12:43 Unresolved reference: ValidationError
+e: file:///home/red1/Projects/blackerp/domain/core/ad/reference/value/ReferenceName.kt:15:21 Unresolved reference: ValidationError
+e: file:///home/red1/Projects/blackerp/domain/core/ad/reference/value/ReferenceName.kt:19:21 Unresolved reference: ValidationError
+e: file:///home/red1/Projects/blackerp/domain/core/ad/shared/values/ProcessName.kt:6:21 Unresolved reference: shared
+e: file:///home/red1/Projects/blackerp/domain/core/ad/shared/values/ProcessName.kt:11:43 Unresolved reference: ValidationError
+e: file:///home/red1/Projects/blackerp/domain/core/ad/shared/values/ProcessName.kt:13:17 Unresolved reference: ValidationError
+e: file:///home/red1/Projects/blackerp/domain/core/ad/shared/values/ProcessName.kt:15:17 Unresolved reference: ValidationError
+e: file:///home/red1/Projects/blackerp/domain/core/ad/tab/ADTab.kt:7:28 Unresolved reference: DomainEntity
+e: file:///home/red1/Projects/blackerp/domain/core/ad/tab/ADTab.kt:8:28 Unresolved reference: EntityMetadata
+e: file:///home/red1/Projects/blackerp/domain/core/ad/tab/ADTab.kt:12:28 Unresolved reference: table
+e: file:///home/red1/Projects/blackerp/domain/core/ad/tab/ADTab.kt:13:21 Unresolved reference: shared
+e: file:///home/red1/Projects/blackerp/domain/core/ad/tab/ADTab.kt:16:5 'metadata' overrides nothing
+e: file:///home/red1/Projects/blackerp/domain/core/ad/tab/ADTab.kt:16:28 Unresolved reference: EntityMetadata
+e: file:///home/red1/Projects/blackerp/domain/core/ad/tab/ADTab.kt:20:16 Unresolved reference: ADTable
+e: file:///home/red1/Projects/blackerp/domain/core/ad/tab/ADTab.kt:27:40 Unresolved reference: ValidationError
+e: file:///home/red1/Projects/blackerp/domain/core/ad/tab/ADTab.kt:31:45 Unresolved reference: it
+e: file:///home/red1/Projects/blackerp/domain/core/ad/tab/ADTab.kt:34:28 Unresolved reference: ValidationError
+e: file:///home/red1/Projects/blackerp/domain/core/ad/tab/ADTab.kt:41:45 Unresolved reference: it
+e: file:///home/red1/Projects/blackerp/domain/core/ad/tab/ADTab.kt:44:28 Unresolved reference: ValidationError
+e: file:///home/red1/Projects/blackerp/domain/core/ad/tab/ADTab.kt:51:45 Unresolved reference: it
+e: file:///home/red1/Projects/blackerp/domain/core/ad/tab/ADTab.kt:54:28 Unresolved reference: ValidationError
+e: file:///home/red1/Projects/blackerp/domain/core/ad/tab/CreateTabParams.kt:4:28 Unresolved reference: EntityMetadata
+e: file:///home/red1/Projects/blackerp/domain/core/ad/tab/CreateTabParams.kt:5:28 Unresolved reference: table
+e: file:///home/red1/Projects/blackerp/domain/core/ad/tab/CreateTabParams.kt:12:19 Unresolved reference: EntityMetadata
+e: file:///home/red1/Projects/blackerp/domain/core/ad/tab/CreateTabParams.kt:16:16 Unresolved reference: ADTable
+e: file:///home/red1/Projects/blackerp/domain/core/ad/tab/TabError.kt:4:28 Unresolved reference: DomainException
+e: file:///home/red1/Projects/blackerp/domain/core/ad/tab/TabError.kt:5:21 Unresolved reference: shared
+e: file:///home/red1/Projects/blackerp/domain/core/ad/tab/TabError.kt:7:42 Unresolved reference: DomainException
+e: file:///home/red1/Projects/blackerp/domain/core/ad/tab/TabError.kt:8:50 Unresolved reference: ValidationError
+e: file:///home/red1/Projects/blackerp/domain/core/ad/tab/value/TabName.kt:7:21 Unresolved reference: shared
+e: file:///home/red1/Projects/blackerp/domain/core/ad/tab/value/TabName.kt:12:43 Unresolved reference: ValidationError
+e: file:///home/red1/Projects/blackerp/domain/core/ad/tab/value/TabName.kt:15:21 Unresolved reference: ValidationError
+e: file:///home/red1/Projects/blackerp/domain/core/ad/tab/value/TabName.kt:19:21 Unresolved reference: ValidationError
+e: file:///home/red1/Projects/blackerp/domain/core/ad/window/WindowName.kt:7:21 Unresolved reference: shared
+e: file:///home/red1/Projects/blackerp/domain/core/ad/window/WindowName.kt:12:43 Unresolved reference: ValidationError
+e: file:///home/red1/Projects/blackerp/domain/core/ad/window/WindowName.kt:15:21 Unresolved reference: ValidationError
+e: file:///home/red1/Projects/blackerp/domain/core/ad/window/WindowName.kt:19:21 Unresolved reference: ValidationError
+e: file:///home/red1/Projects/blackerp/domain/core/ad/workflow/NodeAction.kt:4:39 Unresolved reference: UUID
+e: file:///home/red1/Projects/blackerp/domain/core/ad/workflow/NodeAction.kt:5:37 Unresolved reference: UUID
+e: file:///home/red1/Projects/blackerp/domain/core/ad/workflow/WorkflowNode.kt:3:28 Unresolved reference: EntityMetadata
+e: file:///home/red1/Projects/blackerp/domain/core/ad/workflow/WorkflowNode.kt:12:5 'metadata' overrides nothing
+e: file:///home/red1/Projects/blackerp/domain/core/ad/workflow/WorkflowNode.kt:12:28 Unresolved reference: EntityMetadata
+e: file:///home/red1/Projects/blackerp/domain/core/ad/workflow/WorkflowNode.kt:21:28 Unresolved reference: CreateNodeParams
+e: file:///home/red1/Projects/blackerp/domain/core/ad/workflow/WorkflowNode.kt:21:54 Unresolved reference: WorkflowError
+e: file:///home/red1/Projects/blackerp/domain/core/ad/workflow/WorkflowOperations.kt:7:50 Unresolved reference: WorkflowError
+e: file:///home/red1/Projects/blackerp/domain/core/ad/workflow/WorkflowOperations.kt:8:44 Unresolved reference: WorkflowError
+e: file:///home/red1/Projects/blackerp/domain/core/ad/workflow/WorkflowOperations.kt:9:42 Unresolved reference: WorkflowError
+e: file:///home/red1/Projects/blackerp/domain/core/ad/workflow/WorkflowOperations.kt:10:69 Unresolved reference: WorkflowError
+e: file:///home/red1/Projects/blackerp/domain/core/error/PluginError.kt:4:21 Unresolved reference: shared
+e: file:///home/red1/Projects/blackerp/domain/core/error/PluginError.kt:8:50 Unresolved reference: ValidationError
+e: file:///home/red1/Projects/blackerp/domain/core/error/TableErrors.kt:3:27 Unresolved reference: DomainError
+e: file:///home/red1/Projects/blackerp/domain/core/error/TableErrors.kt:5:9 'message' overrides nothing
+e: file:///home/red1/Projects/blackerp/domain/core/error/TableErrors.kt:10:9 'message' overrides nothing
+e: file:///home/red1/Projects/blackerp/domain/core/error/TableErrors.kt:16:9 'message' overrides nothing
+e: file:///home/red1/Projects/blackerp/domain/core/error/TableErrors.kt:23:9 'message' overrides nothing
+e: file:///home/red1/Projects/blackerp/domain/core/error/TableErrors.kt:29:9 'message' overrides nothing
+e: file:///home/red1/Projects/blackerp/domain/core/error/WorkflowErrors.kt:3:30 Unresolved reference: DomainError
+e: file:///home/red1/Projects/blackerp/domain/core/error/WorkflowErrors.kt:5:9 'message' overrides nothing
+e: file:///home/red1/Projects/blackerp/domain/core/error/WorkflowErrors.kt:10:9 'message' overrides nothing
+e: file:///home/red1/Projects/blackerp/domain/core/error/WorkflowErrors.kt:15:9 'message' overrides nothing
+e: file:///home/red1/Projects/blackerp/domain/core/error/WorkflowErrors.kt:20:9 'message' overrides nothing
+e: file:///home/red1/Projects/blackerp/domain/core/values/Amount.kt:6:21 Unresolved reference: shared
+e: file:///home/red1/Projects/blackerp/domain/core/values/Amount.kt:12:47 Unresolved reference: ValidationError
+e: file:///home/red1/Projects/blackerp/domain/core/values/Amount.kt:15:21 Unresolved reference: ValidationError
+e: file:///home/red1/Projects/blackerp/domain/core/values/ColumnName.kt:7:21 Unresolved reference: shared
+e: file:///home/red1/Projects/blackerp/domain/core/values/ColumnName.kt:12:43 Unresolved reference: ValidationError
+e: file:///home/red1/Projects/blackerp/domain/core/values/ColumnName.kt:15:21 Unresolved reference: ValidationError
+e: file:///home/red1/Projects/blackerp/domain/core/values/ColumnName.kt:17:21 Unresolved reference: ValidationError
+e: file:///home/red1/Projects/blackerp/domain/core/values/Currency.kt:6:21 Unresolved reference: shared
+e: file:///home/red1/Projects/blackerp/domain/core/values/Currency.kt:11:42 Unresolved reference: ValidationError
+e: file:///home/red1/Projects/blackerp/domain/core/values/Currency.kt:14:21 Unresolved reference: ValidationError
+e: file:///home/red1/Projects/blackerp/domain/core/values/Description.kt:6:21 Unresolved reference: shared
+e: file:///home/red1/Projects/blackerp/domain/core/values/Description.kt:11:43 Unresolved reference: ValidationError
+e: file:///home/red1/Projects/blackerp/domain/core/values/Description.kt:14:21 Unresolved reference: ValidationError
+e: file:///home/red1/Projects/blackerp/domain/core/values/DisplayName.kt:6:21 Unresolved reference: shared
+e: file:///home/red1/Projects/blackerp/domain/core/values/DisplayName.kt:11:43 Unresolved reference: ValidationError
+e: file:///home/red1/Projects/blackerp/domain/core/values/DisplayName.kt:14:21 Unresolved reference: ValidationError
+e: file:///home/red1/Projects/blackerp/domain/core/values/DisplayName.kt:16:21 Unresolved reference: ValidationError
+e: file:///home/red1/Projects/blackerp/domain/core/values/Length.kt:7:21 Unresolved reference: shared
+e: file:///home/red1/Projects/blackerp/domain/core/values/Length.kt:12:40 Unresolved reference: ValidationError
+e: file:///home/red1/Projects/blackerp/domain/core/values/Length.kt:15:21 Unresolved reference: ValidationError
+e: file:///home/red1/Projects/blackerp/domain/core/values/Precision.kt:7:21 Unresolved reference: shared
+e: file:///home/red1/Projects/blackerp/domain/core/values/Precision.kt:12:40 Unresolved reference: ValidationError
+e: file:///home/red1/Projects/blackerp/domain/core/values/Precision.kt:15:21 Unresolved reference: ValidationError
+e: file:///home/red1/Projects/blackerp/domain/core/values/Precision.kt:17:21 Unresolved reference: ValidationError
+e: file:///home/red1/Projects/blackerp/domain/core/values/Scale.kt:7:21 Unresolved reference: shared
+e: file:///home/red1/Projects/blackerp/domain/core/values/Scale.kt:12:40 Unresolved reference: ValidationError
+e: file:///home/red1/Projects/blackerp/domain/core/values/Scale.kt:15:21 Unresolved reference: ValidationError
+e: file:///home/red1/Projects/blackerp/domain/core/values/Scale.kt:17:21 Unresolved reference: ValidationError
+e: file:///home/red1/Projects/blackerp/domain/core/values/TableName.kt:6:21 Unresolved reference: shared
+e: file:///home/red1/Projects/blackerp/domain/core/values/TableName.kt:11:43 Unresolved reference: ValidationError
+e: file:///home/red1/Projects/blackerp/domain/core/values/TableName.kt:14:21 Unresolved reference: ValidationError
+e: file:///home/red1/Projects/blackerp/domain/events/ConstraintEvents.kt:6:32 Unresolved reference: DomainEvent
+e: file:///home/red1/Projects/blackerp/domain/events/ConstraintEvents.kt:8:9 'metadata' overrides nothing
+e: file:///home/red1/Projects/blackerp/domain/events/ConstraintEvents.kt:8:32 Unresolved reference: EventMetadata
+e: file:///home/red1/Projects/blackerp/domain/events/ConstraintEvents.kt:18:9 'metadata' overrides nothing
+e: file:///home/red1/Projects/blackerp/domain/events/ConstraintEvents.kt:18:32 Unresolved reference: EventMetadata
+e: file:///home/red1/Projects/blackerp/domain/events/ConstraintEvents.kt:29:9 'metadata' overrides nothing
+e: file:///home/red1/Projects/blackerp/domain/events/ConstraintEvents.kt:29:32 Unresolved reference: EventMetadata
+e: file:///home/red1/Projects/blackerp/domain/events/ConstraintEvents.kt:36:9 'metadata' overrides nothing
+e: file:///home/red1/Projects/blackerp/domain/events/ConstraintEvents.kt:36:32 Unresolved reference: EventMetadata
+e: file:///home/red1/Projects/blackerp/domain/events/DomainEvent.kt:14:12 Redeclaration: EventMetadata
+e: file:///home/red1/Projects/blackerp/domain/events/EventMetadata.kt:7:12 Redeclaration: EventMetadata
+e: file:///home/red1/Projects/blackerp/domain/events/RelationshipEvents.kt:7:34 Unresolved reference: DomainEvent
+e: file:///home/red1/Projects/blackerp/domain/events/RelationshipEvents.kt:9:9 'metadata' overrides nothing
+e: file:///home/red1/Projects/blackerp/domain/events/RelationshipEvents.kt:9:32 Unresolved reference: EventMetadata
+e: file:///home/red1/Projects/blackerp/domain/events/RelationshipEvents.kt:21:9 'metadata' overrides nothing
+e: file:///home/red1/Projects/blackerp/domain/events/RelationshipEvents.kt:21:32 Unresolved reference: EventMetadata
+e: file:///home/red1/Projects/blackerp/domain/events/RelationshipEvents.kt:32:9 'metadata' overrides nothing
+e: file:///home/red1/Projects/blackerp/domain/events/RelationshipEvents.kt:32:32 Unresolved reference: EventMetadata
+e: file:///home/red1/Projects/blackerp/domain/events/WorkflowEvents.kt:7:30 Unresolved reference: DomainEvent
+e: file:///home/red1/Projects/blackerp/domain/events/WorkflowEvents.kt:9:9 'metadata' overrides nothing
+e: file:///home/red1/Projects/blackerp/domain/events/WorkflowEvents.kt:9:32 Unresolved reference: EventMetadata
+e: file:///home/red1/Projects/blackerp/domain/events/WorkflowEvents.kt:15:9 'metadata' overrides nothing
+e: file:///home/red1/Projects/blackerp/domain/events/WorkflowEvents.kt:15:32 Unresolved reference: EventMetadata
+e: file:///home/red1/Projects/blackerp/domain/events/WorkflowEvents.kt:22:9 'metadata' overrides nothing
+e: file:///home/red1/Projects/blackerp/domain/events/WorkflowEvents.kt:22:32 Unresolved reference: EventMetadata
+e: file:///home/red1/Projects/blackerp/domain/events/handlers/ConstraintEventHandler.kt:6:12 Unresolved reference: slf4j
+e: file:///home/red1/Projects/blackerp/domain/events/handlers/ConstraintEventHandler.kt:10:26 Unresolved reference: LoggerFactory
+e: file:///home/red1/Projects/blackerp/domain/events/handlers/RelationshipEventHandler.kt:6:12 Unresolved reference: slf4j
+e: file:///home/red1/Projects/blackerp/domain/events/handlers/RelationshipEventHandler.kt:10:26 Unresolved reference: LoggerFactory
+e: file:///home/red1/Projects/blackerp/domain/events/publishers/DomainEventPublisher.kt:5:35 Unresolved reference: DomainEvent
+e: file:///home/red1/Projects/blackerp/domain/events/publishers/DomainEventPublisher.kt:6:12 Unresolved reference: slf4j
+e: file:///home/red1/Projects/blackerp/domain/events/publishers/DomainEventPublisher.kt:7:12 Unresolved reference: slf4j
+e: file:///home/red1/Projects/blackerp/domain/events/publishers/DomainEventPublisher.kt:14:26 Unresolved reference: LoggerFactory
+e: file:///home/red1/Projects/blackerp/domain/events/publishers/DomainEventPublisher.kt:16:24 Unresolved reference: DomainEvent
+e: file:///home/red1/Projects/blackerp/domain/events/publishers/DomainEventPublisher.kt:17:29 Unresolved reference: MDC
+e: file:///home/red1/Projects/blackerp/domain/events/publishers/DomainEventPublisher.kt:18:9 Unresolved reference: MDC
+e: file:///home/red1/Projects/blackerp/domain/events/publishers/DomainEventPublisher.kt:33:13 Unresolved reference: MDC
+e: file:///home/red1/Projects/blackerp/domain/validation/validators/model/ColumnValidator.kt:6:28 Unresolved reference: table
+e: file:///home/red1/Projects/blackerp/domain/validation/validators/model/ColumnValidator.kt:8:21 Unresolved reference: shared
+e: file:///home/red1/Projects/blackerp/domain/validation/validators/model/ColumnValidator.kt:9:21 Unresolved reference: validation
+e: file:///home/red1/Projects/blackerp/domain/validation/validators/model/ColumnValidator.kt:11:25 Unresolved reference: Validator
+e: file:///home/red1/Projects/blackerp/domain/validation/validators/model/ColumnValidator.kt:11:35 Unresolved reference: ColumnDefinition
+e: file:///home/red1/Projects/blackerp/domain/validation/validators/model/ColumnValidator.kt:12:5 'validate' overrides nothing
+e: file:///home/red1/Projects/blackerp/domain/validation/validators/model/ColumnValidator.kt:12:43 Unresolved reference: ColumnDefinition
+e: file:///home/red1/Projects/blackerp/domain/validation/validators/model/ColumnValidator.kt:12:69 Unresolved reference: ValidationError
+e: file:///home/red1/Projects/blackerp/domain/validation/validators/model/ColumnValidator.kt:12:86 Unresolved reference: ColumnDefinition
+e: file:///home/red1/Projects/blackerp/domain/validation/validators/model/ColumnValidator.kt:13:36 Unresolved reference: ValidationError
+e: file:///home/red1/Projects/blackerp/domain/validation/validators/model/ColumnValidator.kt:17:24 Unresolved reference: ValidationError
+e: file:///home/red1/Projects/blackerp/domain/validation/validators/model/ColumnValidator.kt:24:13 Comparison of incompatible enums '[Error type: Error property type]' and 'DataType' is always unsuccessful
+e: file:///home/red1/Projects/blackerp/domain/validation/validators/model/ColumnValidator.kt:26:32 Unresolved reference: ValidationError
+e: file:///home/red1/Projects/blackerp/domain/validation/validators/model/ColumnValidator.kt:29:32 Unresolved reference: ValidationError
+e: file:///home/red1/Projects/blackerp/domain/validation/validators/model/ColumnValidator.kt:32:13 Comparison of incompatible enums '[Error type: Error property type]' and 'DataType' is always unsuccessful
+e: file:///home/red1/Projects/blackerp/domain/validation/validators/model/ColumnValidator.kt:34:32 Unresolved reference: ValidationError
+e: file:///home/red1/Projects/blackerp/domain/validation/validators/model/ColumnValidator.kt:37:32 Unresolved reference: ValidationError
+e: file:///home/red1/Projects/blackerp/domain/validation/validators/model/ColumnValidator.kt:42:32 Unresolved reference: ValidationError
+e: file:///home/red1/Projects/blackerp/domain/validation/validators/model/CompositeValidator.kt:11:34 Unresolved reference: Validator
+e: file:///home/red1/Projects/blackerp/domain/validation/validators/model/CompositeValidator.kt:16:30 Cannot infer a type for this parameter. Please specify it explicitly.
+e: file:///home/red1/Projects/blackerp/domain/validation/validators/model/CompositeValidator.kt:18:19 Cannot infer a type for this parameter. Please specify it explicitly.
+e: file:///home/red1/Projects/blackerp/domain/validation/validators/model/CompositeValidator.kt:21:33 'return' is not allowed here
+e: file:///home/red1/Projects/blackerp/domain/validation/validators/model/TableValidator.kt:4:28 Unresolved reference: table
+e: file:///home/red1/Projects/blackerp/domain/validation/validators/model/TableValidator.kt:14:31 Unresolved reference: ADTable
+e: file:///home/red1/Projects/blackerp/domain/validation/validators/model/TableValidator.kt:14:60 Unresolved reference: ADTable
+e: file:///home/red1/Projects/blackerp/domain/validation/validators/model/TableValidator.kt:29:40 Cannot infer a type for this parameter. Please specify it explicitly.
+e: file:///home/red1/Projects/blackerp/domain/validation/validators/model/TableValidator.kt:29:47 Cannot infer a type for this parameter. Please specify it explicitly.
+e: file:///home/red1/Projects/blackerp/domain/validation/validators/model/TableValidator.kt:35:24 Unresolved reference: it
+e: file:///home/red1/Projects/blackerp/domain/validation/validators/model/TableValidator.kt:36:23 Unresolved reference: it
+e: file:///home/red1/Projects/blackerp/domain/validation/validators/model/TableValidator.kt:39:26 Overload resolution ambiguity: 
+public inline fun <T> Iterable<TypeVariable(T)>.forEach(action: (TypeVariable(T)) -> Unit): Unit defined in kotlin.collections
+public inline fun <K, V> Map<out TypeVariable(K), TypeVariable(V)>.forEach(action: (Map.Entry<TypeVariable(K), TypeVariable(V)>) -> Unit): Unit defined in kotlin.collections
+e: file:///home/red1/Projects/blackerp/domain/validation/validators/model/TableValidator.kt:39:36 Cannot infer a type for this parameter. Please specify it explicitly.
+e: file:///home/red1/Projects/blackerp/domain/validation/validators/model/TableValidator.kt:50:34 Unresolved reference: it
+e: file:///home/red1/Projects/blackerp/domain/validation/validators/model/TableValidator.kt:70:17 Unresolved reference: ColumnDefinition
+e: file:///home/red1/Projects/blackerp/domain/validation/validators/model/TableValidator.kt:77:13 Comparison of incompatible enums '[Error type: Error property type]' and 'DataType' is always unsuccessful
+e: file:///home/red1/Projects/blackerp/domain/validation/validators/model/TableValidator.kt:97:13 Comparison of incompatible enums '[Error type: Error property type]' and 'DataType' is always unsuccessful
+e: file:///home/red1/Projects/blackerp/domain/validation/validators/model/TableValidator.kt:140:33 Cannot infer a type for this parameter. Please specify it explicitly.
+e: file:///home/red1/Projects/blackerp/domain/validation/validators/model/TableValidator.kt:141:45 Unresolved reference: UUID
+e: file:///home/red1/Projects/blackerp/domain/validation/validators/module/ModuleValidator.kt:7:21 Unresolved reference: shared
+e: file:///home/red1/Projects/blackerp/domain/validation/validators/module/ModuleValidator.kt:8:21 Unresolved reference: validation
+e: file:///home/red1/Projects/blackerp/domain/validation/validators/module/ModuleValidator.kt:10:25 Unresolved reference: Validator
+e: file:///home/red1/Projects/blackerp/domain/validation/validators/module/ModuleValidator.kt:11:5 'validate' overrides nothing
+e: file:///home/red1/Projects/blackerp/domain/validation/validators/module/ModuleValidator.kt:11:61 Unresolved reference: ValidationError
+e: file:///home/red1/Projects/blackerp/domain/validation/validators/module/ModuleValidator.kt:12:36 Unresolved reference: ValidationError
+e: file:///home/red1/Projects/blackerp/domain/validation/validators/module/ModuleValidator.kt:16:24 Unresolved reference: ValidationError
+e: file:///home/red1/Projects/blackerp/domain/validation/validators/module/ModuleValidator.kt:23:24 Unresolved reference: ValidationError
+e: file:///home/red1/Projects/blackerp/domain/validation/validators/module/ModuleValidator.kt:29:28 Unresolved reference: ValidationError
+
+> Task :domain:compileKotlin FAILED
+
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+Execution failed for task ':domain:compileKotlin'.
+> A failure occurred while executing org.jetbrains.kotlin.compilerRunner.GradleCompilerRunnerWithWorkers$GradleKotlinCompilerWorkAction
+   > Compilation error. See log for more details
+
+* Try:
+> Run with --stacktrace option to get the stack trace.
+> Run with --debug option to get more log output.
+> Run with --scan to get full insights.
+> Get more help at https://help.gradle.org.
+
+BUILD FAILED in 29s
+12 actionable tasks: 10 executed, 2 up-to-date
