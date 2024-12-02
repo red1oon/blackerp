@@ -1,5 +1,5 @@
 
-rootProject.name = "NewERP"
+rootProject.name = "blackerp"
 
 include("domain")
 include("application")
