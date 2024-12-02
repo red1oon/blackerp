@@ -1,4 +1,5 @@
 plugins {
+    application
     kotlin("jvm") version "1.9.20" apply false
     kotlin("plugin.spring") version "1.9.20" apply false
     id("org.springframework.boot") version "3.2.0" apply false
@@ -16,7 +17,7 @@ allprojects {
 
 subprojects {
     apply(plugin = "org.jetbrains.kotlin.jvm")
-    apply(plugin = "org.jetbrains.kotlin.plugin.spring") 
+    apply(plugin = "org.jetbrains.kotlin.plugin.spring")
     apply(plugin = "org.springframework.boot")
     apply(plugin = "io.spring.dependency-management")
 
@@ -30,5 +31,10 @@ subprojects {
             jvmTarget = "17"
             freeCompilerArgs = listOf("-Xjsr305=strict")
         }
+    }
+
+    dependencies {
+        implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3")
+        implementation("io.arrow-kt:arrow-core:1.2.0")
     }
 }
