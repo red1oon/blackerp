@@ -1,188 +1,232 @@
 #!/bin/bash
 
-# 1. First, create a service layer with proper transaction boundaries
-cat > application/services/TableManagementService.kt << 'EOL'
-package org.blackerp.application.services
+# Create event classes under domain/events
+cat > domain/events/RelationshipEvents.kt << 'EOL'
+package org.blackerp.domain.events
 
-import org.springframework.stereotype.Service
-import org.springframework.transaction.annotation.Transactional
-import org.springframework.transaction.annotation.Propagation
-import org.blackerp.domain.table.*
-import org.blackerp.domain.core.error.TableError
-import org.blackerp.domain.core.error.DomainError
-import arrow.core.Either
-import arrow.core.right
-import arrow.core.left
+import java.util.UUID
+import org.blackerp.domain.ad.table.RelationshipType
+import org.blackerp.domain.ad.table.CascadeType
+
+sealed class RelationshipEvent : DomainEvent {
+    data class RelationshipCreated(
+        override val metadata: EventMetadata,
+        val relationshipId: UUID,
+        val sourceTableId: UUID,
+        val targetTableId: UUID,
+        val type: RelationshipType,
+        val sourceColumn: String,
+        val targetColumn: String,
+        val onDelete: CascadeType,
+        val onUpdate: CascadeType
+    ) : RelationshipEvent()
+
+    data class RelationshipModified(
+        override val metadata: EventMetadata,
+        val relationshipId: UUID,
+        val previousType: RelationshipType,
+        val newType: RelationshipType,
+        val previousOnDelete: CascadeType,
+        val newOnDelete: CascadeType,
+        val previousOnUpdate: CascadeType,
+        val newOnUpdate: CascadeType
+    ) : RelationshipEvent()
+
+    data class RelationshipDeleted(
+        override val metadata: EventMetadata,
+        val relationshipId: UUID,
+        val sourceTableId: UUID,
+        val targetTableId: UUID
+    ) : RelationshipEvent()
+}
+EOL
+
+cat > domain/events/ConstraintEvents.kt << 'EOL'
+package org.blackerp.domain.events
+
+import java.util.UUID
+import org.blackerp.domain.ad.table.ConstraintType
+
+sealed class ConstraintEvent : DomainEvent {
+    data class ConstraintCreated(
+        override val metadata: EventMetadata,
+        val constraintId: UUID,
+        val tableId: UUID,
+        val name: String,
+        val type: ConstraintType,
+        val columns: List<String>,
+        val expression: String?
+    ) : ConstraintEvent()
+
+    data class ConstraintModified(
+        override val metadata: EventMetadata,
+        val constraintId: UUID,
+        val previousName: String,
+        val newName: String,
+        val previousColumns: List<String>,
+        val newColumns: List<String>,
+        val previousExpression: String?,
+        val newExpression: String?
+    ) : ConstraintEvent()
+
+    data class ConstraintDeleted(
+        override val metadata: EventMetadata,
+        val constraintId: UUID,
+        val tableId: UUID,
+        val name: String
+    ) : ConstraintEvent()
+
+    data class ConstraintViolated(
+        override val metadata: EventMetadata,
+        val constraintId: UUID,
+        val tableId: UUID,
+        val violationType: ViolationType,
+        val violationDetails: String
+    ) : ConstraintEvent()
+}
+
+enum class ViolationType {
+    UNIQUE_VIOLATION,
+    CHECK_VIOLATION,
+    FOREIGN_KEY_VIOLATION
+}
+EOL
+
+cat > domain/events/handlers/RelationshipEventHandler.kt << 'EOL'
+package org.blackerp.domain.events.handlers
+
+import org.springframework.stereotype.Component
+import org.springframework.context.event.EventListener
+import org.blackerp.domain.events.RelationshipEvent
+import org.slf4j.LoggerFactory
+
+@Component
+class RelationshipEventHandler {
+    private val logger = LoggerFactory.getLogger(RelationshipEventHandler::class.java)
+
+    @EventListener
+    fun handleRelationshipCreated(event: RelationshipEvent.RelationshipCreated) {
+        logger.info(
+            "Relationship created: {} -> {} (type: {})",
+            event.sourceTableId,
+            event.targetTableId,
+            event.type
+        )
+    }
+
+    @EventListener
+    fun handleRelationshipModified(event: RelationshipEvent.RelationshipModified) {
+        logger.info(
+            "Relationship modified: {} (type changed: {} -> {})",
+            event.relationshipId,
+            event.previousType,
+            event.newType
+        )
+    }
+
+    @EventListener
+    fun handleRelationshipDeleted(event: RelationshipEvent.RelationshipDeleted) {
+        logger.info(
+            "Relationship deleted: {} (source: {}, target: {})",
+            event.relationshipId,
+            event.sourceTableId,
+            event.targetTableId
+        )
+    }
+}
+EOL
+
+cat > domain/events/handlers/ConstraintEventHandler.kt << 'EOL'
+package org.blackerp.domain.events.handlers
+
+import org.springframework.stereotype.Component
+import org.springframework.context.event.EventListener
+import org.blackerp.domain.events.ConstraintEvent
+import org.slf4j.LoggerFactory
+
+@Component
+class ConstraintEventHandler {
+    private val logger = LoggerFactory.getLogger(ConstraintEventHandler::class.java)
+
+    @EventListener
+    fun handleConstraintCreated(event: ConstraintEvent.ConstraintCreated) {
+        logger.info(
+            "Constraint created: {} on table {} (type: {})",
+            event.name,
+            event.tableId,
+            event.type
+        )
+    }
+
+    @EventListener
+    fun handleConstraintModified(event: ConstraintEvent.ConstraintModified) {
+        logger.info(
+            "Constraint modified: {} (name changed: {} -> {})",
+            event.constraintId,
+            event.previousName,
+            event.newName
+        )
+    }
+
+    @EventListener
+    fun handleConstraintDeleted(event: ConstraintEvent.ConstraintDeleted) {
+        logger.info(
+            "Constraint deleted: {} from table {}",
+            event.name,
+            event.tableId
+        )
+    }
+
+    @EventListener
+    fun handleConstraintViolated(event: ConstraintEvent.ConstraintViolated) {
+        logger.warn(
+            "Constraint violation: {} on table {} (type: {}): {}",
+            event.constraintId,
+            event.tableId,
+            event.violationType,
+            event.violationDetails
+        )
+    }
+}
+EOL
+
+cat > domain/events/publishers/DomainEventPublisher.kt << 'EOL'
+package org.blackerp.domain.events.publishers
+
+import org.springframework.stereotype.Component
+import org.springframework.context.ApplicationEventPublisher
+import org.blackerp.domain.events.DomainEvent
 import org.slf4j.LoggerFactory
 import org.slf4j.MDC
 import java.util.UUID
 
-@Service
-class TableManagementService(
-    private val tableOperations: TableOperations,
-    private val columnOperations: ColumnOperations,
-    private val tableValidator: TableValidator,
-    private val tableMetrics: TableMetrics,
-    private val metadataService: ADMetadataService
+@Component
+class DomainEventPublisher(
+    private val applicationEventPublisher: ApplicationEventPublisher
 ) {
-    private val logger = LoggerFactory.getLogger(TableManagementService::class.java)
+    private val logger = LoggerFactory.getLogger(DomainEventPublisher::class.java)
 
-    @Transactional(rollbackFor = [Exception::class])
-    suspend fun createTable(command: CreateTableCommand): Either<DomainError, ADTable> {
-        val correlationId = UUID.randomUUID().toString()
+    fun publish(event: DomainEvent) {
+        val correlationId = MDC.get("correlationId") ?: UUID.randomUUID().toString()
         MDC.put("correlationId", correlationId)
-        logger.info("Starting table creation with correlationId: $correlationId")
-
-        return tableMetrics.timeCreateOperation {
-            try {
-                tableValidator.validateCreate(command)
-                    .flatMap { validatedCommand -> 
-                        metadataService.generateMetadata(command.name)
-                            .flatMap { metadata ->
-                                val table = ADTable.create(
-                                    metadata = metadata,
-                                    name = validatedCommand.name,
-                                    displayName = validatedCommand.displayName,
-                                    description = validatedCommand.description,
-                                    accessLevel = validatedCommand.accessLevel,
-                                    columns = validatedCommand.columns
-                                )
-                                saveTableWithColumns(table)
-                            }
-                    }
-                    .also { 
-                        tableMetrics.incrementCreateCounter()
-                        logger.info("Table creation completed successfully: ${command.name}")
-                    }
-            } catch (e: Exception) {
-                logger.error("Failed to create table: ${command.name}", e)
-                TableError.DatabaseError(
-                    message = "Failed to create table: ${e.message}",
-                    sqlState = null,
-                    errorCode = null
-                ).left()
-            } finally {
-                MDC.remove("correlationId")
-            }
-        }
-    }
-
-    @Transactional(propagation = Propagation.REQUIRES_NEW)
-    private suspend fun saveTableWithColumns(table: ADTable): Either<DomainError, ADTable> =
-        tableOperations.save(table)
-            .flatMap { savedTable ->
-                saveColumns(savedTable.id, table.columns)
-                    .map { savedTable }
-            }
-
-    private suspend fun saveColumns(
-        tableId: UUID, 
-        columns: List<ColumnDefinition>
-    ): Either<DomainError, List<ColumnDefinition>> {
-        columns.forEach { column ->
-            columnOperations.save(tableId, column)
-                .fold(
-                    { error -> return error.left() },
-                    { /* continue with next column */ }
-                )
-        }
-        return columns.right()
-    }
-}
-EOL
-
-# 2. Create metrics infrastructure
-cat > application/services/TableMetrics.kt << 'EOL'
-package org.blackerp.application.services
-
-import org.springframework.stereotype.Component
-import io.micrometer.core.instrument.MeterRegistry
-import io.micrometer.core.instrument.Timer
-import org.slf4j.LoggerFactory
-
-@Component
-class TableMetrics(private val meterRegistry: MeterRegistry) {
-    private val logger = LoggerFactory.getLogger(TableMetrics::class.java)
-
-    private val createTableCounter = meterRegistry.counter("table.create.count")
-    private val modifyTableCounter = meterRegistry.counter("table.modify.count")
-    private val deleteTableCounter = meterRegistry.counter("table.delete.count")
-    private val createTableTimer = meterRegistry.timer("table.create.duration")
-    private val errorCounter = meterRegistry.counter("table.error.count")
-
-    fun incrementCreateCounter() {
-        createTableCounter.increment()
-        logger.debug("Table creation counter incremented")
-    }
-
-    fun incrementModifyCounter() {
-        modifyTableCounter.increment()
-        logger.debug("Table modification counter incremented")
-    }
-
-    fun incrementDeleteCounter() {
-        deleteTableCounter.increment()
-        logger.debug("Table deletion counter incremented")
-    }
-
-    fun incrementErrorCounter() {
-        errorCounter.increment()
-        logger.debug("Error counter incremented")
-    }
-
-    fun <T> timeCreateOperation(block: () -> T): T {
-        return createTableTimer.record<T> {
-            try {
-                block()
-            } catch (e: Exception) {
-                incrementErrorCounter()
-                throw e
-            }
-        }
-    }
-}
-EOL
-
-# 3. Update health checks
-cat > infrastructure/integration/adapters/TableHealthIndicator.kt << 'EOL'
-package org.blackerp.infrastructure.integration.adapters
-
-import org.springframework.boot.actuate.health.Health
-import org.springframework.boot.actuate.health.HealthIndicator
-import org.springframework.stereotype.Component
-import org.springframework.jdbc.core.JdbcTemplate
-import org.slf4j.LoggerFactory
-
-@Component
-class TableHealthIndicator(
-    private val jdbcTemplate: JdbcTemplate
-) : HealthIndicator {
-    private val logger = LoggerFactory.getLogger(TableHealthIndicator::class.java)
-
-    override fun health(): Health {
-        return try {
-            val tableCount = jdbcTemplate.queryForObject(
-                "SELECT COUNT(*) FROM ad_table",
-                Int::class.java
-            ) ?: 0
-
-            val recentTablesCount = jdbcTemplate.queryForObject("""
-                SELECT COUNT(*) FROM ad_table 
-                WHERE created > now() - interval '24 hours'
-            """, Int::class.java) ?: 0
-
-            Health.up()
-                .withDetail("totalTables", tableCount)
-                .withDetail("tablesCreatedLast24h", recentTablesCount)
-                .build()
+        
+        try {
+            logger.debug("Publishing event: {} with correlationId: {}", 
+                event.javaClass.simpleName, correlationId)
+            
+            applicationEventPublisher.publishEvent(event)
+            
+            logger.debug("Successfully published event: {} with correlationId: {}", 
+                event.javaClass.simpleName, correlationId)
         } catch (e: Exception) {
-            logger.error("Health check failed", e)
-            Health.down()
-                .withException(e)
-                .build()
+            logger.error("Failed to publish event: {} with correlationId: {}", 
+                event.javaClass.simpleName, correlationId, e)
+            throw e
+        } finally {
+            MDC.remove("correlationId")
         }
     }
 }
 EOL
 
-echo "Service layer transaction and metrics implementation completed."
+echo "Event system implementation completed with correct paths under domain/events/"
