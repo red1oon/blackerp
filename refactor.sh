@@ -1,402 +1,465 @@
 #!/bin/bash
 
-# generate_reference_management.sh
-# Generates enhanced reference management components
+# generate_process_management.sh
+# Generates process management components building on reference system
 
-echo "Generating reference management components..."
+echo "Generating process management components..."
 
-# 1. Enhanced ADReference.kt
-cat > domain/core/ad/reference/ADReference.kt << 'EOF'
-package org.blackerp.domain.ad.reference
+# 1. Enhanced Process Domain Model
+cat > domain/core/ad/process/ADProcess.kt << 'EOF'
+package org.blackerp.domain.ad.process
 
-import arrow.core.Either
-import arrow.core.right
 import org.blackerp.domain.EntityMetadata
 import org.blackerp.domain.ad.ADObject
-import org.blackerp.domain.ad.reference.value.ReferenceName
 import org.blackerp.domain.values.DisplayName
 import org.blackerp.domain.values.Description
-import org.blackerp.shared.ValidationError
+import arrow.core.Either
+import arrow.core.right
 import java.util.UUID
 
-data class ADReference(
+data class ADProcess(
     override val metadata: EntityMetadata,
     val id: UUID = UUID.randomUUID(),
-    val name: ReferenceName,
     override val displayName: DisplayName,
     override val description: Description?,
-    val type: ReferenceType,
-    val validationRule: ValidationRule?,
-    val isActive: Boolean = true,
-    val parentId: UUID? = null,
-    val sortOrder: Int = 0,
-    val cacheStrategy: CacheStrategy = CacheStrategy.NONE
+    val type: ProcessType,
+    val parameters: List<ProcessParameter>,
+    val implementation: ProcessImplementation,
+    val schedule: ProcessSchedule?,
+    val accessLevel: AccessLevel = AccessLevel.ORGANIZATION,
+    val version: Int = 1,
+    val status: ProcessStatus = ProcessStatus.ACTIVE
 ) : ADObject {
     companion object {
-        fun create(params: CreateReferenceParams): Either<ReferenceError, ADReference> =
-            ADReference(
+        fun create(params: CreateProcessParams): Either<ProcessError, ADProcess> =
+            ADProcess(
                 metadata = params.metadata,
-                name = params.name,
                 displayName = params.displayName,
                 description = params.description,
                 type = params.type,
-                validationRule = params.validationRule,
-                parentId = params.parentId,
-                sortOrder = params.sortOrder,
-                cacheStrategy = params.cacheStrategy
+                parameters = params.parameters,
+                implementation = params.implementation,
+                schedule = params.schedule
             ).right()
     }
 }
 
-sealed interface ReferenceType {
-    object List : ReferenceType
-    data class Table(
-        val tableName: String,
-        val keyColumn: String, 
-        val displayColumn: String,
-        val whereClause: String? = null,
-        val orderBy: String? = null
-    ) : ReferenceType
-    object Search : ReferenceType
-    data class Custom(
-        val validatorClass: String,
-        val config: Map<String, String> = emptyMap()
-    ) : ReferenceType
+enum class ProcessType {
+    REPORT,
+    CALCULATION,
+    SYNCHRONIZATION,
+    WORKFLOW,
+    DATA_IMPORT,
+    DATA_EXPORT,
+    CUSTOM
 }
 
-data class ValidationRule(
-    val expression: String,
-    val errorMessage: String,
-    val parameters: Map<String, String> = emptyMap()
-)
-
-enum class CacheStrategy {
-    NONE,
-    SESSION,
-    APPLICATION,
-    TIMED
+enum class ProcessStatus {
+    DRAFT,
+    ACTIVE,
+    SUSPENDED,
+    DEPRECATED
 }
 
-data class CreateReferenceParams(
-    val metadata: EntityMetadata,
-    val name: ReferenceName,
-    val displayName: DisplayName,
-    val description: Description?,
-    val type: ReferenceType,
-    val validationRule: ValidationRule? = null,
-    val parentId: UUID? = null,
-    val sortOrder: Int = 0,
-    val cacheStrategy: CacheStrategy = CacheStrategy.NONE
+data class ProcessParameter(
+    val id: UUID = UUID.randomUUID(),
+    val name: String,
+    val displayName: String,
+    val description: String?,
+    val parameterType: ParameterType,
+    val referenceId: UUID?,
+    val defaultValue: String?,
+    val isMandatory: Boolean = false,
+    val validationRule: String?
 )
 
-sealed class ReferenceError {
-    data class ValidationFailed(val errors: List<ValidationError>) : ReferenceError()
-    data class DuplicateReference(val name: String) : ReferenceError()
-    data class ReferenceNotFound(val name: String) : ReferenceError()
-    data class CircularReference(val path: List<String>) : ReferenceError()
-    data class InvalidConfiguration(val message: String) : ReferenceError()
+enum class ParameterType {
+    STRING,
+    NUMBER,
+    DATE,
+    BOOLEAN,
+    REFERENCE,
+    FILE
 }
 
-data class ReferenceValue<T>(
-    val key: T,
-    val display: String,
-    val additionalData: Map<String, Any> = emptyMap()
+sealed interface ProcessImplementation {
+    data class JavaClass(
+        val className: String,
+        val methodName: String = "execute"
+    ) : ProcessImplementation
+    
+    data class DatabaseFunction(
+        val functionName: String,
+        val schema: String = "public"
+    ) : ProcessImplementation
+    
+    data class Script(
+        val language: String,
+        val code: String,
+        val version: String = "1.0"
+    ) : ProcessImplementation
+    
+    data class RestEndpoint(
+        val url: String,
+        val method: String,
+        val headers: Map<String, String> = emptyMap(),
+        val bodyTemplate: String?
+    ) : ProcessImplementation
+}
+
+data class ProcessSchedule(
+    val cronExpression: String,
+    val timezone: String = "UTC",
+    val startDate: java.time.LocalDateTime? = null,
+    val endDate: java.time.LocalDateTime? = null,
+    val maxExecutions: Int? = null,
+    val enabled: Boolean = true
 )
+
+sealed class ProcessError {
+    data class ValidationFailed(val message: String) : ProcessError()
+    data class ExecutionFailed(val message: String) : ProcessError()
+    data class NotFound(val id: UUID) : ProcessError()
+    data class InvalidSchedule(val message: String) : ProcessError()
+    data class InvalidImplementation(val message: String) : ProcessError()
+}
+
+data class ProcessResult(
+    val success: Boolean,
+    val message: String?,
+    val data: Map<String, Any>? = null,
+    val logs: List<String> = emptyList(),
+    val executionTime: Long? = null
+)
+
+enum class AccessLevel {
+    SYSTEM,
+    CLIENT,
+    ORGANIZATION,
+    CLIENT_ORGANIZATION
+}
 EOF
 
-# 2. Operations Interface
-cat > domain/core/ad/reference/ReferenceOperations.kt << 'EOF'
-package org.blackerp.domain.ad.reference
+# 2. Process Operations Interface
+cat > domain/core/ad/process/ProcessOperations.kt << 'EOF'
+package org.blackerp.domain.ad.process
 
 import arrow.core.Either
 import kotlinx.coroutines.flow.Flow
 import java.util.UUID
 
-interface ReferenceOperations {
-    suspend fun save(reference: ADReference): Either<ReferenceError, ADReference>
-    suspend fun findById(id: UUID): Either<ReferenceError, ADReference?>
-    suspend fun findByName(name: String): Either<ReferenceError, ADReference?>
-    suspend fun search(query: String, pageSize: Int = 20, page: Int = 0): Flow<ADReference>
-    suspend fun getValues(
-        referenceId: UUID,
-        searchText: String? = null,
+interface ProcessOperations {
+    suspend fun save(process: ADProcess): Either<ProcessError, ADProcess>
+    suspend fun findById(id: UUID): Either<ProcessError, ADProcess?>
+    suspend fun search(query: String, pageSize: Int = 20, page: Int = 0): Flow<ADProcess>
+    suspend fun delete(id: UUID): Either<ProcessError, Unit>
+    suspend fun execute(
+        id: UUID,
+        parameters: Map<String, Any>,
+        async: Boolean = false
+    ): Either<ProcessError, ProcessResult>
+    suspend fun schedule(
+        id: UUID,
+        schedule: ProcessSchedule
+    ): Either<ProcessError, ADProcess>
+    suspend fun getExecutionHistory(
+        id: UUID,
         pageSize: Int = 20,
         page: Int = 0
-    ): Either<ReferenceError, List<ReferenceValue<*>>>
-    suspend fun validateValue(referenceId: UUID, value: Any): Either<ReferenceError, Boolean>
-    suspend fun getHierarchy(rootId: UUID? = null): Either<ReferenceError, List<ADReference>>
-    suspend fun delete(id: UUID): Either<ReferenceError, Unit>
+    ): Flow<ProcessExecution>
+    suspend fun validateParameters(
+        id: UUID,
+        parameters: Map<String, Any>
+    ): Either<ProcessError, Map<String, List<String>>>
 }
 
-interface ReferenceRepository {
-    suspend fun save(reference: ADReference): Either<ReferenceError, ADReference>
-    suspend fun findById(id: UUID): Either<ReferenceError, ADReference?>
-    suspend fun findByName(name: String): Either<ReferenceError, ADReference?>
-    suspend fun search(query: String, pageSize: Int, page: Int): Flow<ADReference>
-    suspend fun delete(id: UUID): Either<ReferenceError, Unit>
-}
+data class ProcessExecution(
+    val id: UUID = UUID.randomUUID(),
+    val processId: UUID,
+    val startTime: java.time.Instant,
+    val endTime: java.time.Instant?,
+    val status: ExecutionStatus,
+    val parameters: Map<String, Any>,
+    val result: ProcessResult?,
+    val user: String
+)
 
-interface ReferenceCache {
-    suspend fun get(key: String): Any?
-    suspend fun put(key: String, value: Any, ttlSeconds: Long? = null)
-    suspend fun remove(key: String)
-    suspend fun clear()
+enum class ExecutionStatus {
+    QUEUED,
+    RUNNING,
+    COMPLETED,
+    FAILED,
+    CANCELLED
 }
 EOF
 
-# 3. Service Implementation
-cat > application/services/ReferenceService.kt << 'EOF'
+# 3. Process Service Implementation
+cat > application/services/ProcessService.kt << 'EOF'
 package org.blackerp.application.services
 
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
-import org.blackerp.domain.ad.reference.*
+import org.blackerp.domain.ad.process.*
 import arrow.core.Either
 import arrow.core.right
 import arrow.core.left
 import kotlinx.coroutines.flow.Flow
 import org.slf4j.LoggerFactory
 import java.util.UUID
+import java.time.Instant
 
 @Service
-class ReferenceService(
-    private val referenceRepository: ReferenceRepository,
-    private val referenceCache: ReferenceCache,
+class ProcessService(
+    private val processRepository: ProcessRepository,
+    private val processExecutor: ProcessExecutor,
     private val metadataService: ADMetadataService
-) : ReferenceOperations {
-    private val logger = LoggerFactory.getLogger(ReferenceService::class.java)
+) : ProcessOperations {
+    private val logger = LoggerFactory.getLogger(ProcessService::class.java)
 
     @Transactional
-    override suspend fun save(reference: ADReference): Either<ReferenceError, ADReference> {
-        logger.debug("Saving reference: ${reference.name}")
-        return referenceRepository.save(reference).also { result ->
-            result.fold(
-                { error -> logger.error("Failed to save reference: $error") },
-                { saved -> 
-                    logger.debug("Successfully saved reference: ${saved.id}")
-                    clearCacheForReference(saved.id)
-                }
-            )
-        }
+    override suspend fun save(process: ADProcess): Either<ProcessError, ADProcess> {
+        logger.debug("Saving process: ${process.displayName}")
+        return validateProcess(process).fold(
+            { error -> error.left() },
+            { validProcess -> processRepository.save(validProcess) }
+        )
     }
 
-    override suspend fun findById(id: UUID): Either<ReferenceError, ADReference?> {
-        logger.debug("Finding reference by ID: $id")
-        return referenceRepository.findById(id)
+    override suspend fun findById(id: UUID): Either<ProcessError, ADProcess?> {
+        logger.debug("Finding process by ID: $id")
+        return processRepository.findById(id)
     }
 
-    override suspend fun findByName(name: String): Either<ReferenceError, ADReference?> {
-        logger.debug("Finding reference by name: $name")
-        return referenceRepository.findByName(name)
-    }
-
-    override suspend fun search(query: String, pageSize: Int, page: Int): Flow<ADReference> {
-        logger.debug("Searching references with query: $query")
-        return referenceRepository.search(query, pageSize, page)
-    }
-
-    override suspend fun getValues(
-        referenceId: UUID,
-        searchText: String?,
+    override suspend fun search(
+        query: String,
         pageSize: Int,
         page: Int
-    ): Either<ReferenceError, List<ReferenceValue<*>>> {
-        logger.debug("Getting values for reference: $referenceId")
-        val reference = findById(referenceId).getOrNull() 
-            ?: return ReferenceError.ReferenceNotFound(referenceId.toString()).left()
-        
-        return when (reference.cacheStrategy) {
-            CacheStrategy.NONE -> loadValues(reference, searchText, pageSize, page)
-            else -> getCachedValues(reference, searchText, pageSize, page)
-        }
+    ): Flow<ADProcess> {
+        logger.debug("Searching processes with query: $query")
+        return processRepository.search(query, pageSize, page)
     }
 
-    override suspend fun validateValue(
-        referenceId: UUID,
-        value: Any
-    ): Either<ReferenceError, Boolean> {
-        logger.debug("Validating value for reference: $referenceId")
-        return findById(referenceId).fold(
+    @Transactional
+    override suspend fun delete(id: UUID): Either<ProcessError, Unit> {
+        logger.debug("Deleting process: $id")
+        return findById(id).fold(
             { error -> error.left() },
-            { reference ->
-                reference?.validationRule?.let { rule ->
-                    validateValueWithRule(value, rule)
-                } ?: true.right()
+            { process ->
+                if (process == null) {
+                    ProcessError.NotFound(id).left()
+                } else {
+                    processRepository.delete(id)
+                }
             }
         )
     }
 
-    override suspend fun getHierarchy(rootId: UUID?): Either<ReferenceError, List<ADReference>> {
-        logger.debug("Getting hierarchy for root: $rootId")
-        return buildHierarchy(rootId)
-    }
-
-    @Transactional
-    override suspend fun delete(id: UUID): Either<ReferenceError, Unit> {
-        logger.debug("Deleting reference: $id")
-        return referenceRepository.delete(id).also {
-            clearCacheForReference(id)
-        }
-    }
-
-    private suspend fun getCachedValues(
-        reference: ADReference,
-        searchText: String?,
-        pageSize: Int,
-        page: Int
-    ): Either<ReferenceError, List<ReferenceValue<*>>> {
-        val cacheKey = buildCacheKey(reference.id, searchText, page)
-        val cached = referenceCache.get(cacheKey)
+    override suspend fun execute(
+        id: UUID,
+        parameters: Map<String, Any>,
+        async: Boolean
+    ): Either<ProcessError, ProcessResult> {
+        logger.debug("Executing process: $id")
+        val startTime = Instant.now()
         
-        return if (cached != null) {
-            @Suppress("UNCHECKED_CAST")
-            (cached as List<ReferenceValue<*>>).right()
-        } else {
-            loadValues(reference, searchText, pageSize, page).also { result ->
-                result.fold(
-                    { /* Don't cache errors */ },
-                    { values -> referenceCache.put(cacheKey, values) }
-                )
+        return validateParameters(id, parameters).fold(
+            { error -> error.left() },
+            { validatedParams ->
+                processExecutor.execute(id, validatedParams, async).also { result ->
+                    result.fold(
+                        { error -> logger.error("Process execution failed: $error") },
+                        { success -> 
+                            logger.info("Process completed successfully: ${success.message}")
+                            recordExecution(id, startTime, Instant.now(), success)
+                        }
+                    )
+                }
             }
-        }
+        )
     }
 
-    private suspend fun loadValues(
-        reference: ADReference,
-        searchText: String?,
+    override suspend fun schedule(
+        id: UUID,
+        schedule: ProcessSchedule
+    ): Either<ProcessError, ADProcess> {
+        logger.debug("Scheduling process: $id")
+        return findById(id).fold(
+            { error -> error.left() },
+            { process ->
+                if (process == null) {
+                    ProcessError.NotFound(id).left()
+                } else {
+                    validateSchedule(schedule).fold(
+                        { error -> error.left() },
+                        { validSchedule ->
+                            process.copy(schedule = validSchedule)
+                                .let { updatedProcess -> save(updatedProcess) }
+                        }
+                    )
+                }
+            }
+        )
+    }
+
+    override suspend fun getExecutionHistory(
+        id: UUID,
         pageSize: Int,
         page: Int
-    ): Either<ReferenceError, List<ReferenceValue<*>>> {
-        return when (reference.type) {
-            is ReferenceType.List -> emptyList<ReferenceValue<*>>().right() // Implement
-            is ReferenceType.Table -> emptyList<ReferenceValue<*>>().right() // Implement
-            is ReferenceType.Search -> emptyList<ReferenceValue<*>>().right() // Implement
-            is ReferenceType.Custom -> emptyList<ReferenceValue<*>>().right() // Implement
-        }
+    ): Flow<ProcessExecution> {
+        logger.debug("Getting execution history for process: $id")
+        return processRepository.getExecutionHistory(id, pageSize, page)
     }
 
-    private fun buildCacheKey(referenceId: UUID, searchText: String?, page: Int): String =
-        "ref:$referenceId:${searchText ?: ""}:$page"
-
-    private suspend fun clearCacheForReference(referenceId: UUID) {
-        logger.debug("Clearing cache for reference: $referenceId")
-        referenceCache.remove("ref:$referenceId:*")
+    override suspend fun validateParameters(
+        id: UUID,
+        parameters: Map<String, Any>
+    ): Either<ProcessError, Map<String, List<String>>> {
+        logger.debug("Validating parameters for process: $id")
+        return findById(id).fold(
+            { error -> error.left() },
+            { process ->
+                if (process == null) {
+                    ProcessError.NotFound(id).left()
+                } else {
+                    validateParametersAgainstDefinition(process.parameters, parameters)
+                }
+            }
+        )
     }
 
-    private suspend fun validateValueWithRule(
-        value: Any,
-        rule: ValidationRule
-    ): Either<ReferenceError, Boolean> {
-        // Implement validation logic
-        return true.right()
+    private fun validateProcess(process: ADProcess): Either<ProcessError, ADProcess> {
+        // Implementation for process validation
+        return process.right()
     }
 
-    private suspend fun buildHierarchy(rootId: UUID?): Either<ReferenceError, List<ADReference>> {
-        // Implement hierarchy building
-        return emptyList<ADReference>().right()
+    private fun validateSchedule(schedule: ProcessSchedule): Either<ProcessError, ProcessSchedule> {
+        // Implementation for schedule validation
+        return schedule.right()
+    }
+
+    private fun validateParametersAgainstDefinition(
+        definition: List<ProcessParameter>,
+        parameters: Map<String, Any>
+    ): Either<ProcessError, Map<String, List<String>>> {
+        // Implementation for parameter validation
+        return emptyMap<String, List<String>>().right()
+    }
+
+    private suspend fun recordExecution(
+        processId: UUID,
+        startTime: Instant,
+        endTime: Instant,
+        result: ProcessResult
+    ) {
+        // Implementation for recording execution history
     }
 }
 EOF
 
-# 4. Controller Implementation
-cat > application/api/controllers/ReferenceController.kt << 'EOF'
+# 4. Process Controller
+cat > application/api/controllers/ProcessController.kt << 'EOF'
 package org.blackerp.application.api.controllers
 
 import org.springframework.web.bind.annotation.*
 import org.springframework.http.ResponseEntity
-import org.blackerp.domain.ad.reference.*
-import org.blackerp.application.services.ReferenceService
+import org.blackerp.domain.ad.process.*
+import org.blackerp.application.services.ProcessService
 import jakarta.validation.Valid
 import org.slf4j.LoggerFactory
 import java.util.UUID
 
 @RestController
-@RequestMapping("/api/references")
-class ReferenceController(
-    private val referenceService: ReferenceService
+@RequestMapping("/api/processes")
+class ProcessController(
+    private val processService: ProcessService
 ) {
-    private val logger = LoggerFactory.getLogger(ReferenceController::class.java)
+    private val logger = LoggerFactory.getLogger(ProcessController::class.java)
 
     @PostMapping
-    suspend fun createReference(
-        @Valid @RequestBody request: CreateReferenceRequest
-    ): ResponseEntity<ADReference> {
-        logger.debug("Creating reference: ${request.name}")
-        return referenceService.save(request.toDomain()).fold(
+    suspend fun createProcess(
+        @Valid @RequestBody request: CreateProcessRequest
+    ): ResponseEntity<ADProcess> {
+        logger.debug("Creating process: ${request.displayName}")
+        return processService.save(request.toDomain()).fold(
             { error -> ResponseEntity.badRequest().build() },
-            { reference -> ResponseEntity.ok(reference) }
+            { process -> ResponseEntity.ok(process) }
         )
     }
 
-    @GetMapping("/{id}")
-    suspend fun getReference(@PathVariable id: UUID): ResponseEntity<ADReference> {
-        return referenceService.findById(id).fold(
-            { error -> ResponseEntity.notFound().build() },
-            { reference -> 
-                reference?.let { ResponseEntity.ok(it) } 
-                    ?: ResponseEntity.notFound().build()
-            }
-        )
-    }
-
-    @GetMapping("/{id}/values")
-    suspend fun getReferenceValues(
+    @PostMapping("/{id}/execute")
+    suspend fun executeProcess(
         @PathVariable id: UUID,
-        @RequestParam(required = false) search: String?,
+        @RequestBody parameters: Map<String, Any>,
+        @RequestParam(defaultValue = "false") async: Boolean
+    ): ResponseEntity<ProcessResult> {
+        logger.debug("Executing process: $id")
+        return processService.execute(id, parameters, async).fold(
+            { error -> ResponseEntity.badRequest().build() },
+            { result -> ResponseEntity.ok(result) }
+        )
+    }
+
+    @PostMapping("/{id}/schedule")
+    suspend fun scheduleProcess(
+        @PathVariable id: UUID,
+        @Valid @RequestBody schedule: ProcessSchedule
+    ): ResponseEntity<ADProcess> {
+        logger.debug("Scheduling process: $id")
+        return processService.schedule(id, schedule).fold(
+            { error -> ResponseEntity.badRequest().build() },
+            { process -> ResponseEntity.ok(process) }
+        )
+    }
+
+    @GetMapping("/{id}/history")
+    suspend fun getProcessHistory(
+        @PathVariable id: UUID,
         @RequestParam(defaultValue = "20") pageSize: Int,
         @RequestParam(defaultValue = "0") page: Int
-    ): ResponseEntity<List<ReferenceValue<*>>> {
-        return referenceService.getValues(id, search, pageSize, page).fold(
-            { error -> ResponseEntity.badRequest().build() },
-            { values -> ResponseEntity.ok(values) }
-        )
+    ): ResponseEntity<List<ProcessExecution>> {
+        return processService.getExecutionHistory(id, pageSize, page)
+            .collect { executions -> ResponseEntity.ok(executions) }
     }
 
-    @GetMapping("/{id}/hierarchy")
-    suspend fun getReferenceHierarchy(
-        @PathVariable id: UUID
-    ): ResponseEntity<List<ADReference>> {
-        return referenceService.getHierarchy(id).fold(
-            { error -> ResponseEntity.badRequest().build() },
-            { hierarchy -> ResponseEntity.ok(hierarchy) }
-        )
-    }
-
-    @DeleteMapping("/{id}")
-    suspend fun deleteReference(@PathVariable id: UUID): ResponseEntity<Unit> {
-        return referenceService.delete(id).fold(
-            { error -> ResponseEntity.badRequest().build() },
-            { ResponseEntity.noContent().build() }
-        )
-    }
-
-    data class CreateReferenceRequest(
-        val name: String,
+    data class CreateProcessRequest(
         val displayName: String,
         val description: String?,
-        val type: ReferenceTypeRequest,
-        val validationRule: ValidationRuleRequest?,
-        val parentId: UUID?,
-        val sortOrder: Int?,
-        val cacheStrategy: String?
+        val type: String,
+        val parameters: List<ParameterRequest>,
+        val implementation: ImplementationRequest,
+        val schedule: ScheduleRequest?
     ) {
-        fun toDomain(): ADReference {
-            // Implement conversion to domain object
+        fun toDomain(): ADProcess {
+            // Implementation for conversion to domain object
             TODO("Implement conversion")
         }
     }
 
-    data class ReferenceTypeRequest(
+    data class ParameterRequest(
+        val name: String,
+        val displayName: String,
+        val description: String?,
+        val type: String,
+        val referenceId: UUID?,
+        val defaultValue: String?,
+        val isMandatory: Boolean,
+        val validationRule: String?
+    )
+
+    data class ImplementationRequest(
         val type: String,
         val config: Map<String, String>
     )
 
-    data class ValidationRuleRequest(
-        val expression: String,
-        val errorMessage: String,
-        val parameters: Map<String, String>
+    data class ScheduleRequest(
+        val cronExpression: String,
+        val timezone: String?,
+        val startDate: String?,
+        val endDate: String?,
+        val maxExecutions: Int?,
+        val enabled: Boolean?
     )
 }
 EOF
 
-echo "Reference management components generated successfully!"
+echo "Process management components generated successfully!"
