@@ -1,13 +1,13 @@
 #!/bin/bash
 
-# generate_process_management.sh
-# Generates process management components building on reference system
+# generate_document_management.sh
+# Generates document management components
 
-echo "Generating process management components..."
+echo "Generating document management components..."
 
-# 1. Enhanced Process Domain Model
-cat > domain/core/ad/process/ADProcess.kt << 'EOF'
-package org.blackerp.domain.ad.process
+# 1. Enhanced Document Model
+cat > domain/core/ad/document/Document.kt << 'EOF'
+package org.blackerp.domain.ad.document
 
 import org.blackerp.domain.EntityMetadata
 import org.blackerp.domain.ad.ADObject
@@ -16,284 +16,231 @@ import org.blackerp.domain.values.Description
 import arrow.core.Either
 import arrow.core.right
 import java.util.UUID
+import java.time.Instant
 
-data class ADProcess(
+data class Document(
     override val metadata: EntityMetadata,
     val id: UUID = UUID.randomUUID(),
     override val displayName: DisplayName,
     override val description: Description?,
-    val type: ProcessType,
-    val parameters: List<ProcessParameter>,
-    val implementation: ProcessImplementation,
-    val schedule: ProcessSchedule?,
-    val accessLevel: AccessLevel = AccessLevel.ORGANIZATION,
+    val type: DocumentType,
+    val status: DocumentStatus,
+    val lines: List<DocumentLine>,
+    val baseDocument: UUID? = null,
     val version: Int = 1,
-    val status: ProcessStatus = ProcessStatus.ACTIVE
+    val workflow: DocumentWorkflow? = null,
+    val accessLevel: AccessLevel = AccessLevel.ORGANIZATION,
+    val created: Instant = Instant.now(),
+    val lastModified: Instant = Instant.now(),
+    val archived: Boolean = false
 ) : ADObject {
     companion object {
-        fun create(params: CreateProcessParams): Either<ProcessError, ADProcess> =
-            ADProcess(
+        fun create(params: CreateDocumentParams): Either<DocumentError, Document> =
+            Document(
                 metadata = params.metadata,
                 displayName = params.displayName,
                 description = params.description,
                 type = params.type,
-                parameters = params.parameters,
-                implementation = params.implementation,
-                schedule = params.schedule
+                status = DocumentStatus.DRAFT,
+                lines = params.lines,
+                baseDocument = params.baseDocument,
+                workflow = params.workflow
             ).right()
     }
 }
 
-enum class ProcessType {
-    REPORT,
-    CALCULATION,
-    SYNCHRONIZATION,
-    WORKFLOW,
-    DATA_IMPORT,
-    DATA_EXPORT,
-    CUSTOM
-}
-
-enum class ProcessStatus {
-    DRAFT,
-    ACTIVE,
-    SUSPENDED,
-    DEPRECATED
-}
-
-data class ProcessParameter(
+data class DocumentLine(
     val id: UUID = UUID.randomUUID(),
+    val lineNo: Int,
+    val attributes: Map<String, Any>,
+    val referencedDocument: UUID? = null,
+    val status: LineStatus = LineStatus.ACTIVE
+)
+
+data class DocumentType(
+    val id: UUID,
+    val code: String,
     val name: String,
-    val displayName: String,
-    val description: String?,
-    val parameterType: ParameterType,
+    val baseTable: String,
+    val linesTable: String?,
+    val workflow: UUID?,
+    val numberingPattern: String,
+    val attributes: Map<String, AttributeDefinition>
+)
+
+data class AttributeDefinition(
+    val name: String,
+    val type: AttributeType,
     val referenceId: UUID?,
-    val defaultValue: String?,
-    val isMandatory: Boolean = false,
-    val validationRule: String?
+    val mandatory: Boolean = false,
+    val defaultValue: Any? = null,
+    val validationRule: String? = null
 )
 
-enum class ParameterType {
-    STRING,
-    NUMBER,
-    DATE,
-    BOOLEAN,
-    REFERENCE,
-    FILE
+enum class AttributeType {
+    STRING, NUMBER, DATE, BOOLEAN, REFERENCE, DOCUMENT
 }
 
-sealed interface ProcessImplementation {
-    data class JavaClass(
-        val className: String,
-        val methodName: String = "execute"
-    ) : ProcessImplementation
-    
-    data class DatabaseFunction(
-        val functionName: String,
-        val schema: String = "public"
-    ) : ProcessImplementation
-    
-    data class Script(
-        val language: String,
-        val code: String,
-        val version: String = "1.0"
-    ) : ProcessImplementation
-    
-    data class RestEndpoint(
-        val url: String,
-        val method: String,
-        val headers: Map<String, String> = emptyMap(),
-        val bodyTemplate: String?
-    ) : ProcessImplementation
-}
-
-data class ProcessSchedule(
-    val cronExpression: String,
-    val timezone: String = "UTC",
-    val startDate: java.time.LocalDateTime? = null,
-    val endDate: java.time.LocalDateTime? = null,
-    val maxExecutions: Int? = null,
-    val enabled: Boolean = true
+data class DocumentWorkflow(
+    val currentState: String,
+    val availableTransitions: List<String>,
+    val assignee: String?,
+    val dueDate: Instant?
 )
 
-sealed class ProcessError {
-    data class ValidationFailed(val message: String) : ProcessError()
-    data class ExecutionFailed(val message: String) : ProcessError()
-    data class NotFound(val id: UUID) : ProcessError()
-    data class InvalidSchedule(val message: String) : ProcessError()
-    data class InvalidImplementation(val message: String) : ProcessError()
+enum class DocumentStatus {
+    DRAFT, IN_PROGRESS, COMPLETED, CANCELLED, VOID
 }
 
-data class ProcessResult(
-    val success: Boolean,
-    val message: String?,
-    val data: Map<String, Any>? = null,
-    val logs: List<String> = emptyList(),
-    val executionTime: Long? = null
-)
+enum class LineStatus {
+    ACTIVE, CANCELLED, COMPLETED
+}
 
 enum class AccessLevel {
-    SYSTEM,
-    CLIENT,
-    ORGANIZATION,
-    CLIENT_ORGANIZATION
+    SYSTEM, CLIENT, ORGANIZATION, CLIENT_ORGANIZATION
 }
 EOF
 
-# 2. Process Operations Interface
-cat > domain/core/ad/process/ProcessOperations.kt << 'EOF'
-package org.blackerp.domain.ad.process
+# 2. Document Operations
+cat > domain/core/ad/document/DocumentOperations.kt << 'EOF'
+package org.blackerp.domain.ad.document
 
 import arrow.core.Either
 import kotlinx.coroutines.flow.Flow
 import java.util.UUID
 
-interface ProcessOperations {
-    suspend fun save(process: ADProcess): Either<ProcessError, ADProcess>
-    suspend fun findById(id: UUID): Either<ProcessError, ADProcess?>
-    suspend fun search(query: String, pageSize: Int = 20, page: Int = 0): Flow<ADProcess>
-    suspend fun delete(id: UUID): Either<ProcessError, Unit>
-    suspend fun execute(
-        id: UUID,
-        parameters: Map<String, Any>,
-        async: Boolean = false
-    ): Either<ProcessError, ProcessResult>
-    suspend fun schedule(
-        id: UUID,
-        schedule: ProcessSchedule
-    ): Either<ProcessError, ADProcess>
-    suspend fun getExecutionHistory(
-        id: UUID,
-        pageSize: Int = 20,
-        page: Int = 0
-    ): Flow<ProcessExecution>
-    suspend fun validateParameters(
-        id: UUID,
-        parameters: Map<String, Any>
-    ): Either<ProcessError, Map<String, List<String>>>
+interface DocumentOperations {
+    suspend fun create(document: Document): Either<DocumentError, Document>
+    suspend fun update(id: UUID, document: Document): Either<DocumentError, Document>
+    suspend fun findById(id: UUID): Either<DocumentError, Document?>
+    suspend fun search(criteria: SearchCriteria): Flow<Document>
+    suspend fun delete(id: UUID): Either<DocumentError, Unit>
+    suspend fun changeStatus(id: UUID, status: DocumentStatus): Either<DocumentError, Document>
+    suspend fun addLine(id: UUID, line: DocumentLine): Either<DocumentError, Document>
+    suspend fun updateLine(id: UUID, lineId: UUID, line: DocumentLine): Either<DocumentError, Document>
+    suspend fun deleteLine(id: UUID, lineId: UUID): Either<DocumentError, Document>
+    suspend fun validateDocument(document: Document): Either<DocumentError, ValidationResult>
+    suspend fun getHistory(id: UUID): Flow<DocumentHistory>
 }
 
-data class ProcessExecution(
-    val id: UUID = UUID.randomUUID(),
-    val processId: UUID,
-    val startTime: java.time.Instant,
-    val endTime: java.time.Instant?,
-    val status: ExecutionStatus,
-    val parameters: Map<String, Any>,
-    val result: ProcessResult?,
-    val user: String
+data class SearchCriteria(
+    val types: List<UUID>? = null,
+    val statuses: List<DocumentStatus>? = null,
+    val dateRange: DateRange? = null,
+    val attributes: Map<String, Any>? = null,
+    val pageSize: Int = 20,
+    val page: Int = 0
 )
 
-enum class ExecutionStatus {
-    QUEUED,
-    RUNNING,
-    COMPLETED,
-    FAILED,
-    CANCELLED
-}
+data class DateRange(
+    val from: Instant,
+    val to: Instant
+)
+
+data class ValidationResult(
+    val isValid: Boolean,
+    val errors: Map<String, List<String>> = emptyMap()
+)
+
+data class DocumentHistory(
+    val timestamp: Instant,
+    val user: String,
+    val action: String,
+    val changes: Map<String, ChangePair>
+)
 EOF
 
-# 3. Process Service Implementation
-cat > application/services/ProcessService.kt << 'EOF'
+# 3. Document Service
+cat > application/services/DocumentService.kt << 'EOF'
 package org.blackerp.application.services
 
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
-import org.blackerp.domain.ad.process.*
+import org.blackerp.domain.ad.document.*
 import arrow.core.Either
 import arrow.core.right
 import arrow.core.left
 import kotlinx.coroutines.flow.Flow
 import org.slf4j.LoggerFactory
 import java.util.UUID
-import java.time.Instant
 
 @Service
-class ProcessService(
-    private val processRepository: ProcessRepository,
-    private val processExecutor: ProcessExecutor,
-    private val metadataService: ADMetadataService
-) : ProcessOperations {
-    private val logger = LoggerFactory.getLogger(ProcessService::class.java)
+class DocumentService(
+    private val documentRepository: DocumentRepository,
+    private val documentValidator: DocumentValidator,
+    private val metadataService: ADMetadataService,
+    private val workflowService: WorkflowService
+) : DocumentOperations {
+    private val logger = LoggerFactory.getLogger(DocumentService::class.java)
 
     @Transactional
-    override suspend fun save(process: ADProcess): Either<ProcessError, ADProcess> {
-        logger.debug("Saving process: ${process.displayName}")
-        return validateProcess(process).fold(
+    override suspend fun create(document: Document): Either<DocumentError, Document> {
+        logger.debug("Creating document: ${document.displayName}")
+        return validateDocument(document).fold(
             { error -> error.left() },
-            { validProcess -> processRepository.save(validProcess) }
+            { validDocument -> documentRepository.save(validDocument) }
         )
-    }
-
-    override suspend fun findById(id: UUID): Either<ProcessError, ADProcess?> {
-        logger.debug("Finding process by ID: $id")
-        return processRepository.findById(id)
-    }
-
-    override suspend fun search(
-        query: String,
-        pageSize: Int,
-        page: Int
-    ): Flow<ADProcess> {
-        logger.debug("Searching processes with query: $query")
-        return processRepository.search(query, pageSize, page)
     }
 
     @Transactional
-    override suspend fun delete(id: UUID): Either<ProcessError, Unit> {
-        logger.debug("Deleting process: $id")
+    override suspend fun update(id: UUID, document: Document): Either<DocumentError, Document> {
+        logger.debug("Updating document: $id")
         return findById(id).fold(
             { error -> error.left() },
-            { process ->
-                if (process == null) {
-                    ProcessError.NotFound(id).left()
+            { existingDoc ->
+                if (existingDoc == null) {
+                    DocumentError.NotFound(id).left()
                 } else {
-                    processRepository.delete(id)
-                }
-            }
-        )
-    }
-
-    override suspend fun execute(
-        id: UUID,
-        parameters: Map<String, Any>,
-        async: Boolean
-    ): Either<ProcessError, ProcessResult> {
-        logger.debug("Executing process: $id")
-        val startTime = Instant.now()
-        
-        return validateParameters(id, parameters).fold(
-            { error -> error.left() },
-            { validatedParams ->
-                processExecutor.execute(id, validatedParams, async).also { result ->
-                    result.fold(
-                        { error -> logger.error("Process execution failed: $error") },
-                        { success -> 
-                            logger.info("Process completed successfully: ${success.message}")
-                            recordExecution(id, startTime, Instant.now(), success)
-                        }
-                    )
-                }
-            }
-        )
-    }
-
-    override suspend fun schedule(
-        id: UUID,
-        schedule: ProcessSchedule
-    ): Either<ProcessError, ADProcess> {
-        logger.debug("Scheduling process: $id")
-        return findById(id).fold(
-            { error -> error.left() },
-            { process ->
-                if (process == null) {
-                    ProcessError.NotFound(id).left()
-                } else {
-                    validateSchedule(schedule).fold(
+                    validateUpdate(existingDoc, document).fold(
                         { error -> error.left() },
-                        { validSchedule ->
-                            process.copy(schedule = validSchedule)
-                                .let { updatedProcess -> save(updatedProcess) }
+                        { validDocument -> documentRepository.save(validDocument) }
+                    )
+                }
+            }
+        )
+    }
+
+    override suspend fun findById(id: UUID): Either<DocumentError, Document?> {
+        logger.debug("Finding document by ID: $id")
+        return documentRepository.findById(id)
+    }
+
+    override suspend fun search(criteria: SearchCriteria): Flow<Document> {
+        logger.debug("Searching documents with criteria: $criteria")
+        return documentRepository.search(criteria)
+    }
+
+    @Transactional
+    override suspend fun delete(id: UUID): Either<DocumentError, Unit> {
+        logger.debug("Deleting document: $id")
+        return findById(id).fold(
+            { error -> error.left() },
+            { document ->
+                if (document == null) {
+                    DocumentError.NotFound(id).left()
+                } else {
+                    documentRepository.delete(id)
+                }
+            }
+        )
+    }
+
+    @Transactional
+    override suspend fun changeStatus(
+        id: UUID,
+        status: DocumentStatus
+    ): Either<DocumentError, Document> {
+        logger.debug("Changing document status: $id -> $status")
+        return findById(id).fold(
+            { error -> error.left() },
+            { document ->
+                if (document == null) {
+                    DocumentError.NotFound(id).left()
+                } else {
+                    validateStatusTransition(document, status).fold(
+                        { error -> error.left() },
+                        { validDocument -> 
+                            documentRepository.save(validDocument.copy(status = status))
                         }
                     )
                 }
@@ -301,165 +248,120 @@ class ProcessService(
         )
     }
 
-    override suspend fun getExecutionHistory(
-        id: UUID,
-        pageSize: Int,
-        page: Int
-    ): Flow<ProcessExecution> {
-        logger.debug("Getting execution history for process: $id")
-        return processRepository.getExecutionHistory(id, pageSize, page)
+    private suspend fun validateStatusTransition(
+        document: Document,
+        newStatus: DocumentStatus
+    ): Either<DocumentError, Document> {
+        // Implementation for status transition validation
+        return document.right()
     }
 
-    override suspend fun validateParameters(
-        id: UUID,
-        parameters: Map<String, Any>
-    ): Either<ProcessError, Map<String, List<String>>> {
-        logger.debug("Validating parameters for process: $id")
-        return findById(id).fold(
-            { error -> error.left() },
-            { process ->
-                if (process == null) {
-                    ProcessError.NotFound(id).left()
-                } else {
-                    validateParametersAgainstDefinition(process.parameters, parameters)
-                }
-            }
-        )
-    }
-
-    private fun validateProcess(process: ADProcess): Either<ProcessError, ADProcess> {
-        // Implementation for process validation
-        return process.right()
-    }
-
-    private fun validateSchedule(schedule: ProcessSchedule): Either<ProcessError, ProcessSchedule> {
-        // Implementation for schedule validation
-        return schedule.right()
-    }
-
-    private fun validateParametersAgainstDefinition(
-        definition: List<ProcessParameter>,
-        parameters: Map<String, Any>
-    ): Either<ProcessError, Map<String, List<String>>> {
-        // Implementation for parameter validation
-        return emptyMap<String, List<String>>().right()
-    }
-
-    private suspend fun recordExecution(
-        processId: UUID,
-        startTime: Instant,
-        endTime: Instant,
-        result: ProcessResult
-    ) {
-        // Implementation for recording execution history
+    private suspend fun validateUpdate(
+        existingDoc: Document,
+        newDoc: Document
+    ): Either<DocumentError, Document> {
+        // Implementation for update validation
+        return newDoc.right()
     }
 }
 EOF
 
-# 4. Process Controller
-cat > application/api/controllers/ProcessController.kt << 'EOF'
+# 4. Document Controller
+cat > application/api/controllers/DocumentController.kt << 'EOF'
 package org.blackerp.application.api.controllers
 
 import org.springframework.web.bind.annotation.*
 import org.springframework.http.ResponseEntity
-import org.blackerp.domain.ad.process.*
-import org.blackerp.application.services.ProcessService
+import org.blackerp.domain.ad.document.*
+import org.blackerp.application.services.DocumentService
 import jakarta.validation.Valid
 import org.slf4j.LoggerFactory
 import java.util.UUID
 
 @RestController
-@RequestMapping("/api/processes")
-class ProcessController(
-    private val processService: ProcessService
+@RequestMapping("/api/documents")
+class DocumentController(
+    private val documentService: DocumentService
 ) {
-    private val logger = LoggerFactory.getLogger(ProcessController::class.java)
+    private val logger = LoggerFactory.getLogger(DocumentController::class.java)
 
     @PostMapping
-    suspend fun createProcess(
-        @Valid @RequestBody request: CreateProcessRequest
-    ): ResponseEntity<ADProcess> {
-        logger.debug("Creating process: ${request.displayName}")
-        return processService.save(request.toDomain()).fold(
+    suspend fun createDocument(
+        @Valid @RequestBody request: CreateDocumentRequest
+    ): ResponseEntity<Document> {
+        logger.debug("Creating document: ${request.displayName}")
+        return documentService.create(request.toDomain()).fold(
             { error -> ResponseEntity.badRequest().build() },
-            { process -> ResponseEntity.ok(process) }
+            { document -> ResponseEntity.ok(document) }
         )
     }
 
-    @PostMapping("/{id}/execute")
-    suspend fun executeProcess(
+    @PutMapping("/{id}")
+    suspend fun updateDocument(
         @PathVariable id: UUID,
-        @RequestBody parameters: Map<String, Any>,
-        @RequestParam(defaultValue = "false") async: Boolean
-    ): ResponseEntity<ProcessResult> {
-        logger.debug("Executing process: $id")
-        return processService.execute(id, parameters, async).fold(
+        @Valid @RequestBody request: UpdateDocumentRequest
+    ): ResponseEntity<Document> {
+        logger.debug("Updating document: $id")
+        return documentService.update(id, request.toDomain()).fold(
             { error -> ResponseEntity.badRequest().build() },
-            { result -> ResponseEntity.ok(result) }
+            { document -> ResponseEntity.ok(document) }
         )
     }
 
-    @PostMapping("/{id}/schedule")
-    suspend fun scheduleProcess(
+    @PostMapping("/{id}/status")
+    suspend fun changeStatus(
         @PathVariable id: UUID,
-        @Valid @RequestBody schedule: ProcessSchedule
-    ): ResponseEntity<ADProcess> {
-        logger.debug("Scheduling process: $id")
-        return processService.schedule(id, schedule).fold(
+        @Valid @RequestBody request: ChangeStatusRequest
+    ): ResponseEntity<Document> {
+        logger.debug("Changing document status: $id -> ${request.status}")
+        return documentService.changeStatus(id, request.status).fold(
             { error -> ResponseEntity.badRequest().build() },
-            { process -> ResponseEntity.ok(process) }
+            { document -> ResponseEntity.ok(document) }
         )
     }
 
     @GetMapping("/{id}/history")
-    suspend fun getProcessHistory(
-        @PathVariable id: UUID,
-        @RequestParam(defaultValue = "20") pageSize: Int,
-        @RequestParam(defaultValue = "0") page: Int
-    ): ResponseEntity<List<ProcessExecution>> {
-        return processService.getExecutionHistory(id, pageSize, page)
-            .collect { executions -> ResponseEntity.ok(executions) }
+    suspend fun getHistory(
+        @PathVariable id: UUID
+    ): ResponseEntity<List<DocumentHistory>> {
+        return documentService.getHistory(id)
+            .collect { history -> ResponseEntity.ok(history) }
     }
 
-    data class CreateProcessRequest(
+    data class CreateDocumentRequest(
         val displayName: String,
         val description: String?,
-        val type: String,
-        val parameters: List<ParameterRequest>,
-        val implementation: ImplementationRequest,
-        val schedule: ScheduleRequest?
+        val type: UUID,
+        val lines: List<DocumentLineRequest>,
+        val baseDocument: UUID?
     ) {
-        fun toDomain(): ADProcess {
+        fun toDomain(): Document {
             // Implementation for conversion to domain object
             TODO("Implement conversion")
         }
     }
 
-    data class ParameterRequest(
-        val name: String,
-        val displayName: String,
+    data class UpdateDocumentRequest(
+        val displayName: String?,
         val description: String?,
-        val type: String,
-        val referenceId: UUID?,
-        val defaultValue: String?,
-        val isMandatory: Boolean,
-        val validationRule: String?
+        val lines: List<DocumentLineRequest>?
+    ) {
+        fun toDomain(): Document {
+            // Implementation for conversion to domain object
+            TODO("Implement conversion")
+        }
+    }
+
+    data class DocumentLineRequest(
+        val lineNo: Int,
+        val attributes: Map<String, Any>,
+        val referencedDocument: UUID?
     )
 
-    data class ImplementationRequest(
-        val type: String,
-        val config: Map<String, String>
-    )
-
-    data class ScheduleRequest(
-        val cronExpression: String,
-        val timezone: String?,
-        val startDate: String?,
-        val endDate: String?,
-        val maxExecutions: Int?,
-        val enabled: Boolean?
+    data class ChangeStatusRequest(
+        val status: DocumentStatus
     )
 }
 EOF
 
-echo "Process management components generated successfully!"
+echo "Document management components generated successfully!" 
