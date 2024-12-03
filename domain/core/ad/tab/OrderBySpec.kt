@@ -1,7 +1,7 @@
 
-package org.blackerp.domain.ad.tab
+package org.blackerp.domain.core.ad.tab
 
-import org.blackerp.domain.values.ColumnName
+import org.blackerp.domain.core.values.ColumnName
 
 data class OrderBySpec(
     val column: ColumnName,

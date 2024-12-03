@@ -1,8 +1,8 @@
 
-package org.blackerp.domain.ad.tab
+package org.blackerp.domain.core.ad.tab
 
 import org.blackerp.domain.DomainException
-import org.blackerp.shared.ValidationError
+import org.blackerp.domain.core.shared.ValidationError
 
 sealed class TabError(message: String) : DomainException(message) {
     data class ValidationFailed(val errors: List<ValidationError>) : 

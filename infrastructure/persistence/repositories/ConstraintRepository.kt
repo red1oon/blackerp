@@ -3,7 +3,7 @@ package org.blackerp.infrastructure.persistence.repositories
 import org.springframework.stereotype.Repository
 import org.springframework.jdbc.core.JdbcTemplate
 import org.springframework.transaction.annotation.Transactional
-import org.blackerp.domain.ad.table.*
+import org.blackerp.domain.core.ad.table.*
 import org.blackerp.domain.core.error.TableError
 import arrow.core.Either
 import arrow.core.right

@@ -1,4 +1,4 @@
-package org.blackerp.domain.ad.process
+package org.blackerp.domain.core.ad.process
 
 sealed interface ProcessImplementation {
     data class JavaClass(val className: String) : ProcessImplementation

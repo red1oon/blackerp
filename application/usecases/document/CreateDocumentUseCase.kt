@@ -1,6 +1,6 @@
 package org.blackerp.application.usecases.document
 
-import org.blackerp.domain.ad.document.*
+import org.blackerp.domain.core.ad.document.*
 import org.springframework.stereotype.Service
 import arrow.core.Either
 

@@ -1,13 +1,13 @@
-package org.blackerp.domain.ad
+package org.blackerp.domain.core.ad.base
 
 import arrow.core.Either
 import arrow.core.left
 import arrow.core.right
-import org.blackerp.domain.EntityMetadata
-import org.blackerp.domain.ad.value.ModuleName
-import org.blackerp.domain.values.DisplayName
-import org.blackerp.domain.values.Description
-import org.blackerp.shared.ValidationError
+import org.blackerp.domain.core.EntityMetadata
+import org.blackerp.domain.core.ad.value.ModuleName
+import org.blackerp.domain.core.values.DisplayName
+import org.blackerp.domain.core.values.Description
+import org.blackerp.domain.core.shared.ValidationError
 import org.blackerp.plugin.Version
 
 data class ADModule(

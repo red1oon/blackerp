@@ -1,7 +1,7 @@
 // domain-entities/src/main/kotlin/org/blackerp/plugin/PluginError.kt
-package org.blackerp.plugin
+package org.blackerp.domain.core.error
 
-import org.blackerp.shared.ValidationError
+import org.blackerp.domain.core.shared.ValidationError
 
 sealed interface PluginError {
     data class NotFound(val id: String) : PluginError

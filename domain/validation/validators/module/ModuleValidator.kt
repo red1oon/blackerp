@@ -3,9 +3,9 @@ package org.blackerp.domain.validation.validators.module
 import arrow.core.Either
 import arrow.core.left
 import arrow.core.right
-import org.blackerp.domain.ad.ADModule
-import org.blackerp.shared.ValidationError
-import org.blackerp.validation.Validator
+import org.blackerp.domain.core.ad.ADModule
+import org.blackerp.domain.core.shared.ValidationError
+import org.blackerp.domain.core.validation.Validator
 
 class ModuleValidator : Validator<ADModule> {
     override suspend fun validate(entity: ADModule): Either<ValidationError, ADModule> {

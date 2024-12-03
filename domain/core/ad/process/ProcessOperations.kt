@@ -1,4 +1,4 @@
-package org.blackerp.domain.ad.process
+package org.blackerp.domain.core.ad.process
 
 import arrow.core.Either
 import kotlinx.coroutines.flow.Flow

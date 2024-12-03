@@ -1,16 +1,16 @@
 
-package org.blackerp.domain.ad.tab
+package org.blackerp.domain.core.ad.tab
 
 import arrow.core.Either
 import arrow.core.right
 import arrow.core.left
-import org.blackerp.domain.DomainEntity
-import org.blackerp.domain.EntityMetadata
-import org.blackerp.domain.ad.ADObject
-import org.blackerp.domain.ad.tab.value.TabName
-import org.blackerp.domain.values.*
-import org.blackerp.domain.table.ADTable
-import org.blackerp.shared.ValidationError
+import org.blackerp.domain.core.DomainEntity
+import org.blackerp.domain.core.EntityMetadata
+import org.blackerp.domain.core.ad.ADObject
+import org.blackerp.domain.core.ad.tab.value.TabName
+import org.blackerp.domain.core.values.*
+import org.blackerp.domain.core.ad.table.ADTable
+import org.blackerp.domain.core.shared.ValidationError
 
 data class ADTab(
     override val metadata: EntityMetadata,

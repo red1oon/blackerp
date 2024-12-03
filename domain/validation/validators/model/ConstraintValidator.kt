@@ -1,8 +1,8 @@
 package org.blackerp.domain.validation.validators.model
 
 import org.springframework.stereotype.Component
-import org.blackerp.domain.ad.table.TableConstraint
-import org.blackerp.domain.ad.table.ConstraintType
+import org.blackerp.domain.core.ad.table.TableConstraint
+import org.blackerp.domain.core.ad.table.ConstraintType
 import org.blackerp.domain.core.error.TableError
 import arrow.core.Either
 import arrow.core.left

@@ -1,22 +1,68 @@
 #!/bin/bash
-# fix_packages.sh
 
-# Core errors
-sed -i 's/package org.blackerp.shared/package org.blackerp.domain.core.shared/' domain/core/shared/*.kt
-sed -i 's/package org.blackerp.error/package org.blackerp.domain.core.error/' domain/core/error/*.kt
-sed -i 's/package org.blackerp.plugin/package org.blackerp.domain.core.plugin/' domain/core/plugin/*.kt
+# Define colors for terminal output
+GREEN='\033[0;32m'
+YELLOW='\033[1;33m'
+RED='\033[0;31m'
+BLUE='\033[0;34m'
+NC='\033[0m'
 
-# Core domain
-sed -i 's/package org.blackerp.domain.event/package org.blackerp.domain.core.event/' domain/core/event/*.kt
-sed -i 's/package org.blackerp.domain.metadata/package org.blackerp.domain.core.metadata/' domain/core/metadata/*.kt
-sed -i 's/package org.blackerp.domain.values/package org.blackerp.domain.core.values/' domain/core/values/*.kt
-sed -i 's/package org.blackerp.domain.tenant/package org.blackerp.domain.core.tenant/' domain/core/tenant/*.kt
-sed -i 's/package org.blackerp.validation/package org.blackerp.domain.core.validation/' domain/core/validation/*.kt
+# Map of imports to fix
+declare -A IMPORT_MAP=(
+    ["import org.blackerp.shared.ValidationError"]="import org.blackerp.domain.core.shared.ValidationError"
+    ["import org.blackerp.domain.table.ADTable"]="import org.blackerp.domain.core.ad.table.ADTable"
+    ["import org.blackerp.domain.EntityMetadata"]="import org.blackerp.domain.core.EntityMetadata"
+    ["import org.blackerp.domain.DomainEntity"]="import org.blackerp.domain.core.DomainEntity"
+    ["import org.blackerp.validation.Validator"]="import org.blackerp.domain.core.validation.Validator"
+    ["import org.blackerp.plugin.Plugin"]="import org.blackerp.domain.plugin.Plugin"
+    ["import org.blackerp.domain.values.DataType"]="import org.blackerp.domain.core.values.DataType"
+)
 
-# AD modules
-sed -i 's/package org.blackerp.domain.table/package org.blackerp.domain.ad.table/' domain/core/ad/table/*.kt
-sed -i 's/package org.blackerp.domain.ad.value/package org.blackerp.domain.ad.shared.values/' domain/core/ad/shared/values/*.kt
-sed -i 's/package org.blackerp.domain.ad.tab.value/package org.blackerp.domain.ad.tab.values/' domain/core/ad/tab/values/*.kt
+# Counters
+total_files=0
+files_fixed=0
+files_ignored=0
 
-# Make executable
-chmod +x fix_packages.sh
+# Function to fix imports in a file
+fix_imports() {
+    local file="$1"
+    echo -e "\n${YELLOW}Checking imports in: $file${NC}"
+    local changes=0
+
+    for old_import in "${!IMPORT_MAP[@]}"; do
+        # Match only import statements using regex
+        if grep -E "^$old_import" "$file" > /dev/null; then
+            echo -e "${GREEN}Found and fixing: $old_import -> ${IMPORT_MAP[$old_import]}${NC}"
+            # Replace the import using sed
+            sed -i "s|$old_import|${IMPORT_MAP[$old_import]}|g" "$file"
+            ((changes++))
+        fi
+    done
+
+    if ((changes > 0)); then
+        echo -e "${GREEN}Fixed $changes imports in $file${NC}"
+        ((files_fixed++))
+    else
+        ((files_ignored++))
+    fi
+}
+
+# Find all Kotlin files in the project
+total_files=$(find . -name "*.kt" -type f ! -path "*/build/*" ! -path "*/.gradle/*" | wc -l)
+echo -e "${BLUE}Found $total_files Kotlin files${NC}"
+
+# Process each Kotlin file
+find . -name "*.kt" -type f ! -path "*/build/*" ! -path "*/.gradle/*" | while read -r file; do
+    fix_imports "$file"
+done
+
+# Summary
+echo -e "\n${BLUE}Summary:${NC}"
+echo -e "${GREEN}Total files checked: $total_files${NC}"
+echo -e "${GREEN}Files fixed: $files_fixed${NC}"
+echo -e "${YELLOW}Files ignored: $files_ignored${NC}"
+
+# Debugging Message if No Fixes
+if ((files_fixed == 0)); then
+    echo -e "${RED}No fixes applied. Please ensure the IMPORT_MAP keys match exactly the errors in your files.${NC}"
+fi

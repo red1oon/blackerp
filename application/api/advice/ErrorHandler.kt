@@ -1,4 +1,4 @@
-package org.blackerp.api.error
+package org.blackerp.application.api.advice
 
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.ControllerAdvice

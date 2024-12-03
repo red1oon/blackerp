@@ -1,7 +1,7 @@
-package org.blackerp.domain.ad.tab
+package org.blackerp.domain.core.ad.tab
 
 import arrow.core.Either
-import org.blackerp.domain.values.TableName
+import org.blackerp.domain.core.values.TableName
 import java.util.UUID
 
 interface TabOperations {

@@ -1,9 +1,9 @@
-package org.blackerp.domain.ad.workflow
+package org.blackerp.domain.core.ad.workflow
 
-import org.blackerp.domain.EntityMetadata
-import org.blackerp.domain.ad.ADObject
-import org.blackerp.domain.values.DisplayName
-import org.blackerp.domain.values.Description
+import org.blackerp.domain.core.EntityMetadata
+import org.blackerp.domain.core.ad.ADObject
+import org.blackerp.domain.core.values.DisplayName
+import org.blackerp.domain.core.values.Description
 import arrow.core.Either
 import arrow.core.right
 import java.util.UUID

@@ -1,6 +1,6 @@
 package org.blackerp.application.usecases.workflow
 
-import org.blackerp.domain.ad.workflow.*
+import org.blackerp.domain.core.ad.workflow.*
 import org.springframework.stereotype.Service
 import arrow.core.Either
 

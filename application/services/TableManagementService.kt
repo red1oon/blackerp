@@ -3,7 +3,7 @@ package org.blackerp.application.services
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 import org.springframework.transaction.annotation.Propagation
-import org.blackerp.domain.table.*
+import org.blackerp.domain.core.ad.table.*
 import org.blackerp.domain.core.error.TableError
 import org.blackerp.domain.core.error.DomainError
 import arrow.core.Either

@@ -3,7 +3,7 @@ package org.blackerp.application.api.controllers
 import org.springframework.web.bind.annotation.*
 import org.springframework.http.MediaType
 import jakarta.validation.Valid
-import org.blackerp.domain.table.TableOperations
+import org.blackerp.domain.core.ad.table.TableOperations
 import org.blackerp.application.table.CreateTableUseCase
 import org.blackerp.application.api.mappers.TableMapper
 import org.blackerp.application.api.dto.responses.TablesResponse

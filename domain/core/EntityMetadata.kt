@@ -1,15 +1,13 @@
-package org.blackerp.domain.core.metadata
+package org.blackerp.domain.core
 
-import org.blackerp.shared.TimeBasedId
-import java.time.Instant
 import java.util.UUID
+import java.time.Instant
 
 data class EntityMetadata(
-    val id: UUID = TimeBasedId.generate(),
+    val id: UUID = UUID.randomUUID(),
     val created: Instant = Instant.now(),
     val createdBy: String,
     val updated: Instant = Instant.now(),
     val updatedBy: String,
-    val version: Int = 0,
-    val active: Boolean = true
+    val version: Int = 0
 )

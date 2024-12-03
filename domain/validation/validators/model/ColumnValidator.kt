@@ -3,10 +3,10 @@ package org.blackerp.domain.validation.validators.model
 import arrow.core.Either
 import arrow.core.left
 import arrow.core.right
-import org.blackerp.domain.table.ColumnDefinition
-import org.blackerp.domain.values.DataType
-import org.blackerp.shared.ValidationError
-import org.blackerp.validation.Validator
+import org.blackerp.domain.core.ad.table.ColumnDefinition
+import org.blackerp.domain.core.values.DataType
+import org.blackerp.domain.core.shared.ValidationError
+import org.blackerp.domain.core.validation.Validator
 
 class ColumnValidator : Validator<ColumnDefinition> {
     override suspend fun validate(entity: ColumnDefinition): Either<ValidationError, ColumnDefinition> {

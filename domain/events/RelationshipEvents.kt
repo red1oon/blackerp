@@ -1,8 +1,8 @@
 package org.blackerp.domain.events
 
 import java.util.UUID
-import org.blackerp.domain.ad.table.RelationshipType
-import org.blackerp.domain.ad.table.CascadeType
+import org.blackerp.domain.core.ad.table.RelationshipType
+import org.blackerp.domain.core.ad.table.CascadeType
 
 sealed class RelationshipEvent : DomainEvent {
     data class RelationshipCreated(

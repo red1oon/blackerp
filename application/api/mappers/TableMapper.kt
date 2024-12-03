@@ -8,9 +8,9 @@ import org.blackerp.application.api.dto.requests.CreateColumnRequest
 import org.blackerp.application.api.dto.responses.TableResponse
 import org.blackerp.application.table.CreateTableCommand
 import org.blackerp.application.table.CreateColumnCommand
-import org.blackerp.domain.table.ADTable
-import org.blackerp.domain.values.AccessLevel
-import org.blackerp.domain.values.DataType
+import org.blackerp.domain.core.ad.table.ADTable
+import org.blackerp.domain.core.values.AccessLevel
+import org.blackerp.domain.core.values.DataType
 
 @Component
 class TableMapper {

@@ -1,5 +1,5 @@
 // domain-entities/src/main/kotlin/org/blackerp/domain/event/EventMetadata.kt
-package org.blackerp.domain.event
+package org.blackerp.domain.events
 
 import java.time.Instant
 import java.util.UUID

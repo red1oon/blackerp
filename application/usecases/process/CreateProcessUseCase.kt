@@ -1,6 +1,6 @@
 package org.blackerp.application.usecases.process
 
-import org.blackerp.domain.ad.process.*
+import org.blackerp.domain.core.ad.process.*
 import org.springframework.stereotype.Service
 import arrow.core.Either
 

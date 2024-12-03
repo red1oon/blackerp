@@ -1,8 +1,8 @@
 package org.blackerp.domain.events
 
 import java.util.UUID
-import org.blackerp.domain.ad.workflow.NodeType
-import org.blackerp.domain.ad.workflow.WorkflowNode
+import org.blackerp.domain.core.ad.workflow.NodeType
+import org.blackerp.domain.core.ad.workflow.WorkflowNode
 
 sealed class WorkflowEvent : DomainEvent {
     data class NodeCreated(

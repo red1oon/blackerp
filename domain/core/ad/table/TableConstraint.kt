@@ -1,4 +1,4 @@
-package org.blackerp.domain.ad.table
+package org.blackerp.domain.core.ad.table
 
 import arrow.core.Either
 import arrow.core.right

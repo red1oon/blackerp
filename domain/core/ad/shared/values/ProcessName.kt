@@ -1,9 +1,9 @@
-package org.blackerp.domain.ad.shared.values
+package org.blackerp.domain.core.ad.shared.values
 
 import arrow.core.Either
 import arrow.core.left
 import arrow.core.right
-import org.blackerp.shared.ValidationError
+import org.blackerp.domain.core.shared.ValidationError
 
 @JvmInline
 value class ProcessName private constructor(val value: String) {

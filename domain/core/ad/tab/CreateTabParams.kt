@@ -1,12 +1,12 @@
 
-package org.blackerp.domain.ad.tab
+package org.blackerp.domain.core.ad.tab
 
-import org.blackerp.domain.EntityMetadata
-import org.blackerp.domain.table.ADTable
-import org.blackerp.domain.values.ColumnName
-import org.blackerp.domain.values.DisplayName
-import org.blackerp.domain.values.Description
-import org.blackerp.domain.ad.tab.value.TabName
+import org.blackerp.domain.core.EntityMetadata
+import org.blackerp.domain.core.ad.table.ADTable
+import org.blackerp.domain.core.values.ColumnName
+import org.blackerp.domain.core.values.DisplayName
+import org.blackerp.domain.core.values.Description
+import org.blackerp.domain.core.ad.tab.value.TabName
 
 data class CreateTabParams(
     val metadata: EntityMetadata,

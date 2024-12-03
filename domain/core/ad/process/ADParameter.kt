@@ -1,6 +1,6 @@
-package org.blackerp.domain.ad.process
+package org.blackerp.domain.core.ad.process
 
-import org.blackerp.domain.values.DataType
+import org.blackerp.domain.core.values.DataType
 import java.util.UUID
 
 data class ADParameter(

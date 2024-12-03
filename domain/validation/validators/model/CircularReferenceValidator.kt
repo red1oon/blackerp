@@ -1,7 +1,7 @@
 package org.blackerp.domain.validation.validators.model
 
 import org.springframework.stereotype.Component
-import org.blackerp.domain.ad.table.TableRelationship
+import org.blackerp.domain.core.ad.table.TableRelationship
 import org.blackerp.domain.core.error.TableError
 import arrow.core.Either
 import arrow.core.left

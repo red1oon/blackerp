@@ -1,10 +1,10 @@
 package org.blackerp.domain.validation.validators.model
 
 import org.springframework.stereotype.Component
-import org.blackerp.domain.table.ADTable
+import org.blackerp.domain.core.ad.table.ADTable
 import org.blackerp.domain.core.error.TableError
 import org.blackerp.domain.core.error.TableError.Violation
-import org.blackerp.domain.values.DataType
+import org.blackerp.domain.core.values.DataType
 import arrow.core.Either
 import arrow.core.left
 import arrow.core.right

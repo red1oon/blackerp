@@ -1,4 +1,4 @@
-package org.blackerp.domain.ad.workflow
+package org.blackerp.domain.core.ad.workflow
 
 sealed interface NodeAction {
     data class Process(val processId: UUID) : NodeAction

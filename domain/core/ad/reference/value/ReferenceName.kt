@@ -1,10 +1,10 @@
 
-package org.blackerp.domain.ad.reference.value
+package org.blackerp.domain.core.ad.reference.value
 
 import arrow.core.Either
 import arrow.core.left
 import arrow.core.right
-import org.blackerp.shared.ValidationError
+import org.blackerp.domain.core.shared.ValidationError
 
 @JvmInline
 value class ReferenceName private constructor(val value: String) {

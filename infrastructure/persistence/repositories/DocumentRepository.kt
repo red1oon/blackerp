@@ -1,6 +1,6 @@
 package org.blackerp.infrastructure.persistence.repositories
 
-import org.blackerp.domain.ad.document.*
+import org.blackerp.domain.core.ad.document.*
 import org.springframework.stereotype.Repository
 import org.springframework.jdbc.core.JdbcTemplate
 import arrow.core.Either

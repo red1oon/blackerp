@@ -1,0 +1,265 @@
+openjdk version "17.0.13" 2024-10-15
+OpenJDK Runtime Environment (build 17.0.13+11-Ubuntu-2ubuntu124.04)
+OpenJDK 64-Bit Server VM (build 17.0.13+11-Ubuntu-2ubuntu124.04, mixed mode, sharing)
+> Task :compileJava NO-SOURCE
+> Task :processResources NO-SOURCE
+> Task :classes UP-TO-DATE
+> Task :jar UP-TO-DATE
+> Task :startScripts UP-TO-DATE
+> Task :distTar UP-TO-DATE
+> Task :distZip UP-TO-DATE
+> Task :assemble UP-TO-DATE
+> Task :compileTestJava NO-SOURCE
+> Task :processTestResources NO-SOURCE
+> Task :testClasses UP-TO-DATE
+> Task :test NO-SOURCE
+> Task :check UP-TO-DATE
+> Task :build UP-TO-DATE
+> Task :application:checkKotlinGradlePluginConfigurationErrors
+> Task :domain:checkKotlinGradlePluginConfigurationErrors
+> Task :domain:processResources NO-SOURCE
+> Task :application:processResources NO-SOURCE
+> Task :application:processTestResources NO-SOURCE
+> Task :domain:processTestResources NO-SOURCE
+> Task :infrastructure:checkKotlinGradlePluginConfigurationErrors
+> Task :infrastructure:processResources NO-SOURCE
+> Task :infrastructure:processTestResources NO-SOURCE
+
+> Task :domain:compileKotlin FAILED
+e: file:///home/red1/Projects/blackerp/domain/core/ad/base/ADModule.kt:6:33 Unresolved reference: EntityMetadata
+e: file:///home/red1/Projects/blackerp/domain/core/ad/base/ADModule.kt:7:36 Unresolved reference: value
+e: file:///home/red1/Projects/blackerp/domain/core/ad/base/ADModule.kt:10:33 Unresolved reference: shared
+e: file:///home/red1/Projects/blackerp/domain/core/ad/base/ADModule.kt:11:21 Unresolved reference: plugin
+e: file:///home/red1/Projects/blackerp/domain/core/ad/base/ADModule.kt:14:5 'metadata' overrides nothing
+e: file:///home/red1/Projects/blackerp/domain/core/ad/base/ADModule.kt:14:28 Unresolved reference: EntityMetadata
+e: file:///home/red1/Projects/blackerp/domain/core/ad/base/ADModule.kt:18:18 Unresolved reference: Version
+e: file:///home/red1/Projects/blackerp/domain/core/ad/base/ADModule.kt:21:56 Unresolved reference: ValidationError
+e: file:///home/red1/Projects/blackerp/domain/core/ad/base/ADModule.kt:33:19 Unresolved reference: EntityMetadata
+e: file:///home/red1/Projects/blackerp/domain/core/ad/base/ADModule.kt:37:18 Unresolved reference: Version
+e: file:///home/red1/Projects/blackerp/domain/core/ad/base/ADObject.kt:3:33 Unresolved reference: DomainEntity
+e: file:///home/red1/Projects/blackerp/domain/core/ad/base/ADObject.kt:7:22 Unresolved reference: DomainEntity
+e: file:///home/red1/Projects/blackerp/domain/core/ad/base/ModuleName.kt:6:33 Unresolved reference: shared
+e: file:///home/red1/Projects/blackerp/domain/core/ad/base/ModuleName.kt:11:43 Unresolved reference: ValidationError
+e: file:///home/red1/Projects/blackerp/domain/core/ad/base/ModuleName.kt:14:21 Unresolved reference: ValidationError
+e: file:///home/red1/Projects/blackerp/domain/core/ad/base/ModuleName.kt:18:21 Unresolved reference: ValidationError
+e: file:///home/red1/Projects/blackerp/domain/core/ad/document/Document.kt:3:33 Unresolved reference: EntityMetadata
+e: file:///home/red1/Projects/blackerp/domain/core/ad/document/Document.kt:4:36 Unresolved reference: ADObject
+e: file:///home/red1/Projects/blackerp/domain/core/ad/document/Document.kt:13:5 'metadata' overrides nothing
+e: file:///home/red1/Projects/blackerp/domain/core/ad/document/Document.kt:13:28 Unresolved reference: EntityMetadata
+e: file:///home/red1/Projects/blackerp/domain/core/ad/document/Document.kt:15:5 'displayName' overrides nothing
+e: file:///home/red1/Projects/blackerp/domain/core/ad/document/Document.kt:16:5 'description' overrides nothing
+e: file:///home/red1/Projects/blackerp/domain/core/ad/document/Document.kt:27:5 Unresolved reference: ADObject
+e: file:///home/red1/Projects/blackerp/domain/core/ad/document/Document.kt:29:28 Unresolved reference: CreateDocumentParams
+e: file:///home/red1/Projects/blackerp/domain/core/ad/document/Document.kt:29:58 Unresolved reference: DocumentError
+e: file:///home/red1/Projects/blackerp/domain/core/ad/document/Document.kt:43:12 Redeclaration: DocumentLine
+e: file:///home/red1/Projects/blackerp/domain/core/ad/document/Document.kt:51:12 Redeclaration: DocumentType
+e: file:///home/red1/Projects/blackerp/domain/core/ad/document/Document.kt:82:12 Redeclaration: DocumentStatus
+e: file:///home/red1/Projects/blackerp/domain/core/ad/document/DocumentOperations.kt:8:52 Unresolved reference: DocumentError
+e: file:///home/red1/Projects/blackerp/domain/core/ad/document/DocumentOperations.kt:9:62 Unresolved reference: DocumentError
+e: file:///home/red1/Projects/blackerp/domain/core/ad/document/DocumentOperations.kt:10:44 Unresolved reference: DocumentError
+e: file:///home/red1/Projects/blackerp/domain/core/ad/document/DocumentOperations.kt:12:42 Unresolved reference: DocumentError
+e: file:///home/red1/Projects/blackerp/domain/core/ad/document/DocumentOperations.kt:13:72 Unresolved reference: DocumentError
+e: file:///home/red1/Projects/blackerp/domain/core/ad/document/DocumentOperations.kt:14:63 Unresolved reference: DocumentError
+e: file:///home/red1/Projects/blackerp/domain/core/ad/document/DocumentOperations.kt:15:80 Unresolved reference: DocumentError
+e: file:///home/red1/Projects/blackerp/domain/core/ad/document/DocumentOperations.kt:16:60 Unresolved reference: DocumentError
+e: file:///home/red1/Projects/blackerp/domain/core/ad/document/DocumentOperations.kt:17:62 Unresolved reference: DocumentError
+e: file:///home/red1/Projects/blackerp/domain/core/ad/document/DocumentOperations.kt:31:15 Unresolved reference: Instant
+e: file:///home/red1/Projects/blackerp/domain/core/ad/document/DocumentOperations.kt:32:13 Unresolved reference: Instant
+e: file:///home/red1/Projects/blackerp/domain/core/ad/document/DocumentOperations.kt:41:20 Unresolved reference: Instant
+e: file:///home/red1/Projects/blackerp/domain/core/ad/document/DocumentOperations.kt:44:30 Unresolved reference: ChangePair
+e: file:///home/red1/Projects/blackerp/domain/core/ad/document/DocumentStatus.kt:3:12 Redeclaration: DocumentStatus
+e: file:///home/red1/Projects/blackerp/domain/core/ad/document/DocumentType.kt:5:12 Redeclaration: DocumentType
+e: file:///home/red1/Projects/blackerp/domain/core/ad/document/DocumentType.kt:13:12 Redeclaration: DocumentLine
+e: file:///home/red1/Projects/blackerp/domain/core/ad/process/ADProcess.kt:3:33 Unresolved reference: EntityMetadata
+e: file:///home/red1/Projects/blackerp/domain/core/ad/process/ADProcess.kt:4:36 Unresolved reference: ADObject
+e: file:///home/red1/Projects/blackerp/domain/core/ad/process/ADProcess.kt:12:5 'metadata' overrides nothing
+e: file:///home/red1/Projects/blackerp/domain/core/ad/process/ADProcess.kt:12:28 Unresolved reference: EntityMetadata
+e: file:///home/red1/Projects/blackerp/domain/core/ad/process/ADProcess.kt:14:5 'displayName' overrides nothing
+e: file:///home/red1/Projects/blackerp/domain/core/ad/process/ADProcess.kt:15:5 'description' overrides nothing
+e: file:///home/red1/Projects/blackerp/domain/core/ad/process/ADProcess.kt:23:5 Unresolved reference: ADObject
+e: file:///home/red1/Projects/blackerp/domain/core/ad/process/ADProcess.kt:25:28 Unresolved reference: CreateProcessParams
+e: file:///home/red1/Projects/blackerp/domain/core/ad/process/ADProcess.kt:76:18 Redeclaration: ProcessImplementation
+e: file:///home/red1/Projects/blackerp/domain/core/ad/process/ADProcess.kt:101:12 Redeclaration: ProcessSchedule
+e: file:///home/red1/Projects/blackerp/domain/core/ad/process/ProcessImplementation.kt:3:18 Redeclaration: ProcessImplementation
+e: file:///home/red1/Projects/blackerp/domain/core/ad/process/ProcessImplementation.kt:9:12 Redeclaration: ProcessSchedule
+e: file:///home/red1/Projects/blackerp/domain/core/ad/reference/ADReference.kt:5:33 Unresolved reference: EntityMetadata
+e: file:///home/red1/Projects/blackerp/domain/core/ad/reference/ADReference.kt:6:36 Unresolved reference: ADObject
+e: file:///home/red1/Projects/blackerp/domain/core/ad/reference/ADReference.kt:10:33 Unresolved reference: shared
+e: file:///home/red1/Projects/blackerp/domain/core/ad/reference/ADReference.kt:14:5 'metadata' overrides nothing
+e: file:///home/red1/Projects/blackerp/domain/core/ad/reference/ADReference.kt:14:28 Unresolved reference: EntityMetadata
+e: file:///home/red1/Projects/blackerp/domain/core/ad/reference/ADReference.kt:17:5 'displayName' overrides nothing
+e: file:///home/red1/Projects/blackerp/domain/core/ad/reference/ADReference.kt:18:5 'description' overrides nothing
+e: file:///home/red1/Projects/blackerp/domain/core/ad/reference/ADReference.kt:25:5 Unresolved reference: ADObject
+e: file:///home/red1/Projects/blackerp/domain/core/ad/reference/ADReference.kt:72:19 Unresolved reference: EntityMetadata
+e: file:///home/red1/Projects/blackerp/domain/core/ad/reference/ADReference.kt:84:50 Unresolved reference: ValidationError
+e: file:///home/red1/Projects/blackerp/domain/core/ad/reference/value/ReferenceName.kt:7:33 Unresolved reference: shared
+e: file:///home/red1/Projects/blackerp/domain/core/ad/reference/value/ReferenceName.kt:12:43 Unresolved reference: ValidationError
+e: file:///home/red1/Projects/blackerp/domain/core/ad/reference/value/ReferenceName.kt:15:21 Unresolved reference: ValidationError
+e: file:///home/red1/Projects/blackerp/domain/core/ad/reference/value/ReferenceName.kt:19:21 Unresolved reference: ValidationError
+e: file:///home/red1/Projects/blackerp/domain/core/ad/shared/values/ProcessName.kt:6:33 Unresolved reference: shared
+e: file:///home/red1/Projects/blackerp/domain/core/ad/shared/values/ProcessName.kt:11:43 Unresolved reference: ValidationError
+e: file:///home/red1/Projects/blackerp/domain/core/ad/shared/values/ProcessName.kt:13:17 Unresolved reference: ValidationError
+e: file:///home/red1/Projects/blackerp/domain/core/ad/shared/values/ProcessName.kt:15:17 Unresolved reference: ValidationError
+e: file:///home/red1/Projects/blackerp/domain/core/ad/tab/ADTab.kt:7:33 Unresolved reference: DomainEntity
+e: file:///home/red1/Projects/blackerp/domain/core/ad/tab/ADTab.kt:8:33 Unresolved reference: EntityMetadata
+e: file:///home/red1/Projects/blackerp/domain/core/ad/tab/ADTab.kt:9:36 Unresolved reference: ADObject
+e: file:///home/red1/Projects/blackerp/domain/core/ad/tab/ADTab.kt:12:42 Unresolved reference: ADTable
+e: file:///home/red1/Projects/blackerp/domain/core/ad/tab/ADTab.kt:13:33 Unresolved reference: shared
+e: file:///home/red1/Projects/blackerp/domain/core/ad/tab/ADTab.kt:16:5 'metadata' overrides nothing
+e: file:///home/red1/Projects/blackerp/domain/core/ad/tab/ADTab.kt:16:28 Unresolved reference: EntityMetadata
+e: file:///home/red1/Projects/blackerp/domain/core/ad/tab/ADTab.kt:18:5 'displayName' overrides nothing
+e: file:///home/red1/Projects/blackerp/domain/core/ad/tab/ADTab.kt:19:5 'description' overrides nothing
+e: file:///home/red1/Projects/blackerp/domain/core/ad/tab/ADTab.kt:20:16 Unresolved reference: ADTable
+e: file:///home/red1/Projects/blackerp/domain/core/ad/tab/ADTab.kt:24:5 Unresolved reference: ADObject
+e: file:///home/red1/Projects/blackerp/domain/core/ad/tab/ADTab.kt:27:40 Unresolved reference: ValidationError
+e: file:///home/red1/Projects/blackerp/domain/core/ad/tab/ADTab.kt:31:45 Unresolved reference: it
+e: file:///home/red1/Projects/blackerp/domain/core/ad/tab/ADTab.kt:34:28 Unresolved reference: ValidationError
+e: file:///home/red1/Projects/blackerp/domain/core/ad/tab/ADTab.kt:41:45 Unresolved reference: it
+e: file:///home/red1/Projects/blackerp/domain/core/ad/tab/ADTab.kt:44:28 Unresolved reference: ValidationError
+e: file:///home/red1/Projects/blackerp/domain/core/ad/tab/ADTab.kt:51:45 Unresolved reference: it
+e: file:///home/red1/Projects/blackerp/domain/core/ad/tab/ADTab.kt:54:28 Unresolved reference: ValidationError
+e: file:///home/red1/Projects/blackerp/domain/core/ad/tab/CreateTabParams.kt:4:33 Unresolved reference: EntityMetadata
+e: file:///home/red1/Projects/blackerp/domain/core/ad/tab/CreateTabParams.kt:5:42 Unresolved reference: ADTable
+e: file:///home/red1/Projects/blackerp/domain/core/ad/tab/CreateTabParams.kt:12:19 Unresolved reference: EntityMetadata
+e: file:///home/red1/Projects/blackerp/domain/core/ad/tab/CreateTabParams.kt:16:16 Unresolved reference: ADTable
+e: file:///home/red1/Projects/blackerp/domain/core/ad/tab/TabError.kt:4:28 Unresolved reference: DomainException
+e: file:///home/red1/Projects/blackerp/domain/core/ad/tab/TabError.kt:5:33 Unresolved reference: shared
+e: file:///home/red1/Projects/blackerp/domain/core/ad/tab/TabError.kt:7:42 Unresolved reference: DomainException
+e: file:///home/red1/Projects/blackerp/domain/core/ad/tab/TabError.kt:8:50 Unresolved reference: ValidationError
+e: file:///home/red1/Projects/blackerp/domain/core/ad/tab/value/TabName.kt:7:33 Unresolved reference: shared
+e: file:///home/red1/Projects/blackerp/domain/core/ad/tab/value/TabName.kt:12:43 Unresolved reference: ValidationError
+e: file:///home/red1/Projects/blackerp/domain/core/ad/tab/value/TabName.kt:15:21 Unresolved reference: ValidationError
+e: file:///home/red1/Projects/blackerp/domain/core/ad/tab/value/TabName.kt:19:21 Unresolved reference: ValidationError
+e: file:///home/red1/Projects/blackerp/domain/core/ad/window/WindowName.kt:7:33 Unresolved reference: shared
+e: file:///home/red1/Projects/blackerp/domain/core/ad/window/WindowName.kt:12:43 Unresolved reference: ValidationError
+e: file:///home/red1/Projects/blackerp/domain/core/ad/window/WindowName.kt:15:21 Unresolved reference: ValidationError
+e: file:///home/red1/Projects/blackerp/domain/core/ad/window/WindowName.kt:19:21 Unresolved reference: ValidationError
+e: file:///home/red1/Projects/blackerp/domain/core/ad/workflow/NodeAction.kt:4:39 Unresolved reference: UUID
+e: file:///home/red1/Projects/blackerp/domain/core/ad/workflow/NodeAction.kt:5:37 Unresolved reference: UUID
+e: file:///home/red1/Projects/blackerp/domain/core/ad/workflow/WorkflowNode.kt:3:33 Unresolved reference: EntityMetadata
+e: file:///home/red1/Projects/blackerp/domain/core/ad/workflow/WorkflowNode.kt:4:36 Unresolved reference: ADObject
+e: file:///home/red1/Projects/blackerp/domain/core/ad/workflow/WorkflowNode.kt:12:5 'metadata' overrides nothing
+e: file:///home/red1/Projects/blackerp/domain/core/ad/workflow/WorkflowNode.kt:12:28 Unresolved reference: EntityMetadata
+e: file:///home/red1/Projects/blackerp/domain/core/ad/workflow/WorkflowNode.kt:14:5 'displayName' overrides nothing
+e: file:///home/red1/Projects/blackerp/domain/core/ad/workflow/WorkflowNode.kt:15:5 'description' overrides nothing
+e: file:///home/red1/Projects/blackerp/domain/core/ad/workflow/WorkflowNode.kt:19:5 Unresolved reference: ADObject
+e: file:///home/red1/Projects/blackerp/domain/core/ad/workflow/WorkflowNode.kt:21:28 Unresolved reference: CreateNodeParams
+e: file:///home/red1/Projects/blackerp/domain/core/ad/workflow/WorkflowNode.kt:21:54 Unresolved reference: WorkflowError
+e: file:///home/red1/Projects/blackerp/domain/core/ad/workflow/WorkflowOperations.kt:7:50 Unresolved reference: WorkflowError
+e: file:///home/red1/Projects/blackerp/domain/core/ad/workflow/WorkflowOperations.kt:8:44 Unresolved reference: WorkflowError
+e: file:///home/red1/Projects/blackerp/domain/core/ad/workflow/WorkflowOperations.kt:9:42 Unresolved reference: WorkflowError
+e: file:///home/red1/Projects/blackerp/domain/core/ad/workflow/WorkflowOperations.kt:10:69 Unresolved reference: WorkflowError
+e: file:///home/red1/Projects/blackerp/domain/core/error/PluginError.kt:4:33 Unresolved reference: shared
+e: file:///home/red1/Projects/blackerp/domain/core/error/PluginError.kt:8:50 Unresolved reference: ValidationError
+e: file:///home/red1/Projects/blackerp/domain/core/values/Amount.kt:6:33 Unresolved reference: shared
+e: file:///home/red1/Projects/blackerp/domain/core/values/Amount.kt:12:47 Unresolved reference: ValidationError
+e: file:///home/red1/Projects/blackerp/domain/core/values/Amount.kt:15:21 Unresolved reference: ValidationError
+e: file:///home/red1/Projects/blackerp/domain/core/values/ColumnName.kt:7:33 Unresolved reference: shared
+e: file:///home/red1/Projects/blackerp/domain/core/values/ColumnName.kt:12:43 Unresolved reference: ValidationError
+e: file:///home/red1/Projects/blackerp/domain/core/values/ColumnName.kt:15:21 Unresolved reference: ValidationError
+e: file:///home/red1/Projects/blackerp/domain/core/values/ColumnName.kt:17:21 Unresolved reference: ValidationError
+e: file:///home/red1/Projects/blackerp/domain/core/values/Currency.kt:6:33 Unresolved reference: shared
+e: file:///home/red1/Projects/blackerp/domain/core/values/Currency.kt:11:42 Unresolved reference: ValidationError
+e: file:///home/red1/Projects/blackerp/domain/core/values/Currency.kt:14:21 Unresolved reference: ValidationError
+e: file:///home/red1/Projects/blackerp/domain/core/values/Description.kt:6:33 Unresolved reference: shared
+e: file:///home/red1/Projects/blackerp/domain/core/values/Description.kt:11:43 Unresolved reference: ValidationError
+e: file:///home/red1/Projects/blackerp/domain/core/values/Description.kt:14:21 Unresolved reference: ValidationError
+e: file:///home/red1/Projects/blackerp/domain/core/values/DisplayName.kt:6:33 Unresolved reference: shared
+e: file:///home/red1/Projects/blackerp/domain/core/values/DisplayName.kt:11:43 Unresolved reference: ValidationError
+e: file:///home/red1/Projects/blackerp/domain/core/values/DisplayName.kt:14:21 Unresolved reference: ValidationError
+e: file:///home/red1/Projects/blackerp/domain/core/values/DisplayName.kt:16:21 Unresolved reference: ValidationError
+e: file:///home/red1/Projects/blackerp/domain/core/values/Length.kt:7:33 Unresolved reference: shared
+e: file:///home/red1/Projects/blackerp/domain/core/values/Length.kt:12:40 Unresolved reference: ValidationError
+e: file:///home/red1/Projects/blackerp/domain/core/values/Length.kt:15:21 Unresolved reference: ValidationError
+e: file:///home/red1/Projects/blackerp/domain/core/values/Precision.kt:7:33 Unresolved reference: shared
+e: file:///home/red1/Projects/blackerp/domain/core/values/Precision.kt:12:40 Unresolved reference: ValidationError
+e: file:///home/red1/Projects/blackerp/domain/core/values/Precision.kt:15:21 Unresolved reference: ValidationError
+e: file:///home/red1/Projects/blackerp/domain/core/values/Precision.kt:17:21 Unresolved reference: ValidationError
+e: file:///home/red1/Projects/blackerp/domain/core/values/Scale.kt:7:33 Unresolved reference: shared
+e: file:///home/red1/Projects/blackerp/domain/core/values/Scale.kt:12:40 Unresolved reference: ValidationError
+e: file:///home/red1/Projects/blackerp/domain/core/values/Scale.kt:15:21 Unresolved reference: ValidationError
+e: file:///home/red1/Projects/blackerp/domain/core/values/Scale.kt:17:21 Unresolved reference: ValidationError
+e: file:///home/red1/Projects/blackerp/domain/core/values/TableName.kt:6:33 Unresolved reference: shared
+e: file:///home/red1/Projects/blackerp/domain/core/values/TableName.kt:11:43 Unresolved reference: ValidationError
+e: file:///home/red1/Projects/blackerp/domain/core/values/TableName.kt:14:21 Unresolved reference: ValidationError
+e: file:///home/red1/Projects/blackerp/domain/events/ConstraintEvents.kt:7:10 Class 'ConstraintCreated' is not abstract and does not implement abstract base class member public abstract val entityId: UUID defined in org.blackerp.domain.events.ConstraintEvent
+e: file:///home/red1/Projects/blackerp/domain/events/ConstraintEvents.kt:17:10 Class 'ConstraintModified' is not abstract and does not implement abstract base class member public abstract val entityId: UUID defined in org.blackerp.domain.events.ConstraintEvent
+e: file:///home/red1/Projects/blackerp/domain/events/ConstraintEvents.kt:28:10 Class 'ConstraintDeleted' is not abstract and does not implement abstract base class member public abstract val entityId: UUID defined in org.blackerp.domain.events.ConstraintEvent
+e: file:///home/red1/Projects/blackerp/domain/events/ConstraintEvents.kt:35:10 Class 'ConstraintViolated' is not abstract and does not implement abstract base class member public abstract val entityId: UUID defined in org.blackerp.domain.events.ConstraintEvent
+e: file:///home/red1/Projects/blackerp/domain/events/DomainEvent.kt:14:12 Redeclaration: EventMetadata
+e: file:///home/red1/Projects/blackerp/domain/events/EventMetadata.kt:7:12 Redeclaration: EventMetadata
+e: file:///home/red1/Projects/blackerp/domain/events/RelationshipEvents.kt:8:10 Class 'RelationshipCreated' is not abstract and does not implement abstract base class member public abstract val entityId: UUID defined in org.blackerp.domain.events.RelationshipEvent
+e: file:///home/red1/Projects/blackerp/domain/events/RelationshipEvents.kt:20:10 Class 'RelationshipModified' is not abstract and does not implement abstract base class member public abstract val entityId: UUID defined in org.blackerp.domain.events.RelationshipEvent
+e: file:///home/red1/Projects/blackerp/domain/events/RelationshipEvents.kt:31:10 Class 'RelationshipDeleted' is not abstract and does not implement abstract base class member public abstract val entityId: UUID defined in org.blackerp.domain.events.RelationshipEvent
+e: file:///home/red1/Projects/blackerp/domain/events/WorkflowEvents.kt:8:10 Class 'NodeCreated' is not abstract and does not implement abstract base class member public abstract val entityId: UUID defined in org.blackerp.domain.events.WorkflowEvent
+e: file:///home/red1/Projects/blackerp/domain/events/WorkflowEvents.kt:14:10 Class 'NodeUpdated' is not abstract and does not implement abstract base class member public abstract val entityId: UUID defined in org.blackerp.domain.events.WorkflowEvent
+e: file:///home/red1/Projects/blackerp/domain/events/WorkflowEvents.kt:21:10 Class 'NodeDeleted' is not abstract and does not implement abstract base class member public abstract val entityId: UUID defined in org.blackerp.domain.events.WorkflowEvent
+e: file:///home/red1/Projects/blackerp/domain/validation/validators/model/ColumnValidator.kt:6:42 Unresolved reference: ColumnDefinition
+e: file:///home/red1/Projects/blackerp/domain/validation/validators/model/ColumnValidator.kt:8:33 Unresolved reference: shared
+e: file:///home/red1/Projects/blackerp/domain/validation/validators/model/ColumnValidator.kt:9:33 Unresolved reference: validation
+e: file:///home/red1/Projects/blackerp/domain/validation/validators/model/ColumnValidator.kt:11:25 Unresolved reference: Validator
+e: file:///home/red1/Projects/blackerp/domain/validation/validators/model/ColumnValidator.kt:11:35 Unresolved reference: ColumnDefinition
+e: file:///home/red1/Projects/blackerp/domain/validation/validators/model/ColumnValidator.kt:12:5 'validate' overrides nothing
+e: file:///home/red1/Projects/blackerp/domain/validation/validators/model/ColumnValidator.kt:12:43 Unresolved reference: ColumnDefinition
+e: file:///home/red1/Projects/blackerp/domain/validation/validators/model/ColumnValidator.kt:12:69 Unresolved reference: ValidationError
+e: file:///home/red1/Projects/blackerp/domain/validation/validators/model/ColumnValidator.kt:12:86 Unresolved reference: ColumnDefinition
+e: file:///home/red1/Projects/blackerp/domain/validation/validators/model/ColumnValidator.kt:13:36 Unresolved reference: ValidationError
+e: file:///home/red1/Projects/blackerp/domain/validation/validators/model/ColumnValidator.kt:17:24 Unresolved reference: ValidationError
+e: file:///home/red1/Projects/blackerp/domain/validation/validators/model/ColumnValidator.kt:24:13 Comparison of incompatible enums '[Error type: Error property type]' and 'DataType' is always unsuccessful
+e: file:///home/red1/Projects/blackerp/domain/validation/validators/model/ColumnValidator.kt:26:32 Unresolved reference: ValidationError
+e: file:///home/red1/Projects/blackerp/domain/validation/validators/model/ColumnValidator.kt:29:32 Unresolved reference: ValidationError
+e: file:///home/red1/Projects/blackerp/domain/validation/validators/model/ColumnValidator.kt:32:13 Comparison of incompatible enums '[Error type: Error property type]' and 'DataType' is always unsuccessful
+e: file:///home/red1/Projects/blackerp/domain/validation/validators/model/ColumnValidator.kt:34:32 Unresolved reference: ValidationError
+e: file:///home/red1/Projects/blackerp/domain/validation/validators/model/ColumnValidator.kt:37:32 Unresolved reference: ValidationError
+e: file:///home/red1/Projects/blackerp/domain/validation/validators/model/ColumnValidator.kt:42:32 Unresolved reference: ValidationError
+e: file:///home/red1/Projects/blackerp/domain/validation/validators/model/CompositeValidator.kt:11:34 Unresolved reference: Validator
+e: file:///home/red1/Projects/blackerp/domain/validation/validators/model/CompositeValidator.kt:16:30 Cannot infer a type for this parameter. Please specify it explicitly.
+e: file:///home/red1/Projects/blackerp/domain/validation/validators/model/CompositeValidator.kt:18:19 Cannot infer a type for this parameter. Please specify it explicitly.
+e: file:///home/red1/Projects/blackerp/domain/validation/validators/model/CompositeValidator.kt:21:33 'return' is not allowed here
+e: file:///home/red1/Projects/blackerp/domain/validation/validators/model/TableValidator.kt:4:42 Unresolved reference: ADTable
+e: file:///home/red1/Projects/blackerp/domain/validation/validators/model/TableValidator.kt:14:31 Unresolved reference: ADTable
+e: file:///home/red1/Projects/blackerp/domain/validation/validators/model/TableValidator.kt:14:60 Unresolved reference: ADTable
+e: file:///home/red1/Projects/blackerp/domain/validation/validators/model/TableValidator.kt:29:40 Cannot infer a type for this parameter. Please specify it explicitly.
+e: file:///home/red1/Projects/blackerp/domain/validation/validators/model/TableValidator.kt:29:47 Cannot infer a type for this parameter. Please specify it explicitly.
+e: file:///home/red1/Projects/blackerp/domain/validation/validators/model/TableValidator.kt:35:24 Unresolved reference: it
+e: file:///home/red1/Projects/blackerp/domain/validation/validators/model/TableValidator.kt:36:23 Unresolved reference: it
+e: file:///home/red1/Projects/blackerp/domain/validation/validators/model/TableValidator.kt:39:26 Overload resolution ambiguity: 
+public inline fun <T> Iterable<TypeVariable(T)>.forEach(action: (TypeVariable(T)) -> Unit): Unit defined in kotlin.collections
+public inline fun <K, V> Map<out TypeVariable(K), TypeVariable(V)>.forEach(action: (Map.Entry<TypeVariable(K), TypeVariable(V)>) -> Unit): Unit defined in kotlin.collections
+e: file:///home/red1/Projects/blackerp/domain/validation/validators/model/TableValidator.kt:39:36 Cannot infer a type for this parameter. Please specify it explicitly.
+e: file:///home/red1/Projects/blackerp/domain/validation/validators/model/TableValidator.kt:50:34 Unresolved reference: it
+e: file:///home/red1/Projects/blackerp/domain/validation/validators/model/TableValidator.kt:70:17 Unresolved reference: ColumnDefinition
+e: file:///home/red1/Projects/blackerp/domain/validation/validators/model/TableValidator.kt:77:13 Comparison of incompatible enums '[Error type: Error property type]' and 'DataType' is always unsuccessful
+e: file:///home/red1/Projects/blackerp/domain/validation/validators/model/TableValidator.kt:97:13 Comparison of incompatible enums '[Error type: Error property type]' and 'DataType' is always unsuccessful
+e: file:///home/red1/Projects/blackerp/domain/validation/validators/model/TableValidator.kt:140:33 Cannot infer a type for this parameter. Please specify it explicitly.
+e: file:///home/red1/Projects/blackerp/domain/validation/validators/model/TableValidator.kt:141:45 Unresolved reference: UUID
+e: file:///home/red1/Projects/blackerp/domain/validation/validators/module/ModuleValidator.kt:6:36 Unresolved reference: ADModule
+e: file:///home/red1/Projects/blackerp/domain/validation/validators/module/ModuleValidator.kt:7:33 Unresolved reference: shared
+e: file:///home/red1/Projects/blackerp/domain/validation/validators/module/ModuleValidator.kt:8:33 Unresolved reference: validation
+e: file:///home/red1/Projects/blackerp/domain/validation/validators/module/ModuleValidator.kt:10:25 Unresolved reference: Validator
+e: file:///home/red1/Projects/blackerp/domain/validation/validators/module/ModuleValidator.kt:10:35 Unresolved reference: ADModule
+e: file:///home/red1/Projects/blackerp/domain/validation/validators/module/ModuleValidator.kt:11:5 'validate' overrides nothing
+e: file:///home/red1/Projects/blackerp/domain/validation/validators/module/ModuleValidator.kt:11:43 Unresolved reference: ADModule
+e: file:///home/red1/Projects/blackerp/domain/validation/validators/module/ModuleValidator.kt:11:61 Unresolved reference: ValidationError
+e: file:///home/red1/Projects/blackerp/domain/validation/validators/module/ModuleValidator.kt:11:78 Unresolved reference: ADModule
+e: file:///home/red1/Projects/blackerp/domain/validation/validators/module/ModuleValidator.kt:12:36 Unresolved reference: ValidationError
+e: file:///home/red1/Projects/blackerp/domain/validation/validators/module/ModuleValidator.kt:16:24 Unresolved reference: ValidationError
+e: file:///home/red1/Projects/blackerp/domain/validation/validators/module/ModuleValidator.kt:23:24 Unresolved reference: ValidationError
+e: file:///home/red1/Projects/blackerp/domain/validation/validators/module/ModuleValidator.kt:27:42 Cannot infer a type for this parameter. Please specify it explicitly.
+e: file:///home/red1/Projects/blackerp/domain/validation/validators/module/ModuleValidator.kt:29:28 Unresolved reference: ValidationError
+
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+Execution failed for task ':domain:compileKotlin'.
+> A failure occurred while executing org.jetbrains.kotlin.compilerRunner.GradleCompilerRunnerWithWorkers$GradleKotlinCompilerWorkAction
+   > Compilation error. See log for more details
+
+* Try:
+> Run with --stacktrace option to get the stack trace.
+> Run with --info or --debug option to get more log output.
+> Run with --scan to get full insights.
+> Get more help at https://help.gradle.org.
+
+BUILD FAILED in 1s
+8 actionable tasks: 4 executed, 4 up-to-date

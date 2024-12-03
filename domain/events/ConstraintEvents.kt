@@ -1,7 +1,7 @@
 package org.blackerp.domain.events
 
 import java.util.UUID
-import org.blackerp.domain.ad.table.ConstraintType
+import org.blackerp.domain.core.ad.table.ConstraintType
 
 sealed class ConstraintEvent : DomainEvent {
     data class ConstraintCreated(

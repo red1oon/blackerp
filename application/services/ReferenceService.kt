@@ -2,7 +2,7 @@ package org.blackerp.application.services
 
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
-import org.blackerp.domain.ad.reference.*
+import org.blackerp.domain.core.ad.reference.*
 import arrow.core.Either
 import arrow.core.right
 import arrow.core.left

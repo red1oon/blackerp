@@ -3,7 +3,7 @@ package org.blackerp.domain.core.values
 import arrow.core.Either
 import arrow.core.left
 import arrow.core.right
-import org.blackerp.shared.ValidationError
+import org.blackerp.domain.core.shared.ValidationError
 import java.math.BigDecimal
 
 @JvmInline

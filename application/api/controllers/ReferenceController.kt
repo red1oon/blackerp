@@ -2,7 +2,7 @@ package org.blackerp.application.api.controllers
 
 import org.springframework.web.bind.annotation.*
 import org.springframework.http.ResponseEntity
-import org.blackerp.domain.ad.reference.*
+import org.blackerp.domain.core.ad.reference.*
 import org.blackerp.application.services.ReferenceService
 import jakarta.validation.Valid
 import org.slf4j.LoggerFactory
