@@ -10,7 +10,7 @@ import org.slf4j.LoggerFactory
 class ProcessExecutionTracker {
     private val logger = LoggerFactory.getLogger(ProcessExecutionTracker::class.java)
     
-    // In-memory tracking for POC - replace with persistence
+    // In-memory tracking for POC
     private val executionHistory = mutableMapOf<UUID, ProcessExecution>()
 
     fun trackExecution(
@@ -22,6 +22,7 @@ class ProcessExecutionTracker {
     }
 
     fun getExecutionHistory(processId: UUID): List<ProcessExecution> =
-        executionHistory.values.filter { it.processId == processId }
+        executionHistory.values
+            .filter { it.processId == processId }
             .sortedByDescending { it.startTime }
 }

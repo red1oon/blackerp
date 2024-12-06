@@ -29,11 +29,17 @@ data class Permission(
 )
 
 enum class PermissionType {
-    READ, WRITE, DELETE, EXECUTE, ADMIN
+    READ,
+    WRITE,
+    DELETE,
+    EXECUTE,
+    ADMIN
 }
 
 enum class SecurityScope {
-    SYSTEM, CLIENT, ORGANIZATION
+    SYSTEM,
+    CLIENT,
+    ORGANIZATION
 }
 
 data class SecurityContext(
@@ -43,5 +49,7 @@ data class SecurityContext(
     val roles: Set<Role>
 ) {
     fun hasPermission(permission: String): Boolean =
-        roles.any { role -> role.permissions.any { it.code == permission } }
+        roles.any { role ->
+            role.permissions.any { it.code == permission }
+        }
 }

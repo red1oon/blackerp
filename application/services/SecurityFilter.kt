@@ -11,40 +11,48 @@ import org.slf4j.LoggerFactory
 
 @Component
 class SecurityFilter(
-   private val securityService: SecurityService
+    private val securityService: SecurityService
 ) : WebFilter {
-   private val logger = LoggerFactory.getLogger(SecurityFilter::class.java)
-   private val publicPaths = setOf("/api/auth/login", "/api/auth/refresh")
+    private val logger = LoggerFactory.getLogger(SecurityFilter::class.java)
+    
+    private val publicPaths = setOf(
+        "/api/auth/login",
+        "/api/auth/refresh"
+    )
 
-   override fun filter(exchange: ServerWebExchange, chain: WebFilterChain): Mono<Void> {
-       val path = exchange.request.path.value()
-       if (publicPaths.any { path.startsWith(it) }) {
-           return chain.filter(exchange)
-       }
+    override fun filter(
+        exchange: ServerWebExchange,
+        chain: WebFilterChain
+    ): Mono<Void> {
+        val path = exchange.request.path.value()
+        
+        if (publicPaths.any { path.startsWith(it) }) {
+            return chain.filter(exchange)
+        }
 
-       val authHeader = exchange.request.headers.getFirst("Authorization")
-       val authToken = authHeader?.removePrefix("Bearer ")
-       
-       if (authToken == null) {
-           exchange.response.statusCode = HttpStatus.UNAUTHORIZED
-           return exchange.response.setComplete()
-       }
+        val authHeader = exchange.request.headers.getFirst("Authorization")
+        val authToken = authHeader?.removePrefix("Bearer ")
+        
+        if (authToken == null) {
+            exchange.response.statusCode = HttpStatus.UNAUTHORIZED
+            return exchange.response.setComplete()
+        }
 
-       return Mono.defer {
-           runBlocking {
-               securityService.validateToken(authToken)
-           }.fold(
-               { error ->
-                   logger.error("Authentication failed: $error")
-                   exchange.response.statusCode = HttpStatus.UNAUTHORIZED
-                   exchange.response.setComplete()
-               },
-               { context -> 
-                   exchange.attributes["securityContext"] = context
-                   chain.filter(exchange)
-               }
-           )
-           Mono.empty()
-       }
-   }
+        return Mono.defer {
+            runBlocking {
+                securityService.validateToken(authToken)
+            }.fold(
+                { error ->
+                    logger.error("Authentication failed: $error")
+                    exchange.response.statusCode = HttpStatus.UNAUTHORIZED
+                    exchange.response.setComplete()
+                },
+                { context ->
+                    exchange.attributes["securityContext"] = context
+                    chain.filter(exchange)
+                }
+            )
+            Mono.empty()
+        }
+    }
 }

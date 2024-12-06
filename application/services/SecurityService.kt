@@ -11,9 +11,17 @@ import java.util.UUID
 class SecurityService(
     private val passwordEncoder: PasswordEncoder
 ) : SecurityOperations {
-    override suspend fun authenticate(credentials: Credentials): Either<SecurityError, AuthToken> = TODO()
-    override suspend fun validateToken(token: String): Either<SecurityError, SecurityContext> = TODO()
-    override suspend fun getUserRoles(userId: UUID): Flow<Role> = flow { }
-    override suspend fun getRolePermissions(roleId: UUID): Flow<Permission> = flow { }
-    override suspend fun hasPermission(context: SecurityContext, permission: String): Boolean = TODO()
+
+    override suspend fun authenticate(credentials: Credentials): Either<SecurityError, AuthToken> =
+        TODO()
+
+    override suspend fun validateToken(token: String): Either<SecurityError, SecurityContext> =
+        TODO()
+
+    override suspend fun getUserRoles(userId: UUID): Flow<Role> = flow {}
+
+    override suspend fun getRolePermissions(roleId: UUID): Flow<Permission> = flow {}
+
+    override suspend fun hasPermission(context: SecurityContext, permission: String): Boolean =
+        TODO()
 }
