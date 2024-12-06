@@ -1,7 +1,7 @@
 package org.blackerp.domain.core.ad.base
 
 import org.blackerp.domain.core.DomainEntity
-import org.blackerp.domain.core.metadata.EntityMetadata
+import org.blackerp.domain.core.shared.EntityMetadata
 import org.blackerp.domain.core.values.DisplayName
 import org.blackerp.domain.core.values.Description
 

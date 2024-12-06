@@ -1,14 +1,10 @@
-// domain-entities/src/main/kotlin/org/blackerp/plugin/PluginError.kt
 package org.blackerp.domain.core.error
 
-import org.blackerp.domain.core.shared.ValidationError
-
-sealed interface PluginError {
-    data class NotFound(val id: String) : PluginError
-    data class ValidationFailed(val errors: List<ValidationError>) : PluginError
-    data class DuplicatePlugin(val id: String) : PluginError
-    data class IncompatibleVersion(val required: String, val actual: String) : PluginError
-    data class InitializationFailed(val id: String, val cause: Throwable) : PluginError
-    data class DiscoveryFailed(val message: String, val cause: Throwable? = null) : PluginError
-    data class LoadFailed(val message: String) : PluginError
+sealed class PluginError {
+    data class NotFound(val id: String) : PluginError()
+    data class RegistrationFailed(val id: String, val cause: Throwable) : PluginError()
+    data class LoadFailed(val message: String) : PluginError()
+    data class StartupFailed(val id: String, val cause: Throwable) : PluginError()
+    data class ShutdownFailed(val id: String, val cause: Throwable) : PluginError()
+    data class DependencyError(val id: String, val missingDependency: String) : PluginError()
 }

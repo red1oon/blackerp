@@ -5,7 +5,7 @@ import arrow.core.Either
 import arrow.core.left
 import arrow.core.right
 import org.blackerp.domain.core.DomainEntity 
-import org.blackerp.domain.core.metadata.EntityMetadata
+import domain.core.shared.EntityMetadata
 import org.blackerp.domain.core.shared.ValidationError
 
 @JvmInline

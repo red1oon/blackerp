@@ -1,34 +1,16 @@
 openjdk version "17.0.13" 2024-10-15
 OpenJDK Runtime Environment (build 17.0.13+11-Ubuntu-2ubuntu124.04)
 OpenJDK 64-Bit Server VM (build 17.0.13+11-Ubuntu-2ubuntu124.04, mixed mode, sharing)
+> Task :application:checkKotlinGradlePluginConfigurationErrors
+> Task :domain:checkKotlinGradlePluginConfigurationErrors
+> Task :domain:compileKotlin UP-TO-DATE
+> Task :domain:compileJava NO-SOURCE
+> Task :domain:processResources NO-SOURCE
+> Task :domain:classes UP-TO-DATE
+> Task :domain:jar UP-TO-DATE
+> Task :application:compileKotlin NO-SOURCE
+> Task :infrastructure:checkKotlinGradlePluginConfigurationErrors
+> Task :infrastructure:compileKotlin UP-TO-DATE
 
-FAILURE: Build failed with an exception.
-
-* What went wrong:
-Circular dependency between the following tasks:
-:application:classes
-\--- :application:compileJava
-     +--- :application:compileKotlin
-     |    \--- :infrastructure:jar
-     |         +--- :infrastructure:classes
-     |         |    \--- :infrastructure:compileJava
-     |         |         +--- :application:jar
-     |         |         |    +--- :application:classes (*)
-     |         |         |    +--- :application:compileJava (*)
-     |         |         |    \--- :application:compileKotlin (*)
-     |         |         \--- :infrastructure:compileKotlin
-     |         |              \--- :application:jar (*)
-     |         +--- :infrastructure:compileJava (*)
-     |         \--- :infrastructure:compileKotlin (*)
-     \--- :infrastructure:jar (*)
-
-(*) - details omitted (listed previously)
-
-
-* Try:
-> Run with --stacktrace option to get the stack trace.
-> Run with --info or --debug option to get more log output.
-> Run with --scan to get full insights.
-> Get more help at https://help.gradle.org.
-
-BUILD FAILED in 1s
+BUILD SUCCESSFUL in 1s
+6 actionable tasks: 3 executed, 3 up-to-date

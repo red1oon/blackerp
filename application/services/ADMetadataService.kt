@@ -2,7 +2,7 @@ package org.blackerp.application.services
 
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
-import org.blackerp.domain.core.metadata.EntityMetadata
+import domain.core.shared.EntityMetadata
 import org.blackerp.domain.core.metadata.AuditInfo
 import org.blackerp.domain.core.metadata.VersionInfo
 import org.blackerp.domain.core.error.TableError

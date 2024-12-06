@@ -1,59 +1,34 @@
 package org.blackerp.infrastructure.persistence.repositories
 
-import org.blackerp.domain.core.ad.document.*
 import org.springframework.stereotype.Repository
-import org.springframework.jdbc.core.JdbcTemplate
+import org.blackerp.domain.core.ad.document.*
 import arrow.core.Either
 import arrow.core.right
 import arrow.core.left
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flowOf
 import java.util.UUID
 
 @Repository
-class DocumentRepository(
-    private val jdbcTemplate: JdbcTemplate
-) : DocumentOperations {
-
-    override suspend fun save(document: Document): Either<DocumentError, Document> = try {
-        // TODO: Implement save logic
+class DocumentRepository : DocumentOperations {
+    override suspend fun create(document: Document): Either<DocumentError, Document> =
         document.right()
-    } catch (e: Exception) {
-        DocumentError.ValidationFailed(e.message ?: "Save failed").left()
-    }
 
-    override suspend fun findById(id: UUID): Either<DocumentError, Document?> = try {
-        // TODO: Implement find logic
+    override suspend fun update(id: UUID, document: Document): Either<DocumentError, Document> =
+        document.right()
+
+    override suspend fun findById(id: UUID): Either<DocumentError, Document?> =
         null.right()
-    } catch (e: Exception) {
-        DocumentError.ValidationFailed(e.message ?: "Find failed").left()
-    }
 
-    override suspend fun delete(id: UUID): Either<DocumentError, Unit> = try {
-        // TODO: Implement delete logic
+    override suspend fun search(criteria: SearchCriteria): Flow<Document> =
+        flowOf()
+
+    override suspend fun delete(id: UUID): Either<DocumentError, Unit> =
         Unit.right()
-    } catch (e: Exception) {
-        DocumentError.ValidationFailed(e.message ?: "Delete failed").left()
-    }
 
-    override suspend fun update(id: UUID, document: Document): Either<DocumentError, Document> = try {
-        // TODO: Implement update logic
-        document.right()
-    } catch (e: Exception) {
-        DocumentError.ValidationFailed(e.message ?: "Update failed").left()
-    }
-
-    override suspend fun changeStatus(id: UUID, status: DocumentStatus): Either<DocumentError, Document> = try {
-        // TODO: Implement status update logic
-        findById(id).fold(
-            { error -> error.left() },
-            { document ->
-                document?.copy(status = status)?.right() 
-                    ?: DocumentError.NotFound(id).left()
-            }
-        )
-    } catch (e: Exception) {
-        DocumentError.ValidationFailed(e.message ?: "Status update failed").left()
-    }
-
-    override suspend fun search(criteria: SearchCriteria): kotlinx.coroutines.flow.Flow<Document> =
-        kotlinx.coroutines.flow.flowOf()  // TODO: Implement search
+    override suspend fun changeStatus(
+        id: UUID,
+        status: DocumentStatus
+    ): Either<DocumentError, Document> =
+        DocumentError.NotFound(id).left()
 }

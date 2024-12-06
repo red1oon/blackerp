@@ -3,7 +3,7 @@ package org.blackerp.domain.core.ad.docstatus
 import arrow.core.Either
 import arrow.core.right
 import arrow.core.left
-import org.blackerp.domain.core.metadata.EntityMetadata
+import org.blackerp.domain.core.shared.EntityMetadata
 import org.blackerp.domain.core.ad.base.ADObject
 import org.blackerp.domain.core.values.DisplayName
 import org.blackerp.domain.core.values.Description

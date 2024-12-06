@@ -2,7 +2,7 @@ package org.blackerp.domain.core.ad.table
 
 import arrow.core.Either
 import arrow.core.right
-import org.blackerp.domain.core.metadata.EntityMetadata
+import org.blackerp.domain.core.shared.EntityMetadata
 import org.blackerp.domain.core.values.*
 import org.blackerp.domain.core.ad.base.ADObject
 import org.blackerp.domain.core.error.TableError

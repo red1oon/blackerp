@@ -1,5 +1,4 @@
-// domain/core/metadata/EntityMetadata.kt
-package org.blackerp.domain.core.metadata
+package org.blackerp.domain.core.shared
 
 import java.time.Instant
 import java.util.UUID

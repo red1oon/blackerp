@@ -6,10 +6,7 @@ import org.springframework.stereotype.Component
 import org.springframework.jdbc.core.JdbcTemplate
 
 @Component
-class SystemHealthAdapter(
-    private val jdbcTemplate: JdbcTemplate
-) : HealthIndicator {
-    
+class SystemHealthAdapter(private val jdbcTemplate: JdbcTemplate) : HealthIndicator {
     override fun health(): Health {
         return try {
             val dbStatus = checkDatabase()
@@ -29,11 +26,10 @@ class SystemHealthAdapter(
         }
     }
 
-    private fun checkDatabase(): Boolean =
-        try {
-            jdbcTemplate.queryForObject("SELECT 1", Int::class.java)
-            true
-        } catch (e: Exception) {
-            false
-        }
+    private fun checkDatabase(): Boolean = try {
+        jdbcTemplate.queryForObject("SELECT 1", Int::class.java)
+        true
+    } catch (e: Exception) {
+        false
+    }
 }

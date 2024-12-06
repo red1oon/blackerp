@@ -4,7 +4,7 @@ package org.blackerp.application.api.mappers
 import org.springframework.stereotype.Component
 import org.blackerp.application.api.dto.requests.CreateTableRequest
 import org.blackerp.domain.core.ad.table.ADTable
-import org.blackerp.domain.core.metadata.EntityMetadata
+import domain.core.shared.EntityMetadata
 import org.blackerp.domain.core.values.*
 import org.blackerp.domain.core.metadata.AuditInfo
 import org.blackerp.domain.core.shared.ValidationError

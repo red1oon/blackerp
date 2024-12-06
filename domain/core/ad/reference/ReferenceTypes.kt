@@ -16,10 +16,16 @@ sealed interface ReferenceType {
     ) : ReferenceType
 }
 
-sealed class ReferenceError(message: String) {
-    data class ValidationFailed(val message: String) : ReferenceError(message)
-    data class NotFound(val id: String) : ReferenceError("Reference not found: $id")
-    data class DuplicateReference(val name: String) : ReferenceError("Reference already exists: $name")
+sealed class ReferenceError {
+    abstract val message: String
+    
+    data class ValidationFailed(override val message: String) : ReferenceError()
+    data class NotFound(val id: String) : ReferenceError() {
+        override val message = "Reference not found: $id"
+    }
+    data class DuplicateReference(val name: String) : ReferenceError() {
+        override val message = "Reference already exists: $name"
+    }
 }
 
 data class ReferenceValue<T>(

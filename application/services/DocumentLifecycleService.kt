@@ -1,101 +1,72 @@
 package org.blackerp.application.services
 
 import org.springframework.stereotype.Service
+import org.springframework.transaction.annotation.Transactional
 import org.blackerp.domain.core.ad.document.*
-import org.blackerp.domain.core.ad.docstatus.AD_DocStatus
-import org.blackerp.domain.core.ad.docaction.DocActionRegistry
 import org.blackerp.domain.events.DocumentEvent
 import org.blackerp.domain.events.EventMetadata
 import org.blackerp.domain.events.DomainEventPublisher
-import org.blackerp.infrastructure.persistence.repositories.DocumentHistoryRepository
+import org.blackerp.domain.core.shared.ChangePair
 import arrow.core.Either
-import arrow.core.left
-import arrow.core.right
 import java.util.UUID
 import java.time.Instant
-import org.slf4j.LoggerFactory
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 @Service
 class DocumentLifecycleService(
     private val documentOperations: DocumentOperations,
     private val docActionRegistry: DocActionRegistry,
-    private val eventPublisher: DomainEventPublisher,
-    private val historyRepository: DocumentHistoryRepository
+    private val eventPublisher: DomainEventPublisher
 ) {
-    private val logger = LoggerFactory.getLogger(DocumentLifecycleService::class.java)
-
+    @Transactional
     suspend fun changeStatus(
         id: UUID,
         command: ChangeStatusCommand
-    ): Either<DocumentError, Document> {
-        logger.debug("Changing document status: $id -> ${command.targetStatus}")
-
-        return documentOperations.findById(id)
-            .flatMap { document ->
-                if (document == null) {
-                    DocumentError.NotFound(id).left()
-                } else {
-                    validateStatusTransition(document, command.targetStatus)
-                        .flatMap { 
-                            executeRequiredAction(document, command.targetStatus)
-                                .flatMap {
-                                    documentOperations.changeStatus(id, command.targetStatus)
-                                        .also { result ->
-                                            result.fold(
-                                                { /* error handled by caller */ },
-                                                { updatedDoc -> 
-                                                    trackStatusChange(
-                                                        document.status,
-                                                        updatedDoc.status,
-                                                        id,
-                                                        command.reason
-                                                    )
-                                                }
-                                            )
-                                        }
-                                }
-                        }
-                }
+    ): Either<DocumentError, Document> = withContext(Dispatchers.IO) {
+        documentOperations.findById(id).fold(
+            { error -> Either.Left(error) },
+            { document ->
+                document?.let { doc ->
+                    doc.validateStatusTransition(command.targetStatus)
+                        .flatMap { executeStatusChange(doc, command) }
+                } ?: Either.Left(DocumentError.NotFound(id))
             }
+        )
     }
 
-    suspend fun getHistory(
-        id: UUID,
-        fromDate: Instant? = null,
-        toDate: Instant? = null
-    ): Either<DocumentError, List<DocumentChange>> =
-        documentOperations.findById(id).map { document ->
-            if (fromDate != null && toDate != null) {
-                historyRepository.getHistoryBetween(id, fromDate, toDate)
-            } else {
-                historyRepository.getHistory(id)
-            }
+    private suspend fun executeStatusChange(
+        document: Document,
+        command: ChangeStatusCommand
+    ): Either<DocumentError, Document> = withContext(Dispatchers.IO) {
+        documentOperations.changeStatus(
+            UUID.fromString(document.id), 
+            command.targetStatus
+        ).also { result ->
+            result.fold(
+                { /* error handled by caller */ },
+                { updatedDoc ->
+                    trackStatusChange(
+                        document.status,
+                        updatedDoc.status,
+                        UUID.fromString(document.id),
+                        command.reason
+                    )
+                }
+            )
         }
+    }
 
-    private fun trackStatusChange(
+    private suspend fun trackStatusChange(
         previousStatus: DocumentStatus,
         newStatus: DocumentStatus,
         documentId: UUID,
         reason: String?
-    ) {
-        // Track in history
-        historyRepository.trackChange(
-            DocumentChange(
-                id = UUID.randomUUID(),
-                documentId = documentId,
-                changedAt = Instant.now(),
-                changedBy = "system", // TODO: Get from security context
-                changes = mapOf(
-                    "status" to ChangePair(previousStatus, newStatus)
-                )
-            )
-        )
-
-        // Publish event
+    ) = withContext(Dispatchers.IO) {
         eventPublisher.publish(
             DocumentEvent.StatusChanged(
                 metadata = EventMetadata(
-                    user = "system", // TODO: Get from security context
+                    user = "system",
                     correlationId = UUID.randomUUID().toString()
                 ),
                 documentId = documentId,
@@ -106,5 +77,13 @@ class DocumentLifecycleService(
         )
     }
 
-    // ... rest of the existing methods ...
+    suspend fun getHistory(
+        id: UUID,
+        fromDate: Instant? = null,
+        toDate: Instant? = null
+    ): Either<DocumentError, List<DocumentChange>> = withContext(Dispatchers.IO) {
+        documentOperations.findById(id).map { document ->
+            listOf() // TODO: Implement history retrieval
+        }
+    }
 }

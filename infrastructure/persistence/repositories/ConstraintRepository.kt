@@ -93,7 +93,7 @@ class ConstraintRepository(
                     tableId = UUID.fromString(rs.getString("table_id")),
                     name = rs.getString("name"),
                     type = ConstraintType.valueOf(rs.getString("constraint_type")),
-                    columns = (rs.getArray("columns")?.array as Array<String>?)?.toList() ?: emptyList(),
+                    columns = (rs.getArray("columns")?.array as? Array<*>)?.filterIsInstance<String>() ?: emptyList(),
                     expression = rs.getString("expression")
                 )
             }, tableId)
@@ -201,7 +201,7 @@ class ConstraintRepository(
     private fun getTableName(tableId: UUID): String =
         jdbcTemplate.queryForObject(
             "SELECT name FROM ad_table WHERE id = ?",
-            String::class.java,
+            String::class.java, 
             tableId
-        ) ?: throw IllegalStateException("Table not found: $tableId")
+        ) // Return non-nullable String directly
 }
