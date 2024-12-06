@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Output file to store the results
-OUTPUT_FILE="project_listing.txt"
+OUTPUT_FILE="KotlinCoreApp.txt"
 > "$OUTPUT_FILE"  # Empty the file if it already exists
 
 # Step 1: Generate a directory structure overview excluding build, frontend, and bin

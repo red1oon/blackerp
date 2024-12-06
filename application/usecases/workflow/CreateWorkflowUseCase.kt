@@ -1,28 +1,22 @@
 package org.blackerp.application.usecases.workflow
 
-import org.blackerp.domain.core.ad.workflow.*
 import org.springframework.stereotype.Service
+import org.blackerp.domain.core.ad.workflow.*
+import org.blackerp.application.api.process.CreateWorkflowCommand
 import arrow.core.Either
+import arrow.core.flatMap
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 @Service
 class CreateWorkflowUseCase(
     private val workflowOperations: WorkflowOperations
 ) {
-    suspend fun execute(command: CreateWorkflowCommand): Either<WorkflowError, WorkflowNode> =
-        command.toNode().flatMap { node ->
-            workflowOperations.save(node)
+    suspend fun execute(command: CreateWorkflowCommand): Either<WorkflowError, WorkflowNode> {
+        return withContext(Dispatchers.IO) {
+            command.toNode().flatMap { node ->
+                workflowOperations.save(node)
+            }
         }
+    }
 }
-
-data class CreateWorkflowCommand(
-    val displayName: String,
-    val description: String?,
-    val type: NodeType,
-    val action: NodeAction?,
-    val transitions: List<CreateTransitionCommand>
-)
-
-data class CreateTransitionCommand(
-    val targetNodeId: UUID,
-    val condition: String?
-)

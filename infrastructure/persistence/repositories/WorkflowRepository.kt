@@ -18,44 +18,44 @@ class WorkflowRepository(
     private val logger = LoggerFactory.getLogger(WorkflowRepository::class.java)
 
     @Transactional
-    override suspend fun save(node: WorkflowNode): Either<WorkflowError, WorkflowNode> = 
-        try {
-            logger.debug("Saving workflow node: ${node.id}")
-            
-            jdbcTemplate.update("""
-                INSERT INTO workflow_node (id, type, display_name, description, action_type, action_data)
-                VALUES (?, ?, ?, ?, ?, ?)
-                ON CONFLICT (id) DO UPDATE SET
-                    type = EXCLUDED.type,
-                    display_name = EXCLUDED.display_name,
-                    description = EXCLUDED.description,
-                    action_type = EXCLUDED.action_type,
-                    action_data = EXCLUDED.action_data
-            """, 
-                node.id, 
-                node.type.name,
-                node.displayName.value,
-                node.description?.value,
-                node.action?.javaClass?.simpleName,
-                node.action?.toString()
-            )
-
-            // Handle transitions in same transaction
-            handleTransitions(node)
-            
-            node.right()
-        } catch (e: DataIntegrityViolationException) {
-            logger.error("Constraint violation while saving node: ${node.id}", e)
-            WorkflowError.InvalidNode("Constraint violation: ${e.message}").left()
-        } catch (e: Exception) {
-            logger.error("Failed to save node: ${node.id}", e)
-            WorkflowError.InvalidNode("Save failed: ${e.message}").left()
-        }
+    override suspend fun save(node: WorkflowNode): Either<WorkflowError, WorkflowNode> = try {
+        logger.debug("Saving workflow node: ${node.id}")
+        jdbcTemplate.update("""
+            INSERT INTO workflow_node (id, type, display_name, description, action_type, action_data)
+            VALUES (?, ?, ?, ?, ?, ?)
+            ON CONFLICT (id) DO UPDATE SET
+                type = EXCLUDED.type,
+                display_name = EXCLUDED.display_name,
+                description = EXCLUDED.description,
+                action_type = EXCLUDED.action_type,
+                action_data = EXCLUDED.action_data
+        """,
+            node.id,
+            node.type.name,
+            node.displayName.value,
+            node.description?.value,
+            node.action?.javaClass?.simpleName,
+            node.action?.toString()
+        )
+        
+        // Handle transitions in same transaction
+        handleTransitions(node)
+        node.right()
+    } catch (e: DataIntegrityViolationException) {
+        logger.error("Constraint violation while saving node: ${node.id}", e)
+        WorkflowError.InvalidNode("Constraint violation: ${e.message}").left()
+    } catch (e: Exception) {
+        logger.error("Failed to save node: ${node.id}", e)
+        WorkflowError.InvalidNode("Save failed: ${e.message}").left()
+    }
 
     private fun handleTransitions(node: WorkflowNode) {
         // First delete existing transitions
-        jdbcTemplate.update("DELETE FROM workflow_transition WHERE source_node_id = ?", node.id)
-        
+        jdbcTemplate.update(
+            "DELETE FROM workflow_transition WHERE source_node_id = ?",
+            node.id
+        )
+
         // Then insert new transitions
         node.transitions.forEach { transition ->
             jdbcTemplate.update("""

@@ -1,15 +1,24 @@
-// File: domain/core/metadata/EntityMetadata.kt  
+// domain/core/metadata/EntityMetadata.kt
 package org.blackerp.domain.core.metadata
 
 import java.time.Instant
 import java.util.UUID
+import org.blackerp.domain.core.DomainEntity
 
-data class EntityMetadata(
-    val id: UUID = UUID.randomUUID(),
-    val created: Instant = Instant.now(),
+data class AuditInfo(
+    val createdAt: Instant = Instant.now(),
     val createdBy: String,
-    val updated: Instant = Instant.now(), 
-    val updatedBy: String,
-    val version: Int = 0,
+    val updatedAt: Instant = Instant.now(),
+    val updatedBy: String
+)
+
+data class VersionInfo(
+    val version: Int = 1,
     val active: Boolean = true
 )
+
+data class EntityMetadata(
+    override val id: String = UUID.randomUUID().toString(),
+    val audit: AuditInfo,
+    val version: VersionInfo = VersionInfo()
+) : DomainEntity

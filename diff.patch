@@ -1,0 +1,48 @@
+
+diff --git a/domain/events/DomainEvent.kt b/domain/events/DomainEvent.kt
+--- a/domain/events/DomainEvent.kt
++++ b/domain/events/DomainEvent.kt
+@@ -1,19 +1,9 @@
+ package org.blackerp.domain.events
+ 
++import java.util.UUID
++
+ interface DomainEvent {
+     val metadata: EventMetadata
+-    val entityId: UUID
+-    val entityType: String
+-    val eventType: String
+-    val changes: Map<String, ChangePair>
+ }
+ 
+-data class EventMetadata(
+-    val id: UUID = UUID.randomUUID(),
+-    val timestamp: Instant = Instant.now(),
+-    val user: String,
+-    val version: Int,
+-    val correlationId: String? = null
+-)
+-
+ data class ChangePair(
+     val oldValue: Any?,
+     val newValue: Any?
+) {
+     val hasChanged: Boolean get() = oldValue != newValue
+ }
+ 
+diff --git a/domain/events/EventMetadata.kt b/domain/events/EventMetadata.kt
+--- a/domain/events/EventMetadata.kt
++++ b/domain/events/EventMetadata.kt
+@@ -4,8 +4,9 @@ import java.time.Instant
+ import java.util.UUID
+ 
+ data class EventMetadata(
+-    val id: UUID = UUID.randomUUID(), 
+-    val timestamp: Instant = Instant.now(),
+-    val user: String
++    val id: UUID = UUID.randomUUID(),
++    val timestamp: Instant = Instant.now(), 
++    val user: String,
++    val version: Int = 1,
++    val correlationId: String? = null
+ )

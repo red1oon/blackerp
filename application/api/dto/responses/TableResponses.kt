@@ -1,4 +1,7 @@
-package org.blackerp.application.api.dto.responses
+package org.blackerp.api.dto.responses
+
+// Auto-fixed by fix_application.sh
+
 
 import java.util.UUID
 

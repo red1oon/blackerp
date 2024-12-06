@@ -1,6 +1,6 @@
 package org.blackerp.domain.core.error
 
-sealed class TableError : DomainError {
+sealed class TableError : DomainError("Table operation failed") {
     data class ValidationError(
         override val message: String,
         val violations: List<Violation>
@@ -10,13 +10,6 @@ sealed class TableError : DomainError {
         override val message: String,
         val constraintName: String,
         val details: String
-    ) : TableError()
-
-    data class ConcurrencyError(
-        override val message: String,
-        val entityId: String,
-        val expectedVersion: Int,
-        val actualVersion: Int
     ) : TableError()
 
     data class DatabaseError(

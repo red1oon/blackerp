@@ -1,2 +1,2 @@
 rootProject.name = "blackerp"
-include("domain", "application", "infrastructure")
+include(":domain", ":application", ":infrastructure")

@@ -1,4 +1,7 @@
-package org.blackerp.application.api.controllers
+package org.blackerp.api.controllers
+
+// Auto-fixed by fix_application.sh
+
 
 import org.springframework.web.bind.annotation.*
 import org.springframework.http.ResponseEntity

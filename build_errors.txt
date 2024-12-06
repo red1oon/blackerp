@@ -1,252 +1,337 @@
 openjdk version "17.0.13" 2024-10-15
 OpenJDK Runtime Environment (build 17.0.13+11-Ubuntu-2ubuntu124.04)
 OpenJDK 64-Bit Server VM (build 17.0.13+11-Ubuntu-2ubuntu124.04, mixed mode, sharing)
-> Task :compileJava NO-SOURCE
-> Task :processResources NO-SOURCE
-> Task :classes UP-TO-DATE
-> Task :jar UP-TO-DATE
-> Task :startScripts UP-TO-DATE
-> Task :distTar UP-TO-DATE
-> Task :distZip UP-TO-DATE
-> Task :assemble UP-TO-DATE
-> Task :compileTestJava NO-SOURCE
-> Task :processTestResources NO-SOURCE
-> Task :testClasses UP-TO-DATE
-> Task :test NO-SOURCE
-> Task :check UP-TO-DATE
-> Task :build UP-TO-DATE
+Initialized native services in: /home/red1/.gradle/native
+Initialized jansi services in: /home/red1/.gradle/native
+Received JVM installation metadata from '/usr/lib/jvm/java-17-openjdk-amd64': {JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64, JAVA_VERSION=17.0.13, JAVA_VENDOR=Ubuntu, RUNTIME_NAME=OpenJDK Runtime Environment, RUNTIME_VERSION=17.0.13+11-Ubuntu-2ubuntu124.04, VM_NAME=OpenJDK 64-Bit Server VM, VM_VERSION=17.0.13+11-Ubuntu-2ubuntu124.04, VM_VENDOR=Ubuntu, OS_ARCH=amd64}
+Found daemon DaemonInfo{pid=313206, address=[b2f0b6f6-d664-4537-a566-92feb843cd72 port:37125, addresses:[/127.0.0.1]], state=Idle, lastBusy=1733265033490, context=DefaultDaemonContext[uid=dc226423-0b6e-429e-87b7-96a262083825,javaHome=/home/red1/.vscode/extensions/redhat.java-1.37.0-linux-x64/jre/17.0.13-linux-x86_64,daemonRegistryDir=/home/red1/.gradle/daemon,pid=313206,idleTimeout=10800000,priority=NORMAL,applyInstrumentationAgent=true,daemonOpts=--add-opens=java.base/java.util=ALL-UNNAMED,--add-opens=java.base/java.lang=ALL-UNNAMED,--add-opens=java.base/java.lang.invoke=ALL-UNNAMED,--add-opens=java.prefs/java.util.prefs=ALL-UNNAMED,--add-opens=java.base/java.nio.charset=ALL-UNNAMED,--add-opens=java.base/java.net=ALL-UNNAMED,--add-opens=java.base/java.util.concurrent.atomic=ALL-UNNAMED,-XX:MaxMetaspaceSize=384m,-XX:+HeapDumpOnOutOfMemoryError,-Xms256m,-Xmx512m,-Dfile.encoding=UTF-8,-Duser.country=US,-Duser.language=en,-Duser.variant]} however its context does not match the desired criteria.
+Java home is different.
+Wanted: DefaultDaemonContext[uid=null,javaHome=/usr/lib/jvm/java-17-openjdk-amd64,daemonRegistryDir=/home/red1/.gradle/daemon,pid=419757,idleTimeout=null,priority=NORMAL,applyInstrumentationAgent=true,daemonOpts=--add-opens=java.base/java.util=ALL-UNNAMED,--add-opens=java.base/java.lang=ALL-UNNAMED,--add-opens=java.base/java.lang.invoke=ALL-UNNAMED,--add-opens=java.prefs/java.util.prefs=ALL-UNNAMED,--add-opens=java.base/java.nio.charset=ALL-UNNAMED,--add-opens=java.base/java.net=ALL-UNNAMED,--add-opens=java.base/java.util.concurrent.atomic=ALL-UNNAMED,-XX:MaxMetaspaceSize=384m,-XX:+HeapDumpOnOutOfMemoryError,-Xms256m,-Xmx512m,-Dfile.encoding=UTF-8,-Duser.country=US,-Duser.language=en,-Duser.variant]
+Actual: DefaultDaemonContext[uid=dc226423-0b6e-429e-87b7-96a262083825,javaHome=/home/red1/.vscode/extensions/redhat.java-1.37.0-linux-x64/jre/17.0.13-linux-x86_64,daemonRegistryDir=/home/red1/.gradle/daemon,pid=313206,idleTimeout=10800000,priority=NORMAL,applyInstrumentationAgent=true,daemonOpts=--add-opens=java.base/java.util=ALL-UNNAMED,--add-opens=java.base/java.lang=ALL-UNNAMED,--add-opens=java.base/java.lang.invoke=ALL-UNNAMED,--add-opens=java.prefs/java.util.prefs=ALL-UNNAMED,--add-opens=java.base/java.nio.charset=ALL-UNNAMED,--add-opens=java.base/java.net=ALL-UNNAMED,--add-opens=java.base/java.util.concurrent.atomic=ALL-UNNAMED,-XX:MaxMetaspaceSize=384m,-XX:+HeapDumpOnOutOfMemoryError,-Xms256m,-Xmx512m,-Dfile.encoding=UTF-8,-Duser.country=US,-Duser.language=en,-Duser.variant]
+
+  Looking for a different daemon...
+Found daemon DaemonInfo{pid=313877, address=[28e58725-bc1f-4628-b052-ccf9d76bdeae port:36905, addresses:[/127.0.0.1]], state=Idle, lastBusy=1733265022413, context=DefaultDaemonContext[uid=fec7af81-8c1f-4d3f-9546-e51ce38c4b0d,javaHome=/usr/lib/jvm/java-21-openjdk-amd64,daemonRegistryDir=/home/red1/.gradle/daemon,pid=313877,idleTimeout=10800000,priority=NORMAL,applyInstrumentationAgent=true,daemonOpts=--add-opens=java.base/java.util=ALL-UNNAMED,--add-opens=java.base/java.lang=ALL-UNNAMED,--add-opens=java.base/java.lang.invoke=ALL-UNNAMED,--add-opens=java.prefs/java.util.prefs=ALL-UNNAMED,--add-opens=java.base/java.nio.charset=ALL-UNNAMED,--add-opens=java.base/java.net=ALL-UNNAMED,--add-opens=java.base/java.util.concurrent.atomic=ALL-UNNAMED,-Dfile.encoding=UTF-8,-Duser.country=US,-Duser.language=en,-Duser.variant]} however its context does not match the desired criteria.
+Java home is different.
+Wanted: DefaultDaemonContext[uid=null,javaHome=/usr/lib/jvm/java-17-openjdk-amd64,daemonRegistryDir=/home/red1/.gradle/daemon,pid=419757,idleTimeout=null,priority=NORMAL,applyInstrumentationAgent=true,daemonOpts=--add-opens=java.base/java.util=ALL-UNNAMED,--add-opens=java.base/java.lang=ALL-UNNAMED,--add-opens=java.base/java.lang.invoke=ALL-UNNAMED,--add-opens=java.prefs/java.util.prefs=ALL-UNNAMED,--add-opens=java.base/java.nio.charset=ALL-UNNAMED,--add-opens=java.base/java.net=ALL-UNNAMED,--add-opens=java.base/java.util.concurrent.atomic=ALL-UNNAMED,-XX:MaxMetaspaceSize=384m,-XX:+HeapDumpOnOutOfMemoryError,-Xms256m,-Xmx512m,-Dfile.encoding=UTF-8,-Duser.country=US,-Duser.language=en,-Duser.variant]
+Actual: DefaultDaemonContext[uid=fec7af81-8c1f-4d3f-9546-e51ce38c4b0d,javaHome=/usr/lib/jvm/java-21-openjdk-amd64,daemonRegistryDir=/home/red1/.gradle/daemon,pid=313877,idleTimeout=10800000,priority=NORMAL,applyInstrumentationAgent=true,daemonOpts=--add-opens=java.base/java.util=ALL-UNNAMED,--add-opens=java.base/java.lang=ALL-UNNAMED,--add-opens=java.base/java.lang.invoke=ALL-UNNAMED,--add-opens=java.prefs/java.util.prefs=ALL-UNNAMED,--add-opens=java.base/java.nio.charset=ALL-UNNAMED,--add-opens=java.base/java.net=ALL-UNNAMED,--add-opens=java.base/java.util.concurrent.atomic=ALL-UNNAMED,-Dfile.encoding=UTF-8,-Duser.country=US,-Duser.language=en,-Duser.variant]
+
+  Looking for a different daemon...
+The client will now receive all logging from the daemon (pid: 343947). The daemon log file: /home/red1/.gradle/daemon/8.5/daemon-343947.out.log
+Starting 27th build in daemon [uptime: 3 hrs 24 mins 47.705 secs, performance: 100%, GC rate: 0.00/s, heap usage: 8% of 512 MiB, non-heap usage: 23% of 384 MiB]
+Using 8 worker leases.
+Now considering [/home/red1/Projects/blackerp] as hierarchies to watch
+Watching the file system is configured to be enabled if available
+File system watching is active
+Starting Build
+Settings evaluated using settings file '/home/red1/Projects/blackerp/settings.gradle.kts'.
+Projects loaded. Root project using build file '/home/red1/Projects/blackerp/build.gradle.kts'.
+Included projects: [root project 'blackerp', project ':application', project ':domain', project ':infrastructure']
+
+> Configure project :
+Evaluating root project 'blackerp' using build file '/home/red1/Projects/blackerp/build.gradle.kts'.
+Caching disabled for Kotlin DSL accessors for root project 'blackerp' because:
+  Build cache is disabled
+Skipping Kotlin DSL accessors for root project 'blackerp' as it is up-to-date.
+Using Kotlin Gradle Plugin gradle81 variant
+kotlin scripting plugin: created the scripting discovery configuration: kotlinScriptDef
+kotlin scripting plugin: created the scripting discovery configuration: testKotlinScriptDef
+Applying dependency management to configuration 'annotationProcessor' in project 'application'
+Applying dependency management to configuration 'api' in project 'application'
+Applying dependency management to configuration 'apiDependenciesMetadata' in project 'application'
+Applying dependency management to configuration 'apiElements' in project 'application'
+Applying dependency management to configuration 'archives' in project 'application'
+Applying dependency management to configuration 'bootArchives' in project 'application'
+Applying dependency management to configuration 'compileClasspath' in project 'application'
+Applying dependency management to configuration 'compileOnly' in project 'application'
+Applying dependency management to configuration 'compileOnlyDependenciesMetadata' in project 'application'
+Applying dependency management to configuration 'default' in project 'application'
+Applying dependency management to configuration 'developmentOnly' in project 'application'
+Applying dependency management to configuration 'implementation' in project 'application'
+Applying dependency management to configuration 'implementationDependenciesMetadata' in project 'application'
+Applying dependency management to configuration 'intransitiveDependenciesMetadata' in project 'application'
+Applying dependency management to configuration 'kotlinBuildToolsApiClasspath' in project 'application'
+Applying dependency management to configuration 'kotlinCompilerClasspath' in project 'application'
+Applying dependency management to configuration 'kotlinCompilerPluginClasspath' in project 'application'
+Applying dependency management to configuration 'kotlinCompilerPluginClasspathMain' in project 'application'
+Applying dependency management to configuration 'kotlinCompilerPluginClasspathTest' in project 'application'
+Applying dependency management to configuration 'kotlinKlibCommonizerClasspath' in project 'application'
+Applying dependency management to configuration 'kotlinNativeCompilerPluginClasspath' in project 'application'
+Applying dependency management to configuration 'kotlinScriptDef' in project 'application'
+Applying dependency management to configuration 'kotlinScriptDefExtensions' in project 'application'
+Applying dependency management to configuration 'mainSourceElements' in project 'application'
+Applying dependency management to configuration 'productionRuntimeClasspath' in project 'application'
+Applying dependency management to configuration 'runtimeClasspath' in project 'application'
+Applying dependency management to configuration 'runtimeElements' in project 'application'
+Applying dependency management to configuration 'runtimeOnly' in project 'application'
+Applying dependency management to configuration 'testAndDevelopmentOnly' in project 'application'
+Applying dependency management to configuration 'testAnnotationProcessor' in project 'application'
+Applying dependency management to configuration 'testApi' in project 'application'
+Applying dependency management to configuration 'testApiDependenciesMetadata' in project 'application'
+Applying dependency management to configuration 'testCompileClasspath' in project 'application'
+Applying dependency management to configuration 'testCompileOnly' in project 'application'
+Applying dependency management to configuration 'testCompileOnlyDependenciesMetadata' in project 'application'
+Applying dependency management to configuration 'testImplementation' in project 'application'
+Applying dependency management to configuration 'testImplementationDependenciesMetadata' in project 'application'
+Applying dependency management to configuration 'testIntransitiveDependenciesMetadata' in project 'application'
+Applying dependency management to configuration 'testKotlinScriptDef' in project 'application'
+Applying dependency management to configuration 'testKotlinScriptDefExtensions' in project 'application'
+Applying dependency management to configuration 'testResultsElementsForTest' in project 'application'
+Applying dependency management to configuration 'testRuntimeClasspath' in project 'application'
+Applying dependency management to configuration 'testRuntimeOnly' in project 'application'
+Using Kotlin Gradle Plugin gradle81 variant
+kotlin scripting plugin: created the scripting discovery configuration: kotlinScriptDef
+kotlin scripting plugin: created the scripting discovery configuration: testKotlinScriptDef
+Applying dependency management to configuration 'annotationProcessor' in project 'domain'
+Applying dependency management to configuration 'api' in project 'domain'
+Applying dependency management to configuration 'apiDependenciesMetadata' in project 'domain'
+Applying dependency management to configuration 'apiElements' in project 'domain'
+Applying dependency management to configuration 'archives' in project 'domain'
+Applying dependency management to configuration 'bootArchives' in project 'domain'
+Applying dependency management to configuration 'compileClasspath' in project 'domain'
+Applying dependency management to configuration 'compileOnly' in project 'domain'
+Applying dependency management to configuration 'compileOnlyDependenciesMetadata' in project 'domain'
+Applying dependency management to configuration 'default' in project 'domain'
+Applying dependency management to configuration 'developmentOnly' in project 'domain'
+Applying dependency management to configuration 'implementation' in project 'domain'
+Applying dependency management to configuration 'implementationDependenciesMetadata' in project 'domain'
+Applying dependency management to configuration 'intransitiveDependenciesMetadata' in project 'domain'
+Applying dependency management to configuration 'kotlinBuildToolsApiClasspath' in project 'domain'
+Applying dependency management to configuration 'kotlinCompilerClasspath' in project 'domain'
+Applying dependency management to configuration 'kotlinCompilerPluginClasspath' in project 'domain'
+Applying dependency management to configuration 'kotlinCompilerPluginClasspathMain' in project 'domain'
+Applying dependency management to configuration 'kotlinCompilerPluginClasspathTest' in project 'domain'
+Applying dependency management to configuration 'kotlinKlibCommonizerClasspath' in project 'domain'
+Applying dependency management to configuration 'kotlinNativeCompilerPluginClasspath' in project 'domain'
+Applying dependency management to configuration 'kotlinScriptDef' in project 'domain'
+Applying dependency management to configuration 'kotlinScriptDefExtensions' in project 'domain'
+Applying dependency management to configuration 'mainSourceElements' in project 'domain'
+Applying dependency management to configuration 'productionRuntimeClasspath' in project 'domain'
+Applying dependency management to configuration 'runtimeClasspath' in project 'domain'
+Applying dependency management to configuration 'runtimeElements' in project 'domain'
+Applying dependency management to configuration 'runtimeOnly' in project 'domain'
+Applying dependency management to configuration 'testAndDevelopmentOnly' in project 'domain'
+Applying dependency management to configuration 'testAnnotationProcessor' in project 'domain'
+Applying dependency management to configuration 'testApi' in project 'domain'
+Applying dependency management to configuration 'testApiDependenciesMetadata' in project 'domain'
+Applying dependency management to configuration 'testCompileClasspath' in project 'domain'
+Applying dependency management to configuration 'testCompileOnly' in project 'domain'
+Applying dependency management to configuration 'testCompileOnlyDependenciesMetadata' in project 'domain'
+Applying dependency management to configuration 'testImplementation' in project 'domain'
+Applying dependency management to configuration 'testImplementationDependenciesMetadata' in project 'domain'
+Applying dependency management to configuration 'testIntransitiveDependenciesMetadata' in project 'domain'
+Applying dependency management to configuration 'testKotlinScriptDef' in project 'domain'
+Applying dependency management to configuration 'testKotlinScriptDefExtensions' in project 'domain'
+Applying dependency management to configuration 'testResultsElementsForTest' in project 'domain'
+Applying dependency management to configuration 'testRuntimeClasspath' in project 'domain'
+Applying dependency management to configuration 'testRuntimeOnly' in project 'domain'
+Using Kotlin Gradle Plugin gradle81 variant
+kotlin scripting plugin: created the scripting discovery configuration: kotlinScriptDef
+kotlin scripting plugin: created the scripting discovery configuration: testKotlinScriptDef
+Applying dependency management to configuration 'annotationProcessor' in project 'infrastructure'
+Applying dependency management to configuration 'api' in project 'infrastructure'
+Applying dependency management to configuration 'apiDependenciesMetadata' in project 'infrastructure'
+Applying dependency management to configuration 'apiElements' in project 'infrastructure'
+Applying dependency management to configuration 'archives' in project 'infrastructure'
+Applying dependency management to configuration 'bootArchives' in project 'infrastructure'
+Applying dependency management to configuration 'compileClasspath' in project 'infrastructure'
+Applying dependency management to configuration 'compileOnly' in project 'infrastructure'
+Applying dependency management to configuration 'compileOnlyDependenciesMetadata' in project 'infrastructure'
+Applying dependency management to configuration 'default' in project 'infrastructure'
+Applying dependency management to configuration 'developmentOnly' in project 'infrastructure'
+Applying dependency management to configuration 'implementation' in project 'infrastructure'
+Applying dependency management to configuration 'implementationDependenciesMetadata' in project 'infrastructure'
+Applying dependency management to configuration 'intransitiveDependenciesMetadata' in project 'infrastructure'
+Applying dependency management to configuration 'kotlinBuildToolsApiClasspath' in project 'infrastructure'
+Applying dependency management to configuration 'kotlinCompilerClasspath' in project 'infrastructure'
+Applying dependency management to configuration 'kotlinCompilerPluginClasspath' in project 'infrastructure'
+Applying dependency management to configuration 'kotlinCompilerPluginClasspathMain' in project 'infrastructure'
+Applying dependency management to configuration 'kotlinCompilerPluginClasspathTest' in project 'infrastructure'
+Applying dependency management to configuration 'kotlinKlibCommonizerClasspath' in project 'infrastructure'
+Applying dependency management to configuration 'kotlinNativeCompilerPluginClasspath' in project 'infrastructure'
+Applying dependency management to configuration 'kotlinScriptDef' in project 'infrastructure'
+Applying dependency management to configuration 'kotlinScriptDefExtensions' in project 'infrastructure'
+Applying dependency management to configuration 'mainSourceElements' in project 'infrastructure'
+Applying dependency management to configuration 'productionRuntimeClasspath' in project 'infrastructure'
+Applying dependency management to configuration 'runtimeClasspath' in project 'infrastructure'
+Applying dependency management to configuration 'runtimeElements' in project 'infrastructure'
+Applying dependency management to configuration 'runtimeOnly' in project 'infrastructure'
+Applying dependency management to configuration 'testAndDevelopmentOnly' in project 'infrastructure'
+Applying dependency management to configuration 'testAnnotationProcessor' in project 'infrastructure'
+Applying dependency management to configuration 'testApi' in project 'infrastructure'
+Applying dependency management to configuration 'testApiDependenciesMetadata' in project 'infrastructure'
+Applying dependency management to configuration 'testCompileClasspath' in project 'infrastructure'
+Applying dependency management to configuration 'testCompileOnly' in project 'infrastructure'
+Applying dependency management to configuration 'testCompileOnlyDependenciesMetadata' in project 'infrastructure'
+Applying dependency management to configuration 'testImplementation' in project 'infrastructure'
+Applying dependency management to configuration 'testImplementationDependenciesMetadata' in project 'infrastructure'
+Applying dependency management to configuration 'testIntransitiveDependenciesMetadata' in project 'infrastructure'
+Applying dependency management to configuration 'testKotlinScriptDef' in project 'infrastructure'
+Applying dependency management to configuration 'testKotlinScriptDefExtensions' in project 'infrastructure'
+Applying dependency management to configuration 'testResultsElementsForTest' in project 'infrastructure'
+Applying dependency management to configuration 'testRuntimeClasspath' in project 'infrastructure'
+Applying dependency management to configuration 'testRuntimeOnly' in project 'infrastructure'
+
+> Configure project :application
+Evaluating project ':application' using build file '/home/red1/Projects/blackerp/application/build.gradle.kts'.
+Caching disabled for Kotlin DSL accessors for project ':application' because:
+  Build cache is disabled
+Skipping Kotlin DSL accessors for project ':application' as it is up-to-date.
+Applying dependency management to configuration 'apiElements-published' in project 'application'
+Applying dependency management to configuration 'runtimeElements-published' in project 'application'
+
+> Configure project :domain
+Evaluating project ':domain' using build file '/home/red1/Projects/blackerp/domain/build.gradle.kts'.
+Caching disabled for Kotlin DSL accessors for project ':domain' because:
+  Build cache is disabled
+Skipping Kotlin DSL accessors for project ':domain' as it is up-to-date.
+Applying dependency management to configuration 'apiElements-published' in project 'domain'
+Applying dependency management to configuration 'runtimeElements-published' in project 'domain'
+
+> Configure project :infrastructure
+Evaluating project ':infrastructure' using build file '/home/red1/Projects/blackerp/infrastructure/build.gradle.kts'.
+Caching disabled for Kotlin DSL accessors for project ':infrastructure' because:
+  Build cache is disabled
+Skipping Kotlin DSL accessors for project ':infrastructure' as it is up-to-date.
+Applying dependency management to configuration 'apiElements-published' in project 'infrastructure'
+Applying dependency management to configuration 'runtimeElements-published' in project 'infrastructure'
+All projects evaluated.
+Task name matched 'clean'
+Task name matched 'build'
+Selected primary task 'clean' from project :
+Selected primary task 'build' from project :
+Tasks to be executed: [task ':application:clean', task ':domain:clean', task ':infrastructure:clean', task ':application:checkKotlinGradlePluginConfigurationErrors', task ':domain:checkKotlinGradlePluginConfigurationErrors', task ':domain:compileKotlin', task ':domain:compileJava', task ':domain:processResources', task ':domain:classes', task ':domain:jar', task ':application:compileKotlin', task ':application:compileJava', task ':application:processResources', task ':application:classes', task ':application:resolveMainClassName', task ':application:bootJar', task ':application:jar', task ':application:assemble', task ':application:compileTestKotlin', task ':application:compileTestJava', task ':application:processTestResources', task ':application:testClasses', task ':application:test', task ':application:check', task ':application:build', task ':domain:resolveMainClassName', task ':domain:bootJar', task ':domain:assemble', task ':domain:compileTestKotlin', task ':domain:compileTestJava', task ':domain:processTestResources', task ':domain:testClasses', task ':domain:test', task ':domain:check', task ':domain:build', task ':infrastructure:checkKotlinGradlePluginConfigurationErrors', task ':infrastructure:compileKotlin', task ':infrastructure:compileJava', task ':infrastructure:processResources', task ':infrastructure:classes', task ':infrastructure:resolveMainClassName', task ':infrastructure:bootJar', task ':infrastructure:jar', task ':infrastructure:assemble', task ':infrastructure:compileTestKotlin', task ':infrastructure:compileTestJava', task ':infrastructure:processTestResources', task ':infrastructure:testClasses', task ':infrastructure:test', task ':infrastructure:check', task ':infrastructure:build']
+Tasks that were excluded: []
+Resolve mutations for :application:clean (Thread[Execution worker,5,main]) started.
+:application:clean (Thread[Execution worker Thread 7,5,main]) started.
+
+> Task :application:clean UP-TO-DATE
+Caching disabled for task ':application:clean' because:
+  Build cache is disabled
+Task ':application:clean' is not up-to-date because:
+  Task has not declared any outputs despite executing actions.
+Resolve mutations for :domain:clean (Thread[Execution worker Thread 7,5,main]) started.
+:domain:clean (Thread[Execution worker Thread 7,5,main]) started.
+
+> Task :domain:clean
+Caching disabled for task ':domain:clean' because:
+  Build cache is disabled
+Task ':domain:clean' is not up-to-date because:
+  Task has not declared any outputs despite executing actions.
+Resolve mutations for :infrastructure:clean (Thread[Execution worker,5,main]) started.
+:infrastructure:clean (Thread[Execution worker,5,main]) started.
+destroyer locations for task group 0 (Thread[Execution worker Thread 2,5,main]) started.
+
+> Task :infrastructure:clean UP-TO-DATE
+Caching disabled for task ':infrastructure:clean' because:
+  Build cache is disabled
+Task ':infrastructure:clean' is not up-to-date because:
+  Task has not declared any outputs despite executing actions.
+Resolve mutations for :application:checkKotlinGradlePluginConfigurationErrors (Thread[Execution worker,5,main]) started.
+:application:checkKotlinGradlePluginConfigurationErrors (Thread[Execution worker,5,main]) started.
+
 > Task :application:checkKotlinGradlePluginConfigurationErrors
+Caching disabled for task ':application:checkKotlinGradlePluginConfigurationErrors' because:
+  Build cache is disabled
+Task ':application:checkKotlinGradlePluginConfigurationErrors' is not up-to-date because:
+  Task has not declared any outputs despite executing actions.
+Resolve mutations for :domain:checkKotlinGradlePluginConfigurationErrors (Thread[Execution worker Thread 7,5,main]) started.
+:domain:checkKotlinGradlePluginConfigurationErrors (Thread[Execution worker Thread 7,5,main]) started.
+
 > Task :domain:checkKotlinGradlePluginConfigurationErrors
+Caching disabled for task ':domain:checkKotlinGradlePluginConfigurationErrors' because:
+  Build cache is disabled
+Task ':domain:checkKotlinGradlePluginConfigurationErrors' is not up-to-date because:
+  Task has not declared any outputs despite executing actions.
+Resolve mutations for :domain:compileKotlin (Thread[Execution worker Thread 7,5,main]) started.
+:domain:compileKotlin (Thread[Execution worker Thread 7,5,main]) started.
+Resolve mutations for :domain:processResources (Thread[Execution worker,5,main]) started.
+:domain:processResources (Thread[Execution worker,5,main]) started.
+
 > Task :domain:processResources NO-SOURCE
+Skipping task ':domain:processResources' as it has no source files and no previous output files.
+Resolve mutations for :application:processResources (Thread[Execution worker,5,main]) started.
+:application:processResources (Thread[Execution worker,5,main]) started.
+
 > Task :application:processResources NO-SOURCE
+Skipping task ':application:processResources' as it has no source files and no previous output files.
+Resolve mutations for :application:processTestResources (Thread[Execution worker,5,main]) started.
+:application:processTestResources (Thread[Execution worker,5,main]) started.
+
 > Task :application:processTestResources NO-SOURCE
+Skipping task ':application:processTestResources' as it has no source files and no previous output files.
+Resolve mutations for :domain:processTestResources (Thread[Execution worker,5,main]) started.
+:domain:processTestResources (Thread[Execution worker,5,main]) started.
+
 > Task :domain:processTestResources NO-SOURCE
+Skipping task ':domain:processTestResources' as it has no source files and no previous output files.
+Resolve mutations for :infrastructure:checkKotlinGradlePluginConfigurationErrors (Thread[Execution worker,5,main]) started.
+:infrastructure:checkKotlinGradlePluginConfigurationErrors (Thread[Execution worker,5,main]) started.
+
 > Task :infrastructure:checkKotlinGradlePluginConfigurationErrors
+Caching disabled for task ':infrastructure:checkKotlinGradlePluginConfigurationErrors' because:
+  Build cache is disabled
+Task ':infrastructure:checkKotlinGradlePluginConfigurationErrors' is not up-to-date because:
+  Task has not declared any outputs despite executing actions.
+Resolve mutations for :infrastructure:processResources (Thread[Execution worker,5,main]) started.
+:infrastructure:processResources (Thread[Execution worker,5,main]) started.
+
 > Task :infrastructure:processResources NO-SOURCE
+Skipping task ':infrastructure:processResources' as it has no source files and no previous output files.
+Resolve mutations for :infrastructure:processTestResources (Thread[Execution worker,5,main]) started.
+:infrastructure:processTestResources (Thread[Execution worker,5,main]) started.
+
 > Task :infrastructure:processTestResources NO-SOURCE
+Skipping task ':infrastructure:processTestResources' as it has no source files and no previous output files.
 
 > Task :domain:compileKotlin FAILED
-e: file:///home/red1/Projects/blackerp/domain/core/ad/base/ADModule.kt:6:33 Unresolved reference: EntityMetadata
-e: file:///home/red1/Projects/blackerp/domain/core/ad/base/ADModule.kt:7:36 Unresolved reference: value
-e: file:///home/red1/Projects/blackerp/domain/core/ad/base/ADModule.kt:10:33 Unresolved reference: shared
-e: file:///home/red1/Projects/blackerp/domain/core/ad/base/ADModule.kt:11:21 Unresolved reference: plugin
-e: file:///home/red1/Projects/blackerp/domain/core/ad/base/ADModule.kt:14:5 'metadata' overrides nothing
-e: file:///home/red1/Projects/blackerp/domain/core/ad/base/ADModule.kt:14:28 Unresolved reference: EntityMetadata
-e: file:///home/red1/Projects/blackerp/domain/core/ad/base/ADModule.kt:18:18 Unresolved reference: Version
-e: file:///home/red1/Projects/blackerp/domain/core/ad/base/ADModule.kt:21:56 Unresolved reference: ValidationError
-e: file:///home/red1/Projects/blackerp/domain/core/ad/base/ADModule.kt:33:19 Unresolved reference: EntityMetadata
-e: file:///home/red1/Projects/blackerp/domain/core/ad/base/ADModule.kt:37:18 Unresolved reference: Version
-e: file:///home/red1/Projects/blackerp/domain/core/ad/base/ADObject.kt:3:33 Unresolved reference: DomainEntity
-e: file:///home/red1/Projects/blackerp/domain/core/ad/base/ADObject.kt:7:22 Unresolved reference: DomainEntity
-e: file:///home/red1/Projects/blackerp/domain/core/ad/base/ModuleName.kt:6:33 Unresolved reference: shared
-e: file:///home/red1/Projects/blackerp/domain/core/ad/base/ModuleName.kt:11:43 Unresolved reference: ValidationError
-e: file:///home/red1/Projects/blackerp/domain/core/ad/base/ModuleName.kt:14:21 Unresolved reference: ValidationError
-e: file:///home/red1/Projects/blackerp/domain/core/ad/base/ModuleName.kt:18:21 Unresolved reference: ValidationError
-e: file:///home/red1/Projects/blackerp/domain/core/ad/document/Document.kt:3:33 Unresolved reference: EntityMetadata
-e: file:///home/red1/Projects/blackerp/domain/core/ad/document/Document.kt:4:36 Unresolved reference: ADObject
-e: file:///home/red1/Projects/blackerp/domain/core/ad/document/Document.kt:13:5 'metadata' overrides nothing
-e: file:///home/red1/Projects/blackerp/domain/core/ad/document/Document.kt:13:28 Unresolved reference: EntityMetadata
-e: file:///home/red1/Projects/blackerp/domain/core/ad/document/Document.kt:15:5 'displayName' overrides nothing
-e: file:///home/red1/Projects/blackerp/domain/core/ad/document/Document.kt:16:5 'description' overrides nothing
-e: file:///home/red1/Projects/blackerp/domain/core/ad/document/Document.kt:27:5 Unresolved reference: ADObject
-e: file:///home/red1/Projects/blackerp/domain/core/ad/document/Document.kt:29:28 Unresolved reference: CreateDocumentParams
-e: file:///home/red1/Projects/blackerp/domain/core/ad/document/Document.kt:29:58 Unresolved reference: DocumentError
-e: file:///home/red1/Projects/blackerp/domain/core/ad/document/Document.kt:43:12 Redeclaration: DocumentLine
-e: file:///home/red1/Projects/blackerp/domain/core/ad/document/Document.kt:51:12 Redeclaration: DocumentType
-e: file:///home/red1/Projects/blackerp/domain/core/ad/document/Document.kt:82:12 Redeclaration: DocumentStatus
-e: file:///home/red1/Projects/blackerp/domain/core/ad/document/DocumentOperations.kt:8:52 Unresolved reference: DocumentError
-e: file:///home/red1/Projects/blackerp/domain/core/ad/document/DocumentOperations.kt:9:62 Unresolved reference: DocumentError
-e: file:///home/red1/Projects/blackerp/domain/core/ad/document/DocumentOperations.kt:10:44 Unresolved reference: DocumentError
-e: file:///home/red1/Projects/blackerp/domain/core/ad/document/DocumentOperations.kt:12:42 Unresolved reference: DocumentError
-e: file:///home/red1/Projects/blackerp/domain/core/ad/document/DocumentOperations.kt:13:72 Unresolved reference: DocumentError
-e: file:///home/red1/Projects/blackerp/domain/core/ad/document/DocumentOperations.kt:14:63 Unresolved reference: DocumentError
-e: file:///home/red1/Projects/blackerp/domain/core/ad/document/DocumentOperations.kt:15:80 Unresolved reference: DocumentError
-e: file:///home/red1/Projects/blackerp/domain/core/ad/document/DocumentOperations.kt:16:60 Unresolved reference: DocumentError
-e: file:///home/red1/Projects/blackerp/domain/core/ad/document/DocumentOperations.kt:17:62 Unresolved reference: DocumentError
-e: file:///home/red1/Projects/blackerp/domain/core/ad/document/DocumentOperations.kt:31:15 Unresolved reference: Instant
-e: file:///home/red1/Projects/blackerp/domain/core/ad/document/DocumentOperations.kt:32:13 Unresolved reference: Instant
-e: file:///home/red1/Projects/blackerp/domain/core/ad/document/DocumentOperations.kt:41:20 Unresolved reference: Instant
-e: file:///home/red1/Projects/blackerp/domain/core/ad/document/DocumentOperations.kt:44:30 Unresolved reference: ChangePair
-e: file:///home/red1/Projects/blackerp/domain/core/ad/document/DocumentStatus.kt:3:12 Redeclaration: DocumentStatus
-e: file:///home/red1/Projects/blackerp/domain/core/ad/document/DocumentType.kt:5:12 Redeclaration: DocumentType
-e: file:///home/red1/Projects/blackerp/domain/core/ad/document/DocumentType.kt:13:12 Redeclaration: DocumentLine
-e: file:///home/red1/Projects/blackerp/domain/core/ad/process/ADProcess.kt:3:33 Unresolved reference: EntityMetadata
-e: file:///home/red1/Projects/blackerp/domain/core/ad/process/ADProcess.kt:4:36 Unresolved reference: ADObject
-e: file:///home/red1/Projects/blackerp/domain/core/ad/process/ADProcess.kt:12:5 'metadata' overrides nothing
-e: file:///home/red1/Projects/blackerp/domain/core/ad/process/ADProcess.kt:12:28 Unresolved reference: EntityMetadata
-e: file:///home/red1/Projects/blackerp/domain/core/ad/process/ADProcess.kt:14:5 'displayName' overrides nothing
-e: file:///home/red1/Projects/blackerp/domain/core/ad/process/ADProcess.kt:15:5 'description' overrides nothing
-e: file:///home/red1/Projects/blackerp/domain/core/ad/process/ADProcess.kt:23:5 Unresolved reference: ADObject
-e: file:///home/red1/Projects/blackerp/domain/core/ad/process/ADProcess.kt:25:28 Unresolved reference: CreateProcessParams
-e: file:///home/red1/Projects/blackerp/domain/core/ad/process/ADProcess.kt:76:18 Redeclaration: ProcessImplementation
-e: file:///home/red1/Projects/blackerp/domain/core/ad/process/ADProcess.kt:101:12 Redeclaration: ProcessSchedule
-e: file:///home/red1/Projects/blackerp/domain/core/ad/process/ProcessImplementation.kt:3:18 Redeclaration: ProcessImplementation
-e: file:///home/red1/Projects/blackerp/domain/core/ad/process/ProcessImplementation.kt:9:12 Redeclaration: ProcessSchedule
-e: file:///home/red1/Projects/blackerp/domain/core/ad/reference/ADReference.kt:5:33 Unresolved reference: EntityMetadata
-e: file:///home/red1/Projects/blackerp/domain/core/ad/reference/ADReference.kt:6:36 Unresolved reference: ADObject
-e: file:///home/red1/Projects/blackerp/domain/core/ad/reference/ADReference.kt:10:33 Unresolved reference: shared
-e: file:///home/red1/Projects/blackerp/domain/core/ad/reference/ADReference.kt:14:5 'metadata' overrides nothing
-e: file:///home/red1/Projects/blackerp/domain/core/ad/reference/ADReference.kt:14:28 Unresolved reference: EntityMetadata
-e: file:///home/red1/Projects/blackerp/domain/core/ad/reference/ADReference.kt:17:5 'displayName' overrides nothing
-e: file:///home/red1/Projects/blackerp/domain/core/ad/reference/ADReference.kt:18:5 'description' overrides nothing
-e: file:///home/red1/Projects/blackerp/domain/core/ad/reference/ADReference.kt:25:5 Unresolved reference: ADObject
-e: file:///home/red1/Projects/blackerp/domain/core/ad/reference/ADReference.kt:72:19 Unresolved reference: EntityMetadata
-e: file:///home/red1/Projects/blackerp/domain/core/ad/reference/ADReference.kt:84:50 Unresolved reference: ValidationError
-e: file:///home/red1/Projects/blackerp/domain/core/ad/reference/value/ReferenceName.kt:7:33 Unresolved reference: shared
-e: file:///home/red1/Projects/blackerp/domain/core/ad/reference/value/ReferenceName.kt:12:43 Unresolved reference: ValidationError
-e: file:///home/red1/Projects/blackerp/domain/core/ad/reference/value/ReferenceName.kt:15:21 Unresolved reference: ValidationError
-e: file:///home/red1/Projects/blackerp/domain/core/ad/reference/value/ReferenceName.kt:19:21 Unresolved reference: ValidationError
-e: file:///home/red1/Projects/blackerp/domain/core/ad/shared/values/ProcessName.kt:6:33 Unresolved reference: shared
-e: file:///home/red1/Projects/blackerp/domain/core/ad/shared/values/ProcessName.kt:11:43 Unresolved reference: ValidationError
-e: file:///home/red1/Projects/blackerp/domain/core/ad/shared/values/ProcessName.kt:13:17 Unresolved reference: ValidationError
-e: file:///home/red1/Projects/blackerp/domain/core/ad/shared/values/ProcessName.kt:15:17 Unresolved reference: ValidationError
-e: file:///home/red1/Projects/blackerp/domain/core/ad/tab/ADTab.kt:7:33 Unresolved reference: DomainEntity
-e: file:///home/red1/Projects/blackerp/domain/core/ad/tab/ADTab.kt:8:33 Unresolved reference: EntityMetadata
-e: file:///home/red1/Projects/blackerp/domain/core/ad/tab/ADTab.kt:9:36 Unresolved reference: ADObject
-e: file:///home/red1/Projects/blackerp/domain/core/ad/tab/ADTab.kt:12:42 Unresolved reference: ADTable
-e: file:///home/red1/Projects/blackerp/domain/core/ad/tab/ADTab.kt:13:33 Unresolved reference: shared
-e: file:///home/red1/Projects/blackerp/domain/core/ad/tab/ADTab.kt:16:5 'metadata' overrides nothing
-e: file:///home/red1/Projects/blackerp/domain/core/ad/tab/ADTab.kt:16:28 Unresolved reference: EntityMetadata
-e: file:///home/red1/Projects/blackerp/domain/core/ad/tab/ADTab.kt:18:5 'displayName' overrides nothing
-e: file:///home/red1/Projects/blackerp/domain/core/ad/tab/ADTab.kt:19:5 'description' overrides nothing
-e: file:///home/red1/Projects/blackerp/domain/core/ad/tab/ADTab.kt:20:16 Unresolved reference: ADTable
-e: file:///home/red1/Projects/blackerp/domain/core/ad/tab/ADTab.kt:24:5 Unresolved reference: ADObject
-e: file:///home/red1/Projects/blackerp/domain/core/ad/tab/ADTab.kt:27:40 Unresolved reference: ValidationError
-e: file:///home/red1/Projects/blackerp/domain/core/ad/tab/ADTab.kt:31:45 Unresolved reference: it
-e: file:///home/red1/Projects/blackerp/domain/core/ad/tab/ADTab.kt:34:28 Unresolved reference: ValidationError
-e: file:///home/red1/Projects/blackerp/domain/core/ad/tab/ADTab.kt:41:45 Unresolved reference: it
-e: file:///home/red1/Projects/blackerp/domain/core/ad/tab/ADTab.kt:44:28 Unresolved reference: ValidationError
-e: file:///home/red1/Projects/blackerp/domain/core/ad/tab/ADTab.kt:51:45 Unresolved reference: it
-e: file:///home/red1/Projects/blackerp/domain/core/ad/tab/ADTab.kt:54:28 Unresolved reference: ValidationError
-e: file:///home/red1/Projects/blackerp/domain/core/ad/tab/CreateTabParams.kt:4:33 Unresolved reference: EntityMetadata
-e: file:///home/red1/Projects/blackerp/domain/core/ad/tab/CreateTabParams.kt:5:42 Unresolved reference: ADTable
-e: file:///home/red1/Projects/blackerp/domain/core/ad/tab/CreateTabParams.kt:12:19 Unresolved reference: EntityMetadata
-e: file:///home/red1/Projects/blackerp/domain/core/ad/tab/CreateTabParams.kt:16:16 Unresolved reference: ADTable
-e: file:///home/red1/Projects/blackerp/domain/core/ad/tab/TabError.kt:4:28 Unresolved reference: DomainException
-e: file:///home/red1/Projects/blackerp/domain/core/ad/tab/TabError.kt:5:33 Unresolved reference: shared
-e: file:///home/red1/Projects/blackerp/domain/core/ad/tab/TabError.kt:7:42 Unresolved reference: DomainException
-e: file:///home/red1/Projects/blackerp/domain/core/ad/tab/TabError.kt:8:50 Unresolved reference: ValidationError
-e: file:///home/red1/Projects/blackerp/domain/core/ad/tab/value/TabName.kt:7:33 Unresolved reference: shared
-e: file:///home/red1/Projects/blackerp/domain/core/ad/tab/value/TabName.kt:12:43 Unresolved reference: ValidationError
-e: file:///home/red1/Projects/blackerp/domain/core/ad/tab/value/TabName.kt:15:21 Unresolved reference: ValidationError
-e: file:///home/red1/Projects/blackerp/domain/core/ad/tab/value/TabName.kt:19:21 Unresolved reference: ValidationError
-e: file:///home/red1/Projects/blackerp/domain/core/ad/window/WindowName.kt:7:33 Unresolved reference: shared
-e: file:///home/red1/Projects/blackerp/domain/core/ad/window/WindowName.kt:12:43 Unresolved reference: ValidationError
-e: file:///home/red1/Projects/blackerp/domain/core/ad/window/WindowName.kt:15:21 Unresolved reference: ValidationError
-e: file:///home/red1/Projects/blackerp/domain/core/ad/window/WindowName.kt:19:21 Unresolved reference: ValidationError
-e: file:///home/red1/Projects/blackerp/domain/core/ad/workflow/NodeAction.kt:4:39 Unresolved reference: UUID
-e: file:///home/red1/Projects/blackerp/domain/core/ad/workflow/NodeAction.kt:5:37 Unresolved reference: UUID
-e: file:///home/red1/Projects/blackerp/domain/core/ad/workflow/WorkflowNode.kt:3:33 Unresolved reference: EntityMetadata
-e: file:///home/red1/Projects/blackerp/domain/core/ad/workflow/WorkflowNode.kt:4:36 Unresolved reference: ADObject
-e: file:///home/red1/Projects/blackerp/domain/core/ad/workflow/WorkflowNode.kt:12:5 'metadata' overrides nothing
-e: file:///home/red1/Projects/blackerp/domain/core/ad/workflow/WorkflowNode.kt:12:28 Unresolved reference: EntityMetadata
-e: file:///home/red1/Projects/blackerp/domain/core/ad/workflow/WorkflowNode.kt:14:5 'displayName' overrides nothing
-e: file:///home/red1/Projects/blackerp/domain/core/ad/workflow/WorkflowNode.kt:15:5 'description' overrides nothing
-e: file:///home/red1/Projects/blackerp/domain/core/ad/workflow/WorkflowNode.kt:19:5 Unresolved reference: ADObject
-e: file:///home/red1/Projects/blackerp/domain/core/ad/workflow/WorkflowNode.kt:21:28 Unresolved reference: CreateNodeParams
-e: file:///home/red1/Projects/blackerp/domain/core/ad/workflow/WorkflowNode.kt:21:54 Unresolved reference: WorkflowError
-e: file:///home/red1/Projects/blackerp/domain/core/ad/workflow/WorkflowOperations.kt:7:50 Unresolved reference: WorkflowError
-e: file:///home/red1/Projects/blackerp/domain/core/ad/workflow/WorkflowOperations.kt:8:44 Unresolved reference: WorkflowError
-e: file:///home/red1/Projects/blackerp/domain/core/ad/workflow/WorkflowOperations.kt:9:42 Unresolved reference: WorkflowError
-e: file:///home/red1/Projects/blackerp/domain/core/ad/workflow/WorkflowOperations.kt:10:69 Unresolved reference: WorkflowError
-e: file:///home/red1/Projects/blackerp/domain/core/error/PluginError.kt:4:33 Unresolved reference: shared
-e: file:///home/red1/Projects/blackerp/domain/core/error/PluginError.kt:8:50 Unresolved reference: ValidationError
-e: file:///home/red1/Projects/blackerp/domain/core/values/Amount.kt:6:33 Unresolved reference: shared
-e: file:///home/red1/Projects/blackerp/domain/core/values/Amount.kt:12:47 Unresolved reference: ValidationError
-e: file:///home/red1/Projects/blackerp/domain/core/values/Amount.kt:15:21 Unresolved reference: ValidationError
-e: file:///home/red1/Projects/blackerp/domain/core/values/ColumnName.kt:7:33 Unresolved reference: shared
-e: file:///home/red1/Projects/blackerp/domain/core/values/ColumnName.kt:12:43 Unresolved reference: ValidationError
-e: file:///home/red1/Projects/blackerp/domain/core/values/ColumnName.kt:15:21 Unresolved reference: ValidationError
-e: file:///home/red1/Projects/blackerp/domain/core/values/ColumnName.kt:17:21 Unresolved reference: ValidationError
-e: file:///home/red1/Projects/blackerp/domain/core/values/Currency.kt:6:33 Unresolved reference: shared
-e: file:///home/red1/Projects/blackerp/domain/core/values/Currency.kt:11:42 Unresolved reference: ValidationError
-e: file:///home/red1/Projects/blackerp/domain/core/values/Currency.kt:14:21 Unresolved reference: ValidationError
-e: file:///home/red1/Projects/blackerp/domain/core/values/Description.kt:6:33 Unresolved reference: shared
-e: file:///home/red1/Projects/blackerp/domain/core/values/Description.kt:11:43 Unresolved reference: ValidationError
-e: file:///home/red1/Projects/blackerp/domain/core/values/Description.kt:14:21 Unresolved reference: ValidationError
-e: file:///home/red1/Projects/blackerp/domain/core/values/DisplayName.kt:6:33 Unresolved reference: shared
-e: file:///home/red1/Projects/blackerp/domain/core/values/DisplayName.kt:11:43 Unresolved reference: ValidationError
-e: file:///home/red1/Projects/blackerp/domain/core/values/DisplayName.kt:14:21 Unresolved reference: ValidationError
-e: file:///home/red1/Projects/blackerp/domain/core/values/DisplayName.kt:16:21 Unresolved reference: ValidationError
-e: file:///home/red1/Projects/blackerp/domain/core/values/Length.kt:7:33 Unresolved reference: shared
-e: file:///home/red1/Projects/blackerp/domain/core/values/Length.kt:12:40 Unresolved reference: ValidationError
-e: file:///home/red1/Projects/blackerp/domain/core/values/Length.kt:15:21 Unresolved reference: ValidationError
-e: file:///home/red1/Projects/blackerp/domain/core/values/Precision.kt:7:33 Unresolved reference: shared
-e: file:///home/red1/Projects/blackerp/domain/core/values/Precision.kt:12:40 Unresolved reference: ValidationError
-e: file:///home/red1/Projects/blackerp/domain/core/values/Precision.kt:15:21 Unresolved reference: ValidationError
-e: file:///home/red1/Projects/blackerp/domain/core/values/Precision.kt:17:21 Unresolved reference: ValidationError
-e: file:///home/red1/Projects/blackerp/domain/core/values/Scale.kt:7:33 Unresolved reference: shared
-e: file:///home/red1/Projects/blackerp/domain/core/values/Scale.kt:12:40 Unresolved reference: ValidationError
-e: file:///home/red1/Projects/blackerp/domain/core/values/Scale.kt:15:21 Unresolved reference: ValidationError
-e: file:///home/red1/Projects/blackerp/domain/core/values/Scale.kt:17:21 Unresolved reference: ValidationError
-e: file:///home/red1/Projects/blackerp/domain/core/values/TableName.kt:6:33 Unresolved reference: shared
-e: file:///home/red1/Projects/blackerp/domain/core/values/TableName.kt:11:43 Unresolved reference: ValidationError
-e: file:///home/red1/Projects/blackerp/domain/core/values/TableName.kt:14:21 Unresolved reference: ValidationError
-e: file:///home/red1/Projects/blackerp/domain/events/ConstraintEvents.kt:7:10 Class 'ConstraintCreated' is not abstract and does not implement abstract base class member public abstract val entityId: UUID defined in org.blackerp.domain.events.ConstraintEvent
-e: file:///home/red1/Projects/blackerp/domain/events/ConstraintEvents.kt:17:10 Class 'ConstraintModified' is not abstract and does not implement abstract base class member public abstract val entityId: UUID defined in org.blackerp.domain.events.ConstraintEvent
-e: file:///home/red1/Projects/blackerp/domain/events/ConstraintEvents.kt:28:10 Class 'ConstraintDeleted' is not abstract and does not implement abstract base class member public abstract val entityId: UUID defined in org.blackerp.domain.events.ConstraintEvent
-e: file:///home/red1/Projects/blackerp/domain/events/ConstraintEvents.kt:35:10 Class 'ConstraintViolated' is not abstract and does not implement abstract base class member public abstract val entityId: UUID defined in org.blackerp.domain.events.ConstraintEvent
-e: file:///home/red1/Projects/blackerp/domain/events/DomainEvent.kt:14:12 Redeclaration: EventMetadata
-e: file:///home/red1/Projects/blackerp/domain/events/EventMetadata.kt:7:12 Redeclaration: EventMetadata
-e: file:///home/red1/Projects/blackerp/domain/events/RelationshipEvents.kt:8:10 Class 'RelationshipCreated' is not abstract and does not implement abstract base class member public abstract val entityId: UUID defined in org.blackerp.domain.events.RelationshipEvent
-e: file:///home/red1/Projects/blackerp/domain/events/RelationshipEvents.kt:20:10 Class 'RelationshipModified' is not abstract and does not implement abstract base class member public abstract val entityId: UUID defined in org.blackerp.domain.events.RelationshipEvent
-e: file:///home/red1/Projects/blackerp/domain/events/RelationshipEvents.kt:31:10 Class 'RelationshipDeleted' is not abstract and does not implement abstract base class member public abstract val entityId: UUID defined in org.blackerp.domain.events.RelationshipEvent
-e: file:///home/red1/Projects/blackerp/domain/events/WorkflowEvents.kt:8:10 Class 'NodeCreated' is not abstract and does not implement abstract base class member public abstract val entityId: UUID defined in org.blackerp.domain.events.WorkflowEvent
-e: file:///home/red1/Projects/blackerp/domain/events/WorkflowEvents.kt:14:10 Class 'NodeUpdated' is not abstract and does not implement abstract base class member public abstract val entityId: UUID defined in org.blackerp.domain.events.WorkflowEvent
-e: file:///home/red1/Projects/blackerp/domain/events/WorkflowEvents.kt:21:10 Class 'NodeDeleted' is not abstract and does not implement abstract base class member public abstract val entityId: UUID defined in org.blackerp.domain.events.WorkflowEvent
-e: file:///home/red1/Projects/blackerp/domain/validation/validators/model/ColumnValidator.kt:6:42 Unresolved reference: ColumnDefinition
-e: file:///home/red1/Projects/blackerp/domain/validation/validators/model/ColumnValidator.kt:8:33 Unresolved reference: shared
-e: file:///home/red1/Projects/blackerp/domain/validation/validators/model/ColumnValidator.kt:9:33 Unresolved reference: validation
-e: file:///home/red1/Projects/blackerp/domain/validation/validators/model/ColumnValidator.kt:11:25 Unresolved reference: Validator
-e: file:///home/red1/Projects/blackerp/domain/validation/validators/model/ColumnValidator.kt:11:35 Unresolved reference: ColumnDefinition
-e: file:///home/red1/Projects/blackerp/domain/validation/validators/model/ColumnValidator.kt:12:5 'validate' overrides nothing
-e: file:///home/red1/Projects/blackerp/domain/validation/validators/model/ColumnValidator.kt:12:43 Unresolved reference: ColumnDefinition
-e: file:///home/red1/Projects/blackerp/domain/validation/validators/model/ColumnValidator.kt:12:69 Unresolved reference: ValidationError
-e: file:///home/red1/Projects/blackerp/domain/validation/validators/model/ColumnValidator.kt:12:86 Unresolved reference: ColumnDefinition
-e: file:///home/red1/Projects/blackerp/domain/validation/validators/model/ColumnValidator.kt:13:36 Unresolved reference: ValidationError
-e: file:///home/red1/Projects/blackerp/domain/validation/validators/model/ColumnValidator.kt:17:24 Unresolved reference: ValidationError
-e: file:///home/red1/Projects/blackerp/domain/validation/validators/model/ColumnValidator.kt:24:13 Comparison of incompatible enums '[Error type: Error property type]' and 'DataType' is always unsuccessful
-e: file:///home/red1/Projects/blackerp/domain/validation/validators/model/ColumnValidator.kt:26:32 Unresolved reference: ValidationError
-e: file:///home/red1/Projects/blackerp/domain/validation/validators/model/ColumnValidator.kt:29:32 Unresolved reference: ValidationError
-e: file:///home/red1/Projects/blackerp/domain/validation/validators/model/ColumnValidator.kt:32:13 Comparison of incompatible enums '[Error type: Error property type]' and 'DataType' is always unsuccessful
-e: file:///home/red1/Projects/blackerp/domain/validation/validators/model/ColumnValidator.kt:34:32 Unresolved reference: ValidationError
-e: file:///home/red1/Projects/blackerp/domain/validation/validators/model/ColumnValidator.kt:37:32 Unresolved reference: ValidationError
-e: file:///home/red1/Projects/blackerp/domain/validation/validators/model/ColumnValidator.kt:42:32 Unresolved reference: ValidationError
-e: file:///home/red1/Projects/blackerp/domain/validation/validators/model/CompositeValidator.kt:11:34 Unresolved reference: Validator
-e: file:///home/red1/Projects/blackerp/domain/validation/validators/model/CompositeValidator.kt:16:30 Cannot infer a type for this parameter. Please specify it explicitly.
-e: file:///home/red1/Projects/blackerp/domain/validation/validators/model/CompositeValidator.kt:18:19 Cannot infer a type for this parameter. Please specify it explicitly.
-e: file:///home/red1/Projects/blackerp/domain/validation/validators/model/CompositeValidator.kt:21:33 'return' is not allowed here
-e: file:///home/red1/Projects/blackerp/domain/validation/validators/model/TableValidator.kt:4:42 Unresolved reference: ADTable
-e: file:///home/red1/Projects/blackerp/domain/validation/validators/model/TableValidator.kt:14:31 Unresolved reference: ADTable
-e: file:///home/red1/Projects/blackerp/domain/validation/validators/model/TableValidator.kt:14:60 Unresolved reference: ADTable
-e: file:///home/red1/Projects/blackerp/domain/validation/validators/model/TableValidator.kt:29:40 Cannot infer a type for this parameter. Please specify it explicitly.
-e: file:///home/red1/Projects/blackerp/domain/validation/validators/model/TableValidator.kt:29:47 Cannot infer a type for this parameter. Please specify it explicitly.
-e: file:///home/red1/Projects/blackerp/domain/validation/validators/model/TableValidator.kt:35:24 Unresolved reference: it
-e: file:///home/red1/Projects/blackerp/domain/validation/validators/model/TableValidator.kt:36:23 Unresolved reference: it
-e: file:///home/red1/Projects/blackerp/domain/validation/validators/model/TableValidator.kt:39:26 Overload resolution ambiguity: 
-public inline fun <T> Iterable<TypeVariable(T)>.forEach(action: (TypeVariable(T)) -> Unit): Unit defined in kotlin.collections
-public inline fun <K, V> Map<out TypeVariable(K), TypeVariable(V)>.forEach(action: (Map.Entry<TypeVariable(K), TypeVariable(V)>) -> Unit): Unit defined in kotlin.collections
-e: file:///home/red1/Projects/blackerp/domain/validation/validators/model/TableValidator.kt:39:36 Cannot infer a type for this parameter. Please specify it explicitly.
-e: file:///home/red1/Projects/blackerp/domain/validation/validators/model/TableValidator.kt:50:34 Unresolved reference: it
-e: file:///home/red1/Projects/blackerp/domain/validation/validators/model/TableValidator.kt:70:17 Unresolved reference: ColumnDefinition
-e: file:///home/red1/Projects/blackerp/domain/validation/validators/model/TableValidator.kt:77:13 Comparison of incompatible enums '[Error type: Error property type]' and 'DataType' is always unsuccessful
-e: file:///home/red1/Projects/blackerp/domain/validation/validators/model/TableValidator.kt:97:13 Comparison of incompatible enums '[Error type: Error property type]' and 'DataType' is always unsuccessful
-e: file:///home/red1/Projects/blackerp/domain/validation/validators/model/TableValidator.kt:140:33 Cannot infer a type for this parameter. Please specify it explicitly.
-e: file:///home/red1/Projects/blackerp/domain/validation/validators/model/TableValidator.kt:141:45 Unresolved reference: UUID
-e: file:///home/red1/Projects/blackerp/domain/validation/validators/module/ModuleValidator.kt:6:36 Unresolved reference: ADModule
-e: file:///home/red1/Projects/blackerp/domain/validation/validators/module/ModuleValidator.kt:7:33 Unresolved reference: shared
-e: file:///home/red1/Projects/blackerp/domain/validation/validators/module/ModuleValidator.kt:8:33 Unresolved reference: validation
-e: file:///home/red1/Projects/blackerp/domain/validation/validators/module/ModuleValidator.kt:10:25 Unresolved reference: Validator
-e: file:///home/red1/Projects/blackerp/domain/validation/validators/module/ModuleValidator.kt:10:35 Unresolved reference: ADModule
-e: file:///home/red1/Projects/blackerp/domain/validation/validators/module/ModuleValidator.kt:11:5 'validate' overrides nothing
-e: file:///home/red1/Projects/blackerp/domain/validation/validators/module/ModuleValidator.kt:11:43 Unresolved reference: ADModule
-e: file:///home/red1/Projects/blackerp/domain/validation/validators/module/ModuleValidator.kt:11:61 Unresolved reference: ValidationError
-e: file:///home/red1/Projects/blackerp/domain/validation/validators/module/ModuleValidator.kt:11:78 Unresolved reference: ADModule
-e: file:///home/red1/Projects/blackerp/domain/validation/validators/module/ModuleValidator.kt:12:36 Unresolved reference: ValidationError
-e: file:///home/red1/Projects/blackerp/domain/validation/validators/module/ModuleValidator.kt:16:24 Unresolved reference: ValidationError
-e: file:///home/red1/Projects/blackerp/domain/validation/validators/module/ModuleValidator.kt:23:24 Unresolved reference: ValidationError
-e: file:///home/red1/Projects/blackerp/domain/validation/validators/module/ModuleValidator.kt:27:42 Cannot infer a type for this parameter. Please specify it explicitly.
-e: file:///home/red1/Projects/blackerp/domain/validation/validators/module/ModuleValidator.kt:29:28 Unresolved reference: ValidationError
+Resolving global dependency management for project 'domain'
+Excluding []
+Excluding []
+Transforming kotlin-reflect-1.9.20.jar with ClasspathEntrySnapshotTransform
+Transforming kotlinx-datetime-jvm-0.4.0.jar with ClasspathEntrySnapshotTransform
+Transforming kotlinx-coroutines-reactive-1.7.3.jar with ClasspathEntrySnapshotTransform
+Transforming kotlinx-coroutines-core-jvm-1.7.3.jar with ClasspathEntrySnapshotTransform
+Transforming kotlinx-coroutines-reactor-1.7.3.jar with ClasspathEntrySnapshotTransform
+Transforming kotlin-stdlib-jdk8-1.9.20.jar with ClasspathEntrySnapshotTransform
+Transforming arrow-core-jvm-1.2.0.jar with ClasspathEntrySnapshotTransform
+Transforming arrow-atomic-jvm-1.2.0.jar with ClasspathEntrySnapshotTransform
+Transforming kotlin-stdlib-jdk7-1.9.20.jar with ClasspathEntrySnapshotTransform
+Transforming kotlin-stdlib-1.9.20.jar with ClasspathEntrySnapshotTransform
+Transforming slf4j-api-2.0.9.jar with ClasspathEntrySnapshotTransform
+Transforming jakarta.validation-api-3.0.2.jar with ClasspathEntrySnapshotTransform
+Transforming annotations-23.0.0.jar with ClasspathEntrySnapshotTransform
+Transforming reactor-core-3.6.0.jar with ClasspathEntrySnapshotTransform
+Transforming reactive-streams-1.0.4.jar with ClasspathEntrySnapshotTransform
+Transforming arrow-continuations-jvm-1.2.0.jar with ClasspathEntrySnapshotTransform
+Transforming arrow-annotations-jvm-1.2.0.jar with ClasspathEntrySnapshotTransform
+Excluding []
+Excluding []
+Caching disabled for task ':domain:compileKotlin' because:
+  Build cache is disabled
+Task ':domain:compileKotlin' is not up-to-date because:
+  Task has failed previously.
+The input changes require a full rebuild for incremental task ':domain:compileKotlin'.
+file or directory '/home/red1/Projects/blackerp/domain/src/main/kotlin', not found
+file or directory '/home/red1/Projects/blackerp/domain/src/main/java', not found
+file or directory '/home/red1/Projects/blackerp/domain/src/main/kotlin', not found
+file or directory '/home/red1/Projects/blackerp/domain/src/main/java', not found
+file or directory '/home/red1/Projects/blackerp/domain/src/main/kotlin', not found
+file or directory '/home/red1/Projects/blackerp/domain/src/main/java', not found
+file or directory '/home/red1/Projects/blackerp/domain/src/main/kotlin', not found
+file or directory '/home/red1/Projects/blackerp/domain/src/main/java', not found
+file or directory '/home/red1/Projects/blackerp/domain/src/main/kotlin', not found
+file or directory '/home/red1/Projects/blackerp/domain/src/main/java', not found
+Kotlin source files: /home/red1/Projects/blackerp/domain/core/ad/window/WindowName.kt, /home/red1/Projects/blackerp/domain/core/ad/process/ADProcess.kt, /home/red1/Projects/blackerp/domain/core/ad/process/ADParameter.kt, /home/red1/Projects/blackerp/domain/core/ad/process/ProcessOperations.kt, /home/red1/Projects/blackerp/domain/core/ad/process/ProcessTypes.kt, /home/red1/Projects/blackerp/domain/core/ad/document/DocumentError.kt, /home/red1/Projects/blackerp/domain/core/ad/document/Document.kt, /home/red1/Projects/blackerp/domain/core/ad/document/DocumentService.kt, /home/red1/Projects/blackerp/domain/core/ad/document/DocumentOperations.kt, /home/red1/Projects/blackerp/domain/core/ad/document/DocumentStatus.kt, /home/red1/Projects/blackerp/domain/core/ad/document/DocumentType.kt, /home/red1/Projects/blackerp/domain/core/ad/document/DocumentCommands.kt, /home/red1/Projects/blackerp/domain/core/ad/shared/values/ProcessName.kt, /home/red1/Projects/blackerp/domain/core/ad/base/ADModule.kt, /home/red1/Projects/blackerp/domain/core/ad/base/ModuleName.kt, /home/red1/Projects/blackerp/domain/core/ad/base/ADObject.kt, /home/red1/Projects/blackerp/domain/core/ad/base/ModuleService.kt, /home/red1/Projects/blackerp/domain/core/ad/tab/TabOperations.kt, /home/red1/Projects/blackerp/domain/core/ad/tab/OrderBySpec.kt, /home/red1/Projects/blackerp/domain/core/ad/tab/value/TabName.kt, /home/red1/Projects/blackerp/domain/core/ad/tab/TabError.kt, /home/red1/Projects/blackerp/domain/core/ad/tab/ADTab.kt, /home/red1/Projects/blackerp/domain/core/ad/table/ADTable.kt, /home/red1/Projects/blackerp/domain/core/ad/table/TableConstraint.kt, /home/red1/Projects/blackerp/domain/core/ad/table/TableManagementService.kt, /home/red1/Projects/blackerp/domain/core/ad/table/TableRelationship.kt, /home/red1/Projects/blackerp/domain/core/ad/table/commands.kt, /home/red1/Projects/blackerp/domain/core/ad/table/ConstraintOperations.kt, /home/red1/Projects/blackerp/domain/core/ad/table/RelationshipOperations.kt, /home/red1/Projects/blackerp/domain/core/ad/workflow/WorkflowNode.kt, /home/red1/Projects/blackerp/domain/core/ad/workflow/NodeType.kt, /home/red1/Projects/blackerp/domain/core/ad/workflow/WorkflowError.kt, /home/red1/Projects/blackerp/domain/core/ad/workflow/WorkflowOperations.kt, /home/red1/Projects/blackerp/domain/core/ad/workflow/WorkflowService.kt, /home/red1/Projects/blackerp/domain/core/ad/workflow/commands.kt, /home/red1/Projects/blackerp/domain/core/ad/workflow/WorkflowTransition.kt, /home/red1/Projects/blackerp/domain/core/ad/workflow/NodeAction.kt, /home/red1/Projects/blackerp/domain/core/ad/reference/ReferenceTypes.kt, /home/red1/Projects/blackerp/domain/core/ad/reference/ReferenceOperations.kt, /home/red1/Projects/blackerp/domain/core/ad/reference/value/ReferenceName.kt, /home/red1/Projects/blackerp/domain/core/ad/reference/ADReference.kt, /home/red1/Projects/blackerp/domain/core/DomainException.kt, /home/red1/Projects/blackerp/domain/core/error/PluginError.kt, /home/red1/Projects/blackerp/domain/core/error/TableErrors.kt, /home/red1/Projects/blackerp/domain/core/error/DomainError.kt, /home/red1/Projects/blackerp/domain/core/error/WorkflowErrors.kt, /home/red1/Projects/blackerp/domain/core/tenant/TenantAware.kt, /home/red1/Projects/blackerp/domain/core/values/DataType.kt, /home/red1/Projects/blackerp/domain/core/values/Precision.kt, /home/red1/Projects/blackerp/domain/core/values/AccessLevel.kt, /home/red1/Projects/blackerp/domain/core/values/Description.kt, /home/red1/Projects/blackerp/domain/core/values/Amount.kt, /home/red1/Projects/blackerp/domain/core/values/ColumnName.kt, /home/red1/Projects/blackerp/domain/core/values/Scale.kt, /home/red1/Projects/blackerp/domain/core/values/Length.kt, /home/red1/Projects/blackerp/domain/core/values/TableName.kt, /home/red1/Projects/blackerp/domain/core/values/Currency.kt, /home/red1/Projects/blackerp/domain/core/values/DisplayName.kt, /home/red1/Projects/blackerp/domain/core/DomainEntity.kt, /home/red1/Projects/blackerp/domain/core/shared/ValidationError.kt, /home/red1/Projects/blackerp/domain/core/shared/ChangePair.kt, /home/red1/Projects/blackerp/domain/core/metadata/ChangeTracking.kt, /home/red1/Projects/blackerp/domain/core/metadata/EntityMetadata.kt, /home/red1/Projects/blackerp/domain/core/security/SecurityModel.kt, /home/red1/Projects/blackerp/domain/core/security/SecurityOperations.kt, /home/red1/Projects/blackerp/domain/core/Version.kt, /home/red1/Projects/blackerp/domain/events/WorkflowEvents.kt, /home/red1/Projects/blackerp/domain/events/RelationshipEvents.kt, /home/red1/Projects/blackerp/domain/events/EventMetadata.kt, /home/red1/Projects/blackerp/domain/events/DomainEvent.kt, /home/red1/Projects/blackerp/domain/events/ConstraintEvents.kt, /home/red1/Projects/blackerp/domain/validation/validators/module/ModuleValidator.kt, /home/red1/Projects/blackerp/domain/validation/ValidatorRegistry.kt, /home/red1/Projects/blackerp/domain/validation/Validator.kt, /home/red1/Projects/blackerp/domain/validation/BaseValidator.kt
+Java source files: 
+Script source files: 
+Script file extensions: 
+Using Kotlin/JVM incremental compilation
+[KOTLIN] Kotlin compilation 'jdkHome' argument: /usr/lib/jvm/java-17-openjdk-amd64
+i: found daemon on port 17687 (12268000 ms old), trying to connect
+i: connected to the daemon
+Options for KOTLIN DAEMON: IncrementalCompilationOptions(super=CompilationOptions(compilerMode=INCREMENTAL_COMPILER, targetPlatform=JVM, reportCategories=[0, 3], reportSeverity=2, requestedCompilationResults=[0], kotlinScriptExtensions=[]), areFileChangesKnown=false, modifiedFiles=null, deletedFiles=null, classpathChanges=NotAvailableForNonIncrementalRun, workingDir=/home/red1/Projects/blackerp/domain/build/kotlin/compileKotlin/cacheable, multiModuleICSettings=MultiModuleICSettings(buildHistoryFile=/home/red1/Projects/blackerp/domain/build/kotlin/compileKotlin/local-state/build-history.bin, useModuleDetection=false), usePreciseJavaTracking=true, outputFiles=[/home/red1/Projects/blackerp/domain/build/classes/kotlin/main, /home/red1/Projects/blackerp/domain/build/kotlin/compileKotlin/cacheable, /home/red1/Projects/blackerp/domain/build/kotlin/compileKotlin/local-state])
+e: file:///home/red1/Projects/blackerp/domain/core/ad/process/ProcessTypes.kt:34:46 Unresolved reference: DomainError
+e: file:///home/red1/Projects/blackerp/domain/core/ad/table/ADTable.kt:18:23 Unresolved reference: ColumnDefinition
 
 FAILURE: Build failed with an exception.
 
@@ -257,9 +342,9 @@ Execution failed for task ':domain:compileKotlin'.
 
 * Try:
 > Run with --stacktrace option to get the stack trace.
-> Run with --info or --debug option to get more log output.
+> Run with --debug option to get more log output.
 > Run with --scan to get full insights.
 > Get more help at https://help.gradle.org.
 
-BUILD FAILED in 1s
-8 actionable tasks: 4 executed, 4 up-to-date
+BUILD FAILED in 2s
+7 actionable tasks: 5 executed, 2 up-to-date

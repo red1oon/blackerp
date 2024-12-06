@@ -1,3 +1,4 @@
+// domain/core/values/Description.kt
 package org.blackerp.domain.core.values
 
 import arrow.core.Either

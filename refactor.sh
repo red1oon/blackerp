@@ -1,68 +1,147 @@
+# document_process_integration.sh
 #!/bin/bash
 
-# Define colors for terminal output
-GREEN='\033[0;32m'
-YELLOW='\033[1;33m'
-RED='\033[0;31m'
-BLUE='\033[0;34m'
-NC='\033[0m'
+# Create document process integration components
+cat > domain/core/ad/document/DocumentProcessHandler.kt << 'EOF'
+package org.blackerp.domain.core.ad.document
 
-# Map of imports to fix
-declare -A IMPORT_MAP=(
-    ["import org.blackerp.shared.ValidationError"]="import org.blackerp.domain.core.shared.ValidationError"
-    ["import org.blackerp.domain.table.ADTable"]="import org.blackerp.domain.core.ad.table.ADTable"
-    ["import org.blackerp.domain.EntityMetadata"]="import org.blackerp.domain.core.EntityMetadata"
-    ["import org.blackerp.domain.DomainEntity"]="import org.blackerp.domain.core.DomainEntity"
-    ["import org.blackerp.validation.Validator"]="import org.blackerp.domain.core.validation.Validator"
-    ["import org.blackerp.plugin.Plugin"]="import org.blackerp.domain.plugin.Plugin"
-    ["import org.blackerp.domain.values.DataType"]="import org.blackerp.domain.core.values.DataType"
-)
+import org.blackerp.domain.core.ad.process.*
+import arrow.core.Either
+import arrow.core.left
+import arrow.core.right
+import org.slf4j.LoggerFactory
+import java.util.UUID
 
-# Counters
-total_files=0
-files_fixed=0
-files_ignored=0
-
-# Function to fix imports in a file
-fix_imports() {
-    local file="$1"
-    echo -e "\n${YELLOW}Checking imports in: $file${NC}"
-    local changes=0
-
-    for old_import in "${!IMPORT_MAP[@]}"; do
-        # Match only import statements using regex
-        if grep -E "^$old_import" "$file" > /dev/null; then
-            echo -e "${GREEN}Found and fixing: $old_import -> ${IMPORT_MAP[$old_import]}${NC}"
-            # Replace the import using sed
-            sed -i "s|$old_import|${IMPORT_MAP[$old_import]}|g" "$file"
-            ((changes++))
-        fi
-    done
-
-    if ((changes > 0)); then
-        echo -e "${GREEN}Fixed $changes imports in $file${NC}"
-        ((files_fixed++))
-    else
-        ((files_ignored++))
-    fi
+interface DocumentProcessHandler {
+    suspend fun executeDocumentProcess(
+        document: Document,
+        processId: UUID,
+        parameters: Map<String, Any>
+    ): Either<DocumentError, ProcessResult>
 }
 
-# Find all Kotlin files in the project
-total_files=$(find . -name "*.kt" -type f ! -path "*/build/*" ! -path "*/.gradle/*" | wc -l)
-echo -e "${BLUE}Found $total_files Kotlin files${NC}"
+class DocumentProcessHandlerImpl(
+    private val processOperations: ProcessOperations
+) : DocumentProcessHandler {
+    private val logger = LoggerFactory.getLogger(DocumentProcessHandlerImpl::class.java)
 
-# Process each Kotlin file
-find . -name "*.kt" -type f ! -path "*/build/*" ! -path "*/.gradle/*" | while read -r file; do
-    fix_imports "$file"
-done
+    override suspend fun executeDocumentProcess(
+        document: Document,
+        processId: UUID,
+        parameters: Map<String, Any>
+    ): Either<DocumentError, ProcessResult> {
+        logger.debug("Executing process $processId for document ${document.id}")
 
-# Summary
-echo -e "\n${BLUE}Summary:${NC}"
-echo -e "${GREEN}Total files checked: $total_files${NC}"
-echo -e "${GREEN}Files fixed: $files_fixed${NC}"
-echo -e "${YELLOW}Files ignored: $files_ignored${NC}"
+        val documentParameters = createDocumentParameters(document)
+        val mergedParameters = parameters + documentParameters
 
-# Debugging Message if No Fixes
-if ((files_fixed == 0)); then
-    echo -e "${RED}No fixes applied. Please ensure the IMPORT_MAP keys match exactly the errors in your files.${NC}"
-fi
+        return processOperations.execute(processId, mergedParameters)
+            .mapLeft { error ->
+                DocumentError.ValidationFailed("Process execution failed: ${error.message}")
+            }
+    }
+
+    private fun createDocumentParameters(document: Document): Map<String, Any> = mapOf(
+        "DocumentId" to document.id,
+        "DocumentType" to document.type.id,
+        "DocumentStatus" to document.status.name
+    )
+}
+EOF
+
+# Create document process service integration
+cat > application/services/DocumentProcessService.kt << 'EOF'
+package org.blackerp.application.services
+
+import org.springframework.stereotype.Service
+import org.blackerp.domain.core.ad.document.*
+import org.blackerp.domain.core.ad.process.*
+import org.blackerp.domain.events.DocumentEvent
+import org.blackerp.domain.events.EventMetadata
+import org.blackerp.domain.events.DomainEventPublisher
+import arrow.core.Either
+import arrow.core.left
+import arrow.core.right
+import java.util.UUID
+import org.slf4j.LoggerFactory
+
+@Service
+class DocumentProcessService(
+    private val documentOperations: DocumentOperations,
+    private val processHandler: DocumentProcessHandler,
+    private val eventPublisher: DomainEventPublisher
+) {
+    private val logger = LoggerFactory.getLogger(DocumentProcessService::class.java)
+
+    suspend fun executeDocumentProcess(
+        documentId: UUID,
+        processId: UUID,
+        parameters: Map<String, Any>
+    ): Either<DocumentError, ProcessResult> {
+        logger.debug("Executing process $processId for document $documentId")
+
+        return documentOperations.findById(documentId)
+            .flatMap { document ->
+                if (document == null) {
+                    DocumentError.NotFound(documentId).left()
+                } else {
+                    processHandler.executeDocumentProcess(document, processId, parameters)
+                        .also { result ->
+                            result.fold(
+                                { error -> 
+                                    logger.error("Process execution failed: ${error.message}")
+                                },
+                                { processResult ->
+                                    publishProcessExecutionEvent(document, processId, processResult)
+                                }
+                            )
+                        }
+                }
+            }
+    }
+
+    private fun publishProcessExecutionEvent(
+        document: Document,
+        processId: UUID,
+        result: ProcessResult
+    ) {
+        eventPublisher.publish(
+            DocumentEvent.ProcessExecuted(
+                metadata = EventMetadata(
+                    user = "system", // TODO: Get from security context
+                    correlationId = UUID.randomUUID().toString()
+                ),
+                documentId = UUID.fromString(document.id),
+                processId = processId,
+                success = result.success,
+                message = result.message
+            )
+        )
+    }
+}
+EOF
+
+# Update document events to include process execution
+cat > domain/core/ad/document/DocumentEvents.kt << 'EOF'
+package org.blackerp.domain.core.ad.document
+
+import org.blackerp.domain.events.DomainEvent
+import org.blackerp.domain.events.EventMetadata
+import java.util.UUID
+
+sealed class DocumentEvent : DomainEvent {
+    data class ProcessExecuted(
+        override val metadata: EventMetadata,
+        val documentId: UUID,
+        val processId: UUID,
+        val success: Boolean,
+        val message: String
+    ) : DocumentEvent()
+
+    // ... existing event classes ...
+}
+EOF
+
+echo "Document process integration created successfully"
+
+./compile.sh 

@@ -7,19 +7,18 @@ import org.blackerp.domain.core.ad.workflow.WorkflowNode
 sealed class WorkflowEvent : DomainEvent {
     data class NodeCreated(
         override val metadata: EventMetadata,
-        val nodeId: UUID,
-        val type: NodeType
+        val node: WorkflowNode
     ) : WorkflowEvent()
 
     data class NodeUpdated(
         override val metadata: EventMetadata,
         val nodeId: UUID,
-        val previousVersion: Int,
-        val newVersion: Int
+        val changes: Map<String, ChangePair>
     ) : WorkflowEvent()
 
     data class NodeDeleted(
         override val metadata: EventMetadata,
-        val nodeId: UUID
+        val nodeId: UUID,
+        val nodeName: String
     ) : WorkflowEvent()
 }

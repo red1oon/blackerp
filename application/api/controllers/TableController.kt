@@ -1,47 +1,53 @@
 package org.blackerp.application.api.controllers
 
 import org.springframework.web.bind.annotation.*
-import org.springframework.http.MediaType
-import jakarta.validation.Valid
-import org.blackerp.domain.core.ad.table.TableOperations
-import org.blackerp.application.table.CreateTableUseCase
-import org.blackerp.application.api.mappers.TableMapper
-import org.blackerp.application.api.dto.responses.TablesResponse
-import org.blackerp.application.api.dto.responses.TableResponse
+import org.springframework.http.ResponseEntity
+import org.blackerp.application.api.dto.TableDTO
 import org.blackerp.application.api.dto.requests.CreateTableRequest
-import org.slf4j.LoggerFactory
+import org.blackerp.application.services.table.TableManagementService
+import org.blackerp.domain.core.ad.table.*
+import org.blackerp.domain.core.values.*
+import org.blackerp.domain.core.shared.ValidationError
+import arrow.core.*
+import jakarta.validation.Valid
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.toList
 
 @RestController
 @RequestMapping("/api/tables")
-class TableController(
-    private val tableOperations: TableOperations,
-    private val createTableUseCase: CreateTableUseCase,
-    private val tableMapper: TableMapper
-) {
-    private val logger = LoggerFactory.getLogger(TableController::class.java)
+class TableController(private val tableService: TableManagementService) {
+   @GetMapping
+   suspend fun getTables(): ResponseEntity<List<TableDTO>> = 
+       tableService.findTables()
+           .map { TableDTO.fromDomain(it) }
+           .toList()
+           .let { ResponseEntity.ok(it) }
 
-    @GetMapping(produces = [MediaType.APPLICATION_JSON_VALUE])
-    suspend fun getTables(): TablesResponse {
-        logger.debug("Getting all tables")
-        val tables = tableOperations.findAll().getOrNull() ?: emptyList()
-        return TablesResponse(tables = tables.map { tableMapper.toResponse(it) })
-    }
-
-    @PostMapping(consumes = [MediaType.APPLICATION_JSON_VALUE], produces = [MediaType.APPLICATION_JSON_VALUE])
-    suspend fun createTable(@Valid @RequestBody request: CreateTableRequest): TableResponse {
-        logger.debug("Received create table request: $request")
-        val command = tableMapper.toCommand(request)
-        logger.debug("Created command: $command")
-        
-        val table = createTableUseCase.execute(command).fold(
-            { error -> 
-                logger.error("Failed to create table: $error")
-                throw RuntimeException(error.message)
-            },
-            { it }
-        )
-        
-        logger.debug("Successfully created table: ${table.name}")
-        return tableMapper.toResponse(table)
-    }
+   @PostMapping
+   suspend fun createTable(@Valid @RequestBody request: CreateTableRequest): ResponseEntity<TableDTO> = 
+       Either.catch {
+           TableName.create(request.name).orNull()?.let { tableName ->
+               DisplayName.create(request.displayName).orNull()?.let { displayName ->
+                   val description = request.description?.let { desc ->
+                       Description.create(desc).orNull()
+                   }
+                   
+                   CreateTableCommand(
+                       name = tableName,
+                       displayName = displayName,
+                       description = description,
+                       accessLevel = AccessLevel.valueOf(request.accessLevel.uppercase()),
+                       columns = emptyList()
+                   )
+               }
+           } ?: throw IllegalArgumentException("Invalid input")
+       }.fold(
+           { ResponseEntity.badRequest().build() },
+           { command -> 
+               tableService.createTable(command).fold(
+                   { ResponseEntity.badRequest().build() },
+                   { ResponseEntity.ok(TableDTO.fromDomain(it)) }
+               )
+           }
+       )
 }

@@ -1,3 +1,4 @@
+// domain/core/values/DisplayName.kt
 package org.blackerp.domain.core.values
 
 import arrow.core.Either
@@ -10,7 +11,7 @@ value class DisplayName private constructor(val value: String) {
     companion object {
         fun create(value: String): Either<ValidationError, DisplayName> =
             when {
-                value.isBlank() -> 
+                value.isBlank() ->
                     ValidationError.Required("display name").left()
                 value.length !in 1..60 ->
                     ValidationError.InvalidLength("display name", 1, 60).left()
