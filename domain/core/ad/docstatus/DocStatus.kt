@@ -9,6 +9,14 @@ import org.blackerp.domain.core.values.DisplayName
 import org.blackerp.domain.core.values.Description
 import java.util.UUID
 
+enum class DocumentStatus {
+    DRAFT,
+    IN_PROGRESS, 
+    COMPLETED,
+    VOIDED,
+    CLOSED
+}
+
 data class DocStatus(
     override val metadata: EntityMetadata,
     private val uuid: UUID = UUID.randomUUID(),

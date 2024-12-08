@@ -12,11 +12,10 @@ OpenJDK 64-Bit Server VM (build 17.0.13+11-Ubuntu-2ubuntu124.04, mixed mode, sha
 > Task :infrastructure:checkKotlinGradlePluginConfigurationErrors
 
 > Task :infrastructure:compileKotlin
-w: file:///home/red1/Projects/blackerp/infrastructure/persistence/repositories/DocumentRepositoryImpl.kt:273:29 'queryForObject(String, Array<(out) Any!>?, RowMapper<T!>): T?' is deprecated. Deprecated in Java
-w: file:///home/red1/Projects/blackerp/infrastructure/persistence/repositories/DocumentRepositoryImpl.kt:334:26 Unnecessary non-null assertion (!!) on a non-null receiver of type String
-w: file:///home/red1/Projects/blackerp/infrastructure/persistence/repositories/DocumentRepositoryImpl.kt:342:18 'query(String, Array<(out) Any!>?, RowMapper<T!>): (Mutable)List<T!>' is deprecated. Deprecated in Java
-w: file:///home/red1/Projects/blackerp/infrastructure/persistence/repositories/DocumentRepositoryImpl.kt:348:29 'query(String, Array<(out) Any!>?, RowMapper<T!>): (Mutable)List<T!>' is deprecated. Deprecated in Java
-w: file:///home/red1/Projects/blackerp/infrastructure/persistence/repositories/UserRepositoryImpl.kt:49:35 Unnecessary safe call on a non-null receiver of type UUID
+w: file:///home/red1/Projects/blackerp/infrastructure/persistence/repositories/DocumentRepositoryImpl.kt:341:37 'queryForObject(String, Array<(out) Any!>?, RowMapper<T!>): T?' is deprecated. Deprecated in Java
+w: file:///home/red1/Projects/blackerp/infrastructure/persistence/repositories/DocumentRepositoryImpl.kt:420:34 Unnecessary non-null assertion (!!) on a non-null receiver of type String
+w: file:///home/red1/Projects/blackerp/infrastructure/persistence/repositories/DocumentRepositoryImpl.kt:428:26 'query(String, Array<(out) Any!>?, RowMapper<T!>): (Mutable)List<T!>' is deprecated. Deprecated in Java
+w: file:///home/red1/Projects/blackerp/infrastructure/persistence/repositories/DocumentRepositoryImpl.kt:435:26 'query(String, Array<(out) Any!>?, RowMapper<T!>): (Mutable)List<T!>' is deprecated. Deprecated in Java
 
-BUILD SUCCESSFUL in 3s
+BUILD SUCCESSFUL in 2s
 6 actionable tasks: 4 executed, 2 up-to-date
