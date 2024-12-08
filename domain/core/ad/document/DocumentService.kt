@@ -15,6 +15,7 @@ interface DocumentService {
     suspend fun changeStatus(id: UUID, command: ChangeStatusCommand): Either<DocumentError, Document>
     suspend fun findDocuments(criteria: DocumentSearchCriteria): Flow<Document>
     suspend fun getDocumentHistory(id: UUID): Flow<DocumentChange>
+    suspend fun findById(id: UUID): Either<DocumentError, Document?>
 }
 
 data class DocumentChange(

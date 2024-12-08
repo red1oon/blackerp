@@ -8,7 +8,7 @@ import java.util.UUID
 
 sealed class StateTransitionError {
     data class InvalidTransition(val message: String) : StateTransitionError()
-    data class PermissionDenied(val message: String) : StateTransitionError()
+    data class PermissionDenied(val message: String) : StateTransitionError()  
     data class ValidationFailed(val message: String) : StateTransitionError()
 }
 
@@ -35,17 +35,15 @@ class WorkflowStateMachine(
 ) {
     suspend fun transition(
         context: SecurityContext,
-        currentStateName: String,
+        currentStateName: String, 
         targetStateName: String,
         documentId: UUID
     ): Either<StateTransitionError, WorkflowState> {
-        val currentState = states[currentStateName] ?: return StateTransitionError.InvalidTransition(
-            "Invalid current state: $currentStateName"
-        ).left()
+        val currentState = states[currentStateName] ?: 
+            return StateTransitionError.InvalidTransition("Invalid current state: $currentStateName").left()
 
-        val targetState = states[targetStateName] ?: return StateTransitionError.InvalidTransition(
-            "Invalid target state: $targetStateName"
-        ).left()
+        val targetState = states[targetStateName] ?:
+            return StateTransitionError.InvalidTransition("Invalid target state: $targetStateName").left()
 
         // Check if transition is allowed
         if (!currentState.allowedTransitions.contains(targetStateName)) {
@@ -72,9 +70,6 @@ class WorkflowStateMachine(
         return targetState.right()
     }
 
-    private fun hasRequiredPermissions(
-        context: SecurityContext,
-        requiredPermissions: Set<String>
-    ): Boolean =
+    private fun hasRequiredPermissions(context: SecurityContext, requiredPermissions: Set<String>): Boolean =
         requiredPermissions.all { permission -> context.hasPermission(permission) }
 }

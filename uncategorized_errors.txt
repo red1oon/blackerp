@@ -1,2 +1,0 @@
-e: file:///home/red1/Projects/blackerp/infrastructure/persistence/repositories/UserRepositoryImpl.kt:29:25 Cannot infer a type for this parameter. Please specify it explicitly.
-e: file:///home/red1/Projects/blackerp/infrastructure/persistence/repositories/UserRepositoryImpl.kt:40:24 Cannot infer a type for this parameter. Please specify it explicitly.

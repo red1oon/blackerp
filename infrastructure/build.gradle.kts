@@ -1,5 +1,5 @@
 plugins {
-    kotlin("jvm")
+     kotlin("jvm") version "1.9.20"
     kotlin("plugin.spring")
     id("org.springframework.boot")
 }
@@ -19,6 +19,9 @@ sourceSets {
             "cache/providers",
             "integration/adapters",
             "messaging/consumers",
+            "persistence/entities",
+            "persistence/mappers",
+            "events/publishers",  
             "plugin/loaders"
         )
     }

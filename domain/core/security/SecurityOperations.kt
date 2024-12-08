@@ -29,4 +29,5 @@ sealed class SecurityError {
     data class InvalidToken(val message: String) : SecurityError()
     data class InsufficientPermissions(val message: String) : SecurityError()
     data class UserNotFound(val message: String) : SecurityError()
+    data class ValidationFailed(val message: String) : SecurityError()  // Added this
 }

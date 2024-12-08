@@ -3,39 +3,20 @@ OpenJDK Runtime Environment (build 17.0.13+11-Ubuntu-2ubuntu124.04)
 OpenJDK 64-Bit Server VM (build 17.0.13+11-Ubuntu-2ubuntu124.04, mixed mode, sharing)
 > Task :application:checkKotlinGradlePluginConfigurationErrors
 > Task :domain:checkKotlinGradlePluginConfigurationErrors
-> Task :domain:processResources NO-SOURCE
-> Task :infrastructure:checkKotlinGradlePluginConfigurationErrors
-> Task :domain:compileKotlin
+> Task :domain:compileKotlin UP-TO-DATE
 > Task :domain:compileJava NO-SOURCE
+> Task :domain:processResources NO-SOURCE
 > Task :domain:classes UP-TO-DATE
-> Task :domain:jar
+> Task :domain:jar UP-TO-DATE
 > Task :application:compileKotlin NO-SOURCE
+> Task :infrastructure:checkKotlinGradlePluginConfigurationErrors
 
-> Task :infrastructure:compileKotlin FAILED
-e: file:///home/red1/Projects/blackerp/infrastructure/persistence/repositories/SpringUserRepository.kt:5:48 Unresolved reference: entities
-e: file:///home/red1/Projects/blackerp/infrastructure/persistence/repositories/SpringUserRepository.kt:9:48 Unresolved reference: UserEntity
-e: file:///home/red1/Projects/blackerp/infrastructure/persistence/repositories/SpringUserRepository.kt:10:43 Unresolved reference: UserEntity
-e: file:///home/red1/Projects/blackerp/infrastructure/persistence/repositories/UserRepositoryImpl.kt:7:48 Unresolved reference: entities
-e: file:///home/red1/Projects/blackerp/infrastructure/persistence/repositories/UserRepositoryImpl.kt:8:48 Unresolved reference: mappers
-e: file:///home/red1/Projects/blackerp/infrastructure/persistence/repositories/UserRepositoryImpl.kt:9:36 Unresolved reference: events
-e: file:///home/red1/Projects/blackerp/infrastructure/persistence/repositories/UserRepositoryImpl.kt:19:29 Unresolved reference: UserMapper
-e: file:///home/red1/Projects/blackerp/infrastructure/persistence/repositories/UserRepositoryImpl.kt:20:33 Unresolved reference: DomainEventPublisher
-e: file:///home/red1/Projects/blackerp/infrastructure/persistence/repositories/UserRepositoryImpl.kt:29:25 Cannot infer a type for this parameter. Please specify it explicitly.
-e: file:///home/red1/Projects/blackerp/infrastructure/persistence/repositories/UserRepositoryImpl.kt:40:24 Cannot infer a type for this parameter. Please specify it explicitly.
-e: file:///home/red1/Projects/blackerp/infrastructure/persistence/repositories/UserRepositoryImpl.kt:72:27 Unresolved reference: ValidationFailed
+> Task :infrastructure:compileKotlin
+w: file:///home/red1/Projects/blackerp/infrastructure/persistence/repositories/DocumentRepositoryImpl.kt:273:29 'queryForObject(String, Array<(out) Any!>?, RowMapper<T!>): T?' is deprecated. Deprecated in Java
+w: file:///home/red1/Projects/blackerp/infrastructure/persistence/repositories/DocumentRepositoryImpl.kt:334:26 Unnecessary non-null assertion (!!) on a non-null receiver of type String
+w: file:///home/red1/Projects/blackerp/infrastructure/persistence/repositories/DocumentRepositoryImpl.kt:342:18 'query(String, Array<(out) Any!>?, RowMapper<T!>): (Mutable)List<T!>' is deprecated. Deprecated in Java
+w: file:///home/red1/Projects/blackerp/infrastructure/persistence/repositories/DocumentRepositoryImpl.kt:348:29 'query(String, Array<(out) Any!>?, RowMapper<T!>): (Mutable)List<T!>' is deprecated. Deprecated in Java
+w: file:///home/red1/Projects/blackerp/infrastructure/persistence/repositories/UserRepositoryImpl.kt:49:35 Unnecessary safe call on a non-null receiver of type UUID
 
-FAILURE: Build failed with an exception.
-
-* What went wrong:
-Execution failed for task ':infrastructure:compileKotlin'.
-> A failure occurred while executing org.jetbrains.kotlin.compilerRunner.GradleCompilerRunnerWithWorkers$GradleKotlinCompilerWorkAction
-   > Compilation error. See log for more details
-
-* Try:
-> Run with --stacktrace option to get the stack trace.
-> Run with --info or --debug option to get more log output.
-> Run with --scan to get full insights.
-> Get more help at https://help.gradle.org.
-
-BUILD FAILED in 3s
-6 actionable tasks: 6 executed
+BUILD SUCCESSFUL in 3s
+6 actionable tasks: 4 executed, 2 up-to-date

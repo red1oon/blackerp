@@ -1,275 +1,319 @@
 #!/bin/bash
-# File: implement_user_repository.sh
-# Description: Implements User persistence with Spring Data JPA
+# fix_document_repo.sh
+# Updates infrastructure/persistence/repositories/DocumentRepositoryImpl.kt
 
-set -e  # Exit on error
-echo "Implementing User Repository..."
-
-# Create necessary directories
-mkdir -p infrastructure/persistence/repositories
-mkdir -p infrastructure/persistence/entities
-mkdir -p infrastructure/persistence/mappers
-mkdir -p domain/core/security/events
-
-# Function to create file if not exists
-create_file() {
-    if [ ! -f "$1" ]; then
-        mkdir -p "$(dirname "$1")"
-        echo "Creating $1..."
-        cat > "$1"
-    else
-        echo "File $1 already exists, skipping..."
-    fi
-}
-
-# Create JPA Entity
-create_file "infrastructure/persistence/entities/UserEntity.kt" << 'EOF'
-package org.blackerp.infrastructure.persistence.entities
-
-import jakarta.persistence.*
-import java.time.Instant
-import java.util.UUID
-
-@Entity
-@Table(name = "ad_user")
-class UserEntity(
-    @Id
-    @Column(name = "id")
-    val id: UUID = UUID.randomUUID(),
-
-    @Column(name = "username", unique = true)
-    var username: String,
-
-    @Column(name = "email")
-    var email: String,
-
-    @Column(name = "password_hash")
-    var passwordHash: String,
-
-    @Column(name = "is_active")
-    var isActive: Boolean = true,
-
-    @Column(name = "client_id")
-    var clientId: UUID,
-
-    @Column(name = "organization_id")
-    var organizationId: UUID? = null,
-
-    @Column(name = "last_login")
-    var lastLogin: Instant? = null,
-
-    @Column(name = "created_at")
-    val createdAt: Instant = Instant.now(),
-
-    @Column(name = "updated_at")
-    var updatedAt: Instant = Instant.now(),
-
-    @ElementCollection(fetch = FetchType.EAGER)
-    @CollectionTable(
-        name = "ad_user_role",
-        joinColumns = [JoinColumn(name = "user_id")]
-    )
-    var roleIds: MutableSet<UUID> = mutableSetOf()
-)
-EOF
-
-# Create Spring Data JPA Repository
-create_file "infrastructure/persistence/repositories/SpringUserRepository.kt" << 'EOF'
+cat > infrastructure/persistence/repositories/DocumentRepositoryImpl.kt << 'EOF'
 package org.blackerp.infrastructure.persistence.repositories
 
-import org.springframework.data.jpa.repository.JpaRepository
-import org.springframework.stereotype.Repository
-import org.blackerp.infrastructure.persistence.entities.UserEntity
-import java.util.UUID
-
-@Repository
-interface SpringUserRepository : JpaRepository<UserEntity, UUID> {
-    fun findByUsername(username: String): UserEntity?
-    fun existsByUsername(username: String): Boolean
-}
-EOF
-
-# Create User Repository Implementation
-create_file "infrastructure/persistence/repositories/UserRepositoryImpl.kt" << 'EOF'
-package org.blackerp.infrastructure.persistence.repositories
-
-import org.springframework.stereotype.Repository
-import org.springframework.transaction.annotation.Transactional
-import org.blackerp.domain.core.security.*
-import org.blackerp.domain.events.UserEvent
-import org.blackerp.infrastructure.persistence.entities.UserEntity
-import org.blackerp.infrastructure.persistence.mappers.UserMapper
-import org.blackerp.infrastructure.events.publishers.DomainEventPublisher
 import arrow.core.Either
 import arrow.core.left
 import arrow.core.right
+import java.sql.ResultSet
 import java.util.UUID
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
+import org.blackerp.domain.core.ad.document.*
+import org.blackerp.domain.core.shared.AuditInfo
+import org.blackerp.domain.core.shared.EntityMetadata
+import org.blackerp.domain.core.values.*
+import org.blackerp.domain.events.DocumentEvent
+import org.blackerp.domain.events.EventMetadata
+import org.blackerp.infrastructure.events.publishers.DomainEventPublisher
 import org.slf4j.LoggerFactory
+import org.springframework.jdbc.core.JdbcTemplate
+import org.springframework.jdbc.core.RowMapper
+import org.springframework.stereotype.Repository
+import org.springframework.transaction.annotation.Transactional
 
 @Repository
-class UserRepositoryImpl(
-    private val springUserRepository: SpringUserRepository,
-    private val userMapper: UserMapper,
+class DocumentRepositoryImpl(
+    private val jdbcTemplate: JdbcTemplate,
     private val eventPublisher: DomainEventPublisher
-) : UserRepository {
+) : DocumentOperations {
 
-    private val logger = LoggerFactory.getLogger(UserRepositoryImpl::class.java)
+    private val logger = LoggerFactory.getLogger(DocumentRepositoryImpl::class.java)
 
-    @Transactional(readOnly = true)
-    override suspend fun findByUsername(username: String): Either<SecurityError, User?> =
-        try {
-            springUserRepository.findByUsername(username)
-                ?.let { entity -> userMapper.toDomain(entity).right() }
-                ?: null.right()
-        } catch (e: Exception) {
-            logger.error("Error finding user by username: $username", e)
-            SecurityError.UserNotFound("User not found: $username").left()
-        }
-
-    @Transactional(readOnly = true)
-    override suspend fun findById(id: UUID): Either<SecurityError, User?> =
-        try {
-            springUserRepository.findById(id)
-                .map { entity -> userMapper.toDomain(entity) }
-                .orElse(null)
-                .right()
-        } catch (e: Exception) {
-            logger.error("Error finding user by id: $id", e)
-            SecurityError.UserNotFound("User not found: $id").left()
-        }
+    private val documentMapper = RowMapper<Document> { rs: ResultSet, _: Int ->
+        Document.create(
+            metadata = EntityMetadata(
+                id = rs.getString("id"),
+                audit = AuditInfo(
+                    createdBy = rs.getString("created_by"),
+                    updatedBy = rs.getString("updated_by")
+                )
+            ),
+            displayName = DisplayName.create(rs.getString("display_name")).orNull()!!,
+            description = rs.getString("description")?.let { Description.create(it).orNull() },
+            type = loadDocumentType(UUID.fromString(rs.getString("type_id"))),
+            status = DocumentStatus.valueOf(rs.getString("status"))
+        )
+    }
 
     @Transactional
-    override suspend fun save(user: User): Either<SecurityError, User> =
-        try {
-            val existingUser = user.id?.let { springUserRepository.findById(it).orElse(null) }
-            val entity = if (existingUser != null) {
-                userMapper.updateEntity(existingUser, user)
-            } else {
-                userMapper.toEntity(user)
-            }
-            
-            val savedEntity = springUserRepository.save(entity)
-            val savedUser = userMapper.toDomain(savedEntity)
-            
-            // Publish event
-            val event = if (existingUser == null) {
-                UserEvent.UserCreated(savedUser)
-            } else {
-                UserEvent.UserUpdated(savedUser)
-            }
-            eventPublisher.publish(event)
-            
-            savedUser.right()
-        } catch (e: Exception) {
-            logger.error("Error saving user: ${user.id}", e)
-            SecurityError.ValidationFailed("Failed to save user: ${e.message}").left()
-        }
-}
-EOF
-
-# Create User Mapper
-create_file "infrastructure/persistence/mappers/UserMapper.kt" << 'EOF'
-package org.blackerp.infrastructure.persistence.mappers
-
-import org.springframework.stereotype.Component
-import org.blackerp.domain.core.security.*
-import org.blackerp.infrastructure.persistence.entities.UserEntity
-import java.time.Instant
-
-@Component
-class UserMapper {
-    fun toDomain(entity: UserEntity): User =
-        User(
-            id = entity.id,
-            username = entity.username,
-            email = entity.email,
-            isActive = entity.isActive,
-            roles = emptySet(), // TODO: Implement role mapping
-            clientId = entity.clientId,
-            organizationId = entity.organizationId,
-            lastLogin = entity.lastLogin
+    override suspend fun create(document: Document): Either<DocumentError, Document> = try {
+        logger.debug("Creating document: ${document.id}")
+        
+        jdbcTemplate.update("""
+            INSERT INTO ad_document (
+                id, type_id, display_name, description, status, 
+                created_by, created_at, updated_by, updated_at
+            ) VALUES (?, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP, ?, CURRENT_TIMESTAMP)
+        """,
+            document.id,
+            document.type.id,
+            document.displayName.value,
+            document.description?.value,
+            document.status.name,
+            document.metadata.audit.createdBy,
+            document.metadata.audit.updatedBy
         )
 
-    fun toEntity(domain: User): UserEntity =
-        UserEntity(
-            id = domain.id,
-            username = domain.username,
-            email = domain.email,
-            passwordHash = "", // Set through security service
-            isActive = domain.isActive,
-            clientId = domain.clientId,
-            organizationId = domain.organizationId,
-            lastLogin = domain.lastLogin
-        )
+        saveAttributes(UUID.fromString(document.id), document.attributes)
+        publishDocumentCreated(document)
+        document.right()
 
-    fun updateEntity(entity: UserEntity, domain: User): UserEntity {
-        entity.username = domain.username
-        entity.email = domain.email
-        entity.isActive = domain.isActive
-        entity.clientId = domain.clientId
-        entity.organizationId = domain.organizationId
-        entity.updatedAt = Instant.now()
-        return entity
+    } catch (e: Exception) {
+        logger.error("Failed to create document: ${document.id}", e)
+        DocumentError.ValidationFailed("Failed to create document: ${e.message}").left()
     }
+
+    private fun saveAttributes(documentId: UUID, attributes: Map<String, Any>) {
+        attributes.forEach { (key, value) ->
+            jdbcTemplate.update("""
+                INSERT INTO ad_document_attribute (
+                    document_id, name, value, created_by, created_at
+                ) VALUES (?, ?, ?, 'system', CURRENT_TIMESTAMP)
+                ON CONFLICT (document_id, name) DO UPDATE SET 
+                    value = EXCLUDED.value
+            """,
+                documentId,
+                key,
+                value.toString()
+            )
+        }
+    }
+
+    override suspend fun update(id: UUID, document: Document): Either<DocumentError, Document> = try {
+        logger.debug("Updating document: $id")
+        
+        val updated = jdbcTemplate.update("""
+            UPDATE ad_document 
+            SET display_name = ?, description = ?, status = ?, 
+                updated_by = ?, updated_at = CURRENT_TIMESTAMP 
+            WHERE id = ?
+        """,
+            document.displayName.value,
+            document.description?.value,
+            document.status.name,
+            document.metadata.audit.updatedBy,
+            id
+        )
+
+        if (updated == 0) {
+            DocumentError.NotFound(id).left()
+        } else {
+            jdbcTemplate.update(
+                "DELETE FROM ad_document_attribute WHERE document_id = ?", 
+                id
+            )
+            saveAttributes(id, document.attributes)
+            publishDocumentUpdated(document)
+            document.right()
+        }
+
+    } catch (e: Exception) {
+        logger.error("Failed to update document: $id", e)
+        DocumentError.ValidationFailed("Failed to update document: ${e.message}").left()
+    }
+
+    override suspend fun findById(id: UUID): Either<DocumentError, Document?> = try {
+        jdbcTemplate.query("""
+            SELECT d.*, dt.name as type_name, dt.display_name as type_display_name 
+            FROM ad_document d
+            JOIN ad_document_type dt ON d.type_id = dt.id 
+            WHERE d.id = ?
+        """, documentMapper, id)
+            .firstOrNull()
+            .right()
+            
+    } catch (e: Exception) {
+        logger.error("Failed to find document: $id", e)
+        DocumentError.ValidationFailed("Failed to find document: ${e.message}").left()
+    }
+
+    override suspend fun search(criteria: SearchCriteria): Flow<Document> = flow {
+        val conditions = mutableListOf<String>()
+        val params = mutableListOf<Any>()
+
+        criteria.types?.let { typesList ->
+            conditions.add("d.type_id IN ${typesList.joinToString(",", "(", ")") { "?" }}")
+            params.addAll(typesList)
+        }
+
+        criteria.statuses?.let { statusList ->
+            conditions.add("d.status IN ${statusList.joinToString(",", "(", ")") { "?" }}")
+            params.addAll(statusList.map { it.name })
+        }
+
+        criteria.dateRange?.let { dateRange ->
+            conditions.add("d.created_at BETWEEN ? AND ?")
+            params.add(dateRange.from)
+            params.add(dateRange.to)
+        }
+
+        val whereClause = if (conditions.isNotEmpty()) {
+            "WHERE ${conditions.joinToString(" AND ")}"
+        } else ""
+
+        val sql = """
+            SELECT d.*, dt.name as type_name, dt.display_name as type_display_name
+            FROM ad_document d
+            JOIN ad_document_type dt ON d.type_id = dt.id
+            $whereClause 
+            ORDER BY d.created_at DESC
+            LIMIT ? OFFSET ?
+        """
+
+        params.add(criteria.pageSize)
+        params.add(criteria.pageSize * criteria.page)
+
+        jdbcTemplate.query(
+            sql,
+            documentMapper,
+            *params.toTypedArray()
+        ).forEach { emit(it) }
+    }
+
+    @Transactional
+    override suspend fun delete(id: UUID): Either<DocumentError, Unit> = try {
+        jdbcTemplate.update("DELETE FROM ad_document_attribute WHERE document_id = ?", id)
+        val deleted = jdbcTemplate.update("DELETE FROM ad_document WHERE id = ?", id)
+
+        if (deleted > 0) Unit.right()
+        else DocumentError.NotFound(id).left()
+
+    } catch (e: Exception) {
+        logger.error("Failed to delete document: $id", e)
+        DocumentError.ValidationFailed("Failed to delete document: ${e.message}").left()
+    }
+
+    @Transactional
+    override suspend fun changeStatus(id: UUID, status: DocumentStatus): Either<DocumentError, Document> = try {
+        findById(id).flatMap { document ->
+            document?.let { doc ->
+                doc.validateStatusTransition(status).map {
+                    jdbcTemplate.update("""
+                        UPDATE ad_document 
+                        SET status = ?, updated_by = ?, updated_at = CURRENT_TIMESTAMP
+                        WHERE id = ?
+                    """,
+                        status.name,
+                        doc.metadata.audit.updatedBy,
+                        id
+                    )
+                    doc.copy(status = status)
+                }
+            } ?: DocumentError.NotFound(id).left()
+        }
+    } catch (e: Exception) {
+        logger.error("Failed to change document status: $id", e)
+        DocumentError.ValidationFailed("Failed to change status: ${e.message}").left()
+    }
+
+    private fun publishDocumentCreated(document: Document) {
+        eventPublisher.publish(
+            DocumentEvent.DocumentCreated(
+                metadata = EventMetadata(
+                    user = document.metadata.audit.updatedBy,
+                    correlationId = UUID.randomUUID().toString()
+                ),
+                documentId = UUID.fromString(document.id),
+                type = document.type.name,
+                status = document.status
+            )
+        )
+    }
+
+    private fun publishDocumentUpdated(document: Document) {
+        eventPublisher.publish(
+            DocumentEvent.DocumentModified(
+                metadata = EventMetadata(
+                    user = document.metadata.audit.updatedBy,
+                    correlationId = UUID.randomUUID().toString()
+                ),
+                documentId = UUID.fromString(document.id),
+                changes = mapOf() // TODO: Track actual changes
+            )
+        )
+    }
+
+    private fun loadDocumentType(typeId: UUID): DocumentType {
+        return jdbcTemplate.queryForObject("""
+            SELECT * FROM ad_document_type WHERE id = ?
+        """, { rs: ResultSet, _: Int ->
+            DocumentType(
+                metadata = EntityMetadata(
+                    id = rs.getString("id"),
+                    audit = AuditInfo(
+                        createdBy = rs.getString("created_by"),
+                        updatedBy = rs.getString("updated_by")
+                    )
+                ),
+                displayName = DisplayName.create(rs.getString("display_name")).orNull()!!,
+                description = rs.getString("description")?.let { Description.create(it).orNull() },
+                name = rs.getString("name"),
+                baseTableId = UUID.fromString(rs.getString("base_table_id")),
+                linesTableId = rs.getString("lines_table_id")?.let { UUID.fromString(it) },
+                workflowId = rs.getString("workflow_id")?.let { UUID.fromString(it) },
+                statusConfig = loadStatusConfig(typeId),
+                isSOTrx = rs.getBoolean("is_sotrx"),
+                isActive = rs.getBoolean("is_active")
+            )
+        }, typeId)!!
+    }
+
+    private fun loadStatusConfig(typeId: UUID): DocumentStatusConfig {
+        val statuses = jdbcTemplate.query("""
+            SELECT * FROM ad_doc_status WHERE type_id = ?
+        """, { rs: ResultSet, _: Int ->
+            DocumentStatusDef(
+                code = rs.getString("code"),
+                name = rs.getString("name"), 
+                description = rs.getString("description"),
+                nextStatuses = loadNextStatuses(rs.getString("code"))
+            )
+        }, typeId)
+            .associateBy { it.code }
+
+        return DocumentStatusConfig(
+            statuses = statuses,
+            defaultStatus = jdbcTemplate.queryForObject(
+                "SELECT default_status FROM ad_document_type WHERE id = ?",
+                String::class.java,
+                typeId
+            )!!,
+            closingStatuses = loadClosingStatuses(typeId)
+        )
+    }
+
+    private fun loadNextStatuses(statusCode: String): Set<String> =
+        jdbcTemplate
+            .queryForList(
+                "SELECT to_status FROM ad_doc_status_transition WHERE from_status = ?",
+                String::class.java,
+                statusCode
+            )
+            .toSet()
+
+    private fun loadClosingStatuses(typeId: UUID): Set<String> =
+        jdbcTemplate
+            .queryForList(
+                "SELECT code FROM ad_doc_status WHERE type_id = ? AND is_closing = true",
+                String::class.java,
+                typeId
+            )
+            .toSet()
 }
 EOF
 
-# Create User Events
-create_file "domain/core/security/events/UserEvent.kt" << 'EOF'
-package org.blackerp.domain.events
-
-import org.blackerp.domain.core.security.User
-
-sealed class UserEvent {
-    data class UserCreated(val user: User) : UserEvent()
-    data class UserUpdated(val user: User) : UserEvent()
-    data class UserLoginAttempted(
-        val username: String,
-        val success: Boolean,
-        val failureReason: String?
-    ) : UserEvent()
-}
-EOF
-
-# Add DB migration script
-create_file "infrastructure/database/migration/V1__Create_User_Tables.sql" << 'EOF'
-CREATE TABLE ad_user (
-    id UUID PRIMARY KEY,
-    username VARCHAR(100) UNIQUE NOT NULL,
-    email VARCHAR(255) NOT NULL,
-    password_hash VARCHAR(255) NOT NULL,
-    is_active BOOLEAN DEFAULT TRUE,
-    client_id UUID NOT NULL,
-    organization_id UUID,
-    last_login TIMESTAMP,
-    created_at TIMESTAMP NOT NULL,
-    updated_at TIMESTAMP NOT NULL
-);
-
-CREATE TABLE ad_user_role (
-    user_id UUID NOT NULL REFERENCES ad_user(id),
-    role_id UUID NOT NULL,
-    PRIMARY KEY (user_id, role_id)
-);
-
-CREATE INDEX idx_user_username ON ad_user(username);
-CREATE INDEX idx_user_client ON ad_user(client_id);
-CREATE INDEX idx_user_org ON ad_user(organization_id);
-EOF
-
-echo "Implementation complete. Please verify the following files were created:"
-echo "- infrastructure/persistence/entities/UserEntity.kt"
-echo "- infrastructure/persistence/repositories/SpringUserRepository.kt"
-echo "- infrastructure/persistence/repositories/UserRepositoryImpl.kt"
-echo "- infrastructure/persistence/mappers/UserMapper.kt"
-echo "- domain/core/security/events/UserEvent.kt"
-echo "- infrastructure/database/migration/V1__Create_User_Tables.sql"
-
-echo "Next steps:"
-echo "1. Implement role persistence"
-echo "2. Add user event handlers"
-echo "3. Implement security audit logging"
-echo "4. Add integration tests"
-
-
-./compile.sh 
+echo "Updated DocumentRepositoryImpl.kt with fixes"
