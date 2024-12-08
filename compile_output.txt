@@ -3,19 +3,18 @@ OpenJDK Runtime Environment (build 17.0.13+11-Ubuntu-2ubuntu124.04)
 OpenJDK 64-Bit Server VM (build 17.0.13+11-Ubuntu-2ubuntu124.04, mixed mode, sharing)
 > Task :application:checkKotlinGradlePluginConfigurationErrors
 > Task :domain:checkKotlinGradlePluginConfigurationErrors
-> Task :domain:compileKotlin UP-TO-DATE
-> Task :domain:compileJava NO-SOURCE
 > Task :domain:processResources NO-SOURCE
-> Task :domain:classes UP-TO-DATE
-> Task :domain:jar UP-TO-DATE
-> Task :application:compileKotlin NO-SOURCE
 > Task :infrastructure:checkKotlinGradlePluginConfigurationErrors
 
+> Task :domain:compileKotlin
+w: file:///home/red1/Projects/blackerp/domain/core/workflow/transition/TransitionValidator.kt:64:8 Parameter 'condition' is never used
+w: file:///home/red1/Projects/blackerp/domain/core/workflow/transition/TransitionValidator.kt:65:8 Parameter 'context' is never used
+
+> Task :domain:compileJava NO-SOURCE
+> Task :domain:classes UP-TO-DATE
+> Task :domain:jar
+> Task :application:compileKotlin NO-SOURCE
 > Task :infrastructure:compileKotlin
-w: file:///home/red1/Projects/blackerp/infrastructure/persistence/repositories/DocumentRepositoryImpl.kt:341:37 'queryForObject(String, Array<(out) Any!>?, RowMapper<T!>): T?' is deprecated. Deprecated in Java
-w: file:///home/red1/Projects/blackerp/infrastructure/persistence/repositories/DocumentRepositoryImpl.kt:420:34 Unnecessary non-null assertion (!!) on a non-null receiver of type String
-w: file:///home/red1/Projects/blackerp/infrastructure/persistence/repositories/DocumentRepositoryImpl.kt:428:26 'query(String, Array<(out) Any!>?, RowMapper<T!>): (Mutable)List<T!>' is deprecated. Deprecated in Java
-w: file:///home/red1/Projects/blackerp/infrastructure/persistence/repositories/DocumentRepositoryImpl.kt:435:26 'query(String, Array<(out) Any!>?, RowMapper<T!>): (Mutable)List<T!>' is deprecated. Deprecated in Java
 
 BUILD SUCCESSFUL in 2s
-6 actionable tasks: 4 executed, 2 up-to-date
+6 actionable tasks: 6 executed
