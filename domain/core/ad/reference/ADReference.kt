@@ -24,21 +24,6 @@ data class ADReference(
         get() = uuid.toString()
 }
 
-sealed interface ReferenceType {
-    object List : ReferenceType
-    data class Table(
-        val tableName: String,
-        val keyColumn: String,
-        val displayColumn: String,
-        val whereClause: String? = null,
-        val orderBy: String? = null
-    ) : ReferenceType
-    object Search : ReferenceType
-    data class Custom(
-        val validatorClass: String,
-        val config: Map<String, String> = emptyMap()
-    ) : ReferenceType
-}
 
 data class ValidationRule(
     val expression: String,

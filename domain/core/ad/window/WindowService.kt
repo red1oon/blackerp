@@ -2,9 +2,10 @@
 package org.blackerp.domain.core.ad.window
 
 import arrow.core.Either
-import kotlinx.coroutines.flow.Flow
 import java.util.UUID
+import kotlinx.coroutines.flow.Flow
 import org.blackerp.domain.core.ad.tab.ADTab
+import org.blackerp.domain.core.error.WindowError
 
 interface WindowService {
     suspend fun createWindow(command: CreateWindowCommand): Either<WindowError, ADWindow>

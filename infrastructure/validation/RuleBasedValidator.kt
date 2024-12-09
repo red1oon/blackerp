@@ -1,4 +1,4 @@
-package org.blackerp.domain.validation
+package org.blackerp.infrastructure.validation
 
 import org.springframework.stereotype.Component
 import org.blackerp.domain.core.ad.metadata.services.RuleEvaluator
@@ -17,30 +17,25 @@ class RuleBasedValidator(
 ) {
     private val logger = LoggerFactory.getLogger(RuleBasedValidator::class.java)
 
-    suspend fun validate(
-        entityType: String,
-        context: Map<String, Any>
-    ): Either<ValidationError, Unit> {
+    suspend fun validate(entityType: String, context: Map<String, Any>): Either<ValidationError, Unit> {
         var hasErrors = false
         val errors = mutableListOf<String>()
 
         metadataService.getRules(entityType).collect { rule ->
-            ruleEvaluator.evaluate(rule, context).fold(
-                { error -> 
+            ruleEvaluator.evaluate(rule, context).fold({
+                error ->
                     hasErrors = true
                     errors.add(error.message)
-                },
-                { valid ->
-                    if (!valid) {
-                        hasErrors = true
-                        errors.add(rule.errorMessage ?: "Validation failed")
-                    }
+            }, { valid ->
+                if (!valid) {
+                    hasErrors = true
+                    errors.add(rule.errorMessage ?: "Validation failed")
                 }
-            )
+            })
         }
 
         return if (hasErrors) {
-            ValidationError.InvalidValue(errors.joinToString("; ")).left()
+            ValidationError.InvalidValue(errors.joinToString(";")).left()
         } else {
             Unit.right()
         }

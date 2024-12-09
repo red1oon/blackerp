@@ -1,9 +1,10 @@
-
+// File: domain/core/ad/window/WindowOperations.kt
 package org.blackerp.domain.core.ad.window
 
 import arrow.core.Either
 import kotlinx.coroutines.flow.Flow
 import java.util.UUID
+import org.blackerp.domain.core.error.WindowError
 
 interface WindowOperations {
     suspend fun save(window: ADWindow): Either<WindowError, ADWindow>

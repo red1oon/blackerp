@@ -1,4 +1,3 @@
-// /test-import/domain/build.gradle.kts
 plugins {
     kotlin("jvm")
 }
@@ -10,13 +9,7 @@ kotlin {
 sourceSets {
     main {
         kotlin {
-            // Explicitly list all source directories
-            srcDirs(
-                "core",
-                "core/metadata",
-                "core/shared",
-                "core/values"
-            )
+            srcDirs("core", "core/metadata", "core/shared", "core/values")
         }
     }
 }

@@ -1,4 +1,4 @@
-// domain/core/error/DomainError.kt
+// File: domain/core/error/DomainError.kt
 package org.blackerp.domain.core.error
 
 abstract class DomainError(
