@@ -15,8 +15,6 @@ fun EntityMetadata.update(user: String): EntityMetadata {
             updatedAt = Instant.now(),
             updatedBy = user
         ),
-        version = version.copy(
-            version = version.version + 1
-        )
+        version = version.copy(version = version.version + 1)
     )
 }

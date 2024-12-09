@@ -20,18 +20,25 @@ data class ADReference(
     val parentId: UUID? = null,
     val sortOrder: Int = 0
 ) : ADObject {
-    override val id: String get() = uuid.toString()
+    override val id: String 
+        get() = uuid.toString()
 }
 
-data class CreateReferenceParams(
-    val metadata: EntityMetadata,
-    val displayName: DisplayName,
-    val description: Description?,
-    val type: ReferenceType,
-    val validationRule: ValidationRule? = null,
-    val parentId: UUID? = null,
-    val sortOrder: Int = 0
-)
+sealed interface ReferenceType {
+    object List : ReferenceType
+    data class Table(
+        val tableName: String,
+        val keyColumn: String,
+        val displayColumn: String,
+        val whereClause: String? = null,
+        val orderBy: String? = null
+    ) : ReferenceType
+    object Search : ReferenceType
+    data class Custom(
+        val validatorClass: String,
+        val config: Map<String, String> = emptyMap()
+    ) : ReferenceType
+}
 
 data class ValidationRule(
     val expression: String,

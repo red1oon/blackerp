@@ -4,7 +4,7 @@ import org.blackerp.domain.core.shared.EntityMetadata
 import org.blackerp.domain.core.values.*
 import org.blackerp.domain.core.ad.base.ADObject
 import arrow.core.Either
-import arrow.core.right 
+import arrow.core.right
 import arrow.core.left
 import java.util.UUID
 
@@ -19,13 +19,14 @@ data class DocumentType(
     override val description: Description?,
     val name: String,
     val baseTableId: UUID,
-    val linesTableId: UUID?, // For header-line type documents
-    val workflowId: UUID?, // Optional workflow definition
+    val linesTableId: UUID?,  // For header-line type documents
+    val workflowId: UUID?,    // Optional workflow definition
     val statusConfig: DocumentStatusConfig,
     val isSOTrx: Boolean = false,
     val isActive: Boolean = true
 ) : ADObject {
-    override val id: String get() = uuid.toString()
+    override val id: String 
+        get() = uuid.toString()
 
     fun validateStatusTransition(from: String, to: String): Boolean =
         statusConfig.validateTransition(from, to)
@@ -95,12 +96,4 @@ data class DocumentStatusDef(
     val name: String,
     val description: String?,
     val nextStatuses: Set<String>
-)
-
-// Document Line represents a detail record in a header-lines document
-data class DocumentLine(
-    val id: UUID,
-    val documentId: UUID,
-    val lineNo: Int,
-    val attributes: Map<String, Any>
 )

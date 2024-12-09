@@ -17,16 +17,17 @@ data class ADWindow(
     val name: WindowName,
     val tabs: List<ADTab>,
     val isActive: Boolean = true,
-    val isSOTrx: Boolean = true,  // Sales/Purchase indicator
+    val isSOTrx: Boolean = true, // Sales/Purchase indicator
     val windowType: WindowType = WindowType.MAINTAIN
 ) : ADObject {
-    override val id: String get() = uuid.toString()
+    override val id: String 
+        get() = uuid.toString()
 }
 
 enum class WindowType {
-    MAINTAIN,    // Regular maintenance window
-    QUERY,       // Query/lookup window
-    TRANSACTION  // Transaction entry window
+    MAINTAIN,  // Regular maintenance window
+    QUERY,     // Query/lookup window
+    TRANSACTION // Transaction entry window
 }
 
 data class WindowField(
@@ -42,9 +43,3 @@ data class WindowField(
     val defaultValue: String? = null,
     val validationRule: String? = null
 )
-
-sealed class WindowError(message: String) : Exception(message) {
-    data class ValidationFailed(val details: String) : WindowError("Window validation failed: $details")
-    data class NotFound(val id: UUID) : WindowError("Window not found: $id")
-    data class TabError(val details: String) : WindowError("Tab error: $details")
-}

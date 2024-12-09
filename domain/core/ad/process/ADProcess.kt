@@ -32,16 +32,6 @@ data class ADProcess(
     }
 }
 
-data class CreateProcessParams(
-    val metadata: EntityMetadata,
-    val displayName: DisplayName,
-    val description: Description?,
-    val type: ProcessType,
-    val parameters: List<ProcessParameter>,
-    val implementation: ProcessImplementation,
-    val schedule: ProcessSchedule?
-)
-
 sealed interface ProcessImplementation {
     data class JavaClass(val className: String) : ProcessImplementation
     data class DatabaseFunction(val functionName: String) : ProcessImplementation
@@ -49,6 +39,6 @@ sealed interface ProcessImplementation {
 }
 
 data class ProcessSchedule(
-    val cronExpression: String, 
+    val cronExpression: String,
     val enabled: Boolean = true
 )

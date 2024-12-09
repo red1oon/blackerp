@@ -92,4 +92,4 @@ CREATE INDEX idx_doc_type_name ON ad_document_type(name);
 CREATE INDEX idx_doc_status ON ad_document(status);
 CREATE INDEX idx_doc_type ON ad_document(type_id);
 CREATE INDEX idx_doc_history ON ad_document_history(document_id, changed_at);
-CREATE INDEX idx_doc_attribute ON ad_document_attribute(document_id); 
+CREATE INDEX idx_doc_attribute ON ad_document_attribute(document_id);
