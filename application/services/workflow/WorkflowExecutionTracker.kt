@@ -30,12 +30,11 @@ class WorkflowExecutionTracker {
                 status = status,
                 endTime = if (status.isTerminal()) Instant.now() else null
             )
-            logger.info("Updated execution status: {} -> {}", executionId, status)
+            logger.info("Updated execution status: {}-> {}", executionId, status)
         }
     }
 
-    fun getExecutionState(executionId: UUID): WorkflowExecutionState? =
-        activeExecutions[executionId]
+    fun getExecutionState(executionId: UUID): WorkflowExecutionState? = activeExecutions[executionId]
 }
 
 data class WorkflowExecutionState(
@@ -54,6 +53,6 @@ enum class ExecutionStatus {
     COMPLETED,
     FAILED,
     CANCELLED;
-
+    
     fun isTerminal() = this != RUNNING
 }

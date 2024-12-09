@@ -32,11 +32,11 @@ class WorkflowEngine(
         parameters: Map<String, Any> = emptyMap()
     ): Either<WorkflowError, Document> = withContext(Dispatchers.IO) {
         logger.debug("Processing workflow for document $documentId with action: $action")
-        
+
         try {
             documentService.findById(documentId)
                 .flatMap { document ->
-                    document?.let { doc -> 
+                    document?.let { doc ->
                         executeWorkflow(doc, action, parameters)
                     } ?: WorkflowError.NotFound(documentId).left()
                 }
@@ -48,22 +48,22 @@ class WorkflowEngine(
 
     private suspend fun executeWorkflow(
         document: Document,
-        action: String, 
+        action: String,
         parameters: Map<String, Any>
     ): Either<WorkflowError, Document> {
-        val workflowId = document.type.workflowId
+        val workflowId = document.type.workflowId 
             ?: return WorkflowError.ValidationError("No workflow defined for document type").left()
 
         return validateTransition(document.status.name, action)
             .flatMap { transition ->
                 // Execute any actions defined for this transition
                 executeTransitionActions(transition, document, parameters)
-                    .flatMap { 
+                    .flatMap {
                         // Update document status
                         documentService.changeStatus(
                             UUID.fromString(document.id),
                             DocumentStatus.valueOf(action)
-                        ).mapLeft { error -> 
+                        ).mapLeft { error ->
                             WorkflowError.ProcessingError(error.message)
                         }
                     }
@@ -83,10 +83,8 @@ class WorkflowEngine(
         return transitionValidator.validate(currentState, targetState)
             .mapLeft { error ->
                 when (error) {
-                    is TransitionError.InvalidTransition ->
-                        WorkflowError.ValidationError(error.message)
-                    is TransitionError.PermissionDenied ->
-                        WorkflowError.ValidationError(error.message)
+                    is TransitionError.InvalidTransition -> WorkflowError.ValidationError(error.message)
+                    is TransitionError.PermissionDenied -> WorkflowError.ValidationError(error.message)
                     else -> WorkflowError.ProcessingError(error.message ?: "Unknown error")
                 }
             }
