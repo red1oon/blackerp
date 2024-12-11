@@ -16,18 +16,25 @@ class DomainEventPublisher(
     fun publish(event: DomainEvent) {
         val correlationId = MDC.get("correlationId") ?: UUID.randomUUID().toString()
         MDC.put("correlationId", correlationId)
-        
+
         try {
             logger.debug("Publishing event: {} with correlationId: {}", 
-                event.javaClass.simpleName, correlationId)
+                event.javaClass.simpleName,
+                correlationId
+            )
             
             applicationEventPublisher.publishEvent(event)
             
             logger.debug("Successfully published event: {} with correlationId: {}", 
-                event.javaClass.simpleName, correlationId)
+                event.javaClass.simpleName,
+                correlationId
+            )
         } catch (e: Exception) {
             logger.error("Failed to publish event: {} with correlationId: {}", 
-                event.javaClass.simpleName, correlationId, e)
+                event.javaClass.simpleName,
+                correlationId,
+                e
+            )
             throw e
         } finally {
             MDC.remove("correlationId")

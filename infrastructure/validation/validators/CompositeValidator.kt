@@ -12,10 +12,10 @@ class CompositeValidator<T>(
 ) {
     fun validate(target: T): Either<TableError, T> {
         val violations = mutableListOf<TableError.Violation>()
-        
+
         validators.forEach { validator ->
             validator.validate(target).fold(
-                { error -> 
+                { error ->
                     when (error) {
                         is TableError.ValidationError -> violations.addAll(error.violations)
                         else -> return error.left()
@@ -24,7 +24,7 @@ class CompositeValidator<T>(
                 { /* continue validation */ }
             )
         }
-        
+
         return if (violations.isEmpty()) {
             target.right()
         } else {

@@ -13,7 +13,6 @@ import java.util.UUID
 class MetadataServiceImpl(
     private val metadataRepository: MetadataRepository
 ) : MetadataService {
-
     @Transactional(readOnly = true)
     override suspend fun getRules(entityType: String): Flow<ADRule> =
         metadataRepository.findRulesByType(entityType)

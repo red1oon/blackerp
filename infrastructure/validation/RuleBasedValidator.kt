@@ -22,16 +22,18 @@ class RuleBasedValidator(
         val errors = mutableListOf<String>()
 
         metadataService.getRules(entityType).collect { rule ->
-            ruleEvaluator.evaluate(rule, context).fold({
-                error ->
+            ruleEvaluator.evaluate(rule, context).fold(
+                { error -> 
                     hasErrors = true
                     errors.add(error.message)
-            }, { valid ->
-                if (!valid) {
-                    hasErrors = true
-                    errors.add(rule.errorMessage ?: "Validation failed")
+                },
+                { valid ->
+                    if (!valid) {
+                        hasErrors = true
+                        errors.add(rule.errorMessage ?: "Validation failed")
+                    }
                 }
-            })
+            )
         }
 
         return if (hasErrors) {

@@ -10,7 +10,7 @@ import org.slf4j.LoggerFactory
 @Service
 class MetadataEvaluator {
     private val logger = LoggerFactory.getLogger(MetadataEvaluator::class.java)
-    
+
     fun evaluateRule(rule: ADRule, context: Map<String, Any>): Either<MetadataError, Boolean> = try {
         // Simple evaluation for POC
         // TODO: Implement proper expression evaluation engine
@@ -23,12 +23,12 @@ class MetadataEvaluator {
         logger.error("Rule evaluation failed: ${rule.id}", e)
         MetadataError.ValidationFailed("Rule evaluation failed: ${e.message}").left()
     }
-    
+
     private fun evaluateValidation(expression: String, context: Map<String, Any>): Either<MetadataError, Boolean> {
         // Mock validation for POC
         return true.right()
     }
-    
+
     private fun evaluateCalculation(expression: String, context: Map<String, Any>): Either<MetadataError, Boolean> {
         // Mock calculation for POC
         return true.right()

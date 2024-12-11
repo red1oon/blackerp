@@ -1,0 +1,1912 @@
+Generating folder structure...
+-------------------------------------------
+.
+├── frontend.sh
+├── index.html
+├── package.json
+├── package-lock.json
+├── postcss.config.cjs
+├── project_listing.txt
+├── README.md
+├── src
+│   ├── api
+│   │   ├── mockData.ts
+│   │   └── tableApi.ts
+│   ├── App.tsx
+│   ├── assets
+│   ├── components
+│   │   ├── tables
+│   │   │   ├── DataTableWithState.tsx
+│   │   │   ├── index.ts
+│   │   │   └── TableManagement.tsx
+│   │   └── ui
+│   │       ├── alert.tsx
+│   │       ├── button.tsx
+│   │       ├── card.tsx
+│   │       └── table.tsx
+│   ├── hooks
+│   │   └── useTableOperations.ts
+│   ├── index.css
+│   ├── layouts
+│   ├── lib
+│   │   ├── providers
+│   │   │   └── QueryProvider.tsx
+│   │   ├── utils
+│   │   └── utils.ts
+│   ├── main.tsx
+│   ├── pages
+│   ├── __tests__
+│   ├── types
+│   │   └── table.ts
+│   └── utils
+├── tailwind.config.cjs
+├── tsconfig.json
+├── tsconfig.node.json
+└── vite.config.ts
+
+16 directories, 27 files
+
+
+
+Generating file details...
+-------------------------------------------
+File: ./src/main.tsx
+// Classpath: src.main.tsx
+
+import React from 'react'
+import ReactDOM from 'react-dom/client'
+import App from './App'
+import './index.css'
+
+ReactDOM.createRoot(document.getElementById('root')!).render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>,
+)
+
+
+
+File: ./src/components/ui/card.tsx
+// Classpath: src.components.ui.card.tsx
+
+// src/components/ui/card.tsx
+import React from 'react';
+
+export const Card: React.FC<{children: React.ReactNode}> = ({ children }) => (
+  <div className="bg-white rounded-lg shadow-md p-4">
+    {children}
+  </div>
+);
+
+export const CardHeader: React.FC<{children: React.ReactNode}> = ({ children }) => (
+  <div className="mb-4">
+    {children}
+  </div>
+);
+
+export const CardTitle: React.FC<{children: React.ReactNode}> = ({ children }) => (
+  <h2 className="text-xl font-bold text-gray-900">
+    {children}
+  </h2>
+);
+
+export const CardDescription: React.FC<{children: React.ReactNode}> = ({ children }) => (
+  <p className="text-sm text-gray-600">
+    {children}
+  </p>
+);
+
+export const CardContent: React.FC<{children: React.ReactNode}> = ({ children }) => (
+  <div>
+    {children}
+  </div>
+);
+
+
+
+File: ./src/components/ui/button.tsx
+// Classpath: src.components.ui.button.tsx
+
+// src/components/ui/button.tsx
+import React from 'react';
+
+interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  variant?: 'default' | 'outline' | 'destructive';
+  size?: 'sm' | 'md' | 'lg';
+  children: React.ReactNode;
+}
+
+export const Button: React.FC<ButtonProps> = ({ 
+  variant = 'default', 
+  size = 'md', 
+  children,
+  className = '',
+  ...props 
+}) => {
+  const baseStyles = 'inline-flex items-center rounded font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2';
+  
+  const variants = {
+    default: 'bg-slate-900 text-white hover:bg-slate-800',
+    outline: 'border border-slate-200 bg-transparent hover:bg-slate-100 text-slate-900',
+    destructive: 'bg-red-600 text-white hover:bg-red-700'
+  };
+  
+  const sizes = {
+    sm: 'px-3 py-1.5 text-sm',
+    md: 'px-4 py-2',
+    lg: 'px-6 py-3'
+  };
+
+  return (
+    <button
+      className={`${baseStyles} ${variants[variant]} ${sizes[size]} ${className}`}
+      {...props}
+    >
+      {children}
+    </button>
+  );
+};
+
+
+
+File: ./src/components/ui/alert.tsx
+// Classpath: src.components.ui.alert.tsx
+
+import * as React from "react"
+import { cn } from "@/lib/utils"
+
+const Alert = React.forwardRef<
+  HTMLDivElement,
+  React.HTMLAttributes<HTMLDivElement> & {
+    variant?: "default" | "destructive"
+  }
+>(({ className, variant = "default", ...props }, ref) => (
+  <div
+    ref={ref}
+    role="alert"
+    className={cn(
+      "relative w-full rounded-lg border px-4 py-3 text-sm [&>svg+div]:translate-y-[-3px] [&>svg]:absolute [&>svg]:left-4 [&>svg]:top-4 [&>svg]:text-foreground [&>svg~*]:pl-7",
+      variant === "destructive" && "border-destructive/50 text-destructive dark:border-destructive [&>svg]:text-destructive",
+      className
+    )}
+    {...props}
+  />
+))
+Alert.displayName = "Alert"
+
+const AlertTitle = React.forwardRef<
+  HTMLParagraphElement,
+  React.HTMLAttributes<HTMLHeadingElement>
+>(({ className, ...props }, ref) => (
+  <h5
+    ref={ref}
+    className={cn("mb-1 font-medium leading-none tracking-tight", className)}
+    {...props}
+  />
+))
+AlertTitle.displayName = "AlertTitle"
+
+const AlertDescription = React.forwardRef<
+  HTMLParagraphElement,
+  React.HTMLAttributes<HTMLParagraphElement>
+>(({ className, ...props }, ref) => (
+  <div
+    ref={ref}
+    className={cn("text-sm [&_p]:leading-relaxed", className)}
+    {...props}
+  />
+))
+AlertDescription.displayName = "AlertDescription"
+
+export { Alert, AlertTitle, AlertDescription }
+
+
+
+File: ./src/components/ui/table.tsx
+// Classpath: src.components.ui.table.tsx
+
+import * as React from "react"
+
+import { cn } from "@/lib/utils"
+
+const Table = React.forwardRef<
+  HTMLTableElement,
+  React.HTMLAttributes<HTMLTableElement>
+>(({ className, ...props }, ref) => (
+  <div className="relative w-full overflow-auto">
+    <table
+      ref={ref}
+      className={cn("w-full caption-bottom text-sm", className)}
+      {...props}
+    />
+  </div>
+))
+Table.displayName = "Table"
+
+const TableHeader = React.forwardRef<
+  HTMLTableSectionElement,
+  React.HTMLAttributes<HTMLTableSectionElement>
+>(({ className, ...props }, ref) => (
+  <thead ref={ref} className={cn("[&_tr]:border-b", className)} {...props} />
+))
+TableHeader.displayName = "TableHeader"
+
+const TableBody = React.forwardRef<
+  HTMLTableSectionElement,
+  React.HTMLAttributes<HTMLTableSectionElement>
+>(({ className, ...props }, ref) => (
+  <tbody
+    ref={ref}
+    className={cn("[&_tr:last-child]:border-0", className)}
+    {...props}
+  />
+))
+TableBody.displayName = "TableBody"
+
+const TableRow = React.forwardRef<
+  HTMLTableRowElement,
+  React.HTMLAttributes<HTMLTableRowElement>
+>(({ className, ...props }, ref) => (
+  <tr
+    ref={ref}
+    className={cn(
+      "border-b transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted",
+      className
+    )}
+    {...props}
+  />
+))
+TableRow.displayName = "TableRow"
+
+const TableHead = React.forwardRef<
+  HTMLTableCellElement,
+  React.ThHTMLAttributes<HTMLTableCellElement>
+>(({ className, ...props }, ref) => (
+  <th
+    ref={ref}
+    className={cn(
+      "h-12 px-4 text-left align-middle font-medium text-muted-foreground [&:has([role=checkbox])]:pr-0",
+      className
+    )}
+    {...props}
+  />
+))
+TableHead.displayName = "TableHead"
+
+const TableCell = React.forwardRef<
+  HTMLTableCellElement,
+  React.TdHTMLAttributes<HTMLTableCellElement>
+>(({ className, ...props }, ref) => (
+  <td
+    ref={ref}
+    className={cn("p-4 align-middle [&:has([role=checkbox])]:pr-0", className)}
+    {...props}
+  />
+))
+TableCell.displayName = "TableCell"
+
+export {
+  Table,
+  TableHeader,
+  TableBody,
+  TableRow,
+  TableHead,
+  TableCell,
+}
+
+
+
+File: ./src/components/tables/TableManagement.tsx
+// Classpath: src.components.tables.TableManagement.tsx
+
+// src/components/tables/TableManagement.tsx
+import React, { useState, useEffect } from 'react';
+import { Plus, RefreshCw, Edit, Trash2 } from 'lucide-react';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card';
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from '@/components/ui/table';
+import { Button } from '@/components/ui/button';
+import { useTableOperations } from '@/hooks/useTableOperations';
+import { Table as TableType } from '@/types/table';
+
+const TableManagement: React.FC = () => {
+  const { tables, loading, error, fetchTables } = useTableOperations();
+
+  useEffect(() => {
+    fetchTables();
+  }, []);
+
+  if (loading) {
+    return <div>Loading tables...</div>;
+  }
+
+  if (error) {
+    return <div>Error: {error}</div>;
+  }
+
+  return (
+    <div className="container mx-auto p-4 space-y-4">
+      <div className="flex justify-between items-center">
+        <h1 className="text-2xl font-bold">Table Management</h1>
+        <div className="space-x-2">
+          <Button size="sm" variant="outline" onClick={fetchTables}>
+            <RefreshCw className="h-4 w-4 mr-2" />
+            Refresh
+          </Button>
+          <Button size="sm">
+            <Plus className="h-4 w-4 mr-2" />
+            Create Table
+          </Button>
+        </div>
+      </div>
+
+      <div className="grid grid-cols-1 gap-4">
+        {tables.map(table => (
+          <Card key={table.id}>
+            <CardHeader>
+              <div className="flex justify-between items-start">
+                <div>
+                  <CardTitle>{table.displayName}</CardTitle>
+                  <CardDescription>{table.name}</CardDescription>
+                </div>
+                <div className="space-x-2">
+                  <Button size="sm" variant="outline">
+                    <Edit className="h-4 w-4 mr-2" />
+                    Edit
+                  </Button>
+                  <Button size="sm" variant="destructive">
+                    <Trash2 className="h-4 w-4 mr-2" />
+                    Delete
+                  </Button>
+                </div>
+              </div>
+            </CardHeader>
+            <CardContent>
+              <div className="text-sm text-gray-600 mb-4">
+                {table.description}
+              </div>
+              <Table>
+                <TableHeader>
+                  <TableRow>
+                    <TableHead>Column Name</TableHead>
+                    <TableHead>Type</TableHead>
+                    <TableHead>Mandatory</TableHead>
+                    <TableHead>Properties</TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
+                  {table.columns.map((column, idx) => (
+                    <TableRow key={idx}>
+                      <TableCell>{column.name}</TableCell>
+                      <TableCell>{column.type}</TableCell>
+                      <TableCell>
+                        {column.mandatory ? 'Yes' : 'No'}
+                      </TableCell>
+                      <TableCell>
+                        {column.length && `Length: ${column.length}`}
+                        {column.precision && `Precision: ${column.precision}`}
+                        {column.scale && `, Scale: ${column.scale}`}
+                        {column.defaultValue && `, Default: ${column.defaultValue}`}
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </CardContent>
+          </Card>
+        ))}
+      </div>
+    </div>
+  );
+};
+
+export default TableManagement;
+
+
+File: ./src/components/tables/DataTableWithState.tsx
+// Classpath: src.components.tables.DataTableWithState.tsx
+
+// frontend/src/components/tables/DataTableWithState.tsx
+import React from 'react';
+import { useQuery } from '@tanstack/react-query';
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "../../components/ui/table";  // Changed from @/components/ui/table
+import { Alert, AlertTitle, AlertDescription } from "../../components/ui/alert";  // Changed from @/components/ui/alert
+import { Loader2 } from "lucide-react";
+
+export interface Table {
+  id: string;
+  name: string;
+  displayName: string;
+  accessLevel: string;
+}
+
+export default function DataTableWithState() {
+  const {
+    data: tables,
+    isLoading,
+    isError,
+    error
+  } = useQuery<Table[]>({
+    queryKey: ['tables'],
+    queryFn: async () => {
+      const response = await fetch('/api/tables');
+      if (!response.ok) {
+        throw new Error('Failed to fetch tables');
+      }
+      return response.json();
+    }
+  });
+
+  if (isLoading) {
+    return (
+      <div className="w-full h-48 flex items-center justify-center">
+        <Loader2 className="h-8 w-8 animate-spin text-primary" />
+      </div>
+    );
+  }
+
+  if (isError) {
+    return (
+      <Alert variant="destructive" className="mb-4">
+        <AlertTitle>Error</AlertTitle>
+        <AlertDescription>
+          {error instanceof Error ? error.message : 'Failed to load tables'}
+        </AlertDescription>
+      </Alert>
+    );
+  }
+
+  return (
+    <div className="rounded-md border">
+      <Table>
+        <TableHeader>
+          <TableRow>
+            <TableHead>Name</TableHead>
+            <TableHead>Display Name</TableHead>
+            <TableHead>Access Level</TableHead>
+            <TableHead>Actions</TableHead>
+          </TableRow>
+        </TableHeader>
+        <TableBody>
+          {tables?.length === 0 ? (
+            <TableRow>
+              <TableCell colSpan={4} className="text-center text-muted-foreground">
+                No tables found
+              </TableCell>
+            </TableRow>
+          ) : (
+            tables?.map((table) => (
+              <TableRow key={table.id}>
+                <TableCell>{table.name}</TableCell>
+                <TableCell>{table.displayName}</TableCell>
+                <TableCell>{table.accessLevel}</TableCell>
+                <TableCell>
+                  {/* Actions will be added later */}
+                </TableCell>
+              </TableRow>
+            ))
+          )}
+        </TableBody>
+      </Table>
+    </div>
+  );
+}
+
+
+
+File: ./src/App.tsx
+// Classpath: src.App.tsx
+
+import QueryProvider from './lib/providers/QueryProvider';
+import { DataTableWithState } from './components/tables';
+
+function App() {
+  return (
+    <QueryProvider>
+      <div className="container mx-auto py-10">
+        <h1 className="text-2xl font-bold mb-6">Tables</h1>
+        <DataTableWithState />
+      </div>
+    </QueryProvider>
+  );
+}
+
+export default App;
+
+
+
+File: ./src/lib/providers/QueryProvider.tsx
+// Classpath: src.lib.providers.QueryProvider.tsx
+
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { ReactNode } from 'react';
+
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      refetchOnWindowFocus: false,
+      retry: 1,
+    },
+  },
+});
+
+export default function QueryProvider({ children }: { children: ReactNode }) {
+  return (
+    <QueryClientProvider client={queryClient}>
+      {children}
+    </QueryClientProvider>
+  );
+}
+
+
+
+File: ./node_modules/balanced-match/.github/FUNDING.yml
+// Classpath: node_modules.balanced-match..github.FUNDING
+
+tidelift: "npm/balanced-match"
+patreon: juliangruber
+
+
+
+File: ./node_modules/resolve/.github/FUNDING.yml
+// Classpath: node_modules.resolve..github.FUNDING
+
+# These are supported funding model platforms
+
+github: [ljharb]
+patreon: # Replace with a single Patreon username
+open_collective: # Replace with a single Open Collective username
+ko_fi: # Replace with a single Ko-fi username
+tidelift: npm/resolve
+community_bridge: # Replace with a single Community Bridge project-name e.g., cloud-foundry
+liberapay: # Replace with a single Liberapay username
+issuehunt: # Replace with a single IssueHunt username
+otechie: # Replace with a single Otechie username
+custom: # Replace with up to 4 custom sponsorship URLs e.g., ['link1', 'link2']
+
+
+
+File: ./node_modules/@tanstack/react-query/src/QueryClientProvider.tsx
+// Classpath: node_modules.@tanstack.react-query.src.QueryClientProvider.tsx
+
+'use client'
+import * as React from 'react'
+
+import type { QueryClient } from '@tanstack/query-core'
+
+export const QueryClientContext = React.createContext<QueryClient | undefined>(
+  undefined,
+)
+
+export const useQueryClient = (queryClient?: QueryClient) => {
+  const client = React.useContext(QueryClientContext)
+
+  if (queryClient) {
+    return queryClient
+  }
+
+  if (!client) {
+    throw new Error('No QueryClient set, use QueryClientProvider to set one')
+  }
+
+  return client
+}
+
+export type QueryClientProviderProps = {
+  client: QueryClient
+  children?: React.ReactNode
+}
+
+export const QueryClientProvider = ({
+  client,
+  children,
+}: QueryClientProviderProps): React.JSX.Element => {
+  React.useEffect(() => {
+    client.mount()
+    return () => {
+      client.unmount()
+    }
+  }, [client])
+
+  return (
+    <QueryClientContext.Provider value={client}>
+      {children}
+    </QueryClientContext.Provider>
+  )
+}
+
+
+
+File: ./node_modules/@tanstack/react-query/src/usePrefetchInfiniteQuery.tsx
+// Classpath: node_modules.@tanstack.react-query.src.usePrefetchInfiniteQuery.tsx
+
+import { useQueryClient } from './QueryClientProvider'
+import type {
+  DefaultError,
+  FetchInfiniteQueryOptions,
+  QueryClient,
+  QueryKey,
+} from '@tanstack/query-core'
+
+export function usePrefetchInfiniteQuery<
+  TQueryFnData = unknown,
+  TError = DefaultError,
+  TData = TQueryFnData,
+  TQueryKey extends QueryKey = QueryKey,
+  TPageParam = unknown,
+>(
+  options: FetchInfiniteQueryOptions<
+    TQueryFnData,
+    TError,
+    TData,
+    TQueryKey,
+    TPageParam
+  >,
+  queryClient?: QueryClient,
+) {
+  const client = useQueryClient(queryClient)
+
+  if (!client.getQueryState(options.queryKey)) {
+    client.prefetchInfiniteQuery(options)
+  }
+}
+
+
+
+File: ./node_modules/@tanstack/react-query/src/usePrefetchQuery.tsx
+// Classpath: node_modules.@tanstack.react-query.src.usePrefetchQuery.tsx
+
+import { useQueryClient } from './QueryClientProvider'
+import type {
+  DefaultError,
+  FetchQueryOptions,
+  QueryClient,
+  QueryKey,
+} from '@tanstack/query-core'
+
+export function usePrefetchQuery<
+  TQueryFnData = unknown,
+  TError = DefaultError,
+  TData = TQueryFnData,
+  TQueryKey extends QueryKey = QueryKey,
+>(
+  options: FetchQueryOptions<TQueryFnData, TError, TData, TQueryKey>,
+  queryClient?: QueryClient,
+) {
+  const client = useQueryClient(queryClient)
+
+  if (!client.getQueryState(options.queryKey)) {
+    client.prefetchQuery(options)
+  }
+}
+
+
+
+File: ./node_modules/@tanstack/react-query/src/QueryErrorResetBoundary.tsx
+// Classpath: node_modules.@tanstack.react-query.src.QueryErrorResetBoundary.tsx
+
+'use client'
+import * as React from 'react'
+
+// CONTEXT
+export type QueryErrorResetFunction = () => void
+export type QueryErrorIsResetFunction = () => boolean
+export type QueryErrorClearResetFunction = () => void
+
+export interface QueryErrorResetBoundaryValue {
+  clearReset: QueryErrorClearResetFunction
+  isReset: QueryErrorIsResetFunction
+  reset: QueryErrorResetFunction
+}
+
+function createValue(): QueryErrorResetBoundaryValue {
+  let isReset = false
+  return {
+    clearReset: () => {
+      isReset = false
+    },
+    reset: () => {
+      isReset = true
+    },
+    isReset: () => {
+      return isReset
+    },
+  }
+}
+
+const QueryErrorResetBoundaryContext = React.createContext(createValue())
+
+// HOOK
+
+export const useQueryErrorResetBoundary = () =>
+  React.useContext(QueryErrorResetBoundaryContext)
+
+// COMPONENT
+
+export type QueryErrorResetBoundaryFunction = (
+  value: QueryErrorResetBoundaryValue,
+) => React.ReactNode
+
+export interface QueryErrorResetBoundaryProps {
+  children: QueryErrorResetBoundaryFunction | React.ReactNode
+}
+
+export const QueryErrorResetBoundary = ({
+  children,
+}: QueryErrorResetBoundaryProps) => {
+  const [value] = React.useState(() => createValue())
+  return (
+    <QueryErrorResetBoundaryContext.Provider value={value}>
+      {typeof children === 'function' ? children(value) : children}
+    </QueryErrorResetBoundaryContext.Provider>
+  )
+}
+
+
+
+File: ./node_modules/@tanstack/react-query/src/HydrationBoundary.tsx
+// Classpath: node_modules.@tanstack.react-query.src.HydrationBoundary.tsx
+
+/* eslint-disable react-compiler/react-compiler */
+
+'use client'
+import * as React from 'react'
+
+import { hydrate } from '@tanstack/query-core'
+import { useQueryClient } from './QueryClientProvider'
+import type {
+  DehydratedState,
+  HydrateOptions,
+  OmitKeyof,
+  QueryClient,
+} from '@tanstack/query-core'
+
+export interface HydrationBoundaryProps {
+  state?: unknown
+  options?: OmitKeyof<HydrateOptions, 'defaultOptions'> & {
+    defaultOptions?: OmitKeyof<
+      Exclude<HydrateOptions['defaultOptions'], undefined>,
+      'mutations'
+    >
+  }
+  children?: React.ReactNode
+  queryClient?: QueryClient
+}
+
+export const HydrationBoundary = ({
+  children,
+  options = {},
+  state,
+  queryClient,
+}: HydrationBoundaryProps) => {
+  const client = useQueryClient(queryClient)
+  const [hydrationQueue, setHydrationQueue] = React.useState<
+    DehydratedState['queries'] | undefined
+  >()
+
+  const optionsRef = React.useRef(options)
+  optionsRef.current = options
+
+  // This useMemo is for performance reasons only, everything inside it _must_
+  // be safe to run in every render and code here should be read as "in render".
+  //
+  // This code needs to happen during the render phase, because after initial
+  // SSR, hydration needs to happen _before_ children render. Also, if hydrating
+  // during a transition, we want to hydrate as much as is safe in render so
+  // we can prerender as much as possible.
+  //
+  // For any queries that already exist in the cache, we want to hold back on
+  // hydrating until _after_ the render phase. The reason for this is that during
+  // transitions, we don't want the existing queries and observers to update to
+  // the new data on the current page, only _after_ the transition is committed.
+  // If the transition is aborted, we will have hydrated any _new_ queries, but
+  // we throw away the fresh data for any existing ones to avoid unexpectedly
+  // updating the UI.
+  React.useMemo(() => {
+    if (state) {
+      if (typeof state !== 'object') {
+        return
+      }
+
+      const queryCache = client.getQueryCache()
+      // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
+      const queries = (state as DehydratedState).queries || []
+
+      const newQueries: DehydratedState['queries'] = []
+      const existingQueries: DehydratedState['queries'] = []
+      for (const dehydratedQuery of queries) {
+        const existingQuery = queryCache.get(dehydratedQuery.queryHash)
+
+        if (!existingQuery) {
+          newQueries.push(dehydratedQuery)
+        } else {
+          const hydrationIsNewer =
+            dehydratedQuery.state.dataUpdatedAt >
+            existingQuery.state.dataUpdatedAt
+          const queryAlreadyQueued = hydrationQueue?.find(
+            (query) => query.queryHash === dehydratedQuery.queryHash,
+          )
+
+          if (
+            hydrationIsNewer &&
+            (!queryAlreadyQueued ||
+              dehydratedQuery.state.dataUpdatedAt >
+                queryAlreadyQueued.state.dataUpdatedAt)
+          ) {
+            existingQueries.push(dehydratedQuery)
+          }
+        }
+      }
+
+      if (newQueries.length > 0) {
+        // It's actually fine to call this with queries/state that already exists
+        // in the cache, or is older. hydrate() is idempotent for queries.
+        hydrate(client, { queries: newQueries }, optionsRef.current)
+      }
+      if (existingQueries.length > 0) {
+        setHydrationQueue((prev) =>
+          prev ? [...prev, ...existingQueries] : existingQueries,
+        )
+      }
+    }
+  }, [client, hydrationQueue, state])
+
+  React.useEffect(() => {
+    if (hydrationQueue) {
+      hydrate(client, { queries: hydrationQueue }, optionsRef.current)
+      setHydrationQueue(undefined)
+    }
+  }, [client, hydrationQueue])
+
+  return children as React.ReactElement
+}
+
+
+
+File: ./node_modules/@radix-ui/react-alert-dialog/src/AlertDialog.test.tsx
+// Classpath: node_modules.@radix-ui.react-alert-dialog.src.AlertDialog.test.tsx
+
+import React from 'react';
+import { axe } from 'jest-axe';
+import { RenderResult } from '@testing-library/react';
+import { render, fireEvent } from '@testing-library/react';
+import * as AlertDialog from '@radix-ui/react-alert-dialog';
+
+const OPEN_TEXT = 'Open';
+const CANCEL_TEXT = 'Cancel';
+const ACTION_TEXT = 'Do it';
+const TITLE_TEXT = 'Warning';
+const DESC_TEXT = 'This is a warning';
+const OVERLAY_TEST_ID = 'test-overlay';
+
+const DialogTest = (props: React.ComponentProps<typeof AlertDialog.Root>) => (
+  <AlertDialog.Root {...props}>
+    <AlertDialog.Trigger>{OPEN_TEXT}</AlertDialog.Trigger>
+    <AlertDialog.Overlay data-testid={OVERLAY_TEST_ID} />
+    <AlertDialog.Content>
+      <AlertDialog.Title>{TITLE_TEXT}</AlertDialog.Title>
+      <AlertDialog.Description>{DESC_TEXT}</AlertDialog.Description>
+      <AlertDialog.Cancel>{CANCEL_TEXT}</AlertDialog.Cancel>
+      <AlertDialog.Action>{ACTION_TEXT}</AlertDialog.Action>
+    </AlertDialog.Content>
+  </AlertDialog.Root>
+);
+
+describe('given a default Dialog', () => {
+  let rendered: RenderResult;
+  let title: HTMLElement;
+  let trigger: HTMLElement;
+  let cancelButton: HTMLElement;
+
+  beforeEach(() => {
+    rendered = render(<DialogTest />);
+    trigger = rendered.getByText(OPEN_TEXT);
+  });
+
+  it('should have no accessibility violations in default state', async () => {
+    expect(await axe(rendered.container)).toHaveNoViolations();
+  });
+
+  describe('after clicking the trigger', () => {
+    beforeEach(() => {
+      fireEvent.click(trigger);
+      title = rendered.getByText(TITLE_TEXT);
+      cancelButton = rendered.getByText(CANCEL_TEXT);
+    });
+
+    it('should open the content', () => {
+      expect(title).toBeVisible();
+    });
+
+    it('should have no accessibility violations when open', async () => {
+      expect(await axe(rendered.container)).toHaveNoViolations();
+    });
+
+    it('should focus the cancel button', () => {
+      expect(cancelButton).toHaveFocus();
+    });
+  });
+});
+
+
+
+File: ./node_modules/@radix-ui/react-alert-dialog/src/AlertDialog.stories.tsx
+// Classpath: node_modules.@radix-ui.react-alert-dialog.src.AlertDialog.stories.tsx
+
+import * as React from 'react';
+import { css } from '../../../../stitches.config';
+import * as AlertDialog from '@radix-ui/react-alert-dialog';
+
+export default { title: 'Components/AlertDialog' };
+
+export const Styled = () => (
+  <AlertDialog.Root>
+    <AlertDialog.Trigger className={triggerClass()}>delete everything</AlertDialog.Trigger>
+    <AlertDialog.Portal>
+      <AlertDialog.Overlay className={overlayClass()} />
+      <AlertDialog.Content className={contentClass()}>
+        <AlertDialog.Title className={titleClass()}>Are you sure?</AlertDialog.Title>
+        <AlertDialog.Description className={descriptionClass()}>
+          This will do a very dangerous thing. Thar be dragons!
+        </AlertDialog.Description>
+        <AlertDialog.Action className={actionClass()}>yolo, do it</AlertDialog.Action>
+        <AlertDialog.Cancel className={cancelClass()}>maybe not</AlertDialog.Cancel>
+      </AlertDialog.Content>
+    </AlertDialog.Portal>
+  </AlertDialog.Root>
+);
+
+export const Controlled = () => {
+  const [open, setOpen] = React.useState(false);
+  const [housePurchased, setHousePurchased] = React.useState(false);
+
+  return (
+    <div>
+      <div>
+        <img src="https://i.ibb.co/K54hsKt/house.jpg" alt="a large white house with a red roof" />
+      </div>
+      <AlertDialog.Root open={open} onOpenChange={setOpen}>
+        <AlertDialog.Trigger
+          onClick={(e) => {
+            if (housePurchased) {
+              e.preventDefault();
+              setHousePurchased(false);
+            }
+          }}
+        >
+          {housePurchased ? 'You bought the house! Sell it!' : 'Buy this house'}
+        </AlertDialog.Trigger>
+        <AlertDialog.Portal>
+          <AlertDialog.Overlay className={overlayClass()} />
+          <AlertDialog.Content className={contentClass()}>
+            <AlertDialog.Title>Are you sure?</AlertDialog.Title>
+            <AlertDialog.Description>
+              Houses are very expensive and it looks like you only have €20 in the bank. Maybe
+              consult with a financial advisor?
+            </AlertDialog.Description>
+            <AlertDialog.Action className={actionClass()} onClick={() => setHousePurchased(true)}>
+              buy it anyway
+            </AlertDialog.Action>
+            <AlertDialog.Cancel className={cancelClass()}>
+              good point, I'll reconsider
+            </AlertDialog.Cancel>
+          </AlertDialog.Content>
+        </AlertDialog.Portal>
+      </AlertDialog.Root>
+    </div>
+  );
+};
+
+export const Chromatic = () => (
+  <div
+    style={{
+      display: 'grid',
+      gridTemplateColumns: 'repeat(4, 1fr)',
+      gridTemplateRows: 'repeat(2, 1fr)',
+      height: '100vh',
+    }}
+  >
+    <div>
+      <h1>Uncontrolled</h1>
+      <h2>Closed</h2>
+      <AlertDialog.Root>
+        <AlertDialog.Trigger className={triggerClass()}>delete everything</AlertDialog.Trigger>
+        <AlertDialog.Portal>
+          <AlertDialog.Overlay className={overlayClass()} />
+          <AlertDialog.Content className={chromaticContentClass()}>
+            <AlertDialog.Title className={titleClass()}>Title</AlertDialog.Title>
+            <AlertDialog.Description className={descriptionClass()}>
+              Description
+            </AlertDialog.Description>
+            <AlertDialog.Action className={actionClass()}>Confirm</AlertDialog.Action>
+            <AlertDialog.Cancel className={cancelClass()}>Cancel</AlertDialog.Cancel>
+          </AlertDialog.Content>
+        </AlertDialog.Portal>
+      </AlertDialog.Root>
+
+      <h2>Open</h2>
+      <AlertDialog.Root defaultOpen>
+        <AlertDialog.Trigger className={triggerClass()}>delete everything</AlertDialog.Trigger>
+        <AlertDialog.Portal>
+          <AlertDialog.Overlay
+            className={overlayClass()}
+            style={{ left: 0, bottom: '50%', width: '25%' }}
+          />
+          <AlertDialog.Content
+            className={chromaticContentClass()}
+            style={{ top: '25%', left: '12%' }}
+          >
+            <AlertDialog.Title className={titleClass()}>Title</AlertDialog.Title>
+            <AlertDialog.Description className={descriptionClass()}>
+              Description
+            </AlertDialog.Description>
+            <AlertDialog.Action className={actionClass()}>Confirm</AlertDialog.Action>
+            <AlertDialog.Cancel className={cancelClass()}>Cancel</AlertDialog.Cancel>
+          </AlertDialog.Content>
+        </AlertDialog.Portal>
+      </AlertDialog.Root>
+    </div>
+
+    <div>
+      <h1>Uncontrolled with reordered parts</h1>
+      <h2>Closed</h2>
+      <AlertDialog.Root>
+        <AlertDialog.Portal>
+          <AlertDialog.Overlay className={overlayClass()} />
+          <AlertDialog.Content className={chromaticContentClass()}>
+            <AlertDialog.Title className={titleClass()}>Title</AlertDialog.Title>
+            <AlertDialog.Description className={descriptionClass()}>
+              Description
+            </AlertDialog.Description>
+            <AlertDialog.Action className={actionClass()}>Confirm</AlertDialog.Action>
+            <AlertDialog.Cancel className={cancelClass()}>Cancel</AlertDialog.Cancel>
+          </AlertDialog.Content>
+        </AlertDialog.Portal>
+        <AlertDialog.Trigger className={triggerClass()}>delete everything</AlertDialog.Trigger>
+      </AlertDialog.Root>
+
+      <h2>Open</h2>
+      <AlertDialog.Root defaultOpen>
+        <AlertDialog.Portal>
+          <AlertDialog.Overlay
+            className={overlayClass()}
+            style={{ left: '25%', bottom: '50%', width: '25%' }}
+          />
+          <AlertDialog.Content
+            className={chromaticContentClass()}
+            style={{ top: '25%', left: '37%' }}
+          >
+            <AlertDialog.Title className={titleClass()}>Title</AlertDialog.Title>
+            <AlertDialog.Description className={descriptionClass()}>
+              Description
+            </AlertDialog.Description>
+            <AlertDialog.Action className={actionClass()}>Confirm</AlertDialog.Action>
+            <AlertDialog.Cancel className={cancelClass()}>Cancel</AlertDialog.Cancel>
+          </AlertDialog.Content>
+        </AlertDialog.Portal>
+        <AlertDialog.Trigger className={triggerClass()}>delete everything</AlertDialog.Trigger>
+      </AlertDialog.Root>
+    </div>
+
+    <div>
+      <h1>Controlled</h1>
+      <h2>Closed</h2>
+      <AlertDialog.Root open={false}>
+        <AlertDialog.Trigger className={triggerClass()}>delete everything</AlertDialog.Trigger>
+        <AlertDialog.Portal>
+          <AlertDialog.Overlay className={overlayClass()} />
+          <AlertDialog.Content className={chromaticContentClass()}>
+            <AlertDialog.Title className={titleClass()}>Title</AlertDialog.Title>
+            <AlertDialog.Description className={descriptionClass()}>
+              Description
+            </AlertDialog.Description>
+            <AlertDialog.Action className={actionClass()}>Confirm</AlertDialog.Action>
+            <AlertDialog.Cancel className={cancelClass()}>Cancel</AlertDialog.Cancel>
+          </AlertDialog.Content>
+        </AlertDialog.Portal>
+      </AlertDialog.Root>
+
+      <h2>Open</h2>
+      <AlertDialog.Root open>
+        <AlertDialog.Trigger className={triggerClass()}>delete everything</AlertDialog.Trigger>
+        <AlertDialog.Portal>
+          <AlertDialog.Overlay
+            className={overlayClass()}
+            style={{ left: '50%', bottom: '50%', width: '25%' }}
+          />
+          <AlertDialog.Content
+            className={chromaticContentClass()}
+            style={{ top: '25%', left: '62%' }}
+          >
+            <AlertDialog.Title className={titleClass()}>Title</AlertDialog.Title>
+            <AlertDialog.Description className={descriptionClass()}>
+              Description
+            </AlertDialog.Description>
+            <AlertDialog.Action className={actionClass()}>Confirm</AlertDialog.Action>
+            <AlertDialog.Cancel className={cancelClass()}>Cancel</AlertDialog.Cancel>
+          </AlertDialog.Content>
+        </AlertDialog.Portal>
+      </AlertDialog.Root>
+    </div>
+
+    <div>
+      <h1>Controlled with reordered parts</h1>
+      <h2>Closed</h2>
+      <AlertDialog.Root open={false}>
+        <AlertDialog.Portal>
+          <AlertDialog.Overlay className={overlayClass()} />
+          <AlertDialog.Content className={chromaticContentClass()}>
+            <AlertDialog.Title className={titleClass()}>Title</AlertDialog.Title>
+            <AlertDialog.Description className={descriptionClass()}>
+              Description
+            </AlertDialog.Description>
+            <AlertDialog.Action className={actionClass()}>Confirm</AlertDialog.Action>
+            <AlertDialog.Cancel className={cancelClass()}>Cancel</AlertDialog.Cancel>
+          </AlertDialog.Content>
+        </AlertDialog.Portal>
+        <AlertDialog.Trigger className={triggerClass()}>delete everything</AlertDialog.Trigger>
+      </AlertDialog.Root>
+
+      <h2>Open</h2>
+      <AlertDialog.Root open>
+        <AlertDialog.Portal>
+          <AlertDialog.Overlay
+            className={overlayClass()}
+            style={{ left: '75%', bottom: '50%', width: '25%' }}
+          />
+          <AlertDialog.Content
+            className={chromaticContentClass()}
+            style={{ top: '25%', left: '88%' }}
+          >
+            <AlertDialog.Title className={titleClass()}>Title</AlertDialog.Title>
+            <AlertDialog.Description className={descriptionClass()}>
+              Description
+            </AlertDialog.Description>
+            <AlertDialog.Action className={actionClass()}>Confirm</AlertDialog.Action>
+            <AlertDialog.Cancel className={cancelClass()}>Cancel</AlertDialog.Cancel>
+          </AlertDialog.Content>
+        </AlertDialog.Portal>
+        <AlertDialog.Trigger className={triggerClass()}>delete everything</AlertDialog.Trigger>
+      </AlertDialog.Root>
+    </div>
+
+    <div>
+      <h1>State attributes</h1>
+      <h2>Closed</h2>
+      <AlertDialog.Root>
+        <AlertDialog.Trigger className={triggerAttrClass()}>delete everything</AlertDialog.Trigger>
+        <AlertDialog.Portal>
+          <AlertDialog.Overlay className={overlayAttrClass()} />
+          <AlertDialog.Content className={contentAttrClass()}>
+            <AlertDialog.Title className={titleAttrClass()}>Title</AlertDialog.Title>
+            <AlertDialog.Description className={descriptionAttrClass()}>
+              Description
+            </AlertDialog.Description>
+            <AlertDialog.Action className={actionAttrClass()}>Confirm</AlertDialog.Action>
+            <AlertDialog.Cancel className={cancelAttrClass()}>Cancel</AlertDialog.Cancel>
+          </AlertDialog.Content>
+        </AlertDialog.Portal>
+      </AlertDialog.Root>
+
+      <h2>Open</h2>
+      <AlertDialog.Root defaultOpen>
+        <AlertDialog.Trigger className={triggerAttrClass()}>delete everything</AlertDialog.Trigger>
+        <AlertDialog.Portal>
+          <AlertDialog.Overlay className={overlayAttrClass()} style={{ top: '50%' }} />
+          <AlertDialog.Content className={contentAttrClass()} style={{ top: '75%' }}>
+            <AlertDialog.Title className={titleAttrClass()}>Title</AlertDialog.Title>
+            <AlertDialog.Description className={descriptionAttrClass()}>
+              Description
+            </AlertDialog.Description>
+            <AlertDialog.Action className={actionAttrClass()}>Confirm</AlertDialog.Action>
+            <AlertDialog.Cancel className={cancelAttrClass()}>Cancel</AlertDialog.Cancel>
+          </AlertDialog.Content>
+        </AlertDialog.Portal>
+      </AlertDialog.Root>
+    </div>
+  </div>
+);
+Chromatic.parameters = { chromatic: { disable: false } };
+
+const triggerClass = css({});
+
+const RECOMMENDED_CSS__ALERT_DIALOG__OVERLAY: any = {
+  // ensures overlay is positionned correctly
+  position: 'fixed',
+  top: 0,
+  right: 0,
+  bottom: 0,
+  left: 0,
+};
+
+const overlayClass = css({
+  ...RECOMMENDED_CSS__ALERT_DIALOG__OVERLAY,
+  backgroundColor: 'black',
+  opacity: 0.2,
+});
+
+const RECOMMENDED_CSS__ALERT_DIALOG__CONTENT: any = {
+  // ensures good default position for content
+  position: 'fixed',
+  top: 0,
+  left: 0,
+};
+
+const contentClass = css({
+  ...RECOMMENDED_CSS__ALERT_DIALOG__CONTENT,
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  background: 'white',
+  minWidth: 300,
+  minHeight: 150,
+  padding: 50,
+  borderRadius: 10,
+  backgroundColor: 'white',
+  boxShadow: '0 2px 10px rgba(0, 0, 0, 0.12)',
+});
+
+const cancelClass = css({
+  appearance: 'none',
+  padding: 10,
+  border: 'none',
+  background: '$grey100',
+});
+
+const actionClass = css({
+  appearance: 'none',
+  padding: 10,
+  border: 'none',
+  backgroundColor: '$red',
+  color: '$white',
+});
+
+const titleClass = css({});
+
+const descriptionClass = css({});
+
+const chromaticContentClass = css(contentClass, {
+  padding: 10,
+  minWidth: 'auto',
+  minHeight: 'auto',
+});
+
+const styles = {
+  backgroundColor: 'rgba(0, 0, 255, 0.3)',
+  border: '2px solid blue',
+  padding: 10,
+
+  '&[data-state="closed"]': { borderColor: 'red' },
+  '&[data-state="open"]': { borderColor: 'green' },
+};
+const triggerAttrClass = css(styles);
+const overlayAttrClass = css(overlayClass, styles);
+const contentAttrClass = css(chromaticContentClass, styles);
+const cancelAttrClass = css(styles);
+const actionAttrClass = css(styles);
+const titleAttrClass = css(styles);
+const descriptionAttrClass = css(styles);
+
+
+
+File: ./node_modules/@radix-ui/react-alert-dialog/src/AlertDialog.tsx
+// Classpath: node_modules.@radix-ui.react-alert-dialog.src.AlertDialog.tsx
+
+import * as React from 'react';
+import { createContextScope } from '@radix-ui/react-context';
+import { useComposedRefs } from '@radix-ui/react-compose-refs';
+import * as DialogPrimitive from '@radix-ui/react-dialog';
+import { createDialogScope } from '@radix-ui/react-dialog';
+import { composeEventHandlers } from '@radix-ui/primitive';
+import { Slottable } from '@radix-ui/react-slot';
+
+import type { Scope } from '@radix-ui/react-context';
+
+/* -------------------------------------------------------------------------------------------------
+ * AlertDialog
+ * -----------------------------------------------------------------------------------------------*/
+
+const ROOT_NAME = 'AlertDialog';
+
+type ScopedProps<P> = P & { __scopeAlertDialog?: Scope };
+const [createAlertDialogContext, createAlertDialogScope] = createContextScope(ROOT_NAME, [
+  createDialogScope,
+]);
+const useDialogScope = createDialogScope();
+
+type DialogProps = React.ComponentPropsWithoutRef<typeof DialogPrimitive.Root>;
+interface AlertDialogProps extends Omit<DialogProps, 'modal'> {}
+
+const AlertDialog: React.FC<AlertDialogProps> = (props: ScopedProps<AlertDialogProps>) => {
+  const { __scopeAlertDialog, ...alertDialogProps } = props;
+  const dialogScope = useDialogScope(__scopeAlertDialog);
+  return <DialogPrimitive.Root {...dialogScope} {...alertDialogProps} modal={true} />;
+};
+
+AlertDialog.displayName = ROOT_NAME;
+
+/* -------------------------------------------------------------------------------------------------
+ * AlertDialogTrigger
+ * -----------------------------------------------------------------------------------------------*/
+const TRIGGER_NAME = 'AlertDialogTrigger';
+
+type AlertDialogTriggerElement = React.ElementRef<typeof DialogPrimitive.Trigger>;
+type DialogTriggerProps = React.ComponentPropsWithoutRef<typeof DialogPrimitive.Trigger>;
+interface AlertDialogTriggerProps extends DialogTriggerProps {}
+
+const AlertDialogTrigger = React.forwardRef<AlertDialogTriggerElement, AlertDialogTriggerProps>(
+  (props: ScopedProps<AlertDialogTriggerProps>, forwardedRef) => {
+    const { __scopeAlertDialog, ...triggerProps } = props;
+    const dialogScope = useDialogScope(__scopeAlertDialog);
+    return <DialogPrimitive.Trigger {...dialogScope} {...triggerProps} ref={forwardedRef} />;
+  }
+);
+
+AlertDialogTrigger.displayName = TRIGGER_NAME;
+
+/* -------------------------------------------------------------------------------------------------
+ * AlertDialogPortal
+ * -----------------------------------------------------------------------------------------------*/
+
+const PORTAL_NAME = 'AlertDialogPortal';
+
+type DialogPortalProps = React.ComponentPropsWithoutRef<typeof DialogPrimitive.Portal>;
+interface AlertDialogPortalProps extends DialogPortalProps {}
+
+const AlertDialogPortal: React.FC<AlertDialogPortalProps> = (
+  props: ScopedProps<AlertDialogPortalProps>
+) => {
+  const { __scopeAlertDialog, ...portalProps } = props;
+  const dialogScope = useDialogScope(__scopeAlertDialog);
+  return <DialogPrimitive.Portal {...dialogScope} {...portalProps} />;
+};
+
+AlertDialogPortal.displayName = PORTAL_NAME;
+
+/* -------------------------------------------------------------------------------------------------
+ * AlertDialogOverlay
+ * -----------------------------------------------------------------------------------------------*/
+
+const OVERLAY_NAME = 'AlertDialogOverlay';
+
+type AlertDialogOverlayElement = React.ElementRef<typeof DialogPrimitive.Overlay>;
+type DialogOverlayProps = React.ComponentPropsWithoutRef<typeof DialogPrimitive.Overlay>;
+interface AlertDialogOverlayProps extends DialogOverlayProps {}
+
+const AlertDialogOverlay = React.forwardRef<AlertDialogOverlayElement, AlertDialogOverlayProps>(
+  (props: ScopedProps<AlertDialogOverlayProps>, forwardedRef) => {
+    const { __scopeAlertDialog, ...overlayProps } = props;
+    const dialogScope = useDialogScope(__scopeAlertDialog);
+    return <DialogPrimitive.Overlay {...dialogScope} {...overlayProps} ref={forwardedRef} />;
+  }
+);
+
+AlertDialogOverlay.displayName = OVERLAY_NAME;
+
+/* -------------------------------------------------------------------------------------------------
+ * AlertDialogContent
+ * -----------------------------------------------------------------------------------------------*/
+
+const CONTENT_NAME = 'AlertDialogContent';
+
+type AlertDialogContentContextValue = {
+  cancelRef: React.MutableRefObject<AlertDialogCancelElement | null>;
+};
+
+const [AlertDialogContentProvider, useAlertDialogContentContext] =
+  createAlertDialogContext<AlertDialogContentContextValue>(CONTENT_NAME);
+
+type AlertDialogContentElement = React.ElementRef<typeof DialogPrimitive.Content>;
+type DialogContentProps = React.ComponentPropsWithoutRef<typeof DialogPrimitive.Content>;
+interface AlertDialogContentProps
+  extends Omit<DialogContentProps, 'onPointerDownOutside' | 'onInteractOutside'> {}
+
+const AlertDialogContent = React.forwardRef<AlertDialogContentElement, AlertDialogContentProps>(
+  (props: ScopedProps<AlertDialogContentProps>, forwardedRef) => {
+    const { __scopeAlertDialog, children, ...contentProps } = props;
+    const dialogScope = useDialogScope(__scopeAlertDialog);
+    const contentRef = React.useRef<AlertDialogContentElement>(null);
+    const composedRefs = useComposedRefs(forwardedRef, contentRef);
+    const cancelRef = React.useRef<AlertDialogCancelElement | null>(null);
+
+    return (
+      <DialogPrimitive.WarningProvider
+        contentName={CONTENT_NAME}
+        titleName={TITLE_NAME}
+        docsSlug="alert-dialog"
+      >
+        <AlertDialogContentProvider scope={__scopeAlertDialog} cancelRef={cancelRef}>
+          <DialogPrimitive.Content
+            role="alertdialog"
+            {...dialogScope}
+            {...contentProps}
+            ref={composedRefs}
+            onOpenAutoFocus={composeEventHandlers(contentProps.onOpenAutoFocus, (event) => {
+              event.preventDefault();
+              cancelRef.current?.focus({ preventScroll: true });
+            })}
+            onPointerDownOutside={(event) => event.preventDefault()}
+            onInteractOutside={(event) => event.preventDefault()}
+          >
+            {/**
+             * We have to use `Slottable` here as we cannot wrap the `AlertDialogContentProvider`
+             * around everything, otherwise the `DescriptionWarning` would be rendered straight away.
+             * This is because we want the accessibility checks to run only once the content is actually
+             * open and that behaviour is already encapsulated in `DialogContent`.
+             */}
+            <Slottable>{children}</Slottable>
+            {process.env.NODE_ENV === 'development' && (
+              <DescriptionWarning contentRef={contentRef} />
+            )}
+          </DialogPrimitive.Content>
+        </AlertDialogContentProvider>
+      </DialogPrimitive.WarningProvider>
+    );
+  }
+);
+
+AlertDialogContent.displayName = CONTENT_NAME;
+
+/* -------------------------------------------------------------------------------------------------
+ * AlertDialogTitle
+ * -----------------------------------------------------------------------------------------------*/
+
+const TITLE_NAME = 'AlertDialogTitle';
+
+type AlertDialogTitleElement = React.ElementRef<typeof DialogPrimitive.Title>;
+type DialogTitleProps = React.ComponentPropsWithoutRef<typeof DialogPrimitive.Title>;
+interface AlertDialogTitleProps extends DialogTitleProps {}
+
+const AlertDialogTitle = React.forwardRef<AlertDialogTitleElement, AlertDialogTitleProps>(
+  (props: ScopedProps<AlertDialogTitleProps>, forwardedRef) => {
+    const { __scopeAlertDialog, ...titleProps } = props;
+    const dialogScope = useDialogScope(__scopeAlertDialog);
+    return <DialogPrimitive.Title {...dialogScope} {...titleProps} ref={forwardedRef} />;
+  }
+);
+
+AlertDialogTitle.displayName = TITLE_NAME;
+
+/* -------------------------------------------------------------------------------------------------
+ * AlertDialogDescription
+ * -----------------------------------------------------------------------------------------------*/
+
+const DESCRIPTION_NAME = 'AlertDialogDescription';
+
+type AlertDialogDescriptionElement = React.ElementRef<typeof DialogPrimitive.Description>;
+type DialogDescriptionProps = React.ComponentPropsWithoutRef<typeof DialogPrimitive.Description>;
+interface AlertDialogDescriptionProps extends DialogDescriptionProps {}
+
+const AlertDialogDescription = React.forwardRef<
+  AlertDialogDescriptionElement,
+  AlertDialogDescriptionProps
+>((props: ScopedProps<AlertDialogDescriptionProps>, forwardedRef) => {
+  const { __scopeAlertDialog, ...descriptionProps } = props;
+  const dialogScope = useDialogScope(__scopeAlertDialog);
+  return <DialogPrimitive.Description {...dialogScope} {...descriptionProps} ref={forwardedRef} />;
+});
+
+AlertDialogDescription.displayName = DESCRIPTION_NAME;
+
+/* -------------------------------------------------------------------------------------------------
+ * AlertDialogAction
+ * -----------------------------------------------------------------------------------------------*/
+
+const ACTION_NAME = 'AlertDialogAction';
+
+type AlertDialogActionElement = React.ElementRef<typeof DialogPrimitive.Close>;
+type DialogCloseProps = React.ComponentPropsWithoutRef<typeof DialogPrimitive.Close>;
+interface AlertDialogActionProps extends DialogCloseProps {}
+
+const AlertDialogAction = React.forwardRef<AlertDialogActionElement, AlertDialogActionProps>(
+  (props: ScopedProps<AlertDialogActionProps>, forwardedRef) => {
+    const { __scopeAlertDialog, ...actionProps } = props;
+    const dialogScope = useDialogScope(__scopeAlertDialog);
+    return <DialogPrimitive.Close {...dialogScope} {...actionProps} ref={forwardedRef} />;
+  }
+);
+
+AlertDialogAction.displayName = ACTION_NAME;
+
+/* -------------------------------------------------------------------------------------------------
+ * AlertDialogCancel
+ * -----------------------------------------------------------------------------------------------*/
+
+const CANCEL_NAME = 'AlertDialogCancel';
+
+type AlertDialogCancelElement = React.ElementRef<typeof DialogPrimitive.Close>;
+interface AlertDialogCancelProps extends DialogCloseProps {}
+
+const AlertDialogCancel = React.forwardRef<AlertDialogCancelElement, AlertDialogCancelProps>(
+  (props: ScopedProps<AlertDialogCancelProps>, forwardedRef) => {
+    const { __scopeAlertDialog, ...cancelProps } = props;
+    const { cancelRef } = useAlertDialogContentContext(CANCEL_NAME, __scopeAlertDialog);
+    const dialogScope = useDialogScope(__scopeAlertDialog);
+    const ref = useComposedRefs(forwardedRef, cancelRef);
+    return <DialogPrimitive.Close {...dialogScope} {...cancelProps} ref={ref} />;
+  }
+);
+
+AlertDialogCancel.displayName = CANCEL_NAME;
+
+/* ---------------------------------------------------------------------------------------------- */
+
+type DescriptionWarningProps = {
+  contentRef: React.RefObject<AlertDialogContentElement>;
+};
+
+const DescriptionWarning: React.FC<DescriptionWarningProps> = ({ contentRef }) => {
+  const MESSAGE = `\`${CONTENT_NAME}\` requires a description for the component to be accessible for screen reader users.
+
+You can add a description to the \`${CONTENT_NAME}\` by passing a \`${DESCRIPTION_NAME}\` component as a child, which also benefits sighted users by adding visible context to the dialog.
+
+Alternatively, you can use your own component as a description by assigning it an \`id\` and passing the same value to the \`aria-describedby\` prop in \`${CONTENT_NAME}\`. If the description is confusing or duplicative for sighted users, you can use the \`@radix-ui/react-visually-hidden\` primitive as a wrapper around your description component.
+
+For more information, see https://radix-ui.com/primitives/docs/components/alert-dialog`;
+
+  React.useEffect(() => {
+    const hasDescription = document.getElementById(
+      contentRef.current?.getAttribute('aria-describedby')!
+    );
+    if (!hasDescription) console.warn(MESSAGE);
+  }, [MESSAGE, contentRef]);
+
+  return null;
+};
+
+const Root = AlertDialog;
+const Trigger = AlertDialogTrigger;
+const Portal = AlertDialogPortal;
+const Overlay = AlertDialogOverlay;
+const Content = AlertDialogContent;
+const Action = AlertDialogAction;
+const Cancel = AlertDialogCancel;
+const Title = AlertDialogTitle;
+const Description = AlertDialogDescription;
+
+export {
+  createAlertDialogScope,
+  //
+  AlertDialog,
+  AlertDialogTrigger,
+  AlertDialogPortal,
+  AlertDialogOverlay,
+  AlertDialogContent,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogTitle,
+  AlertDialogDescription,
+  //
+  Root,
+  Trigger,
+  Portal,
+  Overlay,
+  Content,
+  Action,
+  Cancel,
+  Title,
+  Description,
+};
+export type {
+  AlertDialogProps,
+  AlertDialogTriggerProps,
+  AlertDialogPortalProps,
+  AlertDialogOverlayProps,
+  AlertDialogContentProps,
+  AlertDialogActionProps,
+  AlertDialogCancelProps,
+  AlertDialogTitleProps,
+  AlertDialogDescriptionProps,
+};
+
+
+
+File: ./node_modules/hasown/.github/FUNDING.yml
+// Classpath: node_modules.hasown..github.FUNDING
+
+# These are supported funding model platforms
+
+github: [ljharb]
+patreon: # Replace with a single Patreon username
+open_collective: # Replace with a single Open Collective username
+ko_fi: # Replace with a single Ko-fi username
+tidelift: npm/hasown
+community_bridge: # Replace with a single Community Bridge project-name e.g., cloud-foundry
+liberapay: # Replace with a single Liberapay username
+issuehunt: # Replace with a single IssueHunt username
+otechie: # Replace with a single Otechie username
+custom: # Replace with a single custom sponsorship URL
+
+
+
+File: ./node_modules/fastq/.github/workflows/ci.yml
+// Classpath: node_modules.fastq..github.workflows.ci
+
+name: ci
+
+on: [push, pull_request]
+
+jobs:
+  legacy:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: ['0.10', '0.12', 4.x, 6.x, 8.x]
+
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          persist-credentials: false
+
+      - name: Use Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Install
+        run: |
+          npm install --production && npm install tape
+
+      - name: Run tests
+        run: |
+          npm run legacy
+
+  test:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [10.x, 12.x, 13.x, 14.x, 15.x, 16.x, 18.x, 20.x]
+
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          persist-credentials: false
+
+      - name: Use Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Install
+        run: |
+          npm install
+
+      - name: Run tests
+        run: |
+          npm run test
+
+  types:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          persist-credentials: false
+
+      - name: Use Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+
+      - name: Install
+        run: |
+          npm install
+
+      - name: Run types tests
+        run: |
+          npm run typescript
+
+
+
+File: ./node_modules/fastq/.github/dependabot.yml
+// Classpath: node_modules.fastq..github.dependabot
+
+version: 2
+updates:
+- package-ecosystem: npm
+  directory: "/"
+  schedule:
+    interval: daily
+  open-pull-requests-limit: 10
+  ignore:
+  - dependency-name: standard
+    versions:
+    - 16.0.3
+
+
+
+File: ./node_modules/bl/.github/workflows/test-and-release.yml
+// Classpath: node_modules.bl..github.workflows.test-and-release
+
+name: Test & Maybe Release
+on: [push, pull_request]
+jobs:
+  test:
+    strategy:
+      fail-fast: false
+      matrix:
+        node: [14.x, 16.x, 18.x, lts/*, current]
+        os: [macos-latest, ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+      - name: Use Node.js ${{ matrix.node }}
+        uses: actions/setup-node@v3.5.1
+        with:
+          node-version: ${{ matrix.node }}
+      - name: Install Dependencies
+        run: |
+          npm install --no-progress
+      - name: Run tests
+        run: |
+          npm config set script-shell bash
+          npm run test:ci
+  release:
+    name: Release
+    needs: test
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: Setup Node.js
+        uses: actions/setup-node@v3.5.1
+        with:
+          node-version: 14
+      - name: Install dependencies
+        run: |
+          npm install --no-progress --no-package-lock --no-save
+      - name: Build
+        run: |
+          npm run build
+      - name: Install plugins
+        run: |
+          npm install \
+            @semantic-release/commit-analyzer \
+            conventional-changelog-conventionalcommits \
+            @semantic-release/release-notes-generator \
+            @semantic-release/npm \
+            @semantic-release/github \
+            @semantic-release/git \
+            @semantic-release/changelog \
+            --no-progress --no-package-lock --no-save
+      - name: Release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: npx semantic-release
+
+
+
+
+File: ./node_modules/bl/.github/dependabot.yml
+// Classpath: node_modules.bl..github.dependabot
+
+version: 2
+updates:
+  - package-ecosystem: 'github-actions'
+    directory: '/'
+    schedule:
+      interval: 'daily'
+    commit-message:
+      prefix: 'chore'
+      include: 'scope'
+  - package-ecosystem: 'npm'
+    directory: '/'
+    schedule:
+      interval: 'daily'
+    commit-message:
+      prefix: 'chore'
+      include: 'scope'
+
+
+
+File: ./node_modules/reusify/.coveralls.yml
+// Classpath: node_modules.reusify..coveralls
+
+repo_token: yIxhFqtaaz5iGVYfie9mODehFYogm8S8L
+
+
+
+File: ./node_modules/reusify/.travis.yml
+// Classpath: node_modules.reusify..travis
+
+language: node_js
+sudo: false
+
+node_js:
+  - 9
+  - 8
+  - 7
+  - 6
+  - 5
+  - 4
+  - 4.0
+  - iojs-v3
+  - iojs-v2
+  - iojs-v1
+  - 0.12
+  - 0.10
+
+cache:
+  directories:
+    - node_modules
+
+after_script:
+- npm run coverage
+
+notifications:
+  email:
+    on_success: never
+    on_failure: always
+
+
+
+File: ./node_modules/brace-expansion/.github/FUNDING.yml
+// Classpath: node_modules.brace-expansion..github.FUNDING
+
+tidelift: "npm/brace-expansion"
+patreon: juliangruber
+
+
+
+File: ./node_modules/supports-preserve-symlinks-flag/.github/FUNDING.yml
+// Classpath: node_modules.supports-preserve-symlinks-flag..github.FUNDING
+
+# These are supported funding model platforms
+
+github: [ljharb]
+patreon: # Replace with a single Patreon username
+open_collective: # Replace with a single Open Collective username
+ko_fi: # Replace with a single Ko-fi username
+tidelift: npm/supports-preserve-symlink-flag
+community_bridge: # Replace with a single Community Bridge project-name e.g., cloud-foundry
+liberapay: # Replace with a single Liberapay username
+issuehunt: # Replace with a single IssueHunt username
+otechie: # Replace with a single Otechie username
+custom: # Replace with up to 4 custom sponsorship URLs e.g., ['link1', 'link2']
+
+
+
+File: ./node_modules/function-bind/.github/FUNDING.yml
+// Classpath: node_modules.function-bind..github.FUNDING
+
+# These are supported funding model platforms
+
+github: [ljharb]
+patreon: # Replace with a single Patreon username
+open_collective: # Replace with a single Open Collective username
+ko_fi: # Replace with a single Ko-fi username
+tidelift: npm/function-bind
+community_bridge: # Replace with a single Community Bridge project-name e.g., cloud-foundry
+liberapay: # Replace with a single Liberapay username
+issuehunt: # Replace with a single IssueHunt username
+otechie: # Replace with a single Otechie username
+custom: # Replace with up to 4 custom sponsorship URLs e.g., ['link1', 'link2']
+
+
+

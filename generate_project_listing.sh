@@ -4,10 +4,13 @@
 OUTPUT_FILE="KotlinCoreApp.txt"
 > "$OUTPUT_FILE"  # Empty the file if it already exists
 
-# Step 1: Generate a directory structure overview excluding build, frontend, and bin
+# Step 1: Generate a more concise directory structure overview
 echo "Generating folder structure..." >> "$OUTPUT_FILE"
 echo "-------------------------------------------" >> "$OUTPUT_FILE"
-tree -a -I "node_modules|target|build|out|.git|.idea|*.class|*.o|*.log|*.iml|*.swp|*~|build|frontend|bin" >> "$OUTPUT_FILE"
+
+# Use tree with a depth of 2 to show high-level structure only
+tree -d -L 2 -I ".*|build|frontend|bin|node_modules|target|out" | sed '/│.*│/d' >> "$OUTPUT_FILE"
+
 echo -e "\n" >> "$OUTPUT_FILE"
 
 # Step 2: Add file paths and cleaned content, excluding build, frontend, and bin folders

@@ -1,3 +1,4 @@
+// File: infrastructure/persistence/entities/UserEntity.kt
 package org.blackerp.infrastructure.persistence.entities
 
 import jakarta.persistence.*
