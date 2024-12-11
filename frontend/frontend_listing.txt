@@ -12,10 +12,25 @@ Generating folder structure...
 ├── src
 │   ├── api
 │   │   ├── mockData.ts
+│   │   ├── security
+│   │   │   └── securityApi.ts
 │   │   └── tableApi.ts
 │   ├── App.tsx
 │   ├── assets
 │   ├── components
+│   │   ├── navigation
+│   │   │   ├── Breadcrumbs.tsx
+│   │   │   ├── index.ts
+│   │   │   ├── Navbar.tsx
+│   │   │   └── ProtectedRoute.tsx
+│   │   ├── security
+│   │   │   ├── CreateRoleDialog.tsx
+│   │   │   ├── DeleteRoleDialog.tsx
+│   │   │   ├── index.ts
+│   │   │   ├── PermissionManagement.tsx
+│   │   │   ├── RoleManagement.tsx
+│   │   │   ├── RolePermissionDialog.tsx
+│   │   │   └── SecurityAdmin.tsx
 │   │   ├── tables
 │   │   │   ├── CreateTableForm.tsx
 │   │   │   ├── DataTableWithState.tsx
@@ -32,7 +47,9 @@ Generating folder structure...
 │   ├── hooks
 │   │   └── useTableOperations.ts
 │   ├── layouts
+│   │   └── MainLayout.tsx
 │   ├── lib
+│   │   ├── auth [error opening dir]
 │   │   ├── providers
 │   │   │   └── QueryProvider.tsx
 │   │   ├── utils
@@ -43,13 +60,20 @@ Generating folder structure...
 │   │   └── migration
 │   ├── main.tsx
 │   ├── pages
+│   │   └── auth
+│   │   ├── index.ts
+│   │   └── LoginPage.tsx
 │   ├── types
+│   │   ├── auth
+│   │   │   └── types.ts
+│   │   ├── security
+│   │   │   └── types.ts
 │   │   └── table.ts
 │   └── utils
 ├── tsconfig.json
 └── tsconfig.node.json
 
-19 directories, 29 files
+26 directories, 46 files
 
 
 Generating file details...
@@ -114,6 +138,162 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
 </React.StrictMode>,
 )
 
+File: ./src/layouts/MainLayout.tsx
+-------------------------------------------
+import React from 'react';
+import {Outlet,Navigate} from 'react-router-dom';
+import {Navbar} from '../components/navigation/Navbar';
+import {Breadcrumbs} from '../components/navigation/Breadcrumbs';
+import {useAuth} from '../lib/auth/AuthContext';
+export default function MainLayout() {
+const {isAuthenticated}=useAuth();
+if (!isAuthenticated) {
+return <Navigate to="/login" replace />;
+}
+return (
+<div className="min-h-screen bg-gray-50">
+<Navbar />
+<main className="container mx-auto py-6 px-4">
+<Breadcrumbs />
+<div className="mt-4">
+<Outlet />
+</div>
+</main>
+</div>
+);
+}
+
+File: ./src/pages/auth/LoginPage.tsx
+-------------------------------------------
+import React,{useState} from 'react';
+import {useNavigate,useLocation} from 'react-router-dom';
+import {Card,CardHeader,CardTitle,CardContent} from '@/components/ui/card';
+import {Button} from '@/components/ui/button';
+import {Alert,AlertDescription} from '@/components/ui/alert';
+import {useAuth} from '@/lib/auth/AuthContext';
+import {LoginCredentials} from '@/types/auth/types';
+import {Loader2} from 'lucide-react';
+export default function LoginPage() {
+const navigate=useNavigate();
+const location=useLocation();
+const {login}=useAuth();
+const [loading,setLoading]=useState(false);
+const [error,setError]=useState<string | null>(null);
+const from=location.state?.from?.pathname || '/';
+const [credentials,setCredentials]=useState<LoginCredentials>({
+username:'',
+password:'',
+});
+const handleSubmit=async (e:React.FormEvent) => {
+e.preventDefault();
+setLoading(true);
+setError(null);
+try {
+const response=await fetch('/api/auth/login',{
+method:'POST',
+headers:{'Content-Type':'application/json'},
+body:JSON.stringify(credentials)
+});
+if (!response.ok) {
+const error=await response.json();
+thrownew Error(error.message || 'Login failed');
+}
+const data=await response.json();
+login(data.token);
+navigate(from,{replace:true});
+} catch (err) {
+setError(err instanceof Error ? err.message :'Login failed');
+} finally {
+setLoading(false);
+}
+};
+return (
+<div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+<Card className="w-full max-w-md">
+<CardHeader>
+<CardTitle className="text-center text-2xl">
+BlackERP Login
+</CardTitle>
+</CardHeader>
+<CardContent>
+{error && (
+<Alert variant="destructive" className="mb-4">
+<AlertDescription>{error}</AlertDescription>
+</Alert>
+)}
+<form onSubmit={handleSubmit} className="space-y-6">
+<div>
+<label htmlFor="username" className="block text-sm font-medium text-gray-700">
+Username
+</label>
+<input
+id="username"
+type="text"
+required
+className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2"
+value={credentials.username}
+onChange={e => setCredentials({
+...credentials,
+username:e.target.value
+})}
+/>
+</div>
+<div>
+<label htmlFor="password" className="block text-sm font-medium text-gray-700">
+Password
+</label>
+<input
+id="password"
+type="password"
+required
+className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2"
+value={credentials.password}
+onChange={e => setCredentials({
+...credentials,
+password:e.target.value
+})}
+/>
+</div>
+<div>
+<label htmlFor="clientId" className="block text-sm font-medium text-gray-700">
+Client
+</label>
+<select
+id="clientId"
+className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2"
+value={credentials.clientId}
+onChange={e => setCredentials({
+...credentials,
+clientId:e.target.value
+})}
+>
+<option value="1">System</option>
+
+File: ./src/pages/auth/index.ts
+-------------------------------------------
+export {default as LoginPage} from './LoginPage';
+
+File: ./src/types/auth/types.ts
+-------------------------------------------
+export interface LoginCredentials {
+username:string;
+password:string;
+clientId:string;
+}
+export interface LoginResponse {
+token:string;
+user:{
+id:string;
+username:string;
+email:string;
+roles:string[];
+};
+}
+export interface AuthError {
+message:string;
+code?:string;
+}
+
 File: ./src/types/table.ts
 -------------------------------------------
 export interface Column {
@@ -140,6 +320,37 @@ displayName:string;
 description?:string;
 accessLevel:string;
 columns:Column[];
+}
+
+File: ./src/types/security/types.ts
+-------------------------------------------
+export interface SecurityRole {
+id:string;
+name:string;
+displayName:string;
+description?:string;
+accessLevel:string;
+isActive:boolean;
+}
+export interface SecurityPermission {
+entityType:string;
+entityId:string;
+permissionType:string;
+validationRule?:string;
+}
+export interface SecurityAuditLog {
+timestamp:string;
+username:string;
+action:string;
+entityType:string;
+entityId:string;
+result:boolean;
+}
+export interface CreateRoleRequest {
+name:string;
+displayName:string;
+description?:string;
+accessLevel:string;
 }
 
 File: ./src/api/tableApi.ts
@@ -214,6 +425,42 @@ throw error;
 }
 }
 };
+File: ./src/api/security/securityApi.ts
+-------------------------------------------
+import {SecurityRole,CreateRoleRequest,SecurityAuditLog} from '../types/security/types';
+export const securityApi={
+async getRoles():Promise<SecurityRole[]> {
+try {
+const response=await fetch(`/api/security/roles`);
+if (!response.ok) thrownew Error('Failed to fetch roles');
+return response.json();
+} catch (error) {
+console.error('Error fetching roles:',error);
+return [];
+}
+},
+async createRole(role:CreateRoleRequest):Promise<SecurityRole> {
+const response=await fetch(`/api/security/roles`,{
+method:'POST',
+headers:{
+'Content-Type':'application/json',
+},
+body:JSON.stringify(role),
+});
+if (!response.ok) {
+const error=await response.json();
+thrownew Error(error.message || 'Failed to create role');
+}
+return response.json();
+},
+async deleteRole(id:string):Promise<void> {
+const response=await fetch(`/api/security/roles/${id}`,{
+method:'DELETE',
+});
+if (!response.ok) thrownew Error('Failed to delete role');
+}
+};
+
 File: ./src/api/mockData.ts
 -------------------------------------------
 import {Table} from '../types/table';
@@ -1210,20 +1457,531 @@ Create Table
 );
 };
 export default CreateTableForm;
+File: ./src/components/navigation/Navbar.tsx
+-------------------------------------------
+import React from 'react';
+import {Link,useLocation,useNavigate} from 'react-router-dom';
+import {Button} from '../ui/button';
+import {Shield,Database,LogOut} from 'lucide-react';
+import {useAuth} from '../../lib/auth/AuthContext';
+export function Navbar() {
+const location=useLocation();
+const navigate=useNavigate();
+const {logout}=useAuth();
+const isActive=(path:string) => location.pathname === path;
+const handleLogout=() => {
+logout();
+navigate('/login');
+};
+return (
+<nav className="bg-white shadow">
+<div className="container mx-auto px-4">
+<div className="flex h-16 justify-between items-center">
+<div className="flex items-center">
+<Link to="/" className="text-xl font-bold text-gray-800">
+BlackERP
+</Link>
+<div className="ml-10 flex items-center space-x-4">
+<Link to="/tables">
+<Button
+variant={isActive('/tables') ? 'default' :'ghost'}
+className="flex items-center"
+>
+<Database className="h-4 w-4 mr-2" />
+Tables
+</Button>
+</Link>
+<Link to="/security">
+<Button
+variant={isActive('/security') ? 'default' :'ghost'}
+className="flex items-center"
+>
+<Shield className="h-4 w-4 mr-2" />
+Security
+</Button>
+</Link>
+</div>
+</div>
+<Button variant="ghost" onClick={handleLogout}>
+<LogOut className="h-4 w-4 mr-2" />
+Logout
+</Button>
+</div>
+</div>
+</nav>
+);
+}
+
+File: ./src/components/navigation/Breadcrumbs.tsx
+-------------------------------------------
+import React from 'react';
+import {Link,useLocation} from 'react-router-dom';
+import {ChevronRight} from 'lucide-react';
+export function Breadcrumbs() {
+const location=useLocation();
+const pathSegments=location.pathname.split('/')
+.filter(segment => segment !== '');
+const breadcrumbs=pathSegments.map((segment,index) => {
+const path=`/${pathSegments.slice(0,index + 1).join('/')}`;
+const label=segment.charAt(0).toUpperCase() + segment.slice(1);
+return {path,label};
+});
+return breadcrumbs.length> 0 ? (
+<div className="flex items-center space-x-2 text-sm text-gray-600">
+<Link to="/" className="hover:text-gray-900">
+Home
+</Link>
+{breadcrumbs.map((crumb,index) => (
+<React.Fragment key={crumb.path}>
+<ChevronRight className="h-4 w-4" />
+<Link
+to={crumb.path}
+className={index === breadcrumbs.length - 1
+? "font-medium text-gray-900"
+:"hover:text-gray-900"
+}
+>
+{crumb.label}
+</Link>
+</React.Fragment>
+))}
+</div>
+) :null;
+}
+
+File: ./src/components/navigation/ProtectedRoute.tsx
+-------------------------------------------
+import React from 'react';
+import {Navigate,useLocation} from 'react-router-dom';
+import {useAuth} from '../../lib/auth/AuthContext';
+export function ProtectedRoute({children}:{children:React.ReactNode}) {
+const {isAuthenticated}=useAuth();
+const location=useLocation();
+if (!isAuthenticated) {
+return <Navigate to="/login" state={{from:location}} replace />;
+}
+return <>{children}</>;
+}
+
+File: ./src/components/navigation/index.ts
+-------------------------------------------
+export {Navbar} from './Navbar';
+export {Breadcrumbs} from './Breadcrumbs';
+
+File: ./src/components/security/DeleteRoleDialog.tsx
+-------------------------------------------
+import React from 'react';
+import {SecurityRole} from '../../types/security/types';
+import {securityApi} from '../../api/securityApi';
+import {
+AlertDialog,
+AlertDialogAction,
+AlertDialogCancel,
+AlertDialogContent,
+AlertDialogDescription,
+AlertDialogFooter,
+AlertDialogHeader,
+AlertDialogTitle,
+} from '../ui/alert-dialog';
+interface Props {
+role:SecurityRole | null;
+open:boolean;
+onClose:() => void;
+}
+export function DeleteRoleDialog({role,open,onClose}:Props) {
+return (
+<AlertDialog open={open} onOpenChange={onClose}>
+<AlertDialogContent>
+<AlertDialogHeader>
+<AlertDialogTitle>Delete Role</AlertDialogTitle>
+<AlertDialogDescription>
+Are you sure you want to delete role "{role?.displayName}"?
+This action cannot be undone.
+</AlertDialogDescription>
+</AlertDialogHeader>
+<AlertDialogFooter>
+<AlertDialogCancel>Cancel</AlertDialogCancel>
+<AlertDialogAction onClick={onClose}>Delete</AlertDialogAction>
+</AlertDialogFooter>
+</AlertDialogContent>
+</AlertDialog>
+);
+}
+
+File: ./src/components/security/SecurityAdmin.tsx
+-------------------------------------------
+import React,{useState} from 'react';
+import {SecurityRole} from '../../types/security/types';
+import {securityApi} from '../../api/securityApi';
+import {Alert,AlertDescription} from '../ui/alert';
+import {Button} from '../ui/button';
+import {Card,CardContent,CardHeader,CardTitle} from '../ui/card';
+import {Loader2,Plus,Shield,Trash2,UserCog} from 'lucide-react';
+import {CreateRoleDialog} from './CreateRoleDialog';
+import {DeleteRoleDialog} from './DeleteRoleDialog';
+export default function SecurityAdmin() {
+const [showCreateDialog,setShowCreateDialog]=useState(false);
+const [roleToDelete,setRoleToDelete]=useState<SecurityRole | null>(null);
+const [error,setError]=useState<string | null>(null);
+return (
+<div className="space-y-6">
+{error && (
+<Alert variant="destructive">
+<AlertDescription>
+{error}
+</AlertDescription>
+</Alert>
+)}
+<div className="flex justify-between items-center">
+<h1 className="text-2xl font-bold">Security Administration</h1>
+<Button onClick={() => setShowCreateDialog(true)}>
+<Plus className="h-4 w-4 mr-2" />
+Create Role
+</Button>
+</div>
+<Card>
+<CardHeader>
+<CardTitle>Role Management</CardTitle>
+</CardHeader>
+<CardContent>
+
+File: ./src/components/security/RolePermissionDialog.tsx
+-------------------------------------------
+import React,{useState} from 'react';
+import {
+Dialog,
+DialogContent,
+DialogHeader,
+DialogTitle,
+DialogFooter,
+} from '../ui/dialog';
+import {Button} from '../ui/button';
+import {Shield} from 'lucide-react';
+interface Props {
+roleId:string;
+open:boolean;
+onClose:() => void;
+}
+export function RolePermissionDialog({roleId,open,onClose}:Props) {
+const [selectedEntity,setSelectedEntity]=useState('');
+const [selectedPermission,setSelectedPermission]=useState('');
+const handleSubmit=async (e:React.FormEvent) => {
+e.preventDefault();
+onClose();
+};
+return (
+<Dialog open={open} onOpenChange={onClose}>
+<DialogContent>
+<DialogHeader>
+<DialogTitle>Assign Permission</DialogTitle>
+</DialogHeader>
+<form onSubmit={handleSubmit} className="space-y-4">
+<div className="space-y-2">
+<label className="text-sm font-medium">Entity Type</label>
+<select
+className="w-full p-2 border rounded"
+value={selectedEntity}
+onChange={(e) => setSelectedEntity(e.target.value)}
+>
+<option value="">Select Entity Type</option>
+<option value="TABLE">Table</option>
+<option value="WINDOW">Window</option>
+<option value="PROCESS">Process</option>
+</select>
+</div>
+<div className="space-y-2">
+<label className="text-sm font-medium">Permission</label>
+<select
+className="w-full p-2 border rounded"
+value={selectedPermission}
+onChange={(e) => setSelectedPermission(e.target.value)}
+>
+<option value="">Select Permission</option>
+<option value="READ">Read</option>
+<option value="WRITE">Write</option>
+<option value="DELETE">Delete</option>
+<option value="EXECUTE">Execute</option>
+</select>
+</div>
+<DialogFooter>
+<Button type="button" variant="outline" onClick={onClose}>
+Cancel
+</Button>
+<Button type="submit">
+<Shield className="h-4 w-4 mr-2" />
+Assign Permission
+</Button>
+</DialogFooter>
+</form>
+</DialogContent>
+</Dialog>
+);
+}
+
+File: ./src/components/security/index.ts
+-------------------------------------------
+export {default as SecurityAdmin} from './SecurityAdmin';
+export {CreateRoleDialog} from './CreateRoleDialog';
+export {DeleteRoleDialog} from './DeleteRoleDialog';
+export {RoleManagement} from './RoleManagement';
+export {PermissionManagement} from './PermissionManagement';
+export {RolePermissionDialog} from './RolePermissionDialog';
+
+File: ./src/components/security/CreateRoleDialog.tsx
+-------------------------------------------
+import React from 'react';
+import {Button} from '../ui/button';
+import {
+Dialog,
+DialogContent,
+DialogHeader,
+DialogTitle,
+DialogFooter,
+} from '../ui/dialog';
+import {CreateRoleRequest} from '../../types/security/types';
+interface Props {
+open:boolean;
+onClose:() => void;
+}
+export function CreateRoleDialog({open,onClose}:Props) {
+const handleSubmit=async (e:React.FormEvent) => {
+e.preventDefault();
+onClose();
+};
+return (
+<Dialog open={open} onOpenChange={onClose}>
+<DialogContent>
+<DialogHeader>
+<DialogTitle>Create New Role</DialogTitle>
+</DialogHeader>
+<form onSubmit={handleSubmit}>
+
+File: ./src/components/security/RoleManagement.tsx
+-------------------------------------------
+import React,{useState,useEffect} from 'react';
+import {SecurityRole} from '../../types/security/types';
+import {securityApi} from '../../api/security/securityApi';
+import {Alert,AlertDescription} from '../ui/alert';
+import {Card,CardContent} from '../ui/card';
+import {Button} from '../ui/button';
+import {Plus,Shield,Trash2,Loader2} from 'lucide-react';
+export function RoleManagement() {
+const [roles,setRoles]=useState<SecurityRole[]>([]);
+const [loading,setLoading]=useState(true);
+const [error,setError]=useState<string | null>(null);
+useEffect(() => {
+loadRoles();
+},[]);
+const loadRoles=async () => {
+try {
+const data=await securityApi.getRoles();
+setRoles(data);
+} catch (err) {
+setError(err instanceof Error ? err.message :'Failed to load roles');
+} finally {
+setLoading(false);
+}
+};
+if (loading) {
+return (
+<div className="flex justify-center items-center h-48">
+<Loader2 className="h-8 w-8 animate-spin text-primary" />
+</div>
+);
+}
+if (error) {
+return (
+<Alert variant="destructive">
+<AlertDescription>{error}</AlertDescription>
+</Alert>
+);
+}
+return (
+<Card>
+<CardContent>
+<div className="relative w-full overflow-auto">
+<table className="w-full caption-bottom text-sm">
+<thead>
+<tr className="border-b">
+<th className="h-12 px-4 text-left">Name</th>
+<th className="h-12 px-4 text-left">Display Name</th>
+<th className="h-12 px-4 text-left">Access Level</th>
+<th className="h-12 px-4 text-left">Status</th>
+<th className="h-12 px-4 text-right">Actions</th>
+</tr>
+</thead>
+<tbody>
+{roles.map(role => (
+<tr key={role.id} className="border-b">
+<td className="p-4">{role.name}</td>
+<td className="p-4">{role.displayName}</td>
+<td className="p-4">{role.accessLevel}</td>
+<td className="p-4">
+{role.isActive ? (
+<span className="text-green-600">Active</span>
+) :(
+<span className="text-red-600">Inactive</span>
+)}
+</td>
+<td className="p-4 text-right">
+<div className="flex justify-end space-x-2">
+<Button
+variant="outline"
+size="sm"
+>
+<Trash2 className="h-4 w-4 mr-2" />
+Delete
+</Button>
+</div>
+</td>
+</tr>
+))}
+</tbody>
+</table>
+</div>
+</CardContent>
+</Card>
+);
+}
+
+File: ./src/components/security/PermissionManagement.tsx
+-------------------------------------------
+import React,{useState} from 'react';
+import {SecurityPermission} from '../../types/security/types';
+import {Card,CardContent,CardHeader,CardTitle} from '../ui/card';
+import {Button} from '../ui/button';
+import {Shield,Plus} from 'lucide-react';
+export function PermissionManagement({roleId}:{roleId:string}) {
+const [permissions,setPermissions]=useState<SecurityPermission[]>([]);
+return (
+<div className="space-y-6">
+<div className="flex justify-between items-center">
+<h2 className="text-xl font-semibold">Role Permissions</h2>
+>
+Edit
+</Button>
+</td>
+</tr>
+))}
+</tbody>
+</table>
+</div>
+</CardContent>
+</Card>
+<Card>
+<CardHeader>
+<CardTitle>Access Rules</CardTitle>
+</CardHeader>
+<CardContent>
+<div className="relative w-full overflow-auto">
+<table className="w-full caption-bottom text-sm">
+<thead>
+<tr className="border-b">
+<th className="h-12 px-4 text-left">Rule</th>
+<th className="h-12 px-4 text-left">Status</th>
+<th className="h-12 px-4 text-right">Actions</th>
+</tr>
+</thead>
+<tbody>
+
 File: ./src/App.tsx
 -------------------------------------------
-import QueryProvider from './lib/providers/QueryProvider';
+import React from 'react';
+import {BrowserRouter,Routes,Route,Navigate} from 'react-router-dom';
+import {AuthProvider} from './lib/auth/AuthContext';
+import {ProtectedRoute} from './components/navigation/ProtectedRoute';
+import MainLayout from './layouts/MainLayout';
+import LoginPage from './pages/auth/LoginPage';
 import TableManagement from './components/tables/TableManagement';
+import {SecurityAdmin} from './components/security';
+import ErrorBoundary from './components/error/ErrorBoundary';
+import {SuspenseWrapper} from './components/loading/SuspenseWrapper';
 function App() {
 return (
-<QueryProvider>
-<div className="container mx-auto py-10">
+<ErrorBoundary>
+<AuthProvider>
+<SuspenseWrapper>
+<BrowserRouter>
+<Routes>
+<Route path="/login" element={<LoginPage />} />
+<Route element={<MainLayout />}>
+<Route
+path="/"
+element={
+<ProtectedRoute>
+<Navigate to="/tables" replace />
+</ProtectedRoute>
+}
+/>
+<Route
+path="/security"
+element={
+<ProtectedRoute>
+<SecurityAdmin />
+</ProtectedRoute>
+}
+/>
+<Route
+path="/tables"
+element={
+<ProtectedRoute>
 <TableManagement />
-</div>
-</QueryProvider>
+</ProtectedRoute>
+}
+/>
+</Route>
+<Route path="*" element={<div>404 Not Found</div>} />
+</Routes>
+</BrowserRouter>
+</SuspenseWrapper>
+</AuthProvider>
+</ErrorBoundary>
 );
 }
 export default App;
+
+File: ./src/lib/auth/AuthContext.tsx
+-------------------------------------------
+import React,{createContext,useContext,useState,useEffect} from 'react';
+interface AuthContextType {
+isAuthenticated:boolean;
+user:any | null;
+login:(token:string) => void;
+logout:() => void;
+}
+const AuthContext=createContext<AuthContextType | undefined>(undefined);
+export function AuthProvider({children}:{children:React.ReactNode}) {
+const [isAuthenticated,setIsAuthenticated]=useState(false);
+const [user,setUser]=useState(null);
+useEffect(() => {
+const token=localStorage.getItem('token');
+if (token) {
+setIsAuthenticated(true);
+}
+},[]);
+const login=(token:string) => {
+localStorage.setItem('token',token);
+setIsAuthenticated(true);
+};
+const logout=() => {
+localStorage.removeItem('token');
+setIsAuthenticated(false);
+setUser(null);
+};
+return (
+<AuthContext.Provider value={{isAuthenticated,user,login,logout}}>
+{children}
+</AuthContext.Provider>
+);
+}
+export function useAuth() {
+const context=useContext(AuthContext);
+if (context === undefined) {
+thrownew Error('useAuth must be used within an AuthProvider');
+}
+return context;
+}
+
 File: ./src/lib/providers/QueryProvider.tsx
 -------------------------------------------
 import {QueryClient,QueryClientProvider} from '@tanstack/react-query';
@@ -1274,6 +2032,7 @@ File: ./package.json
 "lucide-react":"^0.263.1",
 "react":"^18.2.0",
 "react-dom":"^18.2.0",
+"react-router-dom":"^6.22.1",
 "tailwind-merge":"^2.5.5",
 "tailwindcss-animate":"^1.0.7"
 },
