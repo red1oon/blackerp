@@ -14,25 +14,18 @@ class SecurityFilter(
     private val securityService: SecurityService
 ) : WebFilter {
     private val logger = LoggerFactory.getLogger(SecurityFilter::class.java)
-    
-    private val publicPaths = setOf(
-        "/api/auth/login",
-        "/api/auth/refresh"
-    )
+    private val publicPaths = setOf("/api/auth/login", "/api/auth/refresh")
 
-    override fun filter(
-        exchange: ServerWebExchange,
-        chain: WebFilterChain
-    ): Mono<Void> {
+    override fun filter(exchange: ServerWebExchange, chain: WebFilterChain): Mono<Void> {
         val path = exchange.request.path.value()
-        
+
         if (publicPaths.any { path.startsWith(it) }) {
             return chain.filter(exchange)
         }
 
         val authHeader = exchange.request.headers.getFirst("Authorization")
         val authToken = authHeader?.removePrefix("Bearer ")
-        
+
         if (authToken == null) {
             exchange.response.statusCode = HttpStatus.UNAUTHORIZED
             return exchange.response.setComplete()
