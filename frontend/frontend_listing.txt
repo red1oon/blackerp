@@ -18,9 +18,16 @@ Generating folder structure...
 │   ├── App.tsx
 │   ├── assets
 │   ├── components
+│   │   ├── error
+│   │   │   └── ErrorBoundary.tsx
+│   │   ├── loading
+│   │   │   ├── LoadingPage.tsx
+│   │   │   ├── LoadingSpinner.tsx
+│   │   │   └── SuspenseWrapper.tsx
 │   │   ├── navigation
 │   │   │   ├── Breadcrumbs.tsx
 │   │   │   ├── index.ts
+│   │   │   ├── MainNavigation.tsx
 │   │   │   ├── Navbar.tsx
 │   │   │   └── ProtectedRoute.tsx
 │   │   ├── security
@@ -38,20 +45,26 @@ Generating folder structure...
 │   │   │   ├── EditTableForm.tsx
 │   │   │   ├── index.ts
 │   │   │   └── TableManagement.tsx
-│   │   └── ui
-│   │   ├── alert-dialog.tsx
-│   │   ├── alert.tsx
-│   │   ├── button.tsx
-│   │   ├── card.tsx
-│   │   └── table.tsx
+│   │   ├── ui
+│   │   │   ├── alert-dialog.tsx
+│   │   │   ├── alert.tsx
+│   │   │   ├── button.tsx
+│   │   │   ├── card.tsx
+│   │   │   └── table.tsx
+│   │   └── windows
+│   │   └── WindowViewer.tsx
 │   ├── hooks
 │   │   └── useTableOperations.ts
 │   ├── layouts
 │   │   └── MainLayout.tsx
 │   ├── lib
+│   │   ├── api
+│   │   │   └── apiClient.ts
 │   │   ├── auth [error opening dir]
 │   │   ├── providers
 │   │   │   └── QueryProvider.tsx
+│   │   ├── session
+│   │   │   └── sessionStore.ts
 │   │   ├── utils
 │   │   └── utils.ts
 │   ├── main
@@ -73,7 +86,7 @@ Generating folder structure...
 ├── tsconfig.json
 └── tsconfig.node.json
 
-26 directories, 46 files
+31 directories, 54 files
 
 
 Generating file details...
@@ -523,6 +536,58 @@ return mockTables.find(table => table.id === id);
 }
 };
 
+File: ./src/components/error/ErrorBoundary.tsx
+-------------------------------------------
+import React,{Component,ErrorInfo,ReactNode} from 'react';
+import {Alert,AlertDescription,AlertTitle} from '@/components/ui/alert';
+import {Button} from '@/components/ui/button';
+import {RefreshCcw} from 'lucide-react';
+interface Props {
+children:ReactNode;
+}
+interface State {
+hasError:boolean;
+error:Error | null;
+}
+class ErrorBoundary extends Component<Props,State> {
+public state:State={
+hasError:false,
+error:null,
+};
+public static getDerivedStateFromError(error:Error):State {
+return {hasError:true,error};
+}
+public componentDidCatch(error:Error,errorInfo:ErrorInfo) {
+console.error('Uncaught error:',error,errorInfo);
+}
+public render() {
+if (this.state.hasError) {
+return (
+<div className="min-h-screen flex items-center justify-center p-4">
+<Alert variant="destructive" className="max-w-lg">
+<AlertTitle>Something went wrong</AlertTitle>
+<AlertDescription>
+<div className="mt-2">
+{this.state.error?.message || 'An unexpected error occurred'}
+</div>
+<Button
+variant="outline"
+onClick={() => window.location.reload()}
+className="mt-4"
+>
+<RefreshCcw className="h-4 w-4 mr-2" />
+Reload Page
+</Button>
+</AlertDescription>
+</Alert>
+</div>
+);
+}
+return this.props.children;
+}
+}
+export default ErrorBoundary;
+
 File: ./src/components/ui/card.tsx
 -------------------------------------------
 import React from 'react';
@@ -852,6 +917,147 @@ TableRow,
 TableHead,
 TableCell,
 }
+
+File: ./src/components/windows/WindowViewer.tsx
+-------------------------------------------
+import {useState,useEffect} from 'react';
+import {Card,CardHeader,CardTitle,CardContent} from '@/components/ui/card';
+import {Tabs,TabsContent,TabsList,TabsTrigger} from '@/components/ui/tabs';
+import {Input} from '@/components/ui/input';
+import {Button} from '@/components/ui/button';
+import {Table,TableHeader,TableBody,TableRow,TableCell} from '@/components/ui/table';
+import {Loader} from 'lucide-react';
+interface WindowField {
+id:string;
+displayName:string;
+name:string;
+fieldType:string;
+required:boolean;
+readOnly:boolean;
+defaultValue?:string;
+}
+interface WindowTab {
+id:string;
+displayName:string;
+name:string;
+fields:WindowField[];
+tableId:string;
+}
+interface Window {
+id:string;
+displayName:string;
+name:string;
+tabs:WindowTab[];
+}
+const WindowViewer=() => {
+const [windows,setWindows]=useState<Window[]>([]);
+const [selectedWindow,setSelectedWindow]=useState<Window | null>(null);
+const [loading,setLoading]=useState(true);
+useEffect(() => {
+fetchWindows();
+},[]);
+const fetchWindows=async () => {
+try {
+const response=await fetch('/api/metadata/windows');
+const data=await response.json();
+setWindows(data);
+setLoading(false);
+} catch (error) {
+console.error('Error fetching windows:',error);
+setLoading(false);
+}
+};
+const loadWindow=async (id:string) => {
+try {
+setLoading(true);
+const response=await fetch(`/api/metadata/windows/${id}`);
+const data=await response.json();
+setSelectedWindow(data);
+setLoading(false);
+} catch (error) {
+console.error('Error loading window:',error);
+setLoading(false);
+}
+};
+if (loading) {
+return (
+<div className="flex items-center justify-center h-64">
+<Loader className="w-6 h-6 animate-spin" />
+</div>
+);
+}
+return (
+<div className="p-4 space-y-4">
+<Card>
+<CardHeader>
+<CardTitle>Available Windows</CardTitle>
+</CardHeader>
+<CardContent>
+<div className="grid grid-cols-3 gap-4">
+{windows.map(window => (
+<Button
+key={window.id}
+variant="outline"
+onClick={() => loadWindow(window.id)}
+>
+{window.displayName}
+</Button>
+))}
+</div>
+</CardContent>
+</Card>
+{selectedWindow && (
+<Card>
+<CardHeader>
+<CardTitle>{selectedWindow.displayName}</CardTitle>
+</CardHeader>
+<CardContent>
+<Tabs defaultValue={selectedWindow.tabs[0]?.id}>
+<TabsList>
+{selectedWindow.tabs.map(tab => (
+<TabsTrigger key={tab.id} value={tab.id}>
+{tab.displayName}
+</TabsTrigger>
+))}
+</TabsList>
+{selectedWindow.tabs.map(tab => (
+<TabsContent key={tab.id} value={tab.id}>
+<Table>
+<TableHeader>
+<TableRow>
+<TableCell>Field</TableCell>
+<TableCell>Value</TableCell>
+</TableRow>
+</TableHeader>
+<TableBody>
+{tab.fields.map(field => (
+<TableRow key={field.id}>
+<TableCell className="font-medium">
+{field.displayName}
+{field.required && <span className="text-red-500 ml-1">*</span>}
+</TableCell>
+<TableCell>
+<Input
+type="text"
+placeholder={field.displayName}
+disabled={field.readOnly}
+defaultValue={field.defaultValue || ''}
+/>
+</TableCell>
+</TableRow>
+))}
+</TableBody>
+</Table>
+</TabsContent>
+))}
+</Tabs>
+</CardContent>
+</Card>
+)}
+</div>
+);
+}
+export default WindowViewer;
 
 File: ./src/components/tables/TableManagement.tsx
 -------------------------------------------
@@ -1568,6 +1774,90 @@ File: ./src/components/navigation/index.ts
 export {Navbar} from './Navbar';
 export {Breadcrumbs} from './Breadcrumbs';
 
+File: ./src/components/navigation/MainNavigation.tsx
+-------------------------------------------
+import {Button} from '@/components/ui/button';
+import {useNavigate} from 'react-router-dom';
+import {
+LayoutGrid,
+Table,
+Settings,
+Users
+} from 'lucide-react';
+const MainNavigation=() => {
+const navigate=useNavigate();
+return (
+<div className="p-4 space-y-2">
+<Button
+variant="ghost"
+className="w-full justify-start"
+onClick={() => navigate('/windows')}
+>
+<LayoutGrid className="w-4 h-4 mr-2" />
+Windows
+</Button>
+<Button
+variant="ghost"
+className="w-full justify-start"
+onClick={() => navigate('/tables')}
+>
+<Table className="w-4 h-4 mr-2" />
+Tables
+</Button>
+<Button
+variant="ghost"
+className="w-full justify-start"
+onClick={() => navigate('/security')}
+>
+<Users className="w-4 h-4 mr-2" />
+Security
+</Button>
+<Button
+variant="ghost"
+className="w-full justify-start"
+onClick={() => navigate('/settings')}
+>
+<Settings className="w-4 h-4 mr-2" />
+Settings
+</Button>
+</div>
+);
+}
+export default MainNavigation;
+
+File: ./src/components/loading/LoadingPage.tsx
+-------------------------------------------
+import {LoadingSpinner} from './LoadingSpinner';
+export function LoadingPage() {
+return (
+<div className="min-h-screen flex items-center justify-center">
+<LoadingSpinner className="h-8 w-8" />
+</div>
+);
+}
+
+File: ./src/components/loading/SuspenseWrapper.tsx
+-------------------------------------------
+import {Suspense,ReactNode} from 'react';
+import {LoadingPage} from './LoadingPage';
+interface Props {
+children:ReactNode;
+fallback?:ReactNode;
+}
+export function SuspenseWrapper({children,fallback=<LoadingPage />}:Props) {
+return <Suspense fallback={fallback}>{children}</Suspense>;
+}
+
+File: ./src/components/loading/LoadingSpinner.tsx
+-------------------------------------------
+import {Loader2} from 'lucide-react';
+interface Props {
+className?:string;
+}
+export function LoadingSpinner({className="h-4 w-4"}:Props) {
+return <Loader2 className={`animate-spin ${className}`} />;
+}
+
 File: ./src/components/security/DeleteRoleDialog.tsx
 -------------------------------------------
 import React from 'react';
@@ -1893,6 +2183,7 @@ import {ProtectedRoute} from './components/navigation/ProtectedRoute';
 import MainLayout from './layouts/MainLayout';
 import LoginPage from './pages/auth/LoginPage';
 import TableManagement from './components/tables/TableManagement';
+import WindowViewer from './components/windows/WindowViewer';
 import {SecurityAdmin} from './components/security';
 import ErrorBoundary from './components/error/ErrorBoundary';
 import {SuspenseWrapper} from './components/loading/SuspenseWrapper';
@@ -1909,7 +2200,15 @@ return (
 path="/"
 element={
 <ProtectedRoute>
-<Navigate to="/tables" replace />
+<Navigate to="/windows" replace />
+</ProtectedRoute>
+}
+/>
+<Route
+path="/windows"
+element={
+<ProtectedRoute>
+<WindowViewer />
 </ProtectedRoute>
 }
 />
@@ -1982,6 +2281,26 @@ thrownew Error('useAuth must be used within an AuthProvider');
 return context;
 }
 
+File: ./src/lib/session/sessionStore.ts
+-------------------------------------------
+import {create} from '@/lib/utils/store';
+interface SessionStore {
+token:string | null;
+setToken:(token:string) => void;
+clearToken:() => void;
+}
+export const useSessionStore=create<SessionStore>((set) => ({
+token:localStorage.getItem('token'),
+setToken:(token:string) => {
+localStorage.setItem('token',token);
+set({token});
+},
+clearToken:() => {
+localStorage.removeItem('token');
+set({token:null});
+},
+}));
+
 File: ./src/lib/providers/QueryProvider.tsx
 -------------------------------------------
 import {QueryClient,QueryClientProvider} from '@tanstack/react-query';
@@ -2002,6 +2321,52 @@ return (
 );
 }
 export default QueryProvider;
+File: ./src/lib/api/apiClient.ts
+-------------------------------------------
+import {useSessionStore} from '@/lib/session/sessionStore';
+interface RequestConfig extends RequestInit {
+params?:Record<string,string>;
+}
+class ApiError extends Error {
+constructor(
+message:string,
+public status:number,
+public data?:any
+) {
+super(message);
+this.name='ApiError';
+}
+}
+export async function apiRequest<T>(
+endpoint:string,
+{params,...config}:RequestConfig={}
+):Promise<T> {
+const token=useSessionStore.getState().token;
+const url=new URL(`${window.location.origin}/api${endpoint}`);
+if (params) {
+Object.entries(params).forEach(([key,value]) => {
+url.searchParams.append(key,value);
+});
+}
+const response=await fetch(url.toString(),{
+...config,
+headers:{
+'Content-Type':'application/json',
+...(token ? {Authorization:`Bearer ${token}`} :{}),
+...config.headers,
+},
+});
+if (!response.ok) {
+const error=await response.json().catch(() => ({}));
+thrownew ApiError(
+error.message || 'An error occurred',
+response.status,
+error
+);
+}
+return response.json();
+}
+
 File: ./src/lib/utils.ts
 -------------------------------------------
 import {clsx,type ClassValue} from "clsx"

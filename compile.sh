@@ -11,7 +11,7 @@ NC='\033[0m'
 echo "Checking remaining issues..."
 
 # Run Kotlin compilation and capture errors
-./gradlew compileKotlin > compile_output.txt 2>&1
+sudo ./gradlew clean build > compile_output.txt 2>&1
 
 # Output file for uncategorized errors
 UNCATEGORIZED_ERRORS_FILE="uncategorized_errors.txt"

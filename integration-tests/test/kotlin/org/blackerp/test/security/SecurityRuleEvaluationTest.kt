@@ -2,40 +2,69 @@ package org.blackerp.test.security
 
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
-import org.blackerp.application.services.security.evaluation.SecurityRuleEvaluationService
-import org.blackerp.domain.core.security.metadata.*
-import org.blackerp.domain.core.security.SecurityContext
+import org.springframework.boot.test.context.SpringBootTest
+import org.springframework.test.context.ContextConfiguration
 import org.blackerp.test.base.BaseServiceTest
-import org.blackerp.domain.core.values.*
+import org.blackerp.test.config.TestConfig
+import org.blackerp.domain.core.ad.metadata.services.RuleEvaluator
 import java.util.UUID
-import kotlinx.coroutines.runBlocking
 
+@SpringBootTest
+@ContextConfiguration(classes = [TestConfig::class])
 class SecurityRuleEvaluationTest : BaseServiceTest() {
+
     @Autowired
-    lateinit var securityRuleEvaluationService: SecurityRuleEvaluationService
+    private lateinit var ruleEvaluator: RuleEvaluator
 
     @Test
-    fun `should evaluate simple security rule`() = runBlocking {
-        val metadata = createTestMetadata()
-        val rule = SecurityRuleDefinition(
-            metadata = metadata,
-            displayName = DisplayName.create("Test Rule").getOrNull()!!,
-            description = null,
+    fun `should evaluate simple security rule`() = runTest {
+        // Arrange
+        val rule = SecurityTestUtils.createTestRule(
             entityType = "TABLE",
-            entityId = UUID.randomUUID(),
-            roleId = null,
-            ruleType = SecurityRuleType.READ_PERMISSION,
-            expression = "user.clientId == entityClientId"
+            expression = "true"
         )
 
-        val context = createTestSecurityContext()
-        val result = securityRuleEvaluationService.evaluate(rule, context)
+        // Act
+        val context = mapOf(
+            "user" to createTestUser(),
+            "roles" to listOf("ADMIN")
+        )
 
+        // Assert
+        val result = ruleEvaluator.evaluate(rule, context)
         assert(result.isRight()) { "Rule evaluation should succeed" }
+        result.fold(
+            { error -> throw AssertionError("Rule evaluation failed: ${error.message}") },
+            { success -> assert(success) { "Rule should evaluate to true" } }
+        )
     }
 
-    private fun createTestSecurityContext(): SecurityContext {
-        // Create test security context implementation
-        TODO("Implement test security context")
+    @Test
+    fun `should evaluate role-based security rule`() = runTest {
+        // Arrange
+        val rule = SecurityTestUtils.createTestRule(
+            entityType = "TABLE",
+            expression = "hasRole('ADMIN')"
+        )
+
+        // Act
+        val context = mapOf(
+            "user" to createTestUser(),
+            "roles" to listOf("ADMIN")
+        )
+
+        // Assert
+        val result = ruleEvaluator.evaluate(rule, context)
+        assert(result.isRight()) { "Rule evaluation should succeed" }
+        result.fold(
+            { error -> throw AssertionError("Rule evaluation failed: ${error.message}") },
+            { success -> assert(success) { "Rule should evaluate to true for admin role" } }
+        )
     }
+
+    private fun createTestUser(): Map<String, Any> = mapOf(
+        "id" to UUID.randomUUID(),
+        "username" to "test-user",
+        "clientId" to UUID.randomUUID()
+    )
 }

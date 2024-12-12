@@ -5,6 +5,7 @@ import { ProtectedRoute } from './components/navigation/ProtectedRoute';
 import MainLayout from './layouts/MainLayout';
 import LoginPage from './pages/auth/LoginPage';
 import TableManagement from './components/tables/TableManagement';
+import WindowViewer from './components/windows/WindowViewer';
 import { SecurityAdmin } from './components/security';
 import ErrorBoundary from './components/error/ErrorBoundary';
 import { SuspenseWrapper } from './components/loading/SuspenseWrapper';
@@ -22,7 +23,15 @@ function App() {
                   path="/"
                   element={
                     <ProtectedRoute>
-                      <Navigate to="/tables" replace />
+                      <Navigate to="/windows" replace />
+                    </ProtectedRoute>
+                  }
+                />
+                <Route
+                  path="/windows"
+                  element={
+                    <ProtectedRoute>
+                      <WindowViewer />
                     </ProtectedRoute>
                   }
                 />

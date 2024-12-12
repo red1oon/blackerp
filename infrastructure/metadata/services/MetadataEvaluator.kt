@@ -34,3 +34,30 @@ class MetadataEvaluator {
         return true.right()
     }
 }
+
+    // Add interpretation methods to existing MetadataEvaluator
+    suspend fun interpretRule(rule: ADRule, context: Map<String, Any>): Either<MetadataError, InterpretationResult> {
+        return try {
+            when (rule.ruleType) {
+                "VALIDATION" -> evaluateValidation(rule.expression, context)
+                    .map { InterpretationResult.ValidationResult(it, emptyList()) }
+                "WINDOW" -> interpretWindow(rule, context)
+                "WORKFLOW" -> interpretWorkflow(rule, context)
+                else -> throw IllegalArgumentException("Unsupported rule type: ${rule.ruleType}")
+            }
+        } catch (e: Exception) {
+            logger.error("Rule interpretation failed: ${rule.id}", e)
+            MetadataError.ValidationFailed("Rule interpretation failed: ${e.message}").left()
+        }
+    }
+
+    private suspend fun interpretWindow(rule: ADRule, context: Map<String, Any>): Either<MetadataError, InterpretationResult> {
+        // Implement window interpretation using existing metadata
+        // This leverages the existing AD structure
+        return InterpretationResult.WindowResult(emptyList()).right()
+    }
+
+    private suspend fun interpretWorkflow(rule: ADRule, context: Map<String, Any>): Either<MetadataError, InterpretationResult> {
+        // Implement workflow interpretation using existing metadata
+        return InterpretationResult.WorkflowResult(emptyList()).right()
+    }
